@@ -1,0 +1,6 @@
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb

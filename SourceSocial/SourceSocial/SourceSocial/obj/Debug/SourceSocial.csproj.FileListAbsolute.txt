@@ -1,0 +1,9 @@
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\bin\Debug\SourceSocial.exe.config
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\bin\Debug\SourceSocial.exe
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\bin\Debug\SourceSocial.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.Properties.Resources.resources
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.csproj.GenerateResource.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.exe
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\SourceSocial\obj\Debug\SourceSocial.pdb

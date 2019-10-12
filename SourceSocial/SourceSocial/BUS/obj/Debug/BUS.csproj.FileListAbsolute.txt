@@ -1,0 +1,11 @@
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CopyComplete
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.pdb

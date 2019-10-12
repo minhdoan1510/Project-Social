@@ -1,0 +1,9 @@
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\bin\Debug\fMain.exe.config
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\bin\Debug\fMain.exe
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\bin\Debug\fMain.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.Properties.Resources.resources
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.csproj.GenerateResource.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.exe
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fMain\obj\Debug\fMain.csprojAssemblyReference.cache
