@@ -18,3 +18,5 @@ C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fL
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.PostDisplay.resources
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.AddPost.resources
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.DisplayPost_Comment.resources
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.CommentDisplay.resources

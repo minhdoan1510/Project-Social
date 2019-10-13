@@ -33,11 +33,11 @@
             this.lbTime_Post = new System.Windows.Forms.Label();
             this.pnlInfor = new System.Windows.Forms.Panel();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.pnlInter = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lbLiked_Post = new System.Windows.Forms.Label();
-            this.ptbLike = new System.Windows.Forms.PictureBox();
             this.lbContent_Post = new System.Windows.Forms.Label();
+            this.pnlInter = new System.Windows.Forms.Panel();
+            this.ptbLike = new System.Windows.Forms.PictureBox();
+            this.btnComment_Post = new System.Windows.Forms.Button();
+            this.lbLiked_Post = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.btbAvatar_Post)).BeginInit();
             this.pnlInfor.SuspendLayout();
@@ -93,45 +93,6 @@
             this.pnlContent.Size = new System.Drawing.Size(699, 114);
             this.pnlContent.TabIndex = 4;
             // 
-            // pnlInter
-            // 
-            this.pnlInter.Controls.Add(this.ptbLike);
-            this.pnlInter.Controls.Add(this.button1);
-            this.pnlInter.Controls.Add(this.lbLiked_Post);
-            this.pnlInter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlInter.Location = new System.Drawing.Point(0, 174);
-            this.pnlInter.Name = "pnlInter";
-            this.pnlInter.Size = new System.Drawing.Size(699, 50);
-            this.pnlInter.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(559, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 46);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "COMMENT";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // lbLiked_Post
-            // 
-            this.lbLiked_Post.AutoSize = true;
-            this.lbLiked_Post.Location = new System.Drawing.Point(51, 20);
-            this.lbLiked_Post.Name = "lbLiked_Post";
-            this.lbLiked_Post.Size = new System.Drawing.Size(88, 13);
-            this.lbLiked_Post.TabIndex = 1;
-            this.lbLiked_Post.Text = "1000 người thích";
-            // 
-            // ptbLike
-            // 
-            this.ptbLike.BackColor = System.Drawing.Color.Maroon;
-            this.ptbLike.Location = new System.Drawing.Point(15, 15);
-            this.ptbLike.Name = "ptbLike";
-            this.ptbLike.Size = new System.Drawing.Size(25, 25);
-            this.ptbLike.TabIndex = 0;
-            this.ptbLike.TabStop = false;
-            // 
             // lbContent_Post
             // 
             this.lbContent_Post.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -144,6 +105,45 @@
             this.lbContent_Post.TabIndex = 0;
             this.lbContent_Post.Text = "Nội Dung";
             this.lbContent_Post.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlInter
+            // 
+            this.pnlInter.Controls.Add(this.ptbLike);
+            this.pnlInter.Controls.Add(this.btnComment_Post);
+            this.pnlInter.Controls.Add(this.lbLiked_Post);
+            this.pnlInter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlInter.Location = new System.Drawing.Point(0, 174);
+            this.pnlInter.Name = "pnlInter";
+            this.pnlInter.Size = new System.Drawing.Size(699, 50);
+            this.pnlInter.TabIndex = 5;
+            // 
+            // ptbLike
+            // 
+            this.ptbLike.BackColor = System.Drawing.Color.Maroon;
+            this.ptbLike.Location = new System.Drawing.Point(15, 15);
+            this.ptbLike.Name = "ptbLike";
+            this.ptbLike.Size = new System.Drawing.Size(25, 25);
+            this.ptbLike.TabIndex = 0;
+            this.ptbLike.TabStop = false;
+            // 
+            // btnComment_Post
+            // 
+            this.btnComment_Post.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnComment_Post.Location = new System.Drawing.Point(559, 1);
+            this.btnComment_Post.Name = "btnComment_Post";
+            this.btnComment_Post.Size = new System.Drawing.Size(137, 46);
+            this.btnComment_Post.TabIndex = 2;
+            this.btnComment_Post.Text = "COMMENT";
+            this.btnComment_Post.UseVisualStyleBackColor = true;
+            // 
+            // lbLiked_Post
+            // 
+            this.lbLiked_Post.AutoSize = true;
+            this.lbLiked_Post.Location = new System.Drawing.Point(51, 20);
+            this.lbLiked_Post.Name = "lbLiked_Post";
+            this.lbLiked_Post.Size = new System.Drawing.Size(88, 13);
+            this.lbLiked_Post.TabIndex = 1;
+            this.lbLiked_Post.Text = "1000 người thích";
             // 
             // panel1
             // 
@@ -185,7 +185,7 @@
         private System.Windows.Forms.Panel pnlInfor;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlInter;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnComment_Post;
         private System.Windows.Forms.Label lbLiked_Post;
         private System.Windows.Forms.PictureBox ptbLike;
         private System.Windows.Forms.Label lbContent_Post;

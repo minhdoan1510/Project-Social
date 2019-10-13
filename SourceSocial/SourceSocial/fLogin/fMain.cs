@@ -21,7 +21,7 @@ namespace fLogin
             post.OnAddPost += Post_OnAddPost;
             pnlAddPost.Controls.Add(post);
             LoadNewFeed();
-
+            
         }
 
         private void Post_OnAddPost(string str)
@@ -43,8 +43,17 @@ namespace fLogin
             {
                 PostDisplay post = new PostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image);
                 post.Dock = DockStyle.Top;
+                post.Tag = item.Idpost;
+                post.OnClickComment += Post_OnClickComment;
                 pnlNewFeed_Main.Controls.Add(post);
             }
+        }
+
+        private void Post_OnClickComment(string IDPost)
+        {
+
+            DisplayPost_Comment displayPost_Comment = new DisplayPost_Comment(BUS_Controls.LoadCMTof(IDPost));
+            displayPost_Comment.ShowDialog();
         }
 
         private void BtnExit_Form_Click(object sender, EventArgs e)

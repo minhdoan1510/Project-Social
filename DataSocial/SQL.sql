@@ -1,4 +1,4 @@
-USE master
+﻿USE master
 GO
 CREATE DATABASE DataSocial
 GO
@@ -74,3 +74,144 @@ CREATE TABLE MESSENGER
 	CONSTRAINT FK_MESSENGER_PROFILE FOREIGN KEY (UIDsend) REFERENCES dbo.PROFILE(UIDuser)
 
 )
+
+
+USE DataSocial
+GO
+
+SELECT *
+FROM dbo.ACCOUNT
+WHERE ID = 'nkoxway49' AND PASS = '123';
+
+
+SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+FROM dbo.POST AS Post, dbo.PROFILE AS Profile
+WHERE  Post.IDUSER = '99841234' AND Post.IDUSER=Profile.UIDuser
+UNION ALL
+SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+FROM dbo.POST AS Post
+INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '99841234'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '99841234'AND Friend.UID1 = Post.IDUSER)
+INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
+
+
+
+ALTER TABLE dbo.FRIEND DROP CONSTRAINT FK_FRIEND1,FK_FRIEND2
+
+SELECT *
+FROM dbo.ACCOUNT
+WHERE ID = 'nkoxway49' AND PASS = '123';
+
+
+ 
+
+ INSERT dbo.POST
+(
+    IDPOST,
+    IDUSER,
+    LIKED,
+    CONTENT,
+    IMAGE,
+    TIME
+)
+VALUES
+(   '23423443',       -- IDPOST - varchar(30)
+    '32940241',       -- IDUSER - varchar(30)
+    50,        -- LIKED - int
+    'Đạt đăng',       -- CONTENT - text
+    NULL,     -- IMAGE - image
+    GETDATE() -- TIME - datetime
+)
+INSERT dbo.POST
+(
+    IDPOST,
+    IDUSER,
+    LIKED,
+    CONTENT,
+    IMAGE,
+    TIME
+)
+VALUES
+(   '23422443',       -- IDPOST - varchar(30)
+    '77182930',       -- IDUSER - varchar(30)
+    50,        -- LIKED - int
+    'Non k biet',       -- CONTENT - text
+    NULL,     -- IMAGE - image
+    GETDATE() -- TIME - datetime
+)
+INSERT dbo.POST
+(
+    IDPOST,
+    IDUSER,
+    LIKED,
+    CONTENT,
+    IMAGE,
+    TIME
+)
+VALUES
+(   '22114223',       -- IDPOST - varchar(30)
+    '33755086',       -- IDUSER - varchar(30)
+    50,        -- LIKED - int
+    'huy đăng',       -- CONTENT - text
+    NULL,     -- IMAGE - image
+    GETDATE() -- TIME - datetime
+)
+INSERT dbo.POST
+(
+    IDPOST,
+    IDUSER,
+    LIKED,
+    CONTENT,
+    IMAGE,
+    TIME
+)
+VALUES
+(   '23444043',       -- IDPOST - varchar(30)
+    '80267710',       -- IDUSER - varchar(30)
+    50,        -- LIKED - int
+    'Long Đăng',       -- CONTENT - text
+    NULL,     -- IMAGE - image
+    GETDATE() -- TIME - datetime
+)
+INSERT dbo.POST
+(
+    IDPOST,
+    IDUSER,
+    LIKED,
+    CONTENT,
+    IMAGE,
+    TIME
+)
+VALUES
+(   '99555234',       -- IDPOST - varchar(30)
+    '99841234',       -- IDUSER - varchar(30)
+    50,        -- LIKED - int
+    'Minh admin đăng',       -- CONTENT - text
+    NULL,     -- IMAGE - image
+    GETDATE() -- TIME - datetime
+)
+
+
+ALTER TABLE dbo.FRIEND ADD CONSTRAINT FK_FRIEND1 FOREIGN KEY (UID1) REFERENCES dbo.PROFILE(UIDuser)
+ALTER TABLE dbo.FRIEND ADD CONSTRAINT FK_FRIEND2 FOREIGN KEY (UID2) REFERENCES dbo.PROFILE(UIDuser)
+
+INSERT dbo.FRIEND
+(
+    UID1,
+    UID2
+)
+VALUES
+(   '99841234', -- UID1 - varchar(30)
+    '80267710'  -- UID2 - varchar(30)
+)
+
+INSERT dbo.FRIEND
+(
+    UID1,
+    UID2
+)
+VALUES
+(   '77182930', -- UID1 - varchar(30)
+    '80267710'  -- UID2 - varchar(30)
+)
+
+

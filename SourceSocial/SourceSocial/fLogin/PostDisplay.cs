@@ -12,6 +12,8 @@ namespace fLogin
 {
     public partial class PostDisplay : UserControl
     {
+        public delegate void ClickComment(string IDpost);
+        public event ClickComment OnClickComment;
         public PostDisplay(string _name, string _time, string _content, int _liked, Bitmap avatar)
         {
             InitializeComponent();
@@ -20,7 +22,15 @@ namespace fLogin
             LbContent_Post.Text = _content;
             LbLiked_Post.Text = _liked.ToString() + "lượt thích";
             ptbLike.Image = Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png");
+            btnComment_Post.Click += BtnComment_Post_Click;
         }
+
+        private void BtnComment_Post_Click(object sender, EventArgs e)
+        {
+            if (OnClickComment != null)
+                OnClickComment(this.Tag.ToString());
+        }
+
         public Label LbName_Post { get => lbName_Post; set => lbName_Post = value; }
         public Label LbTime_Post { get => lbTime_Post; set => lbTime_Post = value; }
         public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }

@@ -78,5 +78,24 @@ namespace BUS
             }
             return false;
         }
+        public List<Comment> LoadCMTof(string IDPost)
+        {
+            List<Comment> comments = new List<Comment>();
+            DataTable data = dal.LoadCMTof(IDPost);
+            for (int i = data.Rows.Count - 1; i >= 0; i--)
+            {
+                Comment comment = new Comment();
+                comment.IdUser = data.Rows[i].ItemArray[0].ToString();
+                comment.Name = data.Rows[i].ItemArray[1].ToString();
+                //comment.Avatar = (Bitmap)data.Rows[i].ItemArray[2];
+                comment.Avatar = null;
+                comment.IdPost = data.Rows[i].ItemArray[3].ToString();
+                comment.IdComment = data.Rows[i].ItemArray[4].ToString();
+                comment.Content = data.Rows[i].ItemArray[5].ToString();
+                comment.Time = data.Rows[i].ItemArray[6].ToString();
+                comments.Add(comment);
+            }
+            return comments;
+        }
     }
 }

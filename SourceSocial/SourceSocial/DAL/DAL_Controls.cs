@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using DTO;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace DAL
@@ -126,6 +121,34 @@ namespace DAL
             {
                 _conn.Close();
             }
+        }
+
+        public DataTable LoadCMTof(string UIDpost)
+        {
+            try
+            {
+                string query = string.Format
+                    (@"
+                    SELECT Profile.UIDuser, Profile.NAME,Profile.AVATAR, Post.IDPOST, CMT.IDcomment, CMT.CONTENT,CMT.TIME
+                    FROM dbo.COMMENT AS CMT
+                    INNER JOIN dbo.PROFILE AS Profile ON Profile.UIDuser = CMT.IDuser
+                    INNER JOIN dbo.POST AS Post ON Post.IDPOST = CMT.IDPOST
+                    WHERE CMT.IDPOST='{0}'
+                    ", UIDpost);
+                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
+                DataTable data = new DataTable();
+                sqlData.Fill(data);
+                return data;
+            }
+            catch
+            {
+                
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return null;
         }
     }
 
