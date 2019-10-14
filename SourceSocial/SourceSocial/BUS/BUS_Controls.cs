@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using DAL;
 using DTO;
-using DAL;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Drawing;
 
 namespace BUS
@@ -13,8 +11,12 @@ namespace BUS
     public class BUS_Controls
     {
         private List<Post> posts = new List<Post>();
+        private List<KeyValuePair<string, List<Comment>>> comments=new List<KeyValuePair<string, List<Comment>>>();
+        private Profile profilecurrent = new Profile();
         DAL_Controls dal = new DAL_Controls();
-        string UIDcurrent;
+
+        public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+
         public bool SignUp(Account account)
         {
             if (CheckAccount_SignUp(account))
@@ -40,8 +42,11 @@ namespace BUS
                 DataTable data = dal.SignIn(account);
                 if (data.Rows.Count == 1)
                 {
-                    LoadDataPost(dal.SignIn(account).Rows[0].ItemArray[0].ToString());
-                    UIDcurrent = dal.SignIn(account).Rows[0].ItemArray[0].ToString();
+                    LoadDataPost(data.Rows[0].ItemArray[0].ToString());
+                    Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
+                    Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
+                    //Profilecurrent.Avatar = data.Rows[0].ItemArray[3].ToString()
+                    Profilecurrent.Avatar =  Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                     return true;
                 }
             }
@@ -51,10 +56,10 @@ namespace BUS
         {
             return true;
         }
-        private void LoadDataPost(string v)
+        private void LoadDataPost(string UID)
         {
-            DataTable data = dal.LoadPost_fMain(v);
-            for(int i=0;i<data.Rows.Count;i++)
+            DataTable data = dal.LoadPost_fMain(UID);
+            for (int i = 0; i < data.Rows.Count; i++)
             {
                 Post temp = new Post();
                 temp.Iduser = data.Rows[i].ItemArray[0].ToString();
@@ -70,19 +75,32 @@ namespace BUS
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
-            post.Iduser = UIDcurrent;
-            if(dal.AddPost(post))
+            post.Iduser = Profilecurrent.Uid;
+            post.Name = Profilecurrent.Name;
+            post.Time = "Vừa xong";
+            if (dal.AddPost(post))
             {
                 posts.Add(post);
                 return true;
             }
             return false;
         }
-        public List<Comment> LoadCMTof(string IDPost)
+        public List<Comment> LoadCMTof(string idPost)
         {
-            List<Comment> comments = new List<Comment>();
+            foreach(var item in comments)
+            {
+                if (item.Key == idPost)
+                {
+                    return item.Value;
+                }
+            }
+            return LoadAddCMTof(idPost);
+        }
+        public List<Comment> LoadAddCMTof(string IDPost)
+        {
+            List<Comment> commentofpost = new List<Comment>();
             DataTable data = dal.LoadCMTof(IDPost);
-            for (int i = data.Rows.Count - 1; i >= 0; i--)
+            for (int i = 0; i < data.Rows.Count; i++)
             {
                 Comment comment = new Comment();
                 comment.IdUser = data.Rows[i].ItemArray[0].ToString();
@@ -93,9 +111,35 @@ namespace BUS
                 comment.IdComment = data.Rows[i].ItemArray[4].ToString();
                 comment.Content = data.Rows[i].ItemArray[5].ToString();
                 comment.Time = data.Rows[i].ItemArray[6].ToString();
-                comments.Add(comment);
+                commentofpost.Add(comment);
             }
-            return comments;
+            comments.Add(new KeyValuePair<string, List<Comment>>(IDPost, commentofpost));
+            return commentofpost;
+        }
+
+        public List<Comment> AddComment(string idPost, string content)
+        {
+            Comment comment = new Comment()
+            {
+                IdUser = Profilecurrent.Uid,
+                Name = Profilecurrent.Name,
+                IdPost = idPost,
+                Content = content,
+                Time = "Vừa xong",
+                IdComment = new Random().Next(10000000, 99999999).ToString()
+            };
+            if (dal.AddComment(comment))
+            {
+                foreach (var item in comments)
+                {
+                    if (item.Key == idPost)
+                    {
+                        item.Value.Add(comment);
+                        return item.Value;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

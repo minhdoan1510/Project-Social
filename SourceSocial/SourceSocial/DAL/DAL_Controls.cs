@@ -21,7 +21,7 @@ namespace DAL
                 )
                 VALUES
                 (   '{0}',  -- UIDuser - varchar(30)
-                    '{3}',  -- NAME - varchar(20)
+                    N'{3}',  -- NAME - Nvarchar(20)
                     NULL -- AVATAR - image
                 )
                 INSERT dbo.ACCOUNT
@@ -51,9 +51,9 @@ namespace DAL
 
             string query = string.Format
                 (@"
-                SELECT * FROM
-                dbo.ACCOUNT
-                WHERE ID = '{0}' AND PASS = '{1}'
+                SELECT Profile.*
+                FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
+                WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
                 ", account.Username, account.Password);
             SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
             DataTable dataTable= new DataTable();
@@ -103,7 +103,7 @@ namespace DAL
               (   '{0}',       -- IDPOST - varchar(30)
                   '{1}',       -- IDUSER - varchar(30)
                   0,        -- LIKED - int
-                  '{2}',       -- CONTENT - text
+                  N'{2}',       -- CONTENT - Ntext
                   NULL,     -- IMAGE - image
                   GETDATE() -- TIME - datetime
               )
@@ -149,6 +149,46 @@ namespace DAL
                 _conn.Close();
             }
             return null;
+        }
+
+        public bool AddComment(Comment comment)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                    (@"
+                    INSERT dbo.COMMENT
+                    (
+                        IDcomment,
+                        IDPOST,
+                        CONTENT,
+                        TIME,
+                        IDuser
+                    )
+                    VALUES
+                    (   '{0}',        -- IDcomment - varchar(30)
+                        '{1}',        -- IDPOST - varchar(30)
+                        '{2}',        -- CONTENT - text
+                        GETDATE(), -- TIME - datetime
+                        '{3}'         -- IDuser - varchar(30)
+                    )
+                    ", comment.IdComment,comment.IdPost,comment.Content,comment.IdUser);
+                SqlCommand sqlCommand = new SqlCommand(query, _conn);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
         }
     }
 

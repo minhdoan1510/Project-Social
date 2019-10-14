@@ -214,4 +214,116 @@ VALUES
     '80267710'  -- UID2 - varchar(30)
 )
 
+ALTER TABLE dbo.COMMENT ADD IDuser VARCHAR(30)
+ALTER TABLE dbo.COMMENT ADD CONSTRAINT FK_Comment_user FOREIGN KEY (IDuser) REFERENCES dbo.PROFILE (UIDuser)
 
+INSERT dbo.COMMENT
+(
+    IDcomment,
+    IDPOST,
+    CONTENT,
+    TIME,
+    IDuser
+)
+VALUES
+(   '23511111',        -- IDcomment - varchar(30)
+    '22114223',        -- IDPOST - varchar(30)
+    'Minh Đoàn đăng thử',        -- CONTENT - text
+    GETDATE(), -- TIME - datetime
+    '32940241'         -- IDuser - varchar(30)
+    )
+
+
+
+	INSERT dbo.COMMENT
+(
+    IDcomment,
+    IDPOST,
+    CONTENT,
+    TIME,
+    IDuser
+)
+VALUES
+(   '23515511',        -- IDcomment - varchar(30)
+    '22114223',        -- IDPOST - varchar(30)
+    'tesccc đăng thử',        -- CONTENT - text
+    GETDATE(), -- TIME - datetime
+    '77182930'         -- IDuser - varchar(30)
+    )
+	
+	
+	INSERT dbo.COMMENT
+(
+    IDcomment,
+    IDPOST,
+    CONTENT,
+    TIME,
+    IDuser
+)
+VALUES
+(   '23511111',        -- IDcomment - varchar(30)
+    '22114223',        -- IDPOST - varchar(30)
+    'Minh Đoàn đăng thử',        -- CONTENT - text
+    GETDATE(), -- TIME - datetime
+    '32940241'         -- IDuser - varchar(30)
+    )
+	
+	
+	INSERT dbo.COMMENT
+(
+    IDcomment,
+    IDPOST,
+    CONTENT,
+    TIME,
+    IDuser
+)
+VALUES
+(   '23511111',        -- IDcomment - varchar(30)
+    '22114223',        -- IDPOST - varchar(30)
+    'Minh Đoàn đăng thử',        -- CONTENT - text
+    GETDATE(), -- TIME - datetime
+    '32940241'         -- IDuser - varchar(30)
+    )
+
+
+SELECT Profile.UIDuser, Profile.NAME,Profile.AVATAR, Post.IDPOST, CMT.IDcomment, CMT.CONTENT,CMT.TIME
+FROM dbo.COMMENT AS CMT
+INNER JOIN dbo.PROFILE AS Profile ON Profile.UIDuser = CMT.IDuser
+INNER JOIN dbo.POST AS Post ON Post.IDPOST = CMT.IDPOST
+WHERE CMT.IDPOST='22114223'
+
+
+INSERT dbo.COMMENT
+(
+    IDcomment,
+    IDPOST,
+    CONTENT,
+    TIME,
+    IDuser
+)
+VALUES
+(   '61526816',        -- IDcomment - varchar(30)
+    '22114223',        -- IDPOST - varchar(30)
+    'Minh nhưỡng',        -- CONTENT - text
+    GETDATE(), -- TIME - datetime
+    '32940241'         -- IDuser - varchar(30)
+    )
+
+SELECT * FROM
+                dbo.ACCOUNT
+                WHERE ID = 'nkoxway49' AND PASS = '123'
+
+
+
+SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+FROM dbo.POST AS Post, dbo.PROFILE AS Profile
+WHERE  Post.IDUSER = '99841234' AND Post.IDUSER=Profile.UIDuser
+UNION ALL
+SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+FROM dbo.POST AS Post
+INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '99841234'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '99841234'AND Friend.UID1 = Post.IDUSER)
+INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
+
+TRUNCATE TABLE dbo.COMMENT
+
+ALTER TABLE dbo.PROFILE ALTER COLUMN NAME NVARCHAR(30)

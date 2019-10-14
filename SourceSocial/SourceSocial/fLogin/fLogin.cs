@@ -43,7 +43,7 @@ namespace fLogin
                 pnlSignIn.Visible = true;
             }
             else
-                MessageBox.Show("");
+                MessageBox.Show("Khoogn thanh cong");
         }
 
         private void BtnSignIn_Click(object sender, EventArgs e)
@@ -58,6 +58,10 @@ namespace fLogin
             {
                 MessageBox.Show("Sai!!!!");
             }
+            //BUS_Controls.SigIn(new Account() { Username = "nkoxway49", Password = "123" });
+            //fMain fMain = new fMain(BUS_Controls);
+            //this.Visible = false;
+            //fMain.ShowDialog();
         }
     }
 }

@@ -237,6 +237,7 @@
             this.ClientSize = new System.Drawing.Size(272, 257);
             this.Controls.Add(this.pnlSignUp);
             this.Name = "fLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.pnlSignIn.ResumeLayout(false);
             this.pnlSignIn.PerformLayout();
