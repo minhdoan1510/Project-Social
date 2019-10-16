@@ -45,8 +45,7 @@ namespace BUS
                     LoadDataPost(data.Rows[0].ItemArray[0].ToString());
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
-                    //Profilecurrent.Avatar = data.Rows[0].ItemArray[3].ToString()
-                    Profilecurrent.Avatar =  Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                     return true;
                 }
             }
@@ -66,12 +65,32 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                //temp.Image = (Bitmap)data.Rows[i].ItemArray[4];
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[4]);
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
             }
         }
+
+        public Image ConverttoImage(object byteArray)
+        {
+            
+            try
+            {
+                byte[] byteArrayIn = (byte[])byteArray;
+                Image returnImage;
+                MemoryStream ms = new MemoryStream(byteArrayIn, 0, byteArrayIn.Length);
+                ms.Write(byteArrayIn, 0, byteArrayIn.Length);
+                returnImage = Image.FromStream(ms, true);//Exception occurs here
+                return returnImage;
+            }
+            catch { }
+            finally
+            {
+            }
+            return null;
+        }
+
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
@@ -105,8 +124,7 @@ namespace BUS
                 Comment comment = new Comment();
                 comment.IdUser = data.Rows[i].ItemArray[0].ToString();
                 comment.Name = data.Rows[i].ItemArray[1].ToString();
-                //comment.Avatar = (Bitmap)data.Rows[i].ItemArray[2];
-                comment.Avatar = null;
+                comment.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 comment.IdPost = data.Rows[i].ItemArray[3].ToString();
                 comment.IdComment = data.Rows[i].ItemArray[4].ToString();
                 comment.Content = data.Rows[i].ItemArray[5].ToString();
@@ -140,6 +158,16 @@ namespace BUS
                 }
             }
             return null;
+        }
+
+        public bool ChangeAvatar(Image image)
+        {
+            if (dal.ChangeAvatar(new Profile() { Uid = profilecurrent.Uid, Avatar = image }))
+            {
+                profilecurrent.Avatar = image;
+                return true;
+            }
+            return false;
         }
     }
 }

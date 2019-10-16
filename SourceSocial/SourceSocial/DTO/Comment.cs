@@ -15,7 +15,7 @@ namespace DTO
         private string content;
         private string time;
         private string name;
-        private Bitmap avatar;
+        private Image avatar;
 
         public string IdPost { get => idPost; set => idPost = value; }
         public string IdUser { get => idUser; set => idUser = value; }
@@ -23,6 +23,6 @@ namespace DTO
         public string Content { get => content; set => content = value; }
         public string Time { get => time; set => time = value; }
         public string Name { get => name; set => name = value; }
-        public Bitmap Avatar { get => avatar; set => avatar = value; }
+        public Image Avatar { get => avatar; set => avatar = value; }
     }
 }

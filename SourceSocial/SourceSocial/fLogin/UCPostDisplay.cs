@@ -16,13 +16,13 @@ namespace fLogin
         public event ClickComment OnClickComment;
         public delegate void ClickLike(string IDpost);
         public event ClickLike OnClickLike;
-        public UCPostDisplay(string _name, string _time, string _content, int _liked, Bitmap avatar)
+        public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar)
         {
             InitializeComponent();
             LbName_Post.Text = _name;
             LbTime_Post.Text = _time;
             LbContent_Post.Text = _content;
-            PtbAvatar_Post.Image = ((avatar != null) ? avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png"));
+            PtbAvatar_Post.Image = avatar;
             PtbAvatar_Post.SizeMode = PictureBoxSizeMode.Zoom;
             LbLiked_Post.Text = _liked.ToString() + " lượt thích";
             PtbLike.Image = Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png");

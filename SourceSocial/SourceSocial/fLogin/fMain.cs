@@ -75,6 +75,7 @@ namespace fLogin
                 DisplayProfile = new UCProfile(BUS_Controls.Profilecurrent);
                 DisplayProfile.Location = pnlHome.Location;
                 this.Controls.Add(DisplayProfile);
+                DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
             }
         }
 

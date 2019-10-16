@@ -2,6 +2,8 @@
 using System.Data;
 using DTO;
 using System.Data.SqlClient;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace DAL
 {
@@ -49,11 +51,13 @@ namespace DAL
         {
             _conn.Open();
 
+
+            //Logined
             string query = string.Format
                 (@"
                 SELECT Profile.*
                 FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
-                WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
+                WHERE acc.ID = 'nkoxway49' AND acc.PASS = '123' AND Profile.UIDuser = acc.UID
                 ", account.Username, account.Password);
             SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
             DataTable dataTable= new DataTable();
@@ -67,11 +71,11 @@ namespace DAL
             _conn.Open();
             string query = string.Format
                 (@"
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
                 FROM dbo.POST AS Post, dbo.PROFILE AS Profile
                 WHERE  Post.IDUSER = '{0}' AND Post.IDUSER=Profile.UIDuser
                 UNION ALL
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME
+                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
                 FROM dbo.POST AS Post
                 INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
                 INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
@@ -189,6 +193,39 @@ namespace DAL
                 _conn.Close();
             }
             return false;
+        }
+
+        public bool ChangeAvatar(Profile profile)
+        {
+            using (var ms = new MemoryStream())
+            {
+                profile.Avatar.Save(ms, profile.Avatar.RawFormat);
+                byte[] temp = ms.ToArray();
+
+                try
+                {
+                    _conn.Open();
+                    string query = string.Format
+                        (@"
+                    UPDATE PROFILE SET AVATAR = '{0}' 
+                    WHERE UIDuser = '{1}'
+                    ", temp, profile.Uid);
+                    SqlCommand sqlCommand = new SqlCommand(query, _conn);
+                    if (sqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+                    _conn.Close();
+                }
+                return false;
+            }
         }
     }
 

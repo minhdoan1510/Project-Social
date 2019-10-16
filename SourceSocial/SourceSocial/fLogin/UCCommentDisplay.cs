@@ -12,13 +12,13 @@ namespace fLogin
 {
     public partial class UCCommentDisplay : UserControl
     {
-        public UCCommentDisplay(string name, Bitmap avatar, string content, string time)
+        public UCCommentDisplay(string name, Image avatar, string content, string time)
         {
             InitializeComponent();
             LbName.Text = name;
             LbContent.Text = content;
             LbTime.Text = time;
-            PtbAvatar.Image = ((avatar != null) ? avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png"));
+            PtbAvatar.Image = avatar;
             ptbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
         public Label LbName { get => lbName; set => lbName = value; }

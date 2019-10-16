@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DTO
 {
@@ -14,7 +13,7 @@ namespace DTO
         private string idpost;
         private string content;
         private string time;
-        private Bitmap image;
+        private Image image;
         private string name;
         private int liked;
 
@@ -22,7 +21,7 @@ namespace DTO
         public string Idpost { get => idpost; set => idpost = value; }
         public string Content { get => content; set => content = value; }
         public string Time { get => time; set => time = value; }
-        public Bitmap Image { get => image; set => image = value; }
+        public Image Image { get => image; set => image = value; }
         public int Liked { get => liked; set => liked = value; }
         public string Name { get => name; set => name = value; }
 
