@@ -19,13 +19,13 @@ namespace fLogin
 
         public delegate void OpenHome();
         public event OpenHome OnOpenHome;
-        Profile profile = new Profile();
+        Profile profile;
         public UCMainHeader(Profile _profile)
         {
             InitializeComponent();
+            profile = _profile;
             LoadMainHeader(_profile);
             LoadAnimation();
-            profile = _profile;
         }
 
         

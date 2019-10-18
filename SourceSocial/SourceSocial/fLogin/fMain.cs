@@ -59,6 +59,7 @@ namespace fLogin
         {
             UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
             uCMainHeader.OnOpenProfile += UCMainHeader_OnOpenProfile;
+            
             uCMainHeader.OnOpenHome += () => pnlHome.Visible = true;
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
@@ -75,6 +76,7 @@ namespace fLogin
                 DisplayProfile = new UCProfile(BUS_Controls.Profilecurrent);
                 DisplayProfile.Location = pnlHome.Location;
                 this.Controls.Add(DisplayProfile);
+                DisplayProfile.Tag = BUS_Controls.Profilecurrent.Uid;
                 DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
             }
         }

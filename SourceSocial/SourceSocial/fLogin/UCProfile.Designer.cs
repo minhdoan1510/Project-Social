@@ -59,14 +59,14 @@
             this.pnlNewFeed_Main.AutoSize = true;
             this.pnlNewFeed_Main.Location = new System.Drawing.Point(0, 190);
             this.pnlNewFeed_Main.Name = "pnlNewFeed_Main";
-            this.pnlNewFeed_Main.Size = new System.Drawing.Size(707, 403);
+            this.pnlNewFeed_Main.Size = new System.Drawing.Size(716, 403);
             this.pnlNewFeed_Main.TabIndex = 2;
             // 
             // pnlAddPost
             // 
             this.pnlAddPost.Location = new System.Drawing.Point(0, 1);
             this.pnlAddPost.Name = "pnlAddPost";
-            this.pnlAddPost.Size = new System.Drawing.Size(707, 162);
+            this.pnlAddPost.Size = new System.Drawing.Size(716, 162);
             this.pnlAddPost.TabIndex = 3;
             // 
             // pnlProfile_Infor
