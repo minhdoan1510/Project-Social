@@ -62,6 +62,9 @@ namespace BUS
             }
             return false;
         }
+
+        
+
         private bool CheckAccount_SignIn(Account account)
         {
             return true;
@@ -132,9 +135,6 @@ namespace BUS
             comments.Add(new KeyValuePair<string, List<Comment>>(IDPost, commentofpost));
             return commentofpost;
         }
-
-        
-
         public List<Comment> AddComment(string idPost, string content)
         {
             Comment comment = new Comment()
@@ -159,6 +159,8 @@ namespace BUS
             }
             return null;
         }
+
+
         #endregion
 
         #region Handle_Profile
@@ -240,6 +242,17 @@ namespace BUS
         #endregion
 
         #region Handle_Other
+        public List<KeyValuePair<string, string>> GetPeople()
+        {
+            DataTable dataTable = dal.GetPeople(profilecurrent.Uid);
+            List<KeyValuePair<string, string>> temp = new List<KeyValuePair<string, string>>();
+            for(int i=0;i<dataTable.Rows.Count;i++)
+            {
+                KeyValuePair<string, string> key = new KeyValuePair<string, string>(dataTable.Rows[i].ItemArray[0].ToString(), dataTable.Rows[i].ItemArray[1].ToString());
+                temp.Add(key);
+            }
+            return temp;
+        }
         public Image ConverttoImage(object byteArray)
         {
             try

@@ -92,6 +92,12 @@
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
     <Compile Include="main.cs" />
+    <Compile Include="UCCatalog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCCatalog.Designer.cs">
+      <DependentUpon>UCCatalog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCPostDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -123,6 +129,12 @@
     <Compile Include="UCProfile_InfoBox.Designer.cs">
       <DependentUpon>UCProfile_InfoBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCSearchBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCSearchBar.Designer.cs">
+      <DependentUpon>UCSearchBar.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UCAddComment.resx">
       <DependentUpon>UCAddComment.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCCatalog.resx">
+      <DependentUpon>UCCatalog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCPostDisplay.resx">
       <DependentUpon>UCPostDisplay.cs</DependentUpon>
@@ -161,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCProfile_InfoBox.resx">
       <DependentUpon>UCProfile_InfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCSearchBar.resx">
+      <DependentUpon>UCSearchBar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

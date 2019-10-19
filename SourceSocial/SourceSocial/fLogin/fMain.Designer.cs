@@ -33,7 +33,7 @@
             this.pnlMainHeader = new System.Windows.Forms.Panel();
             this.pnlNewFeed_Main = new System.Windows.Forms.Panel();
             this.pnlAddPost = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnlCatalog = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
@@ -90,12 +90,12 @@
             this.pnlAddPost.Size = new System.Drawing.Size(707, 162);
             this.pnlAddPost.TabIndex = 3;
             // 
-            // panel5
+            // pnlCatalog
             // 
-            this.panel5.Location = new System.Drawing.Point(3, 1);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(208, 591);
-            this.panel5.TabIndex = 4;
+            this.pnlCatalog.Location = new System.Drawing.Point(3, 1);
+            this.pnlCatalog.Name = "pnlCatalog";
+            this.pnlCatalog.Size = new System.Drawing.Size(208, 591);
+            this.pnlCatalog.TabIndex = 4;
             // 
             // panel6
             // 
@@ -117,7 +117,7 @@
             // 
             // pnlHome
             // 
-            this.pnlHome.Controls.Add(this.panel5);
+            this.pnlHome.Controls.Add(this.pnlCatalog);
             this.pnlHome.Controls.Add(this.panel6);
             this.pnlHome.Controls.Add(this.pnlMain_Newfeed_AddPost);
             this.pnlHome.Location = new System.Drawing.Point(3, 105);
@@ -153,7 +153,7 @@
         private System.Windows.Forms.Panel pnlMainHeader;
         private System.Windows.Forms.Panel pnlNewFeed_Main;
         private System.Windows.Forms.Panel pnlAddPost;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlCatalog;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
         private System.Windows.Forms.Panel pnlHome;

@@ -200,6 +200,33 @@ namespace DAL
             }
             return false;
         }
+
+        public DataTable GetPeople(string UID)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                    (@"
+                    SELECT *
+                    FROM dbo.PROFILE
+                    WHERE UIDuser != '{0}'
+                    ",UID);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, _conn);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                return dataTable;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return null;
+        }
         #endregion
 
         #region Handle_Profile

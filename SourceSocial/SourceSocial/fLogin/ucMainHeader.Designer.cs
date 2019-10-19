@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.pnlProfile = new System.Windows.Forms.Panel();
+            this.ptbAvatar = new System.Windows.Forms.PictureBox();
+            this.lbName = new System.Windows.Forms.Label();
             this.pnlNotify = new System.Windows.Forms.Panel();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
-            this.lbName = new System.Windows.Forms.Label();
-            this.ptbAvatar = new System.Windows.Forms.PictureBox();
             this.pnlProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlProfile
@@ -47,6 +47,24 @@
             this.pnlProfile.Name = "pnlProfile";
             this.pnlProfile.Size = new System.Drawing.Size(197, 50);
             this.pnlProfile.TabIndex = 7;
+            // 
+            // ptbAvatar
+            // 
+            this.ptbAvatar.Location = new System.Drawing.Point(3, 3);
+            this.ptbAvatar.Name = "ptbAvatar";
+            this.ptbAvatar.Size = new System.Drawing.Size(44, 44);
+            this.ptbAvatar.TabIndex = 1;
+            this.ptbAvatar.TabStop = false;
+            // 
+            // lbName
+            // 
+            this.lbName.AutoSize = true;
+            this.lbName.Font = new System.Drawing.Font("Cambria", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbName.Location = new System.Drawing.Point(53, 12);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(62, 23);
+            this.lbName.TabIndex = 0;
+            this.lbName.Text = "label1";
             // 
             // pnlNotify
             // 
@@ -70,24 +88,6 @@
             this.ptbLogo.TabIndex = 4;
             this.ptbLogo.TabStop = false;
             // 
-            // lbName
-            // 
-            this.lbName.AutoSize = true;
-            this.lbName.Font = new System.Drawing.Font("Cambria", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbName.Location = new System.Drawing.Point(53, 12);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(62, 23);
-            this.lbName.TabIndex = 0;
-            this.lbName.Text = "label1";
-            // 
-            // ptbAvatar
-            // 
-            this.ptbAvatar.Location = new System.Drawing.Point(3, 3);
-            this.ptbAvatar.Name = "ptbAvatar";
-            this.ptbAvatar.Size = new System.Drawing.Size(44, 44);
-            this.ptbAvatar.TabIndex = 1;
-            this.ptbAvatar.TabStop = false;
-            // 
             // UCMainHeader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,8 +101,8 @@
             this.Size = new System.Drawing.Size(1080, 75);
             this.pnlProfile.ResumeLayout(false);
             this.pnlProfile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

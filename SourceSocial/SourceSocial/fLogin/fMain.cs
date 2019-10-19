@@ -58,7 +58,16 @@ namespace fLogin
             pnlAddPost.Controls.Add(post);
             LoadNewFeed();
             LoadMainHeader();
+            LoadCatalog();
         }
+
+        private void LoadCatalog()
+        {
+            UCCatalog uCCatalog = new UCCatalog(BUS_Controls.GetPeople());
+            uCCatalog.OnSelectionUser += (i) => OnOpenProfile(i);
+            this.pnlCatalog.Controls.Add(uCCatalog);
+        }
+
         private void LoadMainHeader()
         {
             UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
