@@ -59,7 +59,7 @@ namespace DAL
                 (@"
                 SELECT Profile.*
                 FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
-                WHERE acc.ID = 'nkoxway49' AND acc.PASS = '123' AND Profile.UIDuser = acc.UID
+                WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
                 ", account.Username, account.Password);
             SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
             DataTable dataTable= new DataTable();
@@ -203,6 +203,34 @@ namespace DAL
         #endregion
 
         #region Handle_Profile
+
+        public DataTable GetListFriend(string UID)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                    (@"
+                    SELECT *
+                    FROM dbo.FRIEND
+                    WHERE UID1='{0}'OR UID2='{0}'
+                    ", UID);
+                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
+                DataTable data = new DataTable();
+                sqlData.Fill(data);
+                return data;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return null;
+        }
+
         public bool ChangeAvatar(Profile profile)
         {
             _conn.Open();
@@ -264,7 +292,7 @@ namespace DAL
             try
             {
                 _conn.Open();
-                string query = string.Format(@"INSERT dbo.FRIEND(UID1, UID2) VALUES('', '')", UID1, UID2);
+                string query = string.Format(@"INSERT dbo.FRIEND(UID1, UID2) VALUES('{0}', '{1}')", UID1, UID2);
                 SqlCommand sqlCommand = new SqlCommand(query, _conn);
                 if (sqlCommand.ExecuteNonQuery() > 0)
                     return true;
@@ -301,6 +329,34 @@ namespace DAL
             }
 
             return false;
+        }
+
+        public DataTable GetProfile(string UID)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                    (@"
+                        SELECT *
+                        FROM dbo.PROFILE
+                        WHERE UIDuser = '{0}'
+                    ", UID);
+                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
+                DataTable dataTable = new DataTable();
+                sqlData.Fill(dataTable);
+                return dataTable;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+
+            return null;
         }
 
         #endregion

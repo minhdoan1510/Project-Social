@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMessenger = new System.Windows.Forms.Button();
+            this.btnAddFriend = new System.Windows.Forms.Button();
             this.lbFriend_Count = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.ptbAvatar = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnMessenger);
+            this.panel1.Controls.Add(this.btnAddFriend);
             this.panel1.Controls.Add(this.lbFriend_Count);
             this.panel1.Controls.Add(this.lbName);
             this.panel1.Controls.Add(this.ptbAvatar);
@@ -49,6 +49,34 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(329, 174);
             this.panel1.TabIndex = 0;
+            // 
+            // btnMessenger
+            // 
+            this.btnMessenger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btnMessenger.FlatAppearance.BorderSize = 0;
+            this.btnMessenger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMessenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMessenger.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMessenger.Location = new System.Drawing.Point(158, 130);
+            this.btnMessenger.Name = "btnMessenger";
+            this.btnMessenger.Size = new System.Drawing.Size(159, 34);
+            this.btnMessenger.TabIndex = 3;
+            this.btnMessenger.Text = "Nhắn tin";
+            this.btnMessenger.UseVisualStyleBackColor = false;
+            // 
+            // btnAddFriend
+            // 
+            this.btnAddFriend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btnAddFriend.FlatAppearance.BorderSize = 0;
+            this.btnAddFriend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddFriend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddFriend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnAddFriend.Location = new System.Drawing.Point(15, 130);
+            this.btnAddFriend.Name = "btnAddFriend";
+            this.btnAddFriend.Size = new System.Drawing.Size(125, 34);
+            this.btnAddFriend.TabIndex = 3;
+            this.btnAddFriend.Text = "Kết Bạn";
+            this.btnAddFriend.UseVisualStyleBackColor = false;
             // 
             // lbFriend_Count
             // 
@@ -78,35 +106,6 @@
             this.ptbAvatar.TabIndex = 0;
             this.ptbAvatar.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button1.Location = new System.Drawing.Point(15, 130);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 34);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Kết Bạn";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.button2.Location = new System.Drawing.Point(158, 130);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(159, 34);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Nhắn tin";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
             // UCProfile_InfoBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +126,7 @@
         private System.Windows.Forms.PictureBox ptbAvatar;
         private System.Windows.Forms.Label lbFriend_Count;
         private System.Windows.Forms.Label lbName;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMessenger;
+        private System.Windows.Forms.Button btnAddFriend;
     }
 }

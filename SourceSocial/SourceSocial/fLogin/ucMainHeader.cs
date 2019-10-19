@@ -16,7 +16,7 @@ namespace fLogin
         #region Propertion
         Profile profile;
 
-        public delegate void OpenProfile();
+        public delegate void OpenProfile(string UID);
         public event OpenProfile OnOpenProfile;
 
         public delegate void OpenHome();
@@ -53,7 +53,7 @@ namespace fLogin
         {
             if (OnOpenProfile != null)
             {
-                OnOpenProfile();
+                OnOpenProfile(profile.Uid);
             }
         }
         #endregion

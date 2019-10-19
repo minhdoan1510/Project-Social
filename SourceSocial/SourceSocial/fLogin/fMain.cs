@@ -33,7 +33,7 @@ namespace fLogin
             btnExit_Form.MouseLeave += BtnExit_Form_MouseLeave;
             //
             //Text holder in my post
-            
+
         }
 
         private void BtnExit_Form_MouseLeave(object sender, EventArgs e)
@@ -62,13 +62,15 @@ namespace fLogin
         private void LoadMainHeader()
         {
             UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
-            uCMainHeader.OnOpenProfile += UCMainHeader_OnOpenProfile;
+            uCMainHeader.OnOpenProfile += OnOpenProfile;
 
-            uCMainHeader.OnOpenHome += () => pnlHome.Visible = true;
+            uCMainHeader.OnOpenHome += () =>
+            {
+                this.Controls.Remove(DisplayProfile);
+                pnlHome.Visible = true;
+            };
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
-
-        #region Handle_Event_MainDisplay
 
         private void LoadNewFeed()
         {
@@ -83,13 +85,19 @@ namespace fLogin
             List<Post> posts = BUS_Controls.GetPost();
             foreach (var item in posts)
             {
-                UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image);
+                UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
                 post.Dock = DockStyle.Top;
                 post.Tag = item.Idpost;
                 post.OnClickComment += Post_OnClickComment;
+                post.OnClickOpenProfile += OnOpenProfile;
                 pnlNewFeed_Main.Controls.Add(post);
             }
         }
+
+
+
+        #region Handle_Event_MainDisplay
+
         private void Post_OnAddPost(string str)
         {
             if (BUS_Controls.AddPost(new Post() { Content = str }))
@@ -119,23 +127,23 @@ namespace fLogin
         #endregion
 
         #region UC_Profile
-        private void UCMainHeader_OnOpenProfile()
+        private void OnOpenProfile(string UID)
         {
+            DisplayProfile = new UCProfile(BUS_Controls.GetProfile(UID), BUS_Controls.IsFriendWith(UID));
             pnlHome.Visible = false;
-            if(DisplayProfile != null)
-            {
-                DisplayProfile.Visible = true;
-            }
-            else
-            {
-                DisplayProfile = new UCProfile(BUS_Controls.Profilecurrent);
-                DisplayProfile.Location = pnlHome.Location;
-                this.Controls.Add(DisplayProfile);
-                DisplayProfile.Tag = BUS_Controls.Profilecurrent.Uid;
-                DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
-                DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
-            }
+            DisplayProfile.Location = pnlHome.Location;
+            this.Controls.Add(DisplayProfile);
+            DisplayProfile.Tag = UID;
+            DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
+            DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
+            DisplayProfile.OnDelFriend += (i) => BUS_Controls.DelFriend(i);
+            DisplayProfile.Visible = true;
+            
+
         }
+
+
+
         #endregion
     }
 }
