@@ -4,11 +4,13 @@ using DTO;
 using System.Data.SqlClient;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace DAL
 {
     public class DAL_Controls: ConnectToDTB
     {
+        #region Handle_Login
         public bool SignUp(Account account)
         {
             _conn.Open();
@@ -65,7 +67,9 @@ namespace DAL
             _conn.Close();
             return dataTable;
         }
+        #endregion
 
+        #region Handle_fMain
         public DataTable LoadPost_fMain(string UID)
         {
             _conn.Open();
@@ -79,6 +83,7 @@ namespace DAL
                 FROM dbo.POST AS Post
                 INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
                 INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
+                ORDER BY Post.TIME
                 ", UID);
             DataTable dataTable = new DataTable();
             SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
@@ -94,24 +99,24 @@ namespace DAL
                 _conn.Open();
                 string query = string.Format
                   (@"
-              INSERT dbo.POST
-              (
-                  IDPOST,
-                  IDUSER,
-                  LIKED,
-                  CONTENT,
-                  IMAGE,
-                  TIME
-              )
-              VALUES
-              (   '{0}',       -- IDPOST - varchar(30)
-                  '{1}',       -- IDUSER - varchar(30)
-                  0,        -- LIKED - int
-                  N'{2}',       -- CONTENT - Ntext
-                  NULL,     -- IMAGE - image
-                  GETDATE() -- TIME - datetime
-              )
-              ", post.Idpost, post.Iduser, post.Content);
+                  INSERT dbo.POST
+                  (
+                      IDPOST,
+                      IDUSER,
+                      LIKED,
+                      CONTENT,
+                      IMAGE,
+                      TIME
+                  )
+                  VALUES
+                  (   '{0}',       -- IDPOST - varchar(30)
+                      '{1}',       -- IDUSER - varchar(30)
+                      0,        -- LIKED - int
+                      N'{2}',       -- CONTENT - Ntext
+                      NULL,     -- IMAGE - image
+                      GETDATE() -- TIME - datetime
+                  )
+                  ", post.Idpost, post.Iduser, post.Content);
                 SqlCommand sql = new SqlCommand(query, _conn);
                 if (sql.ExecuteNonQuery() > 0)
                     return true;
@@ -138,6 +143,7 @@ namespace DAL
                     INNER JOIN dbo.PROFILE AS Profile ON Profile.UIDuser = CMT.IDuser
                     INNER JOIN dbo.POST AS Post ON Post.IDPOST = CMT.IDPOST
                     WHERE CMT.IDPOST='{0}'
+                    ORDER BY Post.TIME
                     ", UIDpost);
                 SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
                 DataTable data = new DataTable();
@@ -194,39 +200,111 @@ namespace DAL
             }
             return false;
         }
+        #endregion
 
+        #region Handle_Profile
         public bool ChangeAvatar(Profile profile)
         {
-            using (var ms = new MemoryStream())
+            _conn.Open();
+            using (var command = _conn.CreateCommand())
             {
-                profile.Avatar.Save(ms, profile.Avatar.RawFormat);
-                byte[] temp = ms.ToArray();
+                Image img = profile.Avatar;
+                MemoryStream tmpStream = new MemoryStream();
+                img.Save(tmpStream, ImageFormat.Png); // change to other format
+                tmpStream.Seek(0, SeekOrigin.Begin);
+                byte[] imgBytes = new byte[100000];
+                tmpStream.Read(imgBytes, 0, 100000);
 
-                try
-                {
-                    _conn.Open();
-                    string query = string.Format
-                        (@"
-                    UPDATE PROFILE SET AVATAR = '{0}' 
-                    WHERE UIDuser = '{1}'
-                    ", temp, profile.Uid);
-                    SqlCommand sqlCommand = new SqlCommand(query, _conn);
-                    if (sqlCommand.ExecuteNonQuery() > 0)
-                    {
-                        return true;
-                    }
-                }
-                catch
-                {
-
-                }
-                finally
-                {
-                    _conn.Close();
-                }
-                return false;
+                command.CommandText = string.Format(@"UPDATE dbo.PROFILE SET AVATAR = AVATAR WHERE UIDuser = '{0}'", profile.Uid);
+                IDataParameter par = command.CreateParameter();
+                par.ParameterName = "AVATAR";
+                par.DbType = DbType.Binary;
+                par.Value = imgBytes;
+                command.Parameters.Add(par);
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
             }
+
+            return false;
+
+            //using (var ms = new MemoryStream())
+            //{
+            //    profile.Avatar.Save(ms, profile.Avatar.RawFormat);
+            //    byte[] temp = ms.ToArray();
+            //    ms.Read(temp, 0, temp.Length);
+            //    try
+            //    {
+            //        _conn.Open();
+            //        string query = string.Format
+            //            (@"
+            //        UPDATE dbo.PROFILE 
+            //        SET AVATAR = '{0}' 
+            //        WHERE UIDuser = '{1}'
+            //        ", temp, profile.Uid);
+            //        SqlCommand sqlCommand = new SqlCommand(query, _conn);
+            //        if (sqlCommand.ExecuteNonQuery() > 0)
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //    catch
+            //    {
+
+            //    }
+            //    finally
+            //    {
+            //        _conn.Close();
+            //    }
+            //    return false;
+            //}
+        } // Đang bị lỗi
+
+        public bool AddFriend(string UID1,string UID2)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format(@"INSERT dbo.FRIEND(UID1, UID2) VALUES('', '')", UID1, UID2);
+                SqlCommand sqlCommand = new SqlCommand(query, _conn);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+
+            return false;
         }
+
+        public bool DelFriend(string UID1, string UID2)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format(@"DELETE FROM dbo.FRIEND WHERE (UID1 = '{0}'AND UID2 = '{1}')OR (UID1 = '{1}'AND UID2 = '{0}')", UID1, UID2);
+                SqlCommand sqlCommand = new SqlCommand(query, _conn);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+
+            return false;
+        }
+
+        #endregion
+
     }
 
 

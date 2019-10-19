@@ -18,17 +18,16 @@ namespace fLogin
         BUS_Controls BUS_Controls = new BUS_Controls();
         #endregion
 
-
         public fLogin()
         {
             InitializeComponent();
         }
 
+        #region Handle_Event
         private void BtnSignUp_Click(object sender, EventArgs e)
         {
             pnlSignIn.Visible = false;
         }
-
         private void BtnSignUp_SignUp_Click(object sender, EventArgs e)
         {
             Account account = new Account()
@@ -45,7 +44,6 @@ namespace fLogin
             else
                 MessageBox.Show("Khoogn thanh cong");
         }
-
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
             if (BUS_Controls.SigIn(new Account() { Username = txbUsername_SignIn.Text, Password = txbPassword_SignIn.Text }))
@@ -63,5 +61,6 @@ namespace fLogin
             //this.Visible = false;
             //fMain.ShowDialog();
         }
+        #endregion
     }
 }

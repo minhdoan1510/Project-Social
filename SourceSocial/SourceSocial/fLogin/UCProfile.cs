@@ -17,6 +17,9 @@ namespace fLogin
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
+        public delegate bool AddFriend(string uid);
+        public event AddFriend OnAddFriend;
+
 
         public delegate bool LoadPost_Profile(string uid, string content);
         public event LoadPost_Profile OnLoadPost_Profile;
@@ -33,11 +36,14 @@ namespace fLogin
             UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(profile);
             pnlProfile_Infor.Controls.Add(uCProfile_InfoBox);
             uCProfile_InfoBox.OnChangeAvatar += (i) => OnChangeAvatar(i);
+            uCProfile_InfoBox.OnAddFriend += () => OnAddFriend(this.Tag.ToString());
             //
             //add UCaddPost
             UCAddPost uCAddPost = new UCAddPost();
             uCAddPost.OnAddPost += (content)=> OnLoadPost_Profile(this.Tag.ToString(),content);
-
+            
+            //
+            //
 
         }
 

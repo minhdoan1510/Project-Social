@@ -66,7 +66,6 @@
             this.btnExit_Form.TabIndex = 0;
             this.btnExit_Form.Text = "X";
             this.btnExit_Form.UseVisualStyleBackColor = false;
-            this.btnExit_Form.Click += new System.EventHandler(this.BtnExit_Form_Click);
             // 
             // pnlMainHeader
             // 

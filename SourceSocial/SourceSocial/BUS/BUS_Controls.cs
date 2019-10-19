@@ -10,13 +10,15 @@ namespace BUS
 {
     public class BUS_Controls
     {
+        #region Propertion
         private List<Post> posts = new List<Post>();
         private List<KeyValuePair<string, List<Comment>>> comments=new List<KeyValuePair<string, List<Comment>>>();
         private Profile profilecurrent = new Profile();
         DAL_Controls dal = new DAL_Controls();
-
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+        #endregion
 
+        #region Handle_Login
         public bool SignUp(Account account)
         {
             if (CheckAccount_SignUp(account))
@@ -29,12 +31,6 @@ namespace BUS
         {
             return true;
         }
-
-        public List<Post> GetPost()
-        {
-            return posts;
-        }
-
         public bool SigIn(Account account)
         {
             if (CheckAccount_SignIn(account))
@@ -55,6 +51,13 @@ namespace BUS
         {
             return true;
         }
+        #endregion
+
+        #region Handle_fMain
+        public List<Post> GetPost()
+        {
+            return posts;
+        }
         private void LoadDataPost(string UID)
         {
             DataTable data = dal.LoadPost_fMain(UID);
@@ -71,26 +74,6 @@ namespace BUS
                 posts.Add(temp);
             }
         }
-
-        public Image ConverttoImage(object byteArray)
-        {
-            
-            try
-            {
-                byte[] byteArrayIn = (byte[])byteArray;
-                Image returnImage;
-                MemoryStream ms = new MemoryStream(byteArrayIn, 0, byteArrayIn.Length);
-                ms.Write(byteArrayIn, 0, byteArrayIn.Length);
-                returnImage = Image.FromStream(ms, true);//Exception occurs here
-                return returnImage;
-            }
-            catch { }
-            finally
-            {
-            }
-            return null;
-        }
-
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
@@ -106,7 +89,7 @@ namespace BUS
         }
         public List<Comment> LoadCMTof(string idPost)
         {
-            foreach(var item in comments)
+            foreach (var item in comments)
             {
                 if (item.Key == idPost)
                 {
@@ -134,7 +117,6 @@ namespace BUS
             comments.Add(new KeyValuePair<string, List<Comment>>(IDPost, commentofpost));
             return commentofpost;
         }
-
         public List<Comment> AddComment(string idPost, string content)
         {
             Comment comment = new Comment()
@@ -159,7 +141,13 @@ namespace BUS
             }
             return null;
         }
+        #endregion
 
+        #region Handle_Profile
+        public bool AddFriend(string i)
+        {
+            return dal.AddFriend(profilecurrent.Uid, i);
+        }
         public bool ChangeAvatar(Image image)
         {
             if (dal.ChangeAvatar(new Profile() { Uid = profilecurrent.Uid, Avatar = image }))
@@ -169,5 +157,26 @@ namespace BUS
             }
             return false;
         }
+        #endregion
+
+        #region Handle_Other
+        public Image ConverttoImage(object byteArray)
+        {
+            try
+            {
+                byte[] byteArrayIn = (byte[])byteArray;
+                Image returnImage;
+                MemoryStream ms = new MemoryStream(byteArrayIn, 0, byteArrayIn.Length);
+                ms.Write(byteArrayIn, 0, byteArrayIn.Length);
+                returnImage = Image.FromStream(ms, true);//Exception occurs here
+                return returnImage;
+            }
+            catch { }
+            finally
+            {
+            }
+            return null;
+        }
+        #endregion
     }
 }

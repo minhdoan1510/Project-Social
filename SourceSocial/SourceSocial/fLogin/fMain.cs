@@ -9,13 +9,17 @@ namespace fLogin
 {
     public partial class fMain : Form
     {
+        #region Propertion
         BUS_Controls BUS_Controls;
         UCProfile DisplayProfile;
+        #endregion
+
         public fMain(BUS_Controls _BUS_Controls)
         {
             InitializeComponent();
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
+            this.btnExit_Form.Click += (s, e) => Close();
             LoadDatafMain();
             LoadAnimation();
         }
@@ -46,6 +50,7 @@ namespace fLogin
 
         #endregion
 
+        #region Load_MainDisplay
         private void LoadDatafMain()
         {
             UCAddPost post = new UCAddPost();
@@ -54,43 +59,16 @@ namespace fLogin
             LoadNewFeed();
             LoadMainHeader();
         }
-
         private void LoadMainHeader()
         {
             UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
             uCMainHeader.OnOpenProfile += UCMainHeader_OnOpenProfile;
-            
+
             uCMainHeader.OnOpenHome += () => pnlHome.Visible = true;
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
 
-        private void UCMainHeader_OnOpenProfile()
-        {
-            pnlHome.Visible = false;
-            if(DisplayProfile != null)
-            {
-                DisplayProfile.Visible = true;
-            }
-            else
-            {
-                DisplayProfile = new UCProfile(BUS_Controls.Profilecurrent);
-                DisplayProfile.Location = pnlHome.Location;
-                this.Controls.Add(DisplayProfile);
-                DisplayProfile.Tag = BUS_Controls.Profilecurrent.Uid;
-                DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
-            }
-        }
-
-        private void Post_OnAddPost(string str)
-        {
-            if (BUS_Controls.AddPost(new Post() { Content = str }))
-            {
-                MessageBox.Show("Đã Đăng!!!");
-                LoadNewFeed();
-            }
-            else
-                MessageBox.Show("Không thành công!!!");
-        }
+        #region Handle_Event_MainDisplay
 
         private void LoadNewFeed()
         {
@@ -112,6 +90,16 @@ namespace fLogin
                 pnlNewFeed_Main.Controls.Add(post);
             }
         }
+        private void Post_OnAddPost(string str)
+        {
+            if (BUS_Controls.AddPost(new Post() { Content = str }))
+            {
+                MessageBox.Show("Đã Đăng!!!");
+                LoadNewFeed();
+            }
+            else
+                MessageBox.Show("Không thành công!!!");
+        }
 
         private void Post_OnClickComment(string IDPost)
         {
@@ -122,17 +110,32 @@ namespace fLogin
             displayPost_Comment.ShowDialog();
             this.Enabled = true;
         }
-
         private List<Comment> DisplayPost_Comment_OnAddComment(string idPost, string content)
         {
             return BUS_Controls.AddComment(idPost, content);
         }
+        #endregion
 
-        private void BtnExit_Form_Click(object sender, EventArgs e)
+        #endregion
+
+        #region UC_Profile
+        private void UCMainHeader_OnOpenProfile()
         {
-            Close();
+            pnlHome.Visible = false;
+            if(DisplayProfile != null)
+            {
+                DisplayProfile.Visible = true;
+            }
+            else
+            {
+                DisplayProfile = new UCProfile(BUS_Controls.Profilecurrent);
+                DisplayProfile.Location = pnlHome.Location;
+                this.Controls.Add(DisplayProfile);
+                DisplayProfile.Tag = BUS_Controls.Profilecurrent.Uid;
+                DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
+                DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
+            }
         }
-
-
+        #endregion
     }
 }

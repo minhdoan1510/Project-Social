@@ -12,10 +12,21 @@ namespace fLogin
 {
     public partial class UCPostDisplay : UserControl
     {
+        #region Propertion
         public delegate void ClickComment(string IDpost);
         public event ClickComment OnClickComment;
         public delegate void ClickLike(string IDpost);
         public event ClickLike OnClickLike;
+
+
+        public Label LbName_Post { get => lbName_Post; set => lbName_Post = value; }
+        public Label LbTime_Post { get => lbTime_Post; set => lbTime_Post = value; }
+        public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
+        public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
+        public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
+        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        #endregion
+
         public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar)
         {
             InitializeComponent();
@@ -31,6 +42,7 @@ namespace fLogin
             PtbLike.Click += PtbLike_Click;
         }
 
+        #region Handle_Event
         private void PtbLike_Click(object sender, EventArgs e)
         {
 
@@ -41,12 +53,6 @@ namespace fLogin
             if (OnClickComment != null)
                 OnClickComment(this.Tag.ToString());
         }
-
-        public Label LbName_Post { get => lbName_Post; set => lbName_Post = value; }
-        public Label LbTime_Post { get => lbTime_Post; set => lbTime_Post = value; }
-        public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
-        public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
-        public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
-        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        #endregion
     }
 }
