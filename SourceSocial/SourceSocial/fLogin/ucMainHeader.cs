@@ -21,6 +21,10 @@ namespace fLogin
 
         public delegate void OpenHome();
         public event OpenHome OnOpenHome;
+
+        public delegate void OpenMessenger();
+        public event OpenMessenger OnOpenMessenger;
+
         public Label LbName { get => lbName; set => lbName = value; }
         public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
@@ -45,6 +49,9 @@ namespace fLogin
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             pnlProfile.Click += PnlProfile_Click;
             PtbLogo.Click += (s, e) => OnOpenHome();
+
+            btnMess.Click += (s, e) => OnOpenMessenger();
+
         }
         #endregion
 
@@ -74,5 +81,7 @@ namespace fLogin
         }
 
         #endregion
+
+
     }
 }

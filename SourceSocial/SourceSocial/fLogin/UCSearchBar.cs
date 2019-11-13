@@ -28,6 +28,7 @@ namespace fLogin
 
             txbSearch.GotFocus += TxbSearch_GotFocus;
             txbSearch.LostFocus += TxbSearch_LostFocus;
+            //txbSearch.
 
             lsvSearchView.MouseDoubleClick += LsvSearchView_MouseDoubleClick;
             lsvSearchView.KeyDown += LsvSearchView_KeyDown;

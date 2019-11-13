@@ -34,8 +34,12 @@
             this.pnlNotify = new System.Windows.Forms.Panel();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
+            this.btnMess = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.pnlProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
+            this.pnlNotify.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +72,9 @@
             // 
             // pnlNotify
             // 
+            this.pnlNotify.Controls.Add(this.button2);
+            this.pnlNotify.Controls.Add(this.button1);
+            this.pnlNotify.Controls.Add(this.btnMess);
             this.pnlNotify.Location = new System.Drawing.Point(707, 12);
             this.pnlNotify.Name = "pnlNotify";
             this.pnlNotify.Size = new System.Drawing.Size(165, 50);
@@ -88,6 +95,36 @@
             this.ptbLogo.TabIndex = 4;
             this.ptbLogo.TabStop = false;
             // 
+            // btnMess
+            // 
+            this.btnMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMess.Location = new System.Drawing.Point(107, 0);
+            this.btnMess.Name = "btnMess";
+            this.btnMess.Size = new System.Drawing.Size(50, 50);
+            this.btnMess.TabIndex = 0;
+            this.btnMess.Text = "MESS";
+            this.btnMess.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(57, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 50);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "TB";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(7, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(50, 50);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "frenf";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // UCMainHeader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,6 +139,7 @@
             this.pnlProfile.ResumeLayout(false);
             this.pnlProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();
+            this.pnlNotify.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.ResumeLayout(false);
 
@@ -115,5 +153,8 @@
         private System.Windows.Forms.PictureBox ptbLogo;
         private System.Windows.Forms.PictureBox ptbAvatar;
         private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMess;
     }
 }

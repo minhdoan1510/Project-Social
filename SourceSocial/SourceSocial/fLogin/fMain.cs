@@ -78,6 +78,13 @@ namespace fLogin
                 this.Controls.Remove(DisplayProfile);
                 pnlHome.Visible = true;
             };
+
+
+            uCMainHeader.OnOpenMessenger += () =>
+            {
+
+            };
+
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
 
