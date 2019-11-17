@@ -12,6 +12,12 @@ namespace fLogin
 {
     public partial class UCCommentDisplay : UserControl
     {
+        #region Propertion
+        public Label LbName { get => lbName; set => lbName = value; }
+        public Label LbContent { get => lbContent; set => lbContent = value; }
+        public Label LbTime { get => lbTime; set => lbTime = value; }
+        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+        #endregion
         public UCCommentDisplay(string name, Image avatar, string content, string time)
         {
             InitializeComponent();
@@ -21,9 +27,5 @@ namespace fLogin
             PtbAvatar.Image = avatar;
             ptbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
-        public Label LbName { get => lbName; set => lbName = value; }
-        public Label LbContent { get => lbContent; set => lbContent = value; }
-        public Label LbTime { get => lbTime; set => lbTime = value; }
-        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
     }
 }

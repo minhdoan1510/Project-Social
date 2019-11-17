@@ -13,13 +13,24 @@ namespace fLogin
 {
     public partial class UCMainHeader : UserControl
     {
+        #region Propertion
+        Profile profile;
 
-        public delegate void OpenProfile();
+        public delegate void OpenProfile(string UID);
         public event OpenProfile OnOpenProfile;
 
         public delegate void OpenHome();
         public event OpenHome OnOpenHome;
-        Profile profile;
+
+        public delegate void OpenMessenger();
+        public event OpenMessenger OnOpenMessenger;
+
+        public Label LbName { get => lbName; set => lbName = value; }
+        public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
+        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+
+        #endregion
+
         public UCMainHeader(Profile _profile)
         {
             InitializeComponent();
@@ -28,8 +39,7 @@ namespace fLogin
             LoadAnimation();
         }
 
-        
-
+        #region Load_UCMainHeader
         private void LoadMainHeader(Profile _profile)
         {
             this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
@@ -39,22 +49,24 @@ namespace fLogin
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             pnlProfile.Click += PnlProfile_Click;
             PtbLogo.Click += (s, e) => OnOpenHome();
-        }
 
+            btnMess.Click += (s, e) => OnOpenMessenger();
+
+        }
+        #endregion
+
+        #region Handle_Event
         private void PnlProfile_Click(object sender, EventArgs e)
         {
             if (OnOpenProfile != null)
             {
-                OnOpenProfile();
+                OnOpenProfile(profile.Uid);
             }
         }
-
-        public Label LbName { get => lbName; set => lbName = value; }
-        public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
-        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+        #endregion
 
         #region Animation
-        
+
         private void LoadAnimation()
         {
             //Animation enter PnlProfile
@@ -69,5 +81,7 @@ namespace fLogin
         }
 
         #endregion
+
+
     }
 }

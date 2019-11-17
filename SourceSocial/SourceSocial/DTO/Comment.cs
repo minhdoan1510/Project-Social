@@ -9,6 +9,7 @@ namespace DTO
 {
     public class Comment
     {
+        #region Propertion
         private string idPost;
         private string idUser;
         private string idComment;
@@ -24,5 +25,11 @@ namespace DTO
         public string Time { get => time; set => time = value; }
         public string Name { get => name; set => name = value; }
         public Image Avatar { get => avatar; set => avatar = value; }
+        #endregion
+
+        public Comment()
+        {
+
+        }
     }
 }
