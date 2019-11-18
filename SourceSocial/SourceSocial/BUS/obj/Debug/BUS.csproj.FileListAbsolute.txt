@@ -9,3 +9,14 @@ C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BU
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CopyComplete
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.dll
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CopyComplete
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.pdb

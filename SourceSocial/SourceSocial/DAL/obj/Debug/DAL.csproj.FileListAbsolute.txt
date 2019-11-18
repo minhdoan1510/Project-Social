@@ -7,3 +7,12 @@ C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DA
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.dll
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\bin\Debug\DAL.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\bin\Debug\DAL.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\bin\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\bin\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DAL\obj\Debug\DAL.pdb
