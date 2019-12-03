@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
+using BUS;
 
 namespace fLogin
 {
     public partial class UCProfile : UserControl
     {
+        BUS_Controls BUS_Controls;
+
         public UCProfile_InfoBox uCProfile_InfoBox;
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
@@ -23,15 +26,51 @@ namespace fLogin
         public delegate bool DelFriend(string uid);
         public event DelFriend OnDelFriend;
 
-        public delegate bool LoadPost_Profile(string uid, string content);
-        public event LoadPost_Profile OnLoadPost_Profile;
+        public delegate void AddPost( string content);
+        public event AddPost OnAddPost;
 
-        public UCProfile(Profile profile, int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
+        public delegate void ClickComment(string UID);
+        public event ClickComment Post_OnClickComment;
+
+
+
+        public UCProfile(BUS_Controls _BUS_Controls, Profile profile, int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
         {
+            BUS_Controls = _BUS_Controls;
             InitializeComponent();
+            LoadWallNewFeed(profile.Uid);
             LoadDisplay(profile, isFriend);
+         
+            
+            OnAddPost += (i)=> LoadWallNewFeed(profile.Uid);
+            OnAddPost += (i)=> LoadDisplay(profile, isFriend);
         }
 
+        private void LoadWallNewFeed(string UID)
+        {
+            pnlMain_Newfeed_AddPost.AutoScroll = false;
+            pnlMain_Newfeed_AddPost.HorizontalScroll.Maximum = 0;
+            pnlMain_Newfeed_AddPost.HorizontalScroll.Visible = false;
+            pnlMain_Newfeed_AddPost.VerticalScroll.Maximum = 0;
+            pnlMain_Newfeed_AddPost.VerticalScroll.Visible = false;
+            pnlMain_Newfeed_AddPost.AutoScroll = true;
+
+            pnlNewFeed_Main.Controls.Clear();
+            List<Post> posts = BUS_Controls.GetPost();
+            foreach (var item in posts)
+            {
+                if (item.Iduser == UID)
+                {
+                    UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
+                    post.Dock = DockStyle.Top;
+                    post.Tag = item.Idpost;
+
+                    post.OnClickComment += (i) => Post_OnClickComment(i);
+
+                    pnlNewFeed_Main.Controls.Add(post);
+                }
+            }
+        }
 
         private void LoadDisplay(Profile profile, int isFriend)
         {
@@ -43,10 +82,17 @@ namespace fLogin
             uCProfile_InfoBox.OnDelFriend += () => OnDelFriend(this.Tag.ToString());
             //
             //add UCaddPost
-            UCAddPost uCAddPost = new UCAddPost();
-            uCAddPost.OnAddPost += (content)=> OnLoadPost_Profile(this.Tag.ToString(),content);
+            if (isFriend == 2)
+            {
+                
+                UCAddPost uCAddPost = new UCAddPost();
+                uCAddPost.OnAddPost += (content) => OnAddPost(content);
+                uCAddPost.Dock = DockStyle.Top;
+                this.pnlNewFeed_Main.Controls.Add(uCAddPost);
+            }
             //
             //
+           
 
         }
 

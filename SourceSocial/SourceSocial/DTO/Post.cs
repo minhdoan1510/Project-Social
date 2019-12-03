@@ -31,7 +31,7 @@ namespace DTO
         {
             Idpost = Iduser = content = "";
             Liked = 0;
-            Image = null;
+            
             Time = "";
         }
     }

@@ -32,7 +32,7 @@ namespace fLogin
         #endregion
 
         #region Animation
-        private void LoadAnimation()
+        public void LoadAnimation()
         {
             //Text placeholder in my post
             string placeholder = "Bạn đang nghĩ gì???";

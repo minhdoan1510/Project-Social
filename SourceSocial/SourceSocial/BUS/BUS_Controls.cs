@@ -62,8 +62,8 @@ namespace BUS
             }
             return false;
         }
+ 
 
-        
 
         private bool CheckAccount_SignIn(Account account)
         {
@@ -75,6 +75,7 @@ namespace BUS
         public List<Post> GetPost()
         {
             return posts;
+           
         }
         private void LoadDataPost(string UID)
         {
@@ -86,7 +87,7 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[4]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); 
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); 
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
@@ -144,6 +145,7 @@ namespace BUS
                 IdPost = idPost,
                 Content = content,
                 Time = "Vừa xong",
+                Avatar = profilecurrent.Avatar,
                 IdComment = new Random().Next(10000000, 99999999).ToString()
             };
             if (dal.AddComment(comment))
@@ -197,7 +199,7 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = null;
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); ;
             return profile;
         }
 
@@ -270,6 +272,14 @@ namespace BUS
             }
             return null;
         }
+        //private Image ConvertBinaryToImage(byte[] data)
+        //{
+
+        //    using (MemoryStream ms = new MemoryStream(data))
+        //    {
+        //        return Image.FromStream(ms);
+        //    }
+        //}
         #endregion
     }
 }

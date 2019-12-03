@@ -55,6 +55,7 @@ namespace fLogin
         {
             UCAddPost post = new UCAddPost();
             post.OnAddPost += Post_OnAddPost;
+            post.OnAddPost +=(i)=> post.LoadAnimation();
             pnlAddPost.Controls.Add(post);
             LoadNewFeed();
             LoadMainHeader();
@@ -76,6 +77,7 @@ namespace fLogin
             uCMainHeader.OnOpenHome += () =>
             {
                 this.Controls.Remove(DisplayProfile);
+                DisplayProfile.Dispose();
                 pnlHome.Visible = true;
             };
 
@@ -102,11 +104,13 @@ namespace fLogin
             foreach (var item in posts)
             {
                 UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
+              
                 post.Dock = DockStyle.Top;
                 post.Tag = item.Idpost;
+                
                 post.OnClickComment += Post_OnClickComment;
                 post.OnClickOpenProfile += OnOpenProfile;
-                pnlNewFeed_Main.Controls.Add(post);
+                this.pnlNewFeed_Main.Controls.Add(post);
             }
         }
 
@@ -120,12 +124,13 @@ namespace fLogin
             {
                 MessageBox.Show("Đã Đăng!!!");
                 LoadNewFeed();
+                
             }
             else
                 MessageBox.Show("Không thành công!!!");
         }
 
-        private void Post_OnClickComment(string IDPost)
+        public void Post_OnClickComment(string IDPost)
         {
 
             fDisplayPost_Comment displayPost_Comment = new fDisplayPost_Comment(BUS_Controls.LoadCMTof(IDPost));
@@ -145,7 +150,7 @@ namespace fLogin
         #region UC_Profile
         private void OnOpenProfile(string UID)
         {
-            DisplayProfile = new UCProfile(BUS_Controls.GetProfile(UID), BUS_Controls.IsFriendWith(UID));
+            DisplayProfile = new UCProfile(BUS_Controls, BUS_Controls.GetProfile(UID), BUS_Controls.IsFriendWith(UID));
             pnlHome.Visible = false;
             DisplayProfile.Location = pnlHome.Location;
             this.Controls.Add(DisplayProfile);
@@ -153,6 +158,8 @@ namespace fLogin
             DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
             DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
             DisplayProfile.OnDelFriend += (i) => BUS_Controls.DelFriend(i);
+            DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
+            DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
             DisplayProfile.Visible = true;
             
 
