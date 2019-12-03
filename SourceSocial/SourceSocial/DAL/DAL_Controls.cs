@@ -258,24 +258,22 @@ namespace DAL
             return null;
         }
 
+        private byte[] ConvertImageToBinary(Image img)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+
+            }
+        }
         public bool ChangeAvatar(Profile profile)
         {
             _conn.Open();
             using (var command = _conn.CreateCommand())
             {
-                Image img = profile.Avatar;
-                MemoryStream tmpStream = new MemoryStream();
-                img.Save(tmpStream, ImageFormat.Png); // change to other format
-                tmpStream.Seek(0, SeekOrigin.Begin);
-                byte[] imgBytes = new byte[100000];
-                tmpStream.Read(imgBytes, 0, 100000);
-
-                command.CommandText = string.Format(@"UPDATE dbo.PROFILE SET AVATAR = AVATAR WHERE UIDuser = '{0}'", profile.Uid);
-                IDataParameter par = command.CreateParameter();
-                par.ParameterName = "AVATAR";
-                par.DbType = DbType.Binary;
-                par.Value = imgBytes;
-                command.Parameters.Add(par);
+                command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
+                command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
                 if (command.ExecuteNonQuery() > 0)
                     return true;
             }

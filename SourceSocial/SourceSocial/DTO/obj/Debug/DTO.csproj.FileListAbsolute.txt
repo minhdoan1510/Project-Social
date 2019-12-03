@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.dll
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.pdb
@@ -34,4 +35,45 @@ D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CoreCompileIn
 D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb
 >>>>>>> Stashed changes
+>>>>>>> minhtien
+=======
+<<<<<<< Updated upstream
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Data.v19.1.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Xpo.v19.1.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Data.v19.1.xml
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Xpo.v19.1.xml
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\es\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\ja\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\ru\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\de\DevExpress.Xpo.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\es\DevExpress.Xpo.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\ja\DevExpress.Xpo.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\bin\Debug\ru\DevExpress.Xpo.v19.1.resources.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CopyComplete
+=======
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb
+>>>>>>> Stashed changes
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Data.v19.1.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DevExpress.Xpo.v19.1.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\es\DevExpress.Data.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\ja\DevExpress.Data.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\ru\DevExpress.Data.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\de\DevExpress.Xpo.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\es\DevExpress.Xpo.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\ja\DevExpress.Xpo.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\ru\DevExpress.Xpo.v19.1.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CopyComplete
 >>>>>>> minhtien

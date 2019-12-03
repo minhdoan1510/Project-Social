@@ -42,15 +42,17 @@ namespace fLogin
                 pnlSignIn.Visible = true;
             }
             else
-                MessageBox.Show("Khoogn thanh cong");
+                MessageBox.Show("Khong thanh cong");
         }
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
             if (BUS_Controls.SigIn(new Account() { Username = txbUsername_SignIn.Text, Password = txbPassword_SignIn.Text }))
             {
                 fMain fMain = new fMain(BUS_Controls);
+                
                 fMain.ShowDialog();
                 this.Close();
+
             }
             else
             {
