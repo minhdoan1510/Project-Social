@@ -98,6 +98,7 @@ namespace BUS
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
             post.Iduser = Profilecurrent.Uid;
             post.Name = Profilecurrent.Name;
+            post.Image = profilecurrent.Avatar;
             post.Time = "Vừa xong";
             if (dal.AddPost(post))
             {
@@ -185,12 +186,19 @@ namespace BUS
                 return listFriend;
             return LoadDataListFriend(UID);
         }
+        public int numOfFriend(string UID)
+        {
+            if (UID == Profilecurrent.Uid)
+                return listFriend.Count;
+            return LoadDataListFriend(UID).Count;
+        }
         public Profile GetProfile(string UID)
         {
             if (UID == profilecurrent.Uid)
                 return profilecurrent;
             return LoadDataProfile(UID);
         }
+
         private Profile LoadDataProfile(string UID)
         {
             DataTable dataTable = dal.GetProfile(UID);
@@ -236,7 +244,13 @@ namespace BUS
             if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = image }))
             {
                 Profilecurrent.Avatar = image;
+                foreach (Post item in posts)
+                {
+                    if (item.Iduser == profilecurrent.Uid)
+                        item.Image = profilecurrent.Avatar;
+                }
                 return true;
+                
             }
             return false;
         }

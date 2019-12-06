@@ -28,47 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlProfile = new System.Windows.Forms.Panel();
-            this.ptbAvatar = new System.Windows.Forms.PictureBox();
-            this.lbName = new System.Windows.Forms.Label();
             this.pnlNotify = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnMess = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
-            this.btnMess = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pnlProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
+            this.ptbAvatar = new System.Windows.Forms.PictureBox();
+            this.pnlProfile = new MaterialSkin.Controls.MaterialRaisedButton();
             this.pnlNotify.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pnlProfile
-            // 
-            this.pnlProfile.Controls.Add(this.ptbAvatar);
-            this.pnlProfile.Controls.Add(this.lbName);
-            this.pnlProfile.Location = new System.Drawing.Point(880, 12);
-            this.pnlProfile.Name = "pnlProfile";
-            this.pnlProfile.Size = new System.Drawing.Size(197, 50);
-            this.pnlProfile.TabIndex = 7;
-            // 
-            // ptbAvatar
-            // 
-            this.ptbAvatar.Location = new System.Drawing.Point(3, 3);
-            this.ptbAvatar.Name = "ptbAvatar";
-            this.ptbAvatar.Size = new System.Drawing.Size(44, 44);
-            this.ptbAvatar.TabIndex = 1;
-            this.ptbAvatar.TabStop = false;
-            // 
-            // lbName
-            // 
-            this.lbName.AutoSize = true;
-            this.lbName.Font = new System.Drawing.Font("Cambria", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbName.Location = new System.Drawing.Point(53, 12);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(62, 23);
-            this.lbName.TabIndex = 0;
-            this.lbName.Text = "label1";
             // 
             // pnlNotify
             // 
@@ -79,6 +50,36 @@
             this.pnlNotify.Name = "pnlNotify";
             this.pnlNotify.Size = new System.Drawing.Size(165, 50);
             this.pnlNotify.TabIndex = 6;
+            // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(7, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(50, 50);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "frenf";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(57, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 50);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "TB";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnMess
+            // 
+            this.btnMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMess.Location = new System.Drawing.Point(107, 0);
+            this.btnMess.Name = "btnMess";
+            this.btnMess.Size = new System.Drawing.Size(50, 50);
+            this.btnMess.TabIndex = 0;
+            this.btnMess.Text = "MESS";
+            this.btnMess.UseVisualStyleBackColor = true;
             // 
             // pnlSearch
             // 
@@ -95,66 +96,54 @@
             this.ptbLogo.TabIndex = 4;
             this.ptbLogo.TabStop = false;
             // 
-            // btnMess
+            // ptbAvatar
             // 
-            this.btnMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMess.Location = new System.Drawing.Point(107, 0);
-            this.btnMess.Name = "btnMess";
-            this.btnMess.Size = new System.Drawing.Size(50, 50);
-            this.btnMess.TabIndex = 0;
-            this.btnMess.Text = "MESS";
-            this.btnMess.UseVisualStyleBackColor = true;
+            this.ptbAvatar.Location = new System.Drawing.Point(896, 14);
+            this.ptbAvatar.Name = "ptbAvatar";
+            this.ptbAvatar.Size = new System.Drawing.Size(44, 44);
+            this.ptbAvatar.TabIndex = 1;
+            this.ptbAvatar.TabStop = false;
             // 
-            // button1
+            // pnlProfile
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(57, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 50);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "TB";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(7, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 50);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "frenf";
-            this.button2.UseVisualStyleBackColor = true;
+            this.pnlProfile.Depth = 0;
+            this.pnlProfile.Location = new System.Drawing.Point(887, 12);
+            this.pnlProfile.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlProfile.Name = "pnlProfile";
+            this.pnlProfile.Primary = true;
+            this.pnlProfile.Size = new System.Drawing.Size(179, 51);
+            this.pnlProfile.TabIndex = 7;
+            this.pnlProfile.Text = "materialRaisedButton1";
+            this.pnlProfile.UseVisualStyleBackColor = true;
+            this.pnlProfile.Click += new System.EventHandler(this.PnlProfile_Click);
             // 
             // UCMainHeader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.pnlProfile);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.Controls.Add(this.ptbAvatar);
             this.Controls.Add(this.pnlNotify);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.ptbLogo);
+            this.Controls.Add(this.pnlProfile);
             this.Name = "UCMainHeader";
             this.Size = new System.Drawing.Size(1080, 75);
-            this.pnlProfile.ResumeLayout(false);
-            this.pnlProfile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();
             this.pnlNotify.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlProfile;
         private System.Windows.Forms.Panel pnlNotify;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.PictureBox ptbLogo;
-        private System.Windows.Forms.PictureBox ptbAvatar;
-        private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnMess;
+        private System.Windows.Forms.PictureBox ptbAvatar;
+        private MaterialSkin.Controls.MaterialRaisedButton pnlProfile;
     }
 }

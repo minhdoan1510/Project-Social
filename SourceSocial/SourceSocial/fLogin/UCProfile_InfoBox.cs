@@ -25,8 +25,12 @@ namespace fLogin
         public delegate bool DelFriend();
         public event DelFriend OnDelFriend;
 
+        public delegate void ViewFriend(string uid);
+        public event ViewFriend OnViewFriend;
+
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
         public Label LbName { get => lbName; set => lbName = value; }
+        public Label LbNumFriend { get => lbFriend_Count; set => lbFriend_Count = value; }
         public Button BtnAddFriend { get => btnAddFriend; set => btnAddFriend = value; }
         public Button BtnMessenger { get => btnMessenger; set => btnMessenger = value; }
         #endregion
@@ -35,11 +39,11 @@ namespace fLogin
             InitializeComponent();
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-           
+            
             LbName.Text = _profile.Name;
             IsFriend = isFriend;
             UpdateTypeProfile();
-            
+            lbFriend_Count.Click += (i,e)=>OnViewFriend(_profile.Uid);
         }
         #region Handle_Event
         private void BtnAddFriend_ClickDelFriend(object sender, EventArgs e)
