@@ -84,11 +84,28 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-
+                Form form = new Form() { Size = new Size(280, 370+60), StartPosition = FormStartPosition.CenterScreen, FormBorderStyle= FormBorderStyle.FixedToolWindow };
+                UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
+                uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
+                uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
+                uCMessengerDisplay.SendMessCurrent += (i,j)=> BUS_Controls.SendMess(i,j);
+                form.Controls.Add(uCMessengerDisplay);
+                form.ShowDialog();
             };
+
 
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
+        private object UCMessengerDisplay_GetMessinMessbox(string id)
+        {
+            return BUS_Controls.GetMessinMessbox(id);
+        }
+
+        private object UCMessengerDisplay_GetMailboxlist()
+        {
+            return BUS_Controls.GetMailboxlist();
+        }
+
 
         private void LoadNewFeed()
         {

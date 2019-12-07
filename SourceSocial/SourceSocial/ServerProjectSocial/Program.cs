@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.PeerToPeer;
 
-namespace BUS
+namespace ServerProjectSocial
 {
-    public class PeerToPeer
+    class Program
     {
-
-        public PeerToPeer()
+        static void Main(string[] args)
         {
-
+            Server server = new Server();
+            server.Run();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace DAL
 {
     public class ConnectToDTB
     {
-        protected SqlConnection _conn = new SqlConnection(@"Data Source=DESKTOP-6ENCE12\SQLEXPRESS;Initial Catalog=DataSocial;Integrated Security=True");
+        protected SqlConnection _conn = new SqlConnection(@"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True");
     }
 }

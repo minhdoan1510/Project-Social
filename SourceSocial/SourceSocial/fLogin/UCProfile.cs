@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
 using BUS;
+using System.Threading;
 
 namespace fLogin
 {
@@ -77,7 +78,10 @@ namespace fLogin
             //add ProfileControl
             UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(profile,isFriend);
             pnlProfile_Infor.Controls.Add(uCProfile_InfoBox);
+
+
             uCProfile_InfoBox.OnChangeAvatar += (i) => OnChangeAvatar(i);
+
             uCProfile_InfoBox.OnAddFriend += () => OnAddFriend(this.Tag.ToString());
             uCProfile_InfoBox.OnDelFriend += () => OnDelFriend(this.Tag.ToString());
             //
@@ -92,8 +96,6 @@ namespace fLogin
             }
             //
             //
-           
-
         }
 
     }

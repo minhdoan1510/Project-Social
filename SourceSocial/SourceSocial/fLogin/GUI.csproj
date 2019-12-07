@@ -67,6 +67,24 @@
     <Compile Include="UCMessengerDisplay.Designer.cs">
       <DependentUpon>UCMessengerDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCMessengerUnit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessengerUnit.Designer.cs">
+      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessofMe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessofMe.Designer.cs">
+      <DependentUpon>UCMessofMe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessofYou.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessofYou.Designer.cs">
+      <DependentUpon>UCMessofYou.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCAddComment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,12 +121,6 @@
     </Compile>
     <Compile Include="UCCatalog.Designer.cs">
       <DependentUpon>UCCatalog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCMessengerUnit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCMessengerUnit.Designer.cs">
-      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
     </Compile>
     <Compile Include="UCPostDisplay.cs">
       <SubType>UserControl</SubType>
@@ -150,6 +162,15 @@
     <EmbeddedResource Include="UCMessengerDisplay.resx">
       <DependentUpon>UCMessengerDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCMessengerUnit.resx">
+      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessofMe.resx">
+      <DependentUpon>UCMessofMe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessofYou.resx">
+      <DependentUpon>UCMessofYou.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCAddComment.resx">
       <DependentUpon>UCAddComment.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,9 +188,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCCatalog.resx">
       <DependentUpon>UCCatalog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCMessengerUnit.resx">
-      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCPostDisplay.resx">
       <DependentUpon>UCPostDisplay.cs</DependentUpon>
@@ -221,6 +239,8 @@
       <Name>DTO</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Messenger\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

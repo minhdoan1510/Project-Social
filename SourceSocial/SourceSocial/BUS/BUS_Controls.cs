@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace BUS
 {
     public class BUS_Controls
     {
         #region Propertion
+        private Network network;
         private List<Post> posts;
         private List<KeyValuePair<string, List<Comment>>> comments;
         private Profile profilecurrent;
@@ -29,8 +31,69 @@ namespace BUS
             dal = new DAL_Controls();
             listFriend = new List<string>();
 
-
         }
+
+        #region Handle Network
+
+        private void Network_OnHavePacket(string obj)
+        {
+            PacketData packet = new PacketData(obj);
+            switch (packet.TPacket)
+            {
+                case 1:
+                    MessinMessbox messin = new MessinMessbox();
+                    DataTable data = dal.GetMessfromIDMess(packet.IDmess);
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 0:
+                    packet.UID = Profilecurrent.Uid;
+                    network.Send(EncodePacketData(packet));
+                    break;
+            }
+        }
+        public bool SendMess(string content, string idmessbox)
+        {
+            string idmess = new Random().Next(10000000, 99999999).ToString();
+            if (dal.SendMess(content, idmess, idmessbox, Profilecurrent.Uid))
+            {
+                network.Send(EncodePacketData(new PacketData() { IDmess = idmess, UID = Profilecurrent.Uid, TPacket = 0 }));
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+        public string EncodePacketData(PacketData packet)
+        {
+            string temp = string.Empty;
+            switch (packet.TPacket)
+            {
+                case 0:
+                    temp = packet.TPacket.ToString();
+                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
+                    return temp;
+                case 1:
+                    temp = packet.TPacket.ToString();
+                    temp += (packet.UID == string.Empty) ? ("_" + packet.UID) : "";
+                    temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
+                    return temp;
+                case 2:
+
+                    break;
+                case 3:
+                    break;
+            }
+            return string.Empty;
+        }
+
+
+        #endregion
 
         #region Handle_Login
         public bool SignUp(Account account)
@@ -57,13 +120,13 @@ namespace BUS
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    network = new Network();
+                    network.OnHavePacket += Network_OnHavePacket;
                     return true;
                 }
             }
             return false;
         }
- 
-
 
         private bool CheckAccount_SignIn(Account account)
         {
@@ -93,6 +156,52 @@ namespace BUS
                 posts.Add(temp);
             }
         }
+
+
+        public object GetMailboxlist()
+        {
+            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
+
+            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
+
+            for (int i=0;i<data.Rows.Count;i++)
+            {
+                Mailboxlist temp = new Mailboxlist();
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
+                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
+                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
+                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
+                mailboxlists.Add(temp);
+            }
+
+            return mailboxlists;
+
+        }
+
+        public object GetMessinMessbox(string id)
+        {
+            DataTable data = dal.GetMessinMessbox(id);
+
+            List<MessinMessbox> messinMessbox = new List<MessinMessbox>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                MessinMessbox temp = new MessinMessbox();
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[6]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.IDmess = data.Rows[i].ItemArray[0].ToString();
+                temp.IDmessBox = data.Rows[i].ItemArray[1].ToString();
+                temp.UidSend = data.Rows[i].ItemArray[5].ToString();
+                temp.Content = data.Rows[i].ItemArray[2].ToString();
+                temp.Time = (DateTime)data.Rows[i].ItemArray[4];
+                temp.IsMe = temp.UidSend == Profilecurrent.Uid;
+                messinMessbox.Add(temp);
+            }
+
+            return messinMessbox;
+
+        }
+
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
