@@ -32,6 +32,7 @@ namespace fLogin
 
         #endregion
 
+
         public UCMainHeader(Profile _profile)
         {
             InitializeComponent();
@@ -56,7 +57,7 @@ namespace fLogin
 
             PtbLogo.Click += (s, e) => OnOpenHome();
 
-            btnMess.Click += (s, e) => OnOpenMessenger();
+            //btnMess.Click += (s, e) => OnOpenMessenger();
 
             //pnlclick = new Panel() { Size = pnlProfile.Size };
             //pnlProfile.Controls.Add(pnlclick);
@@ -91,8 +92,14 @@ namespace fLogin
             };
         }
 
+
         #endregion
 
+        private void BtnMess_Click(object sender, EventArgs e)
+        {
+            if (OnOpenMessenger != null)
+                OnOpenMessenger();
+        }
 
     }
 }

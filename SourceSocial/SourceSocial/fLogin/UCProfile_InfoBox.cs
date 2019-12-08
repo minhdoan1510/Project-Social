@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
 using System.IO;
+using System.Threading;
 
 namespace fLogin
 {
@@ -45,6 +46,7 @@ namespace fLogin
             IsFriend = isFriend;
             UpdateTypeProfile();
             lbFriend_Count.Click += (i,e)=>OnViewFriend(_profile.Uid);
+            CheckForIllegalCrossThreadCalls = false;
         }
         #region Handle_Event
         private void BtnAddFriend_ClickDelFriend(object sender, EventArgs e)
@@ -81,13 +83,32 @@ namespace fLogin
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 Image bitmap = Bitmap.FromFile(openFile.FileName);
+
+                //Form loadding = new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(100, 300), StartPosition = FormStartPosition.CenterScreen };
+                //TextBox textBox = new TextBox() { Text = "Loadding....", Dock = DockStyle.Fill, TextAlign = HorizontalAlignment.Center };
+                //loadding.Controls.Add(textBox);
+
+                //Thread thread = new Thread(() =>
+                //{
+                //    CheckForIllegalCrossThreadCalls = false;
+                //    if (OnChangeAvatar(bitmap))
+                //    {
+                //        loadding.Dispose();
+                //        PtbAvatar.Image = bitmap;
+                //        MessageBox.Show("Đổi avatar thành công");
+                //    }
+                //    else
+                //    {
+                //        loadding.Dispose();
+                //        MessageBox.Show("Đổi avatar không thành công");
+                //    }
+                //    CheckForIllegalCrossThreadCalls = true;
+
+                //});
+                //thread.Start();
+                //loadding.ShowDialog();
+
                 if (OnChangeAvatar(bitmap))
-
-                //Test
-                //
-
-
-                //if (true)
                 {
                     PtbAvatar.Image = bitmap;
                     MessageBox.Show("Đổi avatar thành công");
@@ -96,6 +117,7 @@ namespace fLogin
                 {
                     MessageBox.Show("Đổi avatar không thành công");
                 }
+
             }
         }
         #endregion

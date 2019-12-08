@@ -49,6 +49,8 @@ namespace DAL
             _conn.Close();
             return false;
         }
+
+
         public DataTable SignIn(Account account)
         {
             _conn.Open();
@@ -61,6 +63,7 @@ namespace DAL
                 FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
                 WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
                 ", account.Username, account.Password);
+            //", "nkoxway49", "123");       
             SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
             DataTable dataTable= new DataTable();
             sqlData.Fill(dataTable);
@@ -90,6 +93,7 @@ namespace DAL
             sql.Fill(dataTable);
             _conn.Close();
             return dataTable;
+<<<<<<< HEAD
         }
         public DataTable LoadAllPosts()
         {
@@ -105,6 +109,101 @@ namespace DAL
             sql.Fill(dataTable);
             _conn.Close();
             return dataTable;
+        }
+=======
+        }
+
+        public DataTable GetMailboxlist(string id)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC GetMailboxlist @IDuser";
+                SqlCommand sql = new SqlCommand(query, _conn);
+
+                string[] temp = query.Split(' ');
+                foreach (string item in temp)
+                {
+                    if (item.Contains("@"))
+                        sql.Parameters.AddWithValue(item, id);
+                }
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
+                sqlDataAdapter.Fill(data);
+                return data;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public bool SendMess(string content, string idmess, string idmessbox, string uid)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC AddMess @IDmessbox , @IDmess , @UIDsend , @Content";
+                SqlCommand sql = new SqlCommand(query, _conn);
+
+                string[] parameter = new string[] {  idmessbox, idmess, uid, content }; 
+                string[] temp = query.Split(' ');
+                int i = 0;
+                foreach (string item in temp)
+                {
+                    if (item.Contains("@"))
+                        sql.Parameters.AddWithValue(item, parameter[i++]);
+                }
+
+                if (sql.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
+        }
+
+        public DataTable GetMessinMessbox(string idMess)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC GetMessinMessbox @IDmess";
+                SqlCommand sql = new SqlCommand(query, _conn);
+
+                string[] temp = query.Split(' ');
+                foreach (string item in temp)
+                {
+                    if (item.Contains("@"))
+                        sql.Parameters.AddWithValue(item, idMess);
+                }
+>>>>>>> Minh
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
+                sqlDataAdapter.Fill(data);
+                return data;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
         }
 
         public bool AddPost(Post post)
@@ -242,6 +341,38 @@ namespace DAL
             }
             return null;
         }
+
+
+        public DataTable GetMessfromIDMess(string idmess)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC GetMessfromIDMess @IDmess";
+                SqlCommand sql = new SqlCommand(query, _conn);
+
+                string[] temp = query.Split(' ');
+                foreach (string item in temp)
+                {
+                    if (item.Contains("@"))
+                        sql.Parameters.AddWithValue(item, idmess);
+                }
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
+                sqlDataAdapter.Fill(data);
+                return data;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
         #endregion
 
         #region Handle_Profile

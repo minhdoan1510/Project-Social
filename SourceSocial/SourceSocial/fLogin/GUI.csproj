@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -237,4 +238,260 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A806A5FD-84B4-41BD-9281-1B2D8BA30474}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>fLogin</RootNamespace>
+    <AssemblyName>fLogin</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="LollipoUi">
+      <HintPath>..\..\..\..\..\..\Downloads\Compressed\LollipoUi\LollipoUi.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UCDetailMessbox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCDetailMessbox.Designer.cs">
+      <DependentUpon>UCDetailMessbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessengerDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessengerDisplay.Designer.cs">
+      <DependentUpon>UCMessengerDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessengerUnit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessengerUnit.Designer.cs">
+      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessofMe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessofMe.Designer.cs">
+      <DependentUpon>UCMessofMe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMessofYou.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMessofYou.Designer.cs">
+      <DependentUpon>UCMessofYou.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCAddComment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCAddComment.Designer.cs">
+      <DependentUpon>UCAddComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCAddPost.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCAddPost.Designer.cs">
+      <DependentUpon>UCAddPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fDisplayPost_Comment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fDisplayPost_Comment.Designer.cs">
+      <DependentUpon>fDisplayPost_Comment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fLogin.Designer.cs">
+      <DependentUpon>fLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fMain.Designer.cs">
+      <DependentUpon>fMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="main.cs" />
+    <Compile Include="UCCatalog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCCatalog.Designer.cs">
+      <DependentUpon>UCCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCPostDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCPostDisplay.Designer.cs">
+      <DependentUpon>UCPostDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCCommentDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCCommentDisplay.Designer.cs">
+      <DependentUpon>UCCommentDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMainHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMainHeader.Designer.cs">
+      <DependentUpon>UCMainHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProfile.Designer.cs">
+      <DependentUpon>UCProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProfile_InfoBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProfile_InfoBox.Designer.cs">
+      <DependentUpon>UCProfile_InfoBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCSearchBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCSearchBar.Designer.cs">
+      <DependentUpon>UCSearchBar.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UCDetailMessbox.resx">
+      <DependentUpon>UCDetailMessbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessengerDisplay.resx">
+      <DependentUpon>UCMessengerDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessengerUnit.resx">
+      <DependentUpon>UCMessengerUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessofMe.resx">
+      <DependentUpon>UCMessofMe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMessofYou.resx">
+      <DependentUpon>UCMessofYou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAddComment.resx">
+      <DependentUpon>UCAddComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAddPost.resx">
+      <DependentUpon>UCAddPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fDisplayPost_Comment.resx">
+      <DependentUpon>fDisplayPost_Comment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fLogin.resx">
+      <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fMain.resx">
+      <DependentUpon>fMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCCatalog.resx">
+      <DependentUpon>UCCatalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCPostDisplay.resx">
+      <DependentUpon>UCPostDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UCCommentDisplay.resx">
+      <DependentUpon>UCCommentDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMainHeader.resx">
+      <DependentUpon>UCMainHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProfile.resx">
+      <DependentUpon>UCProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProfile_InfoBox.resx">
+      <DependentUpon>UCProfile_InfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCSearchBar.resx">
+      <DependentUpon>UCSearchBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{9b85cd39-6a0d-4e78-bf1b-c9cdfb48610e}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{dfb4e9b7-4bed-4d94-b189-61a8058ade3a}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messenger\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+>>>>>>> Minh
 </Project>
