@@ -33,13 +33,14 @@ namespace fLogin
         public Label LbNumFriend { get => lbFriend_Count; set => lbFriend_Count = value; }
         public Button BtnAddFriend { get => btnAddFriend; set => btnAddFriend = value; }
         public Button BtnMessenger { get => btnMessenger; set => btnMessenger = value; }
+        public ProfileDetails profileDetails;
         #endregion
-        public UCProfile_InfoBox(Profile _profile,int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
+        public UCProfile_InfoBox(BUS.BUS_Controls bUS_Controls,Profile _profile,int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
         {
             InitializeComponent();
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-            
+            profileDetails = new ProfileDetails(bUS_Controls,_profile);
             LbName.Text = _profile.Name;
             IsFriend = isFriend;
             UpdateTypeProfile();
@@ -140,5 +141,10 @@ namespace fLogin
             }
         }
         #endregion
+
+        private void lbName_Click(object sender, EventArgs e)
+        {
+            profileDetails.Show();
+        }
     }
 }

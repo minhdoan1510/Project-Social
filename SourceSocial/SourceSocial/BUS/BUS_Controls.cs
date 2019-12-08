@@ -57,6 +57,11 @@ namespace BUS
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
+                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
+                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
+                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
+                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
                     return true;
                 }
             }
@@ -207,7 +212,12 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); ;
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
+            profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
+            profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
+            profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
+            profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
             return profile;
         }
 
@@ -219,6 +229,10 @@ namespace BUS
             if (temp != null)
                 return 1;
             return 0;
+        }
+        public bool AlterProfile(Profile profile)
+        {
+            return dal.AlterProfile(profile);
         }
 
         public bool AddFriend(string i)

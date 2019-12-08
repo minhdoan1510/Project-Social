@@ -132,10 +132,10 @@ namespace fLogin
             List<string> UserList = BUS_Controls.GetListFriend(uid);
             Form l = new Form();
             l.AutoScroll = true;
-            l.Size = new Size(329, 500);
+            l.Size = new Size(350, 500);
             foreach(var item in UserList)
             {
-                UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
+                UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls,BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
                 tempInfo.Dock = DockStyle.Top;
                 tempInfo.LbNumFriend.Visible = false;
                 tempInfo.OnDelFriend +=()=> BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);

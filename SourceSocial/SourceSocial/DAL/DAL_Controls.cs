@@ -372,7 +372,7 @@ namespace DAL
                 sqlData.Fill(dataTable);
                 return dataTable;
             }
-            catch
+            catch(SqlException)
             {
 
             }
@@ -382,6 +382,34 @@ namespace DAL
             }
 
             return null;
+        }
+
+        public bool AlterProfile(Profile profile)
+        {
+
+                _conn.Open();
+                using (var command = _conn.CreateCommand())
+                {
+                try
+                {
+                    command.CommandText = string.Format(
+                    "UPDATE PROFILE SET NGSINH = '{0}',SODT = '{1}',EMAIL='{2}',QUEQUAN=N'{3}',HONNHAN='{4}' WHERE UIDuser = '{5}'",
+                    profile.DateOfBirth.ToLocalTime(), profile.PhoneNum, profile.Email, profile.HomeTown, profile.MarriageSt, profile.Uid);
+                    if (command.ExecuteNonQuery() > 0)
+                        return true;
+                }
+                catch(SqlException)
+                {
+                }
+                finally
+                {
+                    _conn.Close();
+                }
+                }
+
+                return false;
+
+              
         }
 
         #endregion

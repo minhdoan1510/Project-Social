@@ -78,7 +78,7 @@ namespace fLogin
         private void LoadDisplay(Profile profile, int isFriend)
         {
             //add ProfileControl
-            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(profile,isFriend);
+            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(BUS_Controls,profile,isFriend);
             pnlProfile_Infor.Controls.Add(uCProfile_InfoBox);
             uCProfile_InfoBox.OnChangeAvatar += (i) => OnChangeAvatar(i);
             uCProfile_InfoBox.OnAddFriend += () => OnAddFriend(this.Tag.ToString());
