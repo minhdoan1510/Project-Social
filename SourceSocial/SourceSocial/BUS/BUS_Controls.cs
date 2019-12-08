@@ -18,6 +18,7 @@ namespace BUS
         private DAL_Controls dal;
         private List<string> listFriend;
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+        public List<string> ListFriend { get => listFriend; set => listFriend = value; }
 
         #endregion
 
@@ -27,7 +28,7 @@ namespace BUS
             comments = new List<KeyValuePair<string, List<Comment>>>();
             Profilecurrent = new Profile();
             dal = new DAL_Controls();
-            listFriend = new List<string>();
+            ListFriend = new List<string>();
 
 
         }
@@ -53,7 +54,7 @@ namespace BUS
                 if (data.Rows.Count == 1)
                 {
                     LoadDataPost(data.Rows[0].ItemArray[0].ToString());
-                    listFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
+                    ListFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
@@ -84,7 +85,7 @@ namespace BUS
         }
         private void LoadDataPost(string UID)
         {
-            DataTable data = dal.LoadPost_fMain(UID);
+            DataTable data = dal.LoadAllPosts();
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 Post temp = new Post();
@@ -92,7 +93,7 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); 
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
@@ -188,13 +189,13 @@ namespace BUS
         public List<string> GetListFriend(string UID)
         {
             if (UID == Profilecurrent.Uid)
-                return listFriend;
+                return ListFriend;
             return LoadDataListFriend(UID);
         }
         public int numOfFriend(string UID)
         {
             if (UID == Profilecurrent.Uid)
-                return listFriend.Count;
+                return ListFriend.Count;
             return LoadDataListFriend(UID).Count;
         }
         public Profile GetProfile(string UID)
@@ -225,7 +226,7 @@ namespace BUS
         {
             if (UID == Profilecurrent.Uid)
                 return 2;
-            var temp = listFriend.Where(x => x == UID).SingleOrDefault();
+            var temp = ListFriend.Where(x => x == UID).SingleOrDefault();
             if (temp != null)
                 return 1;
             return 0;
@@ -239,7 +240,7 @@ namespace BUS
         {
             if (dal.AddFriend(Profilecurrent.Uid, i))
             {
-                listFriend.Add(i);
+                ListFriend.Add(i);
                 return true;
             }
             return false;
@@ -248,7 +249,7 @@ namespace BUS
         {
             if (dal.DelFriend(i, Profilecurrent.Uid))
             {
-                listFriend.Remove(i);
+                ListFriend.Remove(i);
                 return true;
             }
             return false;

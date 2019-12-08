@@ -91,6 +91,21 @@ namespace DAL
             _conn.Close();
             return dataTable;
         }
+        public DataTable LoadAllPosts()
+        {
+            _conn.Open();
+            string query = string.Format
+                (@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR 
+                    FROM dbo.POST AS Post, dbo.PROFILE AS Profile 
+                    WHERE Post.IDUSER=Profile.UIDuser
+                    ORDER BY Post.TIME ASC
+                    ");
+            DataTable dataTable = new DataTable();
+            SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
+            sql.Fill(dataTable);
+            _conn.Close();
+            return dataTable;
+        }
 
         public bool AddPost(Post post)
         {

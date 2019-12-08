@@ -101,14 +101,17 @@ namespace fLogin
             List<Post> posts = BUS_Controls.GetPost();
             foreach (var item in posts)
             {
-                UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
-              
-                post.Dock = DockStyle.Top;
-                post.Tag = item.Idpost;
-                
-                post.OnClickComment += Post_OnClickComment;
-                post.OnClickOpenProfile += OnOpenProfile;
-                this.pnlNewFeed_Main.Controls.Add(post);
+                if (BUS_Controls.ListFriend.Contains(item.Iduser) || item.Iduser == BUS_Controls.Profilecurrent.Uid)
+                {
+                    UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
+
+                    post.Dock = DockStyle.Top;
+                    post.Tag = item.Idpost;
+
+                    post.OnClickComment += Post_OnClickComment;
+                    post.OnClickOpenProfile += OnOpenProfile;
+                    this.pnlNewFeed_Main.Controls.Add(post);
+                }
             }
         }
 

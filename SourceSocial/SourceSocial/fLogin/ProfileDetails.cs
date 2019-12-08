@@ -35,9 +35,9 @@ namespace fLogin
                     Uid = profile.Uid,
                     DateOfBirth = DateTime.Parse(tbxBDay.Text),
                     Email = tbxEmail.Text,
-                    HomeTown = tbxEmail.Text,
+                    HomeTown = tbxHometown.Text,
                     PhoneNum = tbxPhonenum.Text,
-                    MarriageSt = tbxPhonenum.Text
+                    MarriageSt = tbxMarriage.Text
                 };
                  if (BUS_Controls.AlterProfile(_profile))
                      MessageBox.Show("Thay đổi thông tin thành công!");
