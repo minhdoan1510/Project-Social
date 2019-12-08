@@ -21,6 +21,10 @@ namespace BUS
         private List<string> listFriend;
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
 
+        public delegate void OnHaveNewMesseger(MessinMessbox messin);
+        public event OnHaveNewMesseger HaveNewMesseger;
+
+
         #endregion
 
         public BUS_Controls()
@@ -41,11 +45,22 @@ namespace BUS
             switch (packet.TPacket)
             {
                 case 1:
-                    MessinMessbox messin = new MessinMessbox();
-                    DataTable data = dal.GetMessfromIDMess(packet.IDmess);
+                    try
+                    {
+                        MessinMessbox messin = new MessinMessbox(); 
+                        DataTable data = dal.GetMessfromIDMess(packet.IDmess);
+                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
+                        messin.IDmess = data.Rows[0].ItemArray[0].ToString();
+                        messin.Content = data.Rows[0].ItemArray[2].ToString();
+                        messin.Time = (DateTime)data.Rows[0].ItemArray[4];
+                        messin.UidSend = data.Rows[0].ItemArray[5].ToString();
+                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[0]);
+                        if (HaveNewMesseger != null)
+                            HaveNewMesseger(messin);
+                    }
+                    catch { }
 
                     break;
-
                 case 2:
 
                     break;
@@ -56,12 +71,12 @@ namespace BUS
                     break;
             }
         }
-        public bool SendMess(string content, string idmessbox)
+        public bool SendMess(string content, string idmessbox, string uidsend)
         {
             string idmess = new Random().Next(10000000, 99999999).ToString();
             if (dal.SendMess(content, idmess, idmessbox, Profilecurrent.Uid))
             {
-                network.Send(EncodePacketData(new PacketData() { IDmess = idmess, UID = Profilecurrent.Uid, TPacket = 0 }));
+                network.Send(EncodePacketData(new PacketData() { IDmess = idmess, UID = uidsend, TPacket = 1 }));
                 return true;
             }
             else
@@ -80,7 +95,7 @@ namespace BUS
                     return temp;
                 case 1:
                     temp = packet.TPacket.ToString();
-                    temp += (packet.UID == string.Empty) ? ("_" + packet.UID) : "";
+                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
                     temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
                     return temp;
                 case 2:
@@ -308,7 +323,7 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); ;
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
             return profile;
         }
 

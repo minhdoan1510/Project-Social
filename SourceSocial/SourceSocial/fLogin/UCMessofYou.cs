@@ -21,7 +21,7 @@ namespace fLogin
         public UCMessofYou( Image _avatar, string _mess )
         {
             InitializeComponent();
-            Avatar = _avatar;
+            Avatar = _avatar ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
             Mess = _mess;
         }
 

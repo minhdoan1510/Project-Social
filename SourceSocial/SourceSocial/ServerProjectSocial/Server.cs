@@ -11,9 +11,12 @@ namespace ServerProjectSocial
 {
     public class Server
     {
+        #region Propertion
         List<DetailClientSocket> clients;
         IPEndPoint IP;
         Socket server;
+        #endregion
+
         public Server()
         {
             Console.WriteLine("Creating the server");
@@ -25,10 +28,19 @@ namespace ServerProjectSocial
         {
             CloseConnect();
         }
+
+        #region Control
         public void Run()
         {
             Connect();
         }
+        private void CloseConnect()
+        {
+            server.Close();
+        }
+        #endregion
+
+        #region Transer
         void Connect()
         {
             try
@@ -145,30 +157,29 @@ namespace ServerProjectSocial
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine("The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
-                Console.WriteLine("The number of current connections is {0}", clients.Count);
                 clients.Remove(clients.Where(x => x.Socket == client).SingleOrDefault());
+                Console.WriteLine("The number of current connections is {0}", clients.Count);
                 client.Close();
             }
         }
-        //private bool SendPacketforClient(byte[] temp, Socket socket)
-        //{
-        //    if (clients.Where(x => x.Socket == socket).ToList().Count != 0)
-        //    {
-        //        Send(temp, socket);
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        private void CloseConnect()
-        {
-            server.Close();
-        }
+        #endregion
+
+        /// <summary>
+        /// Convert binary to object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         object GetfromBinary(byte[] obj)
         {
             MemoryStream stream = new MemoryStream(obj);
             BinaryFormatter binary = new BinaryFormatter();
             return binary.Deserialize(stream);
         }
+        /// <summary>
+        /// Convert object to binary
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         byte[] SetBinary(object obj)
         {
             MemoryStream stream = new MemoryStream();

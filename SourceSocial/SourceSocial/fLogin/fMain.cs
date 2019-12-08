@@ -12,17 +12,36 @@ namespace fLogin
         #region Propertion
         BUS_Controls BUS_Controls;
         UCProfile DisplayProfile;
+        Form formMess;
+
         #endregion
 
         public fMain(BUS_Controls _BUS_Controls)
         {
             InitializeComponent();
+
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
             this.btnExit_Form.Click += (s, e) => Close();
+            BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
             LoadDatafMain();
             LoadAnimation();
+
+
         }
+
+        private void BUS_Controls_HaveNewMesseger(MessinMessbox messin)
+        {
+            foreach (UCMessengerDisplay item in formMess.Controls)
+            {
+                try
+                {
+                    item.AddMess(messin);
+                }
+                catch { }
+            }
+        }
+
 
         #region Animation
         private void LoadAnimation()
@@ -62,6 +81,7 @@ namespace fLogin
             LoadCatalog();
         }
 
+
         private void LoadCatalog()
         {
             UCCatalog uCCatalog = new UCCatalog(BUS_Controls.GetPeople());
@@ -84,13 +104,13 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                Form form = new Form() { Size = new Size(280, 370+60), StartPosition = FormStartPosition.CenterScreen, FormBorderStyle= FormBorderStyle.FixedToolWindow };
+                formMess = new Form() { Size = new Size(272, 370 + 30), StartPosition = FormStartPosition.CenterScreen, FormBorderStyle = FormBorderStyle.FixedToolWindow };
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
-                uCMessengerDisplay.SendMessCurrent += (i,j)=> BUS_Controls.SendMess(i,j);
-                form.Controls.Add(uCMessengerDisplay);
-                form.ShowDialog();
+                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+                formMess.Controls.Add(uCMessengerDisplay);
+                formMess.ShowDialog();
             };
 
 

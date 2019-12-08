@@ -17,47 +17,28 @@ namespace fLogin
         public delegate object OnGetMailboxlist();
         public event OnGetMailboxlist GetMailboxlist;
 
+        public delegate bool OnSendMess(string Mess, string idMessbox, string uidsend);
+        public event OnSendMess SendMessCurrent;
 
         public delegate object OnGetMessinMessbox(string IDmess);
         public event OnGetMessinMessbox GetMessinMessbox;
 
-        public delegate bool OnSendMess(string Mess, string idMessbox);
-        public event OnSendMess SendMessCurrent;
 
 
-        public UCMessengerDisplay( object _mailboxlists)
+        public delegate MessinMessbox OnHaveMess();
+        public event OnHaveMess HaveMess;
+
+        public UCMessengerDisplay(object _mailboxlists)
         {
             mailboxlists = (List < Mailboxlist > )_mailboxlists;
+            uCDetailMessboxes = new List<UCDetailMessbox>();
             InitializeComponent();
             LoadListMess();
-            this.btnBack.Click += BtnBack_Click;
-            this.btnSend.Click += BtnSend_Click;
-            this.txbMess.KeyPress += TxbMess_KeyPress;
 
         }
 
-        private void TxbMess_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Keys.Enter.ToString().Equals(e.KeyChar))
-                SendMess();
-        }
-
-        private void BtnSend_Click(object sender, EventArgs e)
-        {
-            SendMess();
-        }
-
-        void SendMess()
-        {
-            if (txbMess.Text != string.Empty && SendMessCurrent != null)
-                SendMessCurrent(txbMess.Text, pnlDetailMess.Tag.ToString());
-        }
-
-
-        private void BtnBack_Click(object sender, EventArgs e)
-        {
-            this.pnlDetailMess.Location = new Point(259, 3);
-        }
+        List<UCDetailMessbox> uCDetailMessboxes;
+             
 
         List<Mailboxlist> mailboxlists;
 
@@ -74,34 +55,60 @@ namespace fLogin
             }
         }
 
-        private void UCMessengerUnit_OpenMessBox(string IDmess)
+        private void UCMessengerUnit_OpenMessBox(string IDmessbox)
         {
-            pnlDisplayMess.Controls.Clear();
-            pnlDisplayMess.Tag = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().IDmessbox;
-            List<MessinMessbox> detailMess = new List<MessinMessbox>();
-            if (GetMessinMessbox != null)
-                 detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmess);
-
-            lbName.Text = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().Nameuser;
-            foreach (MessinMessbox item in detailMess)
+            UCDetailMessbox detailMessbox = uCDetailMessboxes.Where(x => x.Tag.Equals(IDmessbox)).SingleOrDefault();
+            if (detailMessbox == null)
             {
-                AddMessinMessbox(item);
+                List<MessinMessbox> detailMess = new List<MessinMessbox>();
+                if (GetMessinMessbox != null)
+                    detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
+
+                detailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox.Equals(IDmessbox)).SingleOrDefault().Nameuser);
+                foreach (MessinMessbox item in detailMess)
+                {
+                   detailMessbox.AddMessinMessbox(item);
+                }
+                detailMessbox.Tag = IDmessbox;
+                uCDetailMessboxes.Add(detailMessbox);
             }
+            detailMessbox.Back += () => this.Controls.Remove(detailMessbox);
+            detailMessbox.Dock = DockStyle.Fill;
+            detailMessbox.Location = new Point(3, 3);
+            detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
+            this.Controls.Add(detailMessbox);
+            detailMessbox.BringToFront();
 
-            this.pnlDetailMess.Location = new Point(3, 3);
+            //UCDetailMessbox uCDetailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox == ).SingleOrDefault());
 
-            
+
+            //pnlDisplayMess.Controls.Clear();
+            //pnlDisplayMess.Tag = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().IDmessbox;
+            //List<MessinMessbox> detailMess = new List<MessinMessbox>();
+            //if (GetMessinMessbox != null)
+            //    detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmess);
+
+            //lbName.Text = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().Nameuser;
+            //foreach (MessinMessbox item in detailMess)
+            //{
+            //    AddMessinMessbox(item);
+            //}
+
+            //this.pnlDetailMess.Location = new Point(3, 3);
+
+
         }
 
-        void AddMessinMessbox(MessinMessbox messin)
+        private bool DetailMessbox_SendMessCurrent(string Mess, string idMessbox)
         {
-            object UCmess;
-            if (messin.IsMe)
-                UCmess = new UCMessofMe(messin.Content);
-            else
-                UCmess = new UCMessofYou(messin.Avatar, messin.Content);
-            ((Control)UCmess).Dock = DockStyle.Top;
-            this.pnlDisplayMess.Controls.Add((Control)UCmess);
+            if (SendMessCurrent != null)
+                return SendMessCurrent(Mess, idMessbox, mailboxlists.Where(x => x.IDmessbox.Equals(idMessbox)).SingleOrDefault().Iduser);
+            return false;
+        }
+
+        public void AddMess(MessinMessbox messin)
+        {
+            uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().newMess = messin;
         }
     }
 }

@@ -131,10 +131,10 @@ namespace DAL
             try
             {
                 _conn.Open();
-                string query = @"EXEC AddMess @IDmess , @IDmessbox , @UIDsend , @Content";
+                string query = @"EXEC AddMess @IDmessbox , @IDmess , @UIDsend , @Content";
                 SqlCommand sql = new SqlCommand(query, _conn);
 
-                string[] parameter = new string[] { idmess, idmessbox, uid, content }; 
+                string[] parameter = new string[] {  idmessbox, idmess, uid, content }; 
                 string[] temp = query.Split(' ');
                 int i = 0;
                 foreach (string item in temp)

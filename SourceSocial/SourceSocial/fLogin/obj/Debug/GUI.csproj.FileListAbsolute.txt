@@ -62,3 +62,4 @@ C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fL
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
