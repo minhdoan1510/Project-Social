@@ -22,12 +22,7 @@ namespace fLogin
 
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
-<<<<<<< HEAD
             
-=======
-            this.btnExit_Form.Click += (s, e) => Close();
-            BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
->>>>>>> Minh
             LoadDatafMain();
             LoadAnimation();
 

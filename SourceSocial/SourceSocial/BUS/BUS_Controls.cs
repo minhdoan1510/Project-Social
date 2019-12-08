@@ -19,18 +19,15 @@ namespace BUS
         private Profile profilecurrent;
         private DAL_Controls dal;
         private List<string> listFriend;
-<<<<<<< HEAD
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
         public List<string> ListFriend { get => listFriend; set => listFriend = value; }
 
-=======
-        public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+   
 
         public delegate void OnHaveNewMesseger(MessinMessbox messin);
         public event OnHaveNewMesseger HaveNewMesseger;
 
 
->>>>>>> Minh
         #endregion
 
         public BUS_Controls()
@@ -141,16 +138,13 @@ namespace BUS
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-<<<<<<< HEAD
                     Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
                     Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
                     Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
                     Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
                     Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
-=======
                     network = new Network();
                     network.OnHavePacket += Network_OnHavePacket;
->>>>>>> Minh
                     return true;
                 }
             }
@@ -345,16 +339,13 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-<<<<<<< HEAD
             profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
             profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
             profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
             profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
             profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
             profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
-=======
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
->>>>>>> Minh
+     
             return profile;
         }
 
