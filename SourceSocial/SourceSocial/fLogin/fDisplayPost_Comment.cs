@@ -13,8 +13,12 @@ namespace fLogin
 {
     public partial class fDisplayPost_Comment : Form
     {
+        #region Propertion
         public delegate List<Comment> OnAddComment_Display(string idPost, string content);
         public event OnAddComment_Display OnAddComment;
+        #endregion
+
+        #region Load_fDisplayPost_Comment
         public fDisplayPost_Comment(List<Comment> comments)
         {
             InitializeComponent();
@@ -35,7 +39,20 @@ namespace fLogin
             pnlAddComment.Controls.Add(addComment);
             LoadComment(comments);
         }
+        private void LoadComment(List<Comment> comments)
+        {
+            pnlDisplayPost_Comment.Controls.Clear();
+            foreach (var item in comments)
+            {
+                UCCommentDisplay comment = new UCCommentDisplay(item.Name, item.Avatar, item.Content, item.Time);
+                comment.Tag = item.IdComment;
+                comment.Dock = DockStyle.Top;
+                pnlDisplayPost_Comment.Controls.Add(comment);
+            }
+        }
+        #endregion
 
+        #region Handle_Event
         private void AddComment_OnSendComment(string content)
         {
             try
@@ -53,22 +70,10 @@ namespace fLogin
                 MessageBox.Show("Lỗi không xác định!!!");
             }
         }
-
         private void PtbExitCommentDisplay_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-        private void LoadComment(List<Comment> comments)
-        {
-            pnlDisplayPost_Comment.Controls.Clear();
-            foreach (var item in comments)
-            {
-                UCCommentDisplay comment = new UCCommentDisplay(item.Name, item.Avatar, item.Content, item.Time);
-                comment.Tag = item.IdComment;
-                comment.Dock = DockStyle.Top;
-                pnlDisplayPost_Comment.Controls.Add(comment);
-            }
-        }
+        #endregion
     }
 }

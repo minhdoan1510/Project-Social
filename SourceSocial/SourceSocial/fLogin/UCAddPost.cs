@@ -7,16 +7,21 @@ namespace fLogin
 {
     public partial class UCAddPost : UserControl
     {
+        #region Propertion
         public delegate void Getstring(string str);
         public event Getstring OnAddPost;
+
+        public RichTextBox RtbContent_Main { get => rtbContent_Main; }
+        public Button BtnAddPost_Main { get => btnAddPost_Main; set => btnAddPost_Main = value; }
+        #endregion
+
         public UCAddPost()
         {
             InitializeComponent();
             LoadAnimation();
         }
-        public RichTextBox RtbContent_Main { get => rtbContent_Main; }
-        public Button BtnAddPost_Main { get => btnAddPost_Main; set => btnAddPost_Main = value; }
 
+        #region Handle_Event
         private void BtnAddPost_Main_Click(object sender, EventArgs e)
         {
             if (new Regex(@"\S").Match(RtbContent_Main.Text).Success)
@@ -24,9 +29,10 @@ namespace fLogin
                     OnAddPost(RtbContent_Main.Text);
         }
 
+        #endregion
 
         #region Animation
-        private void LoadAnimation()
+        public void LoadAnimation()
         {
             //Text placeholder in my post
             string placeholder = "Bạn đang nghĩ gì???";

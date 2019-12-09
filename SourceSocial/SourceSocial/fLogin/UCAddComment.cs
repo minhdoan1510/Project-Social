@@ -13,8 +13,14 @@ namespace fLogin
 {
     public partial class UCAddComment : UserControl
     {
+        #region Propertion
         public delegate void SendCommment(string content);
         public event SendCommment OnSendComment;
+
+        public TextBox TxbContentComment { get => txbContentComment; set => txbContentComment = value; }
+        public PictureBox PtbSendComment { get => ptbSendComment; set => ptbSendComment = value; }
+        #endregion
+
         public UCAddComment()
         {
             InitializeComponent();
@@ -24,6 +30,7 @@ namespace fLogin
             TxbContentComment.KeyDown += TxbContentComment_KeyDown;
         }
 
+        #region Handle_Event
         private void TxbContentComment_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -39,7 +46,6 @@ namespace fLogin
                 OnSendComment(TxbContentComment.Text);
             txbContentComment.Text = "";
         }
-        public TextBox TxbContentComment { get => txbContentComment; set => txbContentComment = value; }
-        public PictureBox PtbSendComment { get => ptbSendComment; set => ptbSendComment = value; }
+        #endregion
     }
 }

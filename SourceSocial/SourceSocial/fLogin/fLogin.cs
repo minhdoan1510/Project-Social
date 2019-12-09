@@ -12,23 +12,24 @@ using DTO;
 
 namespace fLogin
 {
-    public partial class fLogin : Form
+    public partial class fLogin : MaterialSkin.Controls.MaterialForm
     {
         #region propertion
         BUS_Controls BUS_Controls = new BUS_Controls();
         #endregion
 
-
         public fLogin()
         {
             InitializeComponent();
+            MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+
         }
 
-        private void BtnSignUp_Click(object sender, EventArgs e)
-        {
-            pnlSignIn.Visible = false;
-        }
-
+        #region Handle_Event
+     
         private void BtnSignUp_SignUp_Click(object sender, EventArgs e)
         {
             Account account = new Account()
@@ -40,19 +41,19 @@ namespace fLogin
             if (txbRePassword_SignUp.Text == txbPassword_SignUp.Text && BUS_Controls.SignUp(account))
             {
                 MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                pnlSignIn.Visible = true;
             }
             else
-                MessageBox.Show("Khoogn thanh cong");
+                MessageBox.Show("Khong thanh cong");
         }
-
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
             if (BUS_Controls.SigIn(new Account() { Username = txbUsername_SignIn.Text, Password = txbPassword_SignIn.Text }))
             {
                 fMain fMain = new fMain(BUS_Controls);
+                
                 fMain.ShowDialog();
                 this.Close();
+
             }
             else
             {
@@ -63,5 +64,7 @@ namespace fLogin
             //this.Visible = false;
             //fMain.ShowDialog();
         }
+        #endregion
+
     }
 }

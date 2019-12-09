@@ -13,13 +13,26 @@ namespace fLogin
 {
     public partial class UCMainHeader : UserControl
     {
+        #region Propertion
+        Profile profile;
+        
 
-        public delegate void OpenProfile();
+        public delegate void OpenProfile(string UID);
         public event OpenProfile OnOpenProfile;
 
         public delegate void OpenHome();
         public event OpenHome OnOpenHome;
-        Profile profile;
+
+        public delegate void OpenMessenger();
+        public event OpenMessenger OnOpenMessenger;
+
+        
+        public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
+        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+
+        #endregion
+
+
         public UCMainHeader(Profile _profile)
         {
             InitializeComponent();
@@ -28,33 +41,44 @@ namespace fLogin
             LoadAnimation();
         }
 
-        
-
+        #region Load_UCMainHeader
         private void LoadMainHeader(Profile _profile)
         {
             this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
             this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
-            LbName.Text = _profile.Name;
+            pnlProfile.Text = _profile.Name;
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-            pnlProfile.Click += PnlProfile_Click;
-            PtbLogo.Click += (s, e) => OnOpenHome();
-        }
+           
+            pnlProfile.Controls.Add(ptbAvatar);
+           
+            ptbAvatar.BackColor = Color.Transparent;
+            ptbAvatar.Dock = DockStyle.Left;
 
+            PtbLogo.Click += (s, e) => OnOpenHome();
+
+            //btnMess.Click += (s, e) => OnOpenMessenger();
+
+            //pnlclick = new Panel() { Size = pnlProfile.Size };
+            //pnlProfile.Controls.Add(pnlclick);
+            //pnlclick.BringToFront();
+            ////pnlclick.Visible = false;
+            //pnlclick.Click += PnlProfile_Click;
+        }
+        #endregion
+
+        #region Handle_Event
         private void PnlProfile_Click(object sender, EventArgs e)
         {
             if (OnOpenProfile != null)
             {
-                OnOpenProfile();
+                OnOpenProfile(profile.Uid);
             }
         }
-
-        public Label LbName { get => lbName; set => lbName = value; }
-        public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
-        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+        #endregion
 
         #region Animation
-        
+
         private void LoadAnimation()
         {
             //Animation enter PnlProfile
@@ -64,10 +88,18 @@ namespace fLogin
             };
             pnlProfile.MouseLeave += (s, e) =>
             {
-                 pnlProfile.BackColor = Color.Transparent;
+                pnlProfile.BackColor = Color.Transparent;
             };
         }
 
+
         #endregion
+
+        private void BtnMess_Click(object sender, EventArgs e)
+        {
+            if (OnOpenMessenger != null)
+                OnOpenMessenger();
+        }
+
     }
 }

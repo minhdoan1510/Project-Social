@@ -9,6 +9,7 @@ namespace DTO
 {
     public class Post
     {
+        #region Propertion
         private string iduser;
         private string idpost;
         private string content;
@@ -25,11 +26,12 @@ namespace DTO
         public int Liked { get => liked; set => liked = value; }
         public string Name { get => name; set => name = value; }
 
+        #endregion
         public Post()
         {
             Idpost = Iduser = content = "";
             Liked = 0;
-            Image = null;
+            
             Time = "";
         }
     }
