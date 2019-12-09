@@ -18,7 +18,7 @@ namespace fLogin
         public delegate void ClickComment(string IDpost);
         public event ClickComment OnClickComment;
 
-        public delegate void ClickLike(string IDpost);
+        public delegate void ClickLike(string IDpost, string IDuser);
         public event ClickLike OnClickLike;
 
         public delegate void ClickOpenProfile(string UID);
@@ -31,12 +31,13 @@ namespace fLogin
         public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
         public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        public string Iduser { get => iduser; set => iduser = value; }
         #endregion
 
         public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar, string _iduser)
         {
             InitializeComponent();
-            iduser = _iduser;
+            Iduser = _iduser;
 
             LbName_Post.Text = _name;
             LbName_Post.Click += LbName_Post_Click;
@@ -69,7 +70,8 @@ namespace fLogin
 
         private void LbName_Post_Click(object sender, EventArgs e)
         {
-            OnClickOpenProfile(iduser);
+            if (OnClickOpenProfile != null)
+                OnClickOpenProfile(Iduser);
         }
 
         private void BtnComment_Post_Click(object sender, EventArgs e)

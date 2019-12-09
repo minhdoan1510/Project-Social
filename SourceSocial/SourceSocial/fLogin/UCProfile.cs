@@ -27,7 +27,10 @@ namespace fLogin
         public delegate bool DelFriend(string uid);
         public event DelFriend OnDelFriend;
 
-        public delegate void AddPost( string content);
+        public delegate void ViewFriend(string uid);
+        public event ViewFriend OnViewFriend;
+
+        public delegate void AddPost(string content);
         public event AddPost OnAddPost;
 
         public delegate void ClickComment(string UID);
@@ -76,14 +79,14 @@ namespace fLogin
         private void LoadDisplay(Profile profile, int isFriend)
         {
             //add ProfileControl
-            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(profile,isFriend);
+            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(BUS_Controls,profile,isFriend);
             pnlProfile_Infor.Controls.Add(uCProfile_InfoBox);
-
-
             uCProfile_InfoBox.OnChangeAvatar += (i) => OnChangeAvatar(i);
-
             uCProfile_InfoBox.OnAddFriend += () => OnAddFriend(this.Tag.ToString());
             uCProfile_InfoBox.OnDelFriend += () => OnDelFriend(this.Tag.ToString());
+            uCProfile_InfoBox.OnViewFriend += (i) => OnViewFriend(i);
+            uCProfile_InfoBox.LbNumFriend.Text = string.Format("{0} bạn", BUS_Controls.numOfFriend(profile.Uid));
+            
             //
             //add UCaddPost
             if (isFriend == 2)

@@ -20,6 +20,9 @@ namespace BUS
         private DAL_Controls dal;
         private List<string> listFriend;
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+        public List<string> ListFriend { get => listFriend; set => listFriend = value; }
+
+   
 
         public delegate void OnHaveNewMesseger(MessinMessbox messin);
         public event OnHaveNewMesseger HaveNewMesseger;
@@ -33,7 +36,7 @@ namespace BUS
             comments = new List<KeyValuePair<string, List<Comment>>>();
             Profilecurrent = new Profile();
             dal = new DAL_Controls();
-            listFriend = new List<string>();
+            ListFriend = new List<string>();
 
         }
 
@@ -55,7 +58,7 @@ namespace BUS
                         messin.Time = (DateTime)data.Rows[0].ItemArray[4];
                         messin.UidSend = data.Rows[0].ItemArray[5].ToString();
                         messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[0]);
-                        if (HaveNewMesseger != null)
+                        if(HaveNewMesseger!=null)
                             HaveNewMesseger(messin);
                     }
                     catch { }
@@ -131,10 +134,15 @@ namespace BUS
                 if (data.Rows.Count == 1)
                 {
                     LoadDataPost(data.Rows[0].ItemArray[0].ToString());
-                    listFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
+                    ListFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
+                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
+                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
+                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
+                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
                     network = new Network();
                     network.OnHavePacket += Network_OnHavePacket;
                     return true;
@@ -157,7 +165,7 @@ namespace BUS
         }
         private void LoadDataPost(string UID)
         {
-            DataTable data = dal.LoadPost_fMain(UID);
+            DataTable data = dal.LoadAllPosts();
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 Post temp = new Post();
@@ -165,7 +173,7 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png"); 
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
@@ -222,6 +230,7 @@ namespace BUS
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
             post.Iduser = Profilecurrent.Uid;
             post.Name = Profilecurrent.Name;
+            post.Image = profilecurrent.Avatar;
             post.Time = "Vừa xong";
             if (dal.AddPost(post))
             {
@@ -306,8 +315,14 @@ namespace BUS
         public List<string> GetListFriend(string UID)
         {
             if (UID == Profilecurrent.Uid)
-                return listFriend;
+                return ListFriend;
             return LoadDataListFriend(UID);
+        }
+        public int numOfFriend(string UID)
+        {
+            if (UID == Profilecurrent.Uid)
+                return ListFriend.Count;
+            return LoadDataListFriend(UID).Count;
         }
         public Profile GetProfile(string UID)
         {
@@ -315,6 +330,7 @@ namespace BUS
                 return profilecurrent;
             return LoadDataProfile(UID);
         }
+
         private Profile LoadDataProfile(string UID)
         {
             DataTable dataTable = dal.GetProfile(UID);
@@ -324,6 +340,12 @@ namespace BUS
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
             profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
+            profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
+            profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
+            profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
+            profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
+     
             return profile;
         }
 
@@ -331,17 +353,21 @@ namespace BUS
         {
             if (UID == Profilecurrent.Uid)
                 return 2;
-            var temp = listFriend.Where(x => x == UID).SingleOrDefault();
+            var temp = ListFriend.Where(x => x == UID).SingleOrDefault();
             if (temp != null)
                 return 1;
             return 0;
+        }
+        public bool AlterProfile(Profile profile)
+        {
+            return dal.AlterProfile(profile);
         }
 
         public bool AddFriend(string i)
         {
             if (dal.AddFriend(Profilecurrent.Uid, i))
             {
-                listFriend.Add(i);
+                ListFriend.Add(i);
                 return true;
             }
             return false;
@@ -350,7 +376,7 @@ namespace BUS
         {
             if (dal.DelFriend(i, Profilecurrent.Uid))
             {
-                listFriend.Remove(i);
+                ListFriend.Remove(i);
                 return true;
             }
             return false;
@@ -360,7 +386,13 @@ namespace BUS
             if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = image }))
             {
                 Profilecurrent.Avatar = image;
+                foreach (Post item in posts)
+                {
+                    if (item.Iduser == profilecurrent.Uid)
+                        item.Image = profilecurrent.Avatar;
+                }
                 return true;
+                
             }
             return false;
         }

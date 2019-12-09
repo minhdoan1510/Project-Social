@@ -31,7 +31,7 @@ namespace BUS
 
         void Connect()
         {
-            IP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1510);
+            IP = new IPEndPoint(IPAddress.Parse("172.105.119.190"), 1510);
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             try
             {

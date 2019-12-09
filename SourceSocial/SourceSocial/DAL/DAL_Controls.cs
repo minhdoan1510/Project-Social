@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace DAL
 {
-    public class DAL_Controls: ConnectToDTB
+    public class DAL_Controls : ConnectToDTB
     {
         #region Handle_Login
         public bool SignUp(Account account)
@@ -40,7 +40,7 @@ namespace DAL
                     '{2}'  -- PASS - varchar(20)
                 )
                 ", UID, account.Username, account.Password, account.Name);
-            SqlCommand sql = new SqlCommand(query,_conn);
+            SqlCommand sql = new SqlCommand(query, _conn);
             if (sql.ExecuteNonQuery() > 0)
             {
                 _conn.Close();
@@ -65,7 +65,7 @@ namespace DAL
                 ", account.Username, account.Password);
             //", "nkoxway49", "123");       
             SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-            DataTable dataTable= new DataTable();
+            DataTable dataTable = new DataTable();
             sqlData.Fill(dataTable);
             _conn.Close();
             return dataTable;
@@ -94,6 +94,22 @@ namespace DAL
             _conn.Close();
             return dataTable;
         }
+        public DataTable LoadAllPosts()
+        {
+            _conn.Open();
+            string query = string.Format
+                (@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR 
+                    FROM dbo.POST AS Post, dbo.PROFILE AS Profile 
+                    WHERE Post.IDUSER=Profile.UIDuser
+                    ORDER BY Post.TIME ASC
+                    ");
+            DataTable dataTable = new DataTable();
+            SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
+            sql.Fill(dataTable);
+            _conn.Close();
+            return dataTable;
+        }
+
 
         public DataTable GetMailboxlist(string id)
         {
@@ -134,7 +150,7 @@ namespace DAL
                 string query = @"EXEC AddMess @IDmessbox , @IDmess , @UIDsend , @Content";
                 SqlCommand sql = new SqlCommand(query, _conn);
 
-                string[] parameter = new string[] {  idmessbox, idmess, uid, content }; 
+                string[] parameter = new string[] { idmessbox, idmess, uid, content };
                 string[] temp = query.Split(' ');
                 int i = 0;
                 foreach (string item in temp)
@@ -215,7 +231,7 @@ namespace DAL
                 SqlCommand sql = new SqlCommand(query, _conn);
                 if (sql.ExecuteNonQuery() > 0)
                     return true;
-            return false;
+                return false;
             }
             catch
             {
@@ -247,7 +263,7 @@ namespace DAL
             }
             catch
             {
-                
+
             }
             finally
             {
@@ -278,7 +294,7 @@ namespace DAL
                         GETDATE(), -- TIME - datetime
                         '{3}'         -- IDuser - varchar(30)
                     )
-                    ", comment.IdComment,comment.IdPost,comment.Content,comment.IdUser);
+                    ", comment.IdComment, comment.IdPost, comment.Content, comment.IdUser);
                 SqlCommand sqlCommand = new SqlCommand(query, _conn);
                 if (sqlCommand.ExecuteNonQuery() > 0)
                 {
@@ -306,7 +322,7 @@ namespace DAL
                     SELECT *
                     FROM dbo.PROFILE
                     WHERE UIDuser != '{0}'
-                    ",UID);
+                    ", UID);
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, _conn);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
@@ -439,7 +455,7 @@ namespace DAL
             //}
         } // Đang bị lỗi
 
-        public bool AddFriend(string UID1,string UID2)
+        public bool AddFriend(string UID1, string UID2)
         {
             try
             {
@@ -499,7 +515,7 @@ namespace DAL
                 sqlData.Fill(dataTable);
                 return dataTable;
             }
-            catch
+            catch (SqlException)
             {
 
             }
@@ -511,9 +527,38 @@ namespace DAL
             return null;
         }
 
+        public bool AlterProfile(Profile profile)
+        {
+
+            _conn.Open();
+            using (var command = _conn.CreateCommand())
+            {
+                try
+                {
+                    command.CommandText = string.Format(
+                    "UPDATE PROFILE SET NGSINH = '{0}',SODT = '{1}',EMAIL='{2}',QUEQUAN=N'{3}',HONNHAN='{4}' WHERE UIDuser = '{5}'",
+                    profile.DateOfBirth.ToLocalTime(), profile.PhoneNum, profile.Email, profile.HomeTown, profile.MarriageSt, profile.Uid);
+                    if (command.ExecuteNonQuery() > 0)
+                        return true;
+                }
+                catch (SqlException)
+                {
+                }
+                finally
+                {
+                    _conn.Close();
+                }
+            }
+
+            return false;
+
+
+        }
+
         #endregion
 
     }
-
-
 }
+
+
+

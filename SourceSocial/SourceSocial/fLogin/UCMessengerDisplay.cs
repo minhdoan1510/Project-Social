@@ -108,7 +108,11 @@ namespace fLogin
 
         public void AddMess(MessinMessbox messin)
         {
-            uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().newMess = messin;
+            Invoke(new Action(() =>
+            {
+                uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().AddMessinMessbox(messin);
+            }));
+            
         }
     }
 }

@@ -97,6 +97,7 @@
             this.lbName.Size = new System.Drawing.Size(86, 31);
             this.lbName.TabIndex = 1;
             this.lbName.Text = "Name";
+            this.lbName.Click += new System.EventHandler(this.lbName_Click);
             // 
             // ptbAvatar
             // 

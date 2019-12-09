@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
+using MaterialSkin.Controls;
 namespace fLogin
 {
-    public partial class fMain : Form
+    public partial class fMain : MaterialForm
     {
         #region Propertion
         BUS_Controls BUS_Controls;
@@ -20,10 +20,13 @@ namespace fLogin
         {
             InitializeComponent();
 
+
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
-            this.btnExit_Form.Click += (s, e) => Close();
+
             BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
+
+
             LoadDatafMain();
             LoadAnimation();
 
@@ -48,22 +51,17 @@ namespace fLogin
         {
             //Exit change color
             //
-            btnExit_Form.MouseEnter += BtnExit_Form_MouseEnter;
-            btnExit_Form.MouseLeave += BtnExit_Form_MouseLeave;
+            MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+           skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.BLACK);
+
             //
             //Text holder in my post
 
         }
 
-        private void BtnExit_Form_MouseLeave(object sender, EventArgs e)
-        {
-            btnExit_Form.BackColor = pnlTitle.BackColor;
-        }
 
-        private void BtnExit_Form_MouseEnter(object sender, EventArgs e)
-        {
-            btnExit_Form.BackColor = Color.FromArgb(pnlTitle.BackColor.R + 20, pnlTitle.BackColor.G + 20, pnlTitle.BackColor.B + 20);
-        }
 
 
 
@@ -96,9 +94,12 @@ namespace fLogin
 
             uCMainHeader.OnOpenHome += () =>
             {
-                this.Controls.Remove(DisplayProfile);
-                DisplayProfile.Dispose();
-                pnlHome.Visible = true;
+                if (DisplayProfile != null)
+                {
+                    this.Controls.Remove(DisplayProfile);
+                    DisplayProfile.Dispose();
+                    pnlHome.Visible = true;
+                }
             };
 
 
@@ -140,14 +141,17 @@ namespace fLogin
             List<Post> posts = BUS_Controls.GetPost();
             foreach (var item in posts)
             {
-                UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
-              
-                post.Dock = DockStyle.Top;
-                post.Tag = item.Idpost;
-                
-                post.OnClickComment += Post_OnClickComment;
-                post.OnClickOpenProfile += OnOpenProfile;
-                this.pnlNewFeed_Main.Controls.Add(post);
+                if (BUS_Controls.ListFriend.Contains(item.Iduser) || item.Iduser == BUS_Controls.Profilecurrent.Uid)
+                {
+                    UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
+
+                    post.Dock = DockStyle.Top;
+                    post.Tag = item.Idpost;
+
+                    post.OnClickComment += Post_OnClickComment;
+                    post.OnClickOpenProfile += OnOpenProfile;
+                    this.pnlNewFeed_Main.Controls.Add(post);
+                }
             }
         }
 
@@ -161,12 +165,28 @@ namespace fLogin
             {
                 MessageBox.Show("Đã Đăng!!!");
                 LoadNewFeed();
-                
             }
             else
                 MessageBox.Show("Không thành công!!!");
         }
 
+        public void ShowUserList(string uid)
+        {
+            List<string> UserList = BUS_Controls.GetListFriend(uid);
+            Form l = new Form();
+            l.AutoScroll = true;
+            l.Size = new Size(350, 500);
+            foreach(var item in UserList)
+            {
+                UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls,BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
+                tempInfo.Dock = DockStyle.Top;
+                tempInfo.LbNumFriend.Visible = false;
+                tempInfo.OnDelFriend +=()=> BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
+                l.Controls.Add(tempInfo);
+            }
+            l.Show();
+
+        }
         public void Post_OnClickComment(string IDPost)
         {
 
@@ -192,14 +212,29 @@ namespace fLogin
             DisplayProfile.Location = pnlHome.Location;
             this.Controls.Add(DisplayProfile);
             DisplayProfile.Tag = UID;
-            DisplayProfile.OnChangeAvatar += (i) => BUS_Controls.ChangeAvatar(i);
+            DisplayProfile.OnChangeAvatar += DisplayProfile_OnChangeAvatar;
             DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
             DisplayProfile.OnDelFriend += (i) => BUS_Controls.DelFriend(i);
             DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
+            DisplayProfile.OnViewFriend += (i) => ShowUserList(i);
             DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
             DisplayProfile.Visible = true;
             
 
+        }
+
+        private bool DisplayProfile_OnChangeAvatar(Image i)
+        {
+            if (BUS_Controls.ChangeAvatar(i))
+            {
+                foreach (UCPostDisplay item in pnlNewFeed_Main.Controls)
+                {
+                    if (item.Iduser.Equals(BUS_Controls.Profilecurrent.Uid))
+                        item.PtbAvatar_Post.Image = i;
+                }
+                return true;
+            }
+            return false;
         }
 
 

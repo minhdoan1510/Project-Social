@@ -71,6 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlMain_Newfeed_AddPost);
             this.Controls.Add(this.pnlProfile_Infor);

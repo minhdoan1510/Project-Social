@@ -26,8 +26,6 @@ namespace fLogin
         public delegate void OnBack();
         public event OnBack Back;
 
-        public MessinMessbox newMess;
-
         public delegate MessinMessbox OnHaveMess();
         public event OnHaveMess HaveMess;
 
@@ -35,35 +33,23 @@ namespace fLogin
         {
             InitializeComponent();
             Load(name);
-
-            Thread lisningMess = new Thread(() =>
-            {
-                while (true)
-                {
-                    if (newMess != null)
-                    {
-                        AddMessinMessbox(newMess);
-                        newMess = null;
-                    }
-                }
-            });
-            lisningMess.IsBackground = true;
-            lisningMess.Start();
-
         }
 
         private void Load(string name)
         {
             this.btnBack.Click += BtnBack_Click;
             this.btnSend.Click += BtnSend_Click;
-            this.txbMess.KeyPress += TxbMess_KeyPress;
+            //this.txbMess.KeyPress += TxbMess_KeyPress;
+            this.txbMess.KeyDown += TxbMess_KeyDown;
             lbName.Text = name;
         }
-        private void TxbMess_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void TxbMess_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Keys.Enter.ToString().Equals(e.KeyChar))
+            if (e.KeyCode == Keys.Enter)
                 SendMess();
         }
+
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
@@ -83,7 +69,6 @@ namespace fLogin
         {
             if (Back != null)
                 Back();
-
         }
 
 

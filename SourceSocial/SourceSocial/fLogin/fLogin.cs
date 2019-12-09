@@ -12,7 +12,7 @@ using DTO;
 
 namespace fLogin
 {
-    public partial class fLogin : Form
+    public partial class fLogin : MaterialSkin.Controls.MaterialForm
     {
         #region propertion
         BUS_Controls BUS_Controls = new BUS_Controls();
@@ -21,13 +21,15 @@ namespace fLogin
         public fLogin()
         {
             InitializeComponent();
+            MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+
         }
 
         #region Handle_Event
-        private void BtnSignUp_Click(object sender, EventArgs e)
-        {
-            pnlSignIn.Visible = false;
-        }
+     
         private void BtnSignUp_SignUp_Click(object sender, EventArgs e)
         {
             Account account = new Account()
@@ -39,7 +41,6 @@ namespace fLogin
             if (txbRePassword_SignUp.Text == txbPassword_SignUp.Text && BUS_Controls.SignUp(account))
             {
                 MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                pnlSignIn.Visible = true;
             }
             else
                 MessageBox.Show("Khong thanh cong");
@@ -64,5 +65,6 @@ namespace fLogin
             //fMain.ShowDialog();
         }
         #endregion
+
     }
 }
