@@ -15,3 +15,10 @@ C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DT
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CopyComplete
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\bin\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.csproj.CopyComplete
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\DTO\obj\Debug\DTO.pdb

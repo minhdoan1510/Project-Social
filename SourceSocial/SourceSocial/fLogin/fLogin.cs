@@ -25,7 +25,7 @@ namespace fLogin
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
-
+            
         }
 
         #region Handle_Event

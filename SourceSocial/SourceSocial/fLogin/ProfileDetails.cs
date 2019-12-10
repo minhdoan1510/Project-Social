@@ -44,6 +44,7 @@ namespace fLogin
                  else
                      MessageBox.Show("Thay đổi thông tin thất bại!");
             };
+          
         }
 
         private void ProfileDetails_Load(object sender, EventArgs e)

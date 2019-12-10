@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
+using System.Drawing.Drawing2D;
 
 namespace fLogin
 {
@@ -15,7 +16,7 @@ namespace fLogin
     {
         #region Propertion
         Profile profile;
-        
+        List<KeyValuePair<string, string>> peopleList;
 
         public delegate void OpenProfile(string UID);
         public event OpenProfile OnOpenProfile;
@@ -26,6 +27,7 @@ namespace fLogin
         public delegate void OpenMessenger();
         public event OpenMessenger OnOpenMessenger;
 
+
         
         public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
@@ -33,10 +35,11 @@ namespace fLogin
         #endregion
 
 
-        public UCMainHeader(Profile _profile)
+        public UCMainHeader(Profile _profile, List<KeyValuePair<string, string>> _people)
         {
             InitializeComponent();
             profile = _profile;
+            peopleList = _people;
             LoadMainHeader(_profile);
             LoadAnimation();
         }
@@ -44,26 +47,56 @@ namespace fLogin
         #region Load_UCMainHeader
         private void LoadMainHeader(Profile _profile)
         {
-            this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
-            this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            InitSearchTbx();
+        //   this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
+         //   this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pnlProfile.Text = _profile.Name;
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
            
             pnlProfile.Controls.Add(ptbAvatar);
-           
             ptbAvatar.BackColor = Color.Transparent;
             ptbAvatar.Dock = DockStyle.Left;
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 3, 43, 43);
+            ptbAvatar.Region = new Region(path);
 
             PtbLogo.Click += (s, e) => OnOpenHome();
-
-            //btnMess.Click += (s, e) => OnOpenMessenger();
-
+            btnMess.Click += (s, e) => OnOpenMessenger();
+            tbxSearch.KeyDown += UCMainHeader_KeyDown;
             //pnlclick = new Panel() { Size = pnlProfile.Size };
             //pnlProfile.Controls.Add(pnlclick);
             //pnlclick.BringToFront();
-            ////pnlclick.Visible = false;
+            //pnlclick.Visible = false;
             //pnlclick.Click += PnlProfile_Click;
+
+            btnMess.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\mess.png");
+            btnMess.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNotification.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\noti.png");
+            btnNotification.BackgroundImageLayout = ImageLayout.Stretch;
+            this.BackgroundImage = System.Drawing.Bitmap.FromFile(Application.StartupPath + @"\Picture\widebg.png");
+        }
+
+        private void UCMainHeader_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if(peopleList.Where(x => tbxSearch.Text == x.Value).SingleOrDefault().Key!=null)
+                    OnOpenProfile(peopleList.Where(x => tbxSearch.Text == x.Value).SingleOrDefault().Key);
+            }
+        }
+
+        private void InitSearchTbx()
+        {
+            tbxSearch.AutoCompleteMode = AutoCompleteMode.Suggest;
+            tbxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+            foreach(var item in peopleList)
+            {
+                collection.Add(item.Value);
+            }
+            tbxSearch.AutoCompleteCustomSource = collection;
+            
         }
         #endregion
 

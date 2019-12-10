@@ -176,7 +176,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(373, 323);
+            this.tabPage2.Size = new System.Drawing.Size(360, 323);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Đăng ký";
             // 
@@ -322,6 +322,7 @@
             // 
             // fLogin
             // 
+            this.AcceptButton = this.btnSignIn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;

@@ -28,42 +28,38 @@ namespace fLogin
 
         public MessinMessbox newMess;
 
-        public delegate MessinMessbox OnHaveMess();
-        public event OnHaveMess HaveMess;
-
         public UCDetailMessbox(string name)
         {
             InitializeComponent();
-            Load(name);
+            //pnlDisplayMess.AutoScroll = false;
+            //pnlDisplayMess.HorizontalScroll.Maximum = 0;
+            //pnlDisplayMess.HorizontalScroll.Visible = false;
+            //pnlDisplayMess.VerticalScroll.Maximum = 0;
+            //pnlDisplayMess.VerticalScroll.Visible = false;
+            pnlDisplayMess.AutoScroll = true;
+            pnlDisplayMess.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messbg.png");
 
-            Thread lisningMess = new Thread(() =>
-            {
-                while (true)
-                {
-                    if (newMess != null)
-                    {
-                        AddMessinMessbox(newMess);
-                        newMess = null;
-                    }
-                }
-            });
-            lisningMess.IsBackground = true;
-            lisningMess.Start();
+            Loading(name);
 
+
+            pnlDetailMess.Focus();
         }
 
-        private void Load(string name)
+        private void TxbMess_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SendMess();
+        }
+
+        private void Loading(string name)
         {
             this.btnBack.Click += BtnBack_Click;
             this.btnSend.Click += BtnSend_Click;
-            this.txbMess.KeyPress += TxbMess_KeyPress;
+            this.txbMess.KeyDown += TxbMess_KeyDown;
             lbName.Text = name;
+            
         }
-        private void TxbMess_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Keys.Enter.ToString().Equals(e.KeyChar))
-                SendMess();
-        }
+       
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
@@ -78,12 +74,12 @@ namespace fLogin
                     AddMessinMessbox(new MessinMessbox() { IsMe = true, Content = txbMess.Text });
                     txbMess.Clear();
                 }
+            pnlDisplayMess.Select();
         }
         private void BtnBack_Click(object sender, EventArgs e)
         {
             if (Back != null)
                 Back();
-
         }
 
 
@@ -95,7 +91,7 @@ namespace fLogin
                 UCmess = new UCMessofMe(messin.Content);
             else
                 UCmess = new UCMessofYou(messin.Avatar, messin.Content);
-            UCmess.Dock = DockStyle.Top;
+            UCmess.Dock = DockStyle.Bottom;
             this.pnlDisplayMess.Controls.Add(UCmess);
         }
     }
