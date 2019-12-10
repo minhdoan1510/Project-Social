@@ -196,3 +196,5 @@ C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin
 C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
 C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
 C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\MaterialSkin.dll
+C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources

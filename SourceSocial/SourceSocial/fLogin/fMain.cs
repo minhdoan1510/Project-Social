@@ -105,7 +105,7 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                formMess = new Form() { Size = new Size(272, 370 + 30), StartPosition = FormStartPosition.CenterScreen, FormBorderStyle = FormBorderStyle.FixedToolWindow };
+                formMess = new MaterialForm() { Size = new Size(272, 370 + 30), StartPosition = FormStartPosition.CenterScreen };//, FormBorderStyle = FormBorderStyle.FixedToolWindow };
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;

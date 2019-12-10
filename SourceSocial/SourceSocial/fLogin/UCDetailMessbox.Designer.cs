@@ -53,6 +53,7 @@
             // 
             // pnlDisplayMess
             // 
+            this.pnlDisplayMess.AutoScroll = true;
             this.pnlDisplayMess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplayMess.Location = new System.Drawing.Point(0, 34);
             this.pnlDisplayMess.Name = "pnlDisplayMess";
