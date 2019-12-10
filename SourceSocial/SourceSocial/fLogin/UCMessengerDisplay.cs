@@ -65,9 +65,9 @@ namespace fLogin
                     detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
 
                 detailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox.Equals(IDmessbox)).SingleOrDefault().Nameuser);
-                foreach (MessinMessbox item in detailMess)
-                {
-                   detailMessbox.AddMessinMessbox(item);
+                for(int i = detailMess.Count-1;i>=0;i--)
+                { 
+                   detailMessbox.AddMessinMessbox(detailMess[i]);
                 }
                 detailMessbox.Tag = IDmessbox;
                 uCDetailMessboxes.Add(detailMessbox);
@@ -78,7 +78,7 @@ namespace fLogin
             detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
             this.Controls.Add(detailMessbox);
             detailMessbox.BringToFront();
-
+            
             //UCDetailMessbox uCDetailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox == ).SingleOrDefault());
 
 
@@ -109,10 +109,17 @@ namespace fLogin
         public void AddMess(MessinMessbox messin)
         {
             Invoke(new Action(() =>
+<<<<<<< HEAD
             {
                 uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().AddMessinMessbox(messin);
             }));
             
         }
+=======
+            {
+                uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().AddMessinMessbox(messin);
+            }));
+            }
+>>>>>>> minhtien
     }
 }

@@ -25,7 +25,11 @@ namespace fLogin
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> minhtien
         }
 
         #region Handle_Event
@@ -41,6 +45,10 @@ namespace fLogin
             if (txbRePassword_SignUp.Text == txbPassword_SignUp.Text && BUS_Controls.SignUp(account))
             {
                 MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+<<<<<<< HEAD
+=======
+                
+>>>>>>> minhtien
             }
             else
                 MessageBox.Show("Khong thanh cong");

@@ -19,6 +19,10 @@ namespace BUS
         private Profile profilecurrent;
         private DAL_Controls dal;
         private List<string> listFriend;
+<<<<<<< HEAD
+=======
+        private List<string> listUser;
+>>>>>>> minhtien
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
         public List<string> ListFriend { get => listFriend; set => listFriend = value; }
 
@@ -333,6 +337,7 @@ namespace BUS
 
         private Profile LoadDataProfile(string UID)
         {
+            
             DataTable dataTable = dal.GetProfile(UID);
             if (dataTable == null)
                 return null;

@@ -30,8 +30,13 @@ namespace fLogin
         public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
         public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
+<<<<<<< HEAD
         public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
         public string Iduser { get => iduser; set => iduser = value; }
+=======
+        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        public string Iduser { get => iduser; set => iduser = value; }
+>>>>>>> minhtien
         #endregion
 
         public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar, string _iduser)
@@ -70,7 +75,11 @@ namespace fLogin
 
         private void LbName_Post_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             if (OnClickOpenProfile != null)
+=======
+            if (OnClickOpenProfile != null)
+>>>>>>> minhtien
                 OnClickOpenProfile(Iduser);
         }
 

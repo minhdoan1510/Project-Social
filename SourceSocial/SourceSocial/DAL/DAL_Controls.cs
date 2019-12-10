@@ -413,12 +413,22 @@ namespace DAL
         public bool ChangeAvatar(Profile profile)
         {
             _conn.Open();
-            using (var command = _conn.CreateCommand())
+            try
             {
-                command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
-                command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
-                if (command.ExecuteNonQuery() > 0)
-                    return true;
+                using (var command = _conn.CreateCommand())
+                {
+                    command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
+                    command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
+                    if (command.ExecuteNonQuery() > 0)
+                        return true;
+                }
+            }
+            catch(Exception)
+            {
+            }
+            finally
+            {
+                _conn.Close();
             }
 
             return false;

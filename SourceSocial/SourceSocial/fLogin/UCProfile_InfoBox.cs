@@ -163,10 +163,18 @@ namespace fLogin
             }
         }
         #endregion
+<<<<<<< HEAD
 
         private void lbName_Click(object sender, EventArgs e)
         {
             profileDetails.Show();
         }
+=======
+
+        private void lbName_Click(object sender, EventArgs e)
+        {
+            profileDetails.Show();
+        }
+>>>>>>> minhtien
     }
 }
