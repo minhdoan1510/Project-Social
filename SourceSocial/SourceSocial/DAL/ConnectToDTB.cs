@@ -8,14 +8,7 @@ using System.Data.SqlClient;
 namespace DAL
 {
     public class ConnectToDTB
-<<<<<<< HEAD
     {
         protected SqlConnection _conn = new SqlConnection(@"Data Source=172.105.119.190,1433;Initial Catalog=DataSocial;User ID=minhtien123;Password=Minhtien@123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-=======
-    {
-        //protected SqlConnection _conn = new SqlConnection(@"Data Source=DESKTOP-6ENCE12\SQLEXPRESS;Initial Catalog=DataSocial;Integrated Security=True");
-    
-    protected SqlConnection _conn = new SqlConnection(@"Data Source=172.105.119.190,1433;Initial Catalog=DataSocial;User ID=minhtien123;Password=Minhtien@123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
->>>>>>> minhtien
     }
 }

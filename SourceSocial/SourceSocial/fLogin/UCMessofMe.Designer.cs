@@ -28,29 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txbMess = new RoundedLabel();
+            this.txbMess = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(249, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(7, 28);
-            this.panel1.TabIndex = 0;
             // 
             // txbMess
             // 
-            this.txbMess._BackColor = System.Drawing.Color.LightSalmon;
-            this.txbMess.BackColor = System.Drawing.Color.Transparent;
-            this.txbMess.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txbMess.Location = new System.Drawing.Point(80, 0);
-            this.txbMess.MaximumSize = new System.Drawing.Size(210, 26);
+            this.txbMess.BackColor = System.Drawing.Color.LightSalmon;
+            this.txbMess.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbMess.Location = new System.Drawing.Point(84, 4);
+            this.txbMess.Multiline = true;
             this.txbMess.Name = "txbMess";
-            this.txbMess.Size = new System.Drawing.Size(169, 26);
+            this.txbMess.ReadOnly = true;
+            this.txbMess.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txbMess.Size = new System.Drawing.Size(169, 20);
             this.txbMess.TabIndex = 2;
-            this.txbMess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // UCMessofMe
             // 
@@ -58,17 +49,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.txbMess);
-            this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.Name = "UCMessofMe";
-            this.Size = new System.Drawing.Size(256, 28);
+            this.Size = new System.Drawing.Size(256, 27);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private RoundedLabel txbMess;
+        private System.Windows.Forms.TextBox txbMess;
     }
 }
