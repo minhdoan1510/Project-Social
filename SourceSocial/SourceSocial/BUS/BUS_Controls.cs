@@ -16,10 +16,11 @@ namespace BUS
         private Network network;
         private List<Post> posts;
         private List<KeyValuePair<string, List<Comment>>> comments;
+        private List<KeyValuePair<string, List<string>>> likes;
         private Profile profilecurrent;
         private DAL_Controls dal;
         private List<string> listFriend;
-        private List<string> listUser;
+      
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
         public List<string> ListFriend { get => listFriend; set => listFriend = value; }
 
@@ -35,10 +36,11 @@ namespace BUS
         {
             posts = new List<Post>();
             comments = new List<KeyValuePair<string, List<Comment>>>();
+            likes = new List<KeyValuePair<string, List<string>>>();
             Profilecurrent = new Profile();
             dal = new DAL_Controls();
             ListFriend = new List<string>();
-
+            
         }
 
         #region Handle Network
@@ -136,6 +138,7 @@ namespace BUS
                 {
                     LoadDataPost(data.Rows[0].ItemArray[0].ToString());
                     ListFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
+                    
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
@@ -201,6 +204,27 @@ namespace BUS
 
             return mailboxlists;
 
+        }
+
+        public bool AddLike_Post(string iDPost,bool add)
+        {
+            if (add)
+            {
+                if (dal.AddLike(iDPost, profilecurrent.Uid))
+                {
+                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);
+                    return true;
+                }
+            }
+            else
+            {
+                if (dal.UnLike(iDPost, profilecurrent.Uid))
+                {
+                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Remove(profilecurrent.Uid);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public object GetMessinMessbox(string id)
@@ -296,7 +320,28 @@ namespace BUS
             return null;
         }
 
-
+        public List<string> LoadLikesOfPost(string idPost)
+        {
+            foreach (var item in likes)
+            {
+                if (item.Key == idPost)
+                {
+                    return item.Value;
+                }
+            }
+            return LoadAddLikesOf(idPost);
+        }
+        public List<string> LoadAddLikesOf(string IDPost)
+        {
+            List<string> likesOfPost = new List<string>();
+            DataTable data = dal.LoadLikesof(IDPost);
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                likesOfPost.Add(data.Rows[i].ItemArray[0].ToString());
+            }
+            likes.Add(new KeyValuePair<string, List<string>>(IDPost, likesOfPost));
+            return likesOfPost;
+        }
         #endregion
 
         #region Handle_Profile

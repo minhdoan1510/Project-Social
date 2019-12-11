@@ -48,7 +48,7 @@
             this.pnlDetailMess.Controls.Add(this.panel1);
             this.pnlDetailMess.Location = new System.Drawing.Point(0, 0);
             this.pnlDetailMess.Name = "pnlDetailMess";
-            this.pnlDetailMess.Size = new System.Drawing.Size(256, 364);
+            this.pnlDetailMess.Size = new System.Drawing.Size(256, 365);
             this.pnlDetailMess.TabIndex = 2;
             // 
             // pnlDisplayMess
@@ -58,9 +58,9 @@
             this.pnlDisplayMess.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDisplayMess.Location = new System.Drawing.Point(0, 34);
             this.pnlDisplayMess.MaximumSize = new System.Drawing.Size(256, 293);
-            this.pnlDisplayMess.MinimumSize = new System.Drawing.Size(256, 0);
+            this.pnlDisplayMess.MinimumSize = new System.Drawing.Size(256, 10);
             this.pnlDisplayMess.Name = "pnlDisplayMess";
-            this.pnlDisplayMess.Size = new System.Drawing.Size(256, 0);
+            this.pnlDisplayMess.Size = new System.Drawing.Size(256, 10);
             this.pnlDisplayMess.TabIndex = 5;
             // 
             // panel2
@@ -69,7 +69,7 @@
             this.panel2.Controls.Add(this.btnSend);
             this.panel2.Controls.Add(this.txbMess);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 327);
+            this.panel2.Location = new System.Drawing.Point(0, 328);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(256, 37);
             this.panel2.TabIndex = 0;

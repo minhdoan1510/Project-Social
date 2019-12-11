@@ -101,7 +101,7 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                formMess = new MaterialForm() { Size = new Size(256, 364 + 30), StartPosition = FormStartPosition.CenterScreen };
+                formMess = new MaterialForm() { Size = new Size(256+50, 364 + 30), StartPosition = FormStartPosition.CenterScreen };
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
@@ -144,9 +144,13 @@ namespace fLogin
 
                     post.Dock = DockStyle.Top;
                     post.Tag = item.Idpost;
-
                     post.OnClickComment += Post_OnClickComment;
                     post.OnClickOpenProfile += OnOpenProfile;
+                    post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
+                    post.OnClickLikeList += (i)=> ShowUserList(BUS_Controls.LoadLikesOfPost(i));
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(item.Iduser))
+                        post.PtbLike.Tag = true;
+                    else post.PtbLike.Tag = false;
                     this.pnlNewFeed_Main.Controls.Add(post);
                 }
             }
@@ -167,9 +171,9 @@ namespace fLogin
                 MessageBox.Show("Không thành công!!!");
         }
 
-        public void ShowUserList(string uid)
+        public void ShowUserList(List<string> UserList)
         {
-            List<string> UserList = BUS_Controls.GetListFriend(uid);
+            if (UserList.Count == 0) return;
             Form l = new Form();
             l.AutoScroll = true;
             l.Size = new Size(350, 500);
@@ -197,6 +201,9 @@ namespace fLogin
         {
             return BUS_Controls.AddComment(idPost, content);
         }
+       
+    
+       
         #endregion
 
         #endregion
@@ -213,8 +220,10 @@ namespace fLogin
             DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
             DisplayProfile.OnDelFriend += (i) => BUS_Controls.DelFriend(i);
             DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
-            DisplayProfile.OnViewFriend += (i) => ShowUserList(i);
+            DisplayProfile.OnViewFriend += (i) => ShowUserList(BUS_Controls.GetListFriend(i));
             DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
+            DisplayProfile.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
+            DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
             DisplayProfile.Visible = true;
             
 

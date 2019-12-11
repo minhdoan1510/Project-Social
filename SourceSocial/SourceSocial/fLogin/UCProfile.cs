@@ -36,6 +36,11 @@ namespace fLogin
         public delegate void ClickComment(string UID);
         public event ClickComment Post_OnClickComment;
 
+        public delegate bool ClickLike(string IDpost, bool add);
+        public event ClickLike OnClickLike;
+
+        public delegate void ClickLikeList(string IdPost);
+        public event ClickLikeList OnClickLikeList;
 
 
         public UCProfile(BUS_Controls _BUS_Controls, Profile profile, int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
@@ -70,7 +75,11 @@ namespace fLogin
                     post.Tag = item.Idpost;
 
                     post.OnClickComment += (i) => Post_OnClickComment(i);
-
+                    post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
+                    post.OnClickLikeList += (i) => OnClickLikeList(i);
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(item.Iduser))
+                        post.PtbLike.Tag = true;
+                    else post.PtbLike.Tag = false;
                     pnlNewFeed_Main.Controls.Add(post);
                 }
             }

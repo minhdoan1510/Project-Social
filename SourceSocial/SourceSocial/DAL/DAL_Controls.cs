@@ -243,6 +243,65 @@ namespace DAL
             }
         }
 
+        public bool AddLike(string IdPost,string IdUser)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                  (@"
+                  INSERT INTO dbo.posts_like_list
+                  (
+                      IDPOST,
+                      IDUSER
+                  )
+                  VALUES
+                  (   '{0}',       -- IDPOST - varchar(30)
+                      '{1}'      -- IDUSER - varchar(30)
+                  )
+                  ", IdPost, IdUser);
+                SqlCommand sql = new SqlCommand(query, _conn);
+                if (sql.ExecuteNonQuery() > 0)
+                    return true;
+                return false;
+            }
+            catch(Exception)
+            {
+                
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
+        }
+        public bool UnLike(string IdPost, string IdUser)
+        {
+            try
+            {
+                _conn.Open();
+                string query = string.Format
+                  (@"
+                  DELETE FROM dbo.posts_like_list
+                  WHERE IdPost = '{0}'
+                  AND IdUser = '{1}'
+                 
+                  ", IdPost, IdUser);
+                SqlCommand sql = new SqlCommand(query, _conn);
+                if (sql.ExecuteNonQuery() > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
+        }
         public DataTable LoadCMTof(string UIDpost)
         {
             try
@@ -312,6 +371,30 @@ namespace DAL
             return false;
         }
 
+        public DataTable LoadLikesof(string iDPost)
+        {
+            try
+            {
+                string query = string.Format
+                    (@"
+                    SELECT IdUser FROM dbo.posts_like_list
+                    WHERE IdPost = '{0}'
+                    ", iDPost);
+                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
+                DataTable data = new DataTable();
+                sqlData.Fill(data);
+                return data;
+            }
+            catch(Exception)
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return null;
+        }
         public DataTable GetPeople(string UID)
         {
             try
@@ -338,7 +421,6 @@ namespace DAL
             }
             return null;
         }
-
 
         public DataTable GetMessfromIDMess(string idmess)
         {
