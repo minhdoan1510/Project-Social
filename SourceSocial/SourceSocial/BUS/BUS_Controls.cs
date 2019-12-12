@@ -230,7 +230,8 @@ namespace BUS
             {
                 if (dal.AddLike(iDPost, profilecurrent.Uid))
                 {
-                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);
+                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);                    if(posts.SingleOrDefault(x=> x.Idpost == iDPost).Iduser == profilecurrent.Uid)                        AddNotify(iDPost, 1); //1 => like
+                    
                     return true;
                 }
             }
@@ -331,9 +332,12 @@ namespace BUS
                     if (item.Key == idPost)
                     {
                         item.Value.Add(comment);
+                        if (posts.SingleOrDefault(x => x.Idpost == idPost).Iduser == profilecurrent.Uid)
+                            AddNotify(idPost, 2); //2 => comment
                         return item.Value;
                     }
                 }
+               
             }
             return null;
         }
@@ -504,9 +508,22 @@ namespace BUS
 
         #region Handle_Notify
         
-        public bool SaveNotifyInDTB(Notify notify)
-        {
-            return dal.SaveNotifyInDTB(notify);
+        public bool AddNotify(string IdPost, int type)
+        {            Notify notify = new Notify()
+            {
+                IDNotify = new Random().Next(10000000, 99999999).ToString(),
+                IDPost = IdPost,
+                TypeNotify = type,
+                SendUID = profilecurrent.Uid,
+                SendName = profilecurrent.Name,
+                ReceiveUID = posts.SingleOrDefault(x => x.Idpost == IdPost).Iduser,
+                ReceiveName = GetProfile(posts.SingleOrDefault(x => x.Idpost == IdPost).Iduser).Name
+            };
+            if (dal.SaveNotifyInDTB(notify))
+            {
+                SendNotify(notify);
+                return true;
+            }            return false;
         }
 
         public List<Notify> GetAllNotifyofUser()
