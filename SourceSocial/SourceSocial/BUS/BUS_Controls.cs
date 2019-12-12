@@ -231,6 +231,7 @@ namespace BUS
                 if (dal.AddLike(iDPost, profilecurrent.Uid))
                 {
                     likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);
+                    posts.Single(x => x.Idpost == iDPost).Liked++;
                     return true;
                 }
             }
@@ -239,6 +240,7 @@ namespace BUS
                 if (dal.UnLike(iDPost, profilecurrent.Uid))
                 {
                     likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Remove(profilecurrent.Uid);
+                    posts.Single(x => x.Idpost == iDPost).Liked--;
                     return true;
                 }
             }
