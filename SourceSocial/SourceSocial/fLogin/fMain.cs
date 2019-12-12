@@ -12,7 +12,7 @@ namespace fLogin
         #region Propertion
         BUS_Controls BUS_Controls;
         UCProfile DisplayProfile;
-        Form formMess;
+        Form formMess;        Form formNotify;
 
         #endregion
 
@@ -25,14 +25,23 @@ namespace fLogin
             this.BackColor = Color.FromArgb(249, 249, 249);
 
             BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
-
+            BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;
 
             LoadDatafMain();
             LoadAnimation();
 
 
         }
-
+        private void BUS_Controls_HaveNewNotify(Notify notify)
+        {
+            Form notiForm = new Form() { Size = new Size(400, 400) };
+            Label label = new Label();
+            label.Text = notify.SendName + " đã " + ((notify.TypeNotify == 1) ? "like " : "comment ") + "bài viết của bạn";
+            label.Dock = DockStyle.Top;
+            notiForm.Controls.Add(label);
+        }
+
+
         private void BUS_Controls_HaveNewMesseger(MessinMessbox messin)
         {
             foreach (UCMessengerDisplay item in formMess.Controls)
