@@ -65,9 +65,9 @@ namespace fLogin
                     detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
 
                 detailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox.Equals(IDmessbox)).SingleOrDefault().Nameuser);
-                foreach (MessinMessbox item in detailMess)
+                for (int i = detailMess.Count-1; i >=0; i--)
                 {
-                   detailMessbox.AddMessinMessbox(item);
+                   detailMessbox.AddMessinMessbox(detailMess[i]);
                 }
                 detailMessbox.Tag = IDmessbox;
                 uCDetailMessboxes.Add(detailMessbox);

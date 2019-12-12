@@ -557,6 +557,86 @@ namespace DAL
 
         #endregion
 
+        #region Handle_Notify
+
+        public bool SaveNotifyInDTB(Notify notify)
+        {
+            try
+            {
+                _conn.Open();
+
+                string query = @"EXEC AddNotify  @IDNotify , @IDPost , @Content , @IDuser , @TypeNotify";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDNotify", notify.IDNotify);
+                sql.Parameters.AddWithValue("@IDPost", notify.IDPost);
+                sql.Parameters.AddWithValue("@Content", notify.IDPost);
+                sql.Parameters.AddWithValue("@IDuser", notify.SendUID);
+                sql.Parameters.AddWithValue("@TypeNotify", notify.TypeNotify);
+                if (sql.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch 
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
+        }
+
+        public DataTable GetAllNotifyofUser(string UID)
+        {
+
+            try
+            {
+                _conn.Open();
+                DataTable data = new DataTable();
+                string query = @"EXEC GetAllNotifyofUser @IDuser";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDuser", UID);
+                SqlDataAdapter sqlData = new SqlDataAdapter(sql);
+                sqlData.Fill(data);
+                return (data);
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public DataTable GetOnlyOneNotify(string IDNotify, string UID)
+        {
+            try
+            {
+                _conn.Open();
+
+                DataTable data = new DataTable();
+                string query = @"EXEC GetOnlyOneNotify @IDNotify , @IDuser";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDNotify", IDNotify);
+                sql.Parameters.AddWithValue("@IDuser", UID);
+
+                SqlDataAdapter sqlData = new SqlDataAdapter(sql);
+                sqlData.Fill(data);
+                return data;
+            }
+            catch 
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        #endregion
     }
 }
 

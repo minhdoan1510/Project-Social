@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Data;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -21,7 +22,7 @@ namespace ServerProjectSocial
         {
             Console.WriteLine( "["+ DateTime.Now +"] Creating the server");
             clients = new List<DetailClientSocket>();
-            IP = new IPEndPoint(IPAddress.Any, 1510);
+            IP = new IPEndPoint(IPAddress.Any, 9865);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
         }
         ~Server()
@@ -116,7 +117,11 @@ namespace ServerProjectSocial
                 socket.Send(temp);
                 return true;
             }
-            catch { return false; }
+            catch(Exception e)
+            {
+                Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
+                return false;
+            }
         }
         void Receive(object obj)
         {
@@ -125,33 +130,34 @@ namespace ServerProjectSocial
             {
                 while (true)
                 {
-                    SocketFlags so = new SocketFlags();
                     byte[] temp = new byte[1024 * 5000];
-                    client.Receive(temp, so);
+                    client.Receive(temp);
                     
                     string packet_str = (string)GetfromBinary(temp);
                     PacketData packet = new PacketData(packet_str);
-                    switch (packet.TPacket)
-                    {
-                        case 1:
-                            Console.WriteLine( "["+ DateTime.Now +"] Received message package.Sending to the client");
-                            try
-                            {
-                                if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
-                                    Console.WriteLine( "["+ DateTime.Now +"] Send success");
-                            }
-                            catch { Console.WriteLine( "["+ DateTime.Now +"] Client not working. The packet has been saved in the database"); }
-                            break;
+                    Handle_ReceivePacket(packet, temp, client);
 
-                        case 2:
+                    //switch (packet.TPacket)
+                    //{
+                    //    case 1:
+                    //        Console.WriteLine( "["+ DateTime.Now +"] Received message package.Sending to the client");
+                    //        try
+                    //        {
+                    //            if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
+                    //                Console.WriteLine( "["+ DateTime.Now +"] Send success");
+                    //        }
+                    //        catch { Console.WriteLine( "["+ DateTime.Now +"] Client not working. The packet has been saved in the database"); }
+                    //        break;
 
-                            break;
+                    //    case 2:
 
-                        case 0:
-                            clients.Where(x => x.Socket == ((Socket)obj)).SingleOrDefault().UID = packet.UID;
-                            Console.WriteLine( "["+ DateTime.Now +"] Received UID {0} from the client",packet.UID);
-                            break;
-                    }
+                    //        break;
+
+                    //    case 0:
+                    //        clients.Where(x => x.Socket == ((Socket)obj)).SingleOrDefault().UID = packet.UID;
+                    //        Console.WriteLine( "["+ DateTime.Now +"] Received UID {0} from the client",packet.UID);
+                    //        break;
+                    //}
                
                 }
             }
@@ -164,8 +170,49 @@ namespace ServerProjectSocial
                 client.Close();
             }
         }
-        #endregion
+        void Handle_ReceivePacket(PacketData packet, byte[] temp, Socket client)
+        {
+            switch (packet.TPacket)
+            {
+                case 1:
+                    Console.WriteLine("[" + DateTime.Now + "] Received message package.Sending to the client");
+                    try
+                    {
+                        if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
+                            Console.WriteLine("[" + DateTime.Now + "] Send success");
+                    }
+                    catch { Console.WriteLine("[" + DateTime.Now + "] Client not working. The packet has been saved in the database"); }
+                    break;
 
+                case 2:
+                    Handle_NotifyPacket(packet.IDNotify, client);
+                    break;
+
+                case 0:
+                    clients.Where(x => x.Socket == client).SingleOrDefault().UID = packet.UID;
+                    Console.WriteLine("[" + DateTime.Now + "] Received UID {0} from the client", packet.UID);
+                    break;
+            }
+        }
+        private void Handle_NotifyPacket(string iDNotify, Socket client)
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetListSendNotify @IDNotify", new object[] { iDNotify });
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                try
+                {
+                    DetailClientSocket socketDetail = clients.Where(x => x.UID == data.Rows[0].ItemArray[0].ToString()).SingleOrDefault();
+                    if (socketDetail != null&&socketDetail.Socket != client)
+                        if (Send(SetBinary("2_" + iDNotify), socketDetail.Socket))
+                            Console.WriteLine("[" + DateTime.Now + "] Send notify ID " + iDNotify + " to UID " + socketDetail.UID);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
+                }
+            }
+        }
+        #endregion
         /// <summary>
         /// Convert binary to object
         /// </summary>

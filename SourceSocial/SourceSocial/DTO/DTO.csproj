@@ -48,6 +48,7 @@
     <Compile Include="Comment.cs" />
     <Compile Include="Mailboxlist.cs" />
     <Compile Include="MessinMessbox.cs" />
+    <Compile Include="Notify.cs" />
     <Compile Include="PacketData.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Profile.cs" />

@@ -12,10 +12,14 @@ namespace ServerProjectSocial
         private int tPacket; // 0-RequestUID 1-Messenger, 2-Notify, 
         private string iDmess;
         private string uID;
+        private string iDNotify;
 
         public string IDmess { get => iDmess; set => iDmess = value; }
         public string UID { get => uID; set => uID = value; }
         public int TPacket { get => tPacket; set => tPacket = value; }
+        public string IDNotify { get => iDNotify; set => iDNotify = value; }
+
+        public PacketData() { }
 
         public PacketData(string str) //struct string <flag>_<UID>_<IDmess>
         {
@@ -28,7 +32,7 @@ namespace ServerProjectSocial
                     {
                         UID = temp[1];
                     }
-                    catch { UID = string.Empty;}
+                    catch { UID = string.Empty; }
                     break;
                 case 1:
                     try
@@ -45,7 +49,8 @@ namespace ServerProjectSocial
                     break;
 
                 case 2:
-
+                    IDNotify = temp[1];
+                    break;
 
                 default:
                     break;

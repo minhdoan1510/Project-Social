@@ -28,6 +28,10 @@ namespace BUS
         public event OnHaveNewMesseger HaveNewMesseger;
 
 
+        public delegate void OnHaveNewNotify(Notify notify);
+        public event OnHaveNewNotify HaveNewNotify;
+
+
         #endregion
 
         public BUS_Controls()
@@ -59,12 +63,19 @@ namespace BUS
                         messin.UidSend = data.Rows[0].ItemArray[5].ToString();
                         messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[0]);
                         if(HaveNewMesseger!=null)
-                            HaveNewMesseger(messin);
+                            HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
                     }
                     catch { }
 
                     break;
                 case 2:
+                    try
+                    {
+                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
+                        if (HaveNewNotify != null)
+                            HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
+                    }
+                    catch { }
 
                     break;
 
@@ -86,6 +97,13 @@ namespace BUS
                 return false;
         }
 
+        public void SendNotify(Notify notify)
+        {
+            PacketData packet=new PacketData();
+            packet.TPacket = 2;
+            packet.IDNotify = notify.IDNotify;
+            network.Send(EncodePacketData(packet));
+        }
 
         public string EncodePacketData(PacketData packet)
         {
@@ -102,7 +120,7 @@ namespace BUS
                     temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
                     return temp;
                 case 2:
-
+                    temp = packet.TPacket + "_" + packet.IDNotify;
                     break;
                 case 3:
                     break;
@@ -436,6 +454,54 @@ namespace BUS
         //        return Image.FromStream(ms);
         //    }
         //}
+        #endregion
+
+        #region Handle_Notify
+        
+        public bool SaveNotifyInDTB(Notify notify)
+        {
+            return dal.SaveNotifyInDTB(notify);
+        }
+
+        public List<Notify> GetAllNotifyofUser()
+        {
+            DataTable data = dal.GetAllNotifyofUser(Profilecurrent.Uid);
+            List<Notify> notifies = new List<Notify>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                Notify notify = new Notify();
+                notify.IDNotify = data.Rows[i].ItemArray[0].ToString();
+                notify.IDPost = data.Rows[i].ItemArray[1].ToString();
+                notify.Content = data.Rows[i].ItemArray[2].ToString();
+                notify.SendName = data.Rows[i].ItemArray[3].ToString();
+                notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
+                notify.ReceiveUID = data.Rows[i].ItemArray[5].ToString();
+                notifies.Add(notify);
+            }
+            return notifies;
+        }
+
+        public Notify GetOnlyOneNotify(string IDNotify)
+        {
+            Notify notify = new Notify();
+            try
+            {
+                DataTable data = dal.GetOnlyOneNotify(IDNotify, Profilecurrent.Uid);
+                notify.IDNotify = data.Rows[0].ItemArray[0].ToString();
+                notify.IDPost = data.Rows[0].ItemArray[1].ToString();
+                notify.Content = data.Rows[0].ItemArray[2].ToString();
+                notify.SendName = data.Rows[0].ItemArray[3].ToString();
+                notify.ReceiveUID = data.Rows[0].ItemArray[4].ToString();
+                notify.ReceiveUID = data.Rows[0].ItemArray[5].ToString();
+            }
+            catch
+            {
+                return null;
+            }
+            return notify;
+        }
+
         #endregion
     }
 }
