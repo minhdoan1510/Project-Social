@@ -48,7 +48,7 @@ namespace fLogin
             //Exit change color
             //
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
-           skinManager.AddFormToManage(this);
+            skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.BLACK);
 
@@ -94,6 +94,8 @@ namespace fLogin
                 {
                     this.Controls.Remove(DisplayProfile);
                     DisplayProfile.Dispose();
+                    
+                  
                     pnlHome.Visible = true;
                 }
             };
@@ -225,7 +227,7 @@ namespace fLogin
             DisplayProfile.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
             DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
             DisplayProfile.Visible = true;
-            
+         
 
         }
 
