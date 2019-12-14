@@ -692,17 +692,17 @@ namespace DAL
             }
         }
 
-        public DataTable GetOnlyOneNotify(string IDNotify, string UID)
+        public DataTable GetOnlyOneNotify(string IDNotify)
         {
             try
             {
                 _conn.Open();
 
                 DataTable data = new DataTable();
-                string query = @"EXEC GetOnlyOneNotify @IDNotify , @IDuser";
+                string query = @"EXEC GetOnlyOneNotify @IDNotify";
                 SqlCommand sql = new SqlCommand(query, _conn);
                 sql.Parameters.AddWithValue("@IDNotify", IDNotify);
-                sql.Parameters.AddWithValue("@IDuser", UID);
+             
 
                 SqlDataAdapter sqlData = new SqlDataAdapter(sql);
                 sqlData.Fill(data);

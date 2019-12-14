@@ -64,6 +64,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotificationBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotificationBox.Designer.cs">
+      <DependentUpon>NotificationBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NotificationItem.Designer.cs">
+      <DependentUpon>NotificationItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotificationList.Designer.cs">
+      <DependentUpon>NotificationList.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProfileDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +192,15 @@
     <Compile Include="UCSearchBar.Designer.cs">
       <DependentUpon>UCSearchBar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="NotificationBox.resx">
+      <DependentUpon>NotificationBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotificationItem.resx">
+      <DependentUpon>NotificationItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotificationList.resx">
+      <DependentUpon>NotificationList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProfileDetails.resx">
       <DependentUpon>ProfileDetails.cs</DependentUpon>
     </EmbeddedResource>

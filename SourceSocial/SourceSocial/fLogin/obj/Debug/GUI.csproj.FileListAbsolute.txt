@@ -198,3 +198,6 @@ C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin
 C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\MaterialSkin.dll
 C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationList.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationBox.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationItem.resources

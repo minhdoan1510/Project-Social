@@ -30,7 +30,7 @@
         {
             this.pnlNotify = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnNotify = new System.Windows.Forms.Button();
             this.btnMess = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
@@ -44,7 +44,7 @@
             // pnlNotify
             // 
             this.pnlNotify.Controls.Add(this.button2);
-            this.pnlNotify.Controls.Add(this.button1);
+            this.pnlNotify.Controls.Add(this.btnNotify);
             this.pnlNotify.Controls.Add(this.btnMess);
             this.pnlNotify.Location = new System.Drawing.Point(707, 12);
             this.pnlNotify.Name = "pnlNotify";
@@ -61,15 +61,15 @@
             this.button2.Text = "frenf";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnNotify
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(57, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 50);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "TB";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnNotify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotify.Location = new System.Drawing.Point(57, 0);
+            this.btnNotify.Name = "btnNotify";
+            this.btnNotify.Size = new System.Drawing.Size(50, 50);
+            this.btnNotify.TabIndex = 1;
+            this.btnNotify.Text = "TB";
+            this.btnNotify.UseVisualStyleBackColor = true;
             // 
             // btnMess
             // 
@@ -142,7 +142,7 @@
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.PictureBox ptbLogo;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnNotify;
         private System.Windows.Forms.Button btnMess;
         private System.Windows.Forms.PictureBox ptbAvatar;
         private MaterialSkin.Controls.MaterialRaisedButton pnlProfile;

@@ -12,8 +12,8 @@ namespace fLogin
         #region Propertion
         BUS_Controls BUS_Controls;
         UCProfile DisplayProfile;
-        Form formMess;        Form formNotify;
-
+        Form formMess;        NotificationList formNotify;
+        NotificationBox notification;
         #endregion
 
         public fMain(BUS_Controls _BUS_Controls)
@@ -34,11 +34,10 @@ namespace fLogin
         }
         private void BUS_Controls_HaveNewNotify(Notify notify)
         {
-            Form notiForm = new Form() { Size = new Size(400, 400) };
-            Label label = new Label();
-            label.Text = notify.SendName + " đã " + ((notify.TypeNotify == 1) ? "like " : "comment ") + "bài viết của bạn";
-            label.Dock = DockStyle.Top;
-            notiForm.Controls.Add(label);
+            notification = new NotificationBox(notify,BUS_Controls.Profilecurrent.Uid);
+            notification.StartPosition = FormStartPosition.CenterParent;
+            notification.ShowDialog();   
+
         }
 
 
@@ -61,7 +60,7 @@ namespace fLogin
             //Exit change color
             //
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
-           skinManager.AddFormToManage(this);
+            skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.BLACK);
 
@@ -100,13 +99,21 @@ namespace fLogin
         {
             UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
             uCMainHeader.OnOpenProfile += OnOpenProfile;
+            uCMainHeader.OnOpenNotify += () =>
+            {
+                formNotify = new NotificationList(BUS_Controls.GetAllNotifyofUser(), BUS_Controls.Profilecurrent.Uid) { StartPosition = FormStartPosition.Manual, FormBorderStyle = FormBorderStyle.None };
+                formNotify.SetDesktopLocation(MousePosition.X, MousePosition.Y);           
+                formNotify.ShowDialog();
 
+            };
             uCMainHeader.OnOpenHome += () =>
             {
                 if (DisplayProfile != null)
                 {
                     this.Controls.Remove(DisplayProfile);
                     DisplayProfile.Dispose();
+                    
+                  
                     pnlHome.Visible = true;
                 }
             };
@@ -160,7 +167,7 @@ namespace fLogin
                     post.OnClickOpenProfile += OnOpenProfile;
                     post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
                     post.OnClickLikeList += (i)=> ShowUserList(BUS_Controls.LoadLikesOfPost(i));
-                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(item.Iduser))
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
                         post.PtbLike.Tag = true;
                     else post.PtbLike.Tag = false;
                     this.pnlNewFeed_Main.Controls.Add(post);
@@ -237,7 +244,7 @@ namespace fLogin
             DisplayProfile.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
             DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
             DisplayProfile.Visible = true;
-            
+         
 
         }
 

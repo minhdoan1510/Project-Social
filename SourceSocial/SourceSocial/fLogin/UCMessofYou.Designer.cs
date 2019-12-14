@@ -60,6 +60,8 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.txbMess);
             this.Controls.Add(this.ptbAvatar);
+            this.MaximumSize = new System.Drawing.Size(256, 27);
+            this.MinimumSize = new System.Drawing.Size(256, 27);
             this.Name = "UCMessofYou";
             this.Size = new System.Drawing.Size(256, 27);
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();

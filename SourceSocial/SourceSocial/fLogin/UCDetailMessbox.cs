@@ -82,6 +82,8 @@ namespace fLogin
                 UCmess = new UCMessofYou(messin.Avatar, messin.Content);
             UCmess.Dock = DockStyle.Top;
             this.pnlDisplayMess.Controls.Add(UCmess);
+            this.pnlDisplayMess.Controls.SetChildIndex(UCmess, 0);
+            pnlDisplayMess.ScrollControlIntoView(UCmess);
         }
     }
 }

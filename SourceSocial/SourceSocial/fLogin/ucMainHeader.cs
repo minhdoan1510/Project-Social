@@ -26,7 +26,10 @@ namespace fLogin
         public delegate void OpenMessenger();
         public event OpenMessenger OnOpenMessenger;
 
-        
+        public delegate void OpenNotify();
+        public event OpenNotify OnOpenNotify;
+
+
         public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
 
@@ -56,7 +59,7 @@ namespace fLogin
             ptbAvatar.Dock = DockStyle.Left;
 
             PtbLogo.Click += (s, e) => OnOpenHome();
-
+            btnNotify.Click += (s, e) => OnOpenNotify();
             //btnMess.Click += (s, e) => OnOpenMessenger();
 
             //pnlclick = new Panel() { Size = pnlProfile.Size };

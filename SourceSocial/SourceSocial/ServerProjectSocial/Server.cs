@@ -46,7 +46,7 @@ namespace ServerProjectSocial
         {
             try
             {
-                Console.WriteLine( "["+ DateTime.Now +"] Connetting....");
+                Console.WriteLine( "["+ DateTime.Now +"] Connecting....");
                 server.Bind(IP);
                 Console.WriteLine( "["+ DateTime.Now +"] The server is ready to accept the connection!!!");
             }
@@ -201,7 +201,7 @@ namespace ServerProjectSocial
             {
                 try
                 {
-                    DetailClientSocket socketDetail = clients.Where(x => x.UID == data.Rows[0].ItemArray[0].ToString()).SingleOrDefault();
+                    DetailClientSocket socketDetail = clients.Where(x => x.UID == data.Rows[i].ItemArray[0].ToString()).Single();
                     if (socketDetail != null&&socketDetail.Socket != client)
                         if (Send(SetBinary("2_" + iDNotify), socketDetail.Socket))
                             Console.WriteLine("[" + DateTime.Now + "] Send notify ID " + iDNotify + " to UID " + socketDetail.UID);

@@ -49,6 +49,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.txbMess);
+            this.MaximumSize = new System.Drawing.Size(256, 27);
+            this.MinimumSize = new System.Drawing.Size(256, 27);
             this.Name = "UCMessofMe";
             this.Size = new System.Drawing.Size(256, 27);
             this.ResumeLayout(false);
