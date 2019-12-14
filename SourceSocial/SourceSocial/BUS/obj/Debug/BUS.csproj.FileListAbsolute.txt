@@ -20,3 +20,14 @@ D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CoreCompileIn
 D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CopyComplete
 D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.pdb
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.dll
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\BUS.pdb
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.dll
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.dll
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\DAL.pdb
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\bin\Debug\DTO.pdb
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.csproj.CopyComplete
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.dll
+C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\BUS\obj\Debug\BUS.pdb

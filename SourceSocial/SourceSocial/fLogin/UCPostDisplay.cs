@@ -33,9 +33,9 @@ namespace fLogin
         public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
         public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
-        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
-        public string Iduser { get => iduser; set => iduser = value; }
-        public int LikeCount { get => likeCount; set { likeCount = value; OnLikeCountChange(); }  }
+        public int LikeCount { get => likeCount; set { likeCount = value; OnLikeCountChange(); }  }
+        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        public string Iduser { get => iduser; set => iduser = value; }
         #endregion
 
         public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar, string _iduser)
@@ -69,18 +69,18 @@ namespace fLogin
         #region Handle_Event
         private void PtbLike_Click(object sender, EventArgs e)
         {
-            if (OnClickLike(this.Tag.ToString(), !(bool)PtbLike.Tag))
-            {
-                LikeCount=(PtbLike.Tag.Equals(false))? likeCount+1:likeCount-1;
-                PtbLike.Tag = !(bool)PtbLike.Tag;
+            if (OnClickLike(this.Tag.ToString(), !(bool)PtbLike.Tag))
+            {
+                LikeCount=(PtbLike.Tag.Equals(false))? likeCount+1:likeCount-1;
+                PtbLike.Tag = !(bool)PtbLike.Tag;
             }
       
             
         }
 
-        private void OnLikeCountChange()
-        {
-            this.lbLiked_Post.Text = string.Format("{0} lượt thích", likeCount);
+        private void OnLikeCountChange()
+        {
+            this.lbLiked_Post.Text = string.Format("{0} lượt thích", likeCount);
         }
         private void LbName_Post_Click(object sender, EventArgs e)
         {

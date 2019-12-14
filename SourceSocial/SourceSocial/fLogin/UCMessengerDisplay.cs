@@ -65,8 +65,8 @@ namespace fLogin
                     detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
 
                 detailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox.Equals(IDmessbox)).SingleOrDefault().Nameuser);
-                for(int i = detailMess.Count-1;i>=0;i--)
-                { 
+                for (int i = detailMess.Count-1; i >=0; i--)
+                {
                    detailMessbox.AddMessinMessbox(detailMess[i]);
                 }
                 detailMessbox.Tag = IDmessbox;
@@ -78,7 +78,7 @@ namespace fLogin
             detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
             this.Controls.Add(detailMessbox);
             detailMessbox.BringToFront();
-            
+
             //UCDetailMessbox uCDetailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox == ).SingleOrDefault());
 
 
@@ -112,6 +112,7 @@ namespace fLogin
             {
                 uCDetailMessboxes.Where(x => x.Tag.Equals(messin.IDmessBox)).SingleOrDefault().AddMessinMessbox(messin);
             }));
-            }
+            
+        }
     }
 }

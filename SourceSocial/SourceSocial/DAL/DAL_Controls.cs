@@ -495,22 +495,12 @@ namespace DAL
         public bool ChangeAvatar(Profile profile)
         {
             _conn.Open();
-            try
+            using (var command = _conn.CreateCommand())
             {
-                using (var command = _conn.CreateCommand())
-                {
-                    command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
-                    command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
-                    if (command.ExecuteNonQuery() > 0)
-                        return true;
-                }
-            }
-            catch(Exception)
-            {
-            }
-            finally
-            {
-                _conn.Close();
+                command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
+                command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
             }
 
             return false;
@@ -649,6 +639,86 @@ namespace DAL
 
         #endregion
 
+        #region Handle_Notify
+
+        public bool SaveNotifyInDTB(Notify notify)
+        {
+            try
+            {
+                _conn.Open();
+
+                string query = @"EXEC AddNotify  @IDNotify , @IDPost , @Content , @IDuser , @TypeNotify";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDNotify", notify.IDNotify);
+                sql.Parameters.AddWithValue("@IDPost", notify.IDPost);
+                sql.Parameters.AddWithValue("@Content", notify.IDPost);
+                sql.Parameters.AddWithValue("@IDuser", notify.SendUID);
+                sql.Parameters.AddWithValue("@TypeNotify", notify.TypeNotify);
+                if (sql.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch 
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return false;
+        }
+
+        public DataTable GetAllNotifyofUser(string UID)
+        {
+
+            try
+            {
+                _conn.Open();
+                DataTable data = new DataTable();
+                string query = @"EXEC GetAllNotifyofUser @IDuser";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDuser", UID);
+                SqlDataAdapter sqlData = new SqlDataAdapter(sql);
+                sqlData.Fill(data);
+                return (data);
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public DataTable GetOnlyOneNotify(string IDNotify)
+        {
+            try
+            {
+                _conn.Open();
+
+                DataTable data = new DataTable();
+                string query = @"EXEC GetOnlyOneNotify @IDNotify";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                sql.Parameters.AddWithValue("@IDNotify", IDNotify);
+             
+
+                SqlDataAdapter sqlData = new SqlDataAdapter(sql);
+                sqlData.Fill(data);
+                return data;
+            }
+            catch 
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        #endregion
     }
 }
 

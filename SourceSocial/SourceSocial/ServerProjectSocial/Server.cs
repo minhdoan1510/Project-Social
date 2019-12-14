@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Data;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -19,9 +20,9 @@ namespace ServerProjectSocial
 
         public Server()
         {
-            Console.WriteLine("Creating the server");
+            Console.WriteLine( "["+ DateTime.Now +"] Creating the server");
             clients = new List<DetailClientSocket>();
-            IP = new IPEndPoint(IPAddress.Any, 1510);
+            IP = new IPEndPoint(IPAddress.Any, 9865);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
         }
         ~Server()
@@ -45,15 +46,15 @@ namespace ServerProjectSocial
         {
             try
             {
-                Console.WriteLine("Connetting....");
+                Console.WriteLine( "["+ DateTime.Now +"] Connecting....");
                 server.Bind(IP);
-                Console.WriteLine("The server is ready to accept the connection!!!");
+                Console.WriteLine( "["+ DateTime.Now +"] The server is ready to accept the connection!!!");
             }
 
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Error!!!!! Trying again....");
+                Console.WriteLine( "["+ DateTime.Now +"] Error!!!!! Trying again....");
                 Connect();
             }
 
@@ -65,7 +66,7 @@ namespace ServerProjectSocial
                     {
                         server.Listen(100);
                         Socket client = server.Accept();
-                        Console.WriteLine("Have 1 device request access");
+                        Console.WriteLine( "["+ DateTime.Now +"] Have 1 device request access");
                         clients.Add(new DetailClientSocket(client,string.Empty));
                         Send(SetBinary("0"),client);
                         //Send(SetBinary("Minh"), client);
@@ -73,15 +74,15 @@ namespace ServerProjectSocial
                         Thread threadReceive = new Thread(Receive);
                         threadReceive.IsBackground = true;
                         threadReceive.Start(client);
-                        Console.WriteLine("Device access allowed");
-                        Console.WriteLine("The number of current connections is {0}",clients.Count);
+                        Console.WriteLine( "["+ DateTime.Now +"] Device access allowed");
+                        Console.WriteLine( "["+ DateTime.Now +"] The number of current connections is {0}",clients.Count);
                     }
                 }
                 catch (Exception e)
                 {
                     server.Close();
                     Console.WriteLine(e.Message);
-                    Console.WriteLine("Connection lost, recovering");
+                    Console.WriteLine( "["+ DateTime.Now +"] Connection lost, recovering");
                     IP = new IPEndPoint(IPAddress.Any, 1510);
                     server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                     Connect();
@@ -116,7 +117,11 @@ namespace ServerProjectSocial
                 socket.Send(temp);
                 return true;
             }
-            catch { return false; }
+            catch(Exception e)
+            {
+                Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
+                return false;
+            }
         }
         void Receive(object obj)
         {
@@ -125,45 +130,89 @@ namespace ServerProjectSocial
             {
                 while (true)
                 {
-                    SocketFlags so = new SocketFlags();
                     byte[] temp = new byte[1024 * 5000];
-                    client.Receive(temp, so);
+                    client.Receive(temp);
                     
                     string packet_str = (string)GetfromBinary(temp);
                     PacketData packet = new PacketData(packet_str);
-                    switch (packet.TPacket)
-                    {
-                        case 1:
-                            Console.WriteLine("Received message package.Sending to the client");
-                            if (Send(temp, clients.Where(x=>x.UID == packet.UID ).SingleOrDefault().Socket))
-                                Console.WriteLine("Send success");
-                            else
-                                Console.WriteLine("Client not working. The packet has been saved in the database");
-                            break;
+                    Handle_ReceivePacket(packet, temp, client);
 
-                        case 2:
+                    //switch (packet.TPacket)
+                    //{
+                    //    case 1:
+                    //        Console.WriteLine( "["+ DateTime.Now +"] Received message package.Sending to the client");
+                    //        try
+                    //        {
+                    //            if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
+                    //                Console.WriteLine( "["+ DateTime.Now +"] Send success");
+                    //        }
+                    //        catch { Console.WriteLine( "["+ DateTime.Now +"] Client not working. The packet has been saved in the database"); }
+                    //        break;
 
-                            break;
+                    //    case 2:
 
-                        case 0:
-                            clients.Where(x => x.Socket == ((Socket)obj)).SingleOrDefault().UID = packet.UID;
-                            Console.WriteLine("Received UID {0} from the client",packet.UID);
-                            break;
-                    }
+                    //        break;
+
+                    //    case 0:
+                    //        clients.Where(x => x.Socket == ((Socket)obj)).SingleOrDefault().UID = packet.UID;
+                    //        Console.WriteLine( "["+ DateTime.Now +"] Received UID {0} from the client",packet.UID);
+                    //        break;
+                    //}
                
                 }
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine("The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
+                Console.WriteLine( "["+ DateTime.Now +"] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
                 clients.Remove(clients.Where(x => x.Socket == client).SingleOrDefault());
-                Console.WriteLine("The number of current connections is {0}", clients.Count);
+                Console.WriteLine( "["+ DateTime.Now +"] The number of current connections is {0}", clients.Count);
                 client.Close();
             }
         }
-        #endregion
+        void Handle_ReceivePacket(PacketData packet, byte[] temp, Socket client)
+        {
+            switch (packet.TPacket)
+            {
+                case 1:
+                    Console.WriteLine("[" + DateTime.Now + "] Received message package.Sending to the client");
+                    try
+                    {
+                        if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
+                            Console.WriteLine("[" + DateTime.Now + "] Send success");
+                    }
+                    catch { Console.WriteLine("[" + DateTime.Now + "] Client not working. The packet has been saved in the database"); }
+                    break;
 
+                case 2:
+                    Handle_NotifyPacket(packet.IDNotify, client);
+                    break;
+
+                case 0:
+                    clients.Where(x => x.Socket == client).SingleOrDefault().UID = packet.UID;
+                    Console.WriteLine("[" + DateTime.Now + "] Received UID {0} from the client", packet.UID);
+                    break;
+            }
+        }
+        private void Handle_NotifyPacket(string iDNotify, Socket client)
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetListSendNotify @IDNotify", new object[] { iDNotify });
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                try
+                {
+                    DetailClientSocket socketDetail = clients.Where(x => x.UID == data.Rows[i].ItemArray[0].ToString()).Single();
+                    if (socketDetail != null&&socketDetail.Socket != client)
+                        if (Send(SetBinary("2_" + iDNotify), socketDetail.Socket))
+                            Console.WriteLine("[" + DateTime.Now + "] Send notify ID " + iDNotify + " to UID " + socketDetail.UID);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
+                }
+            }
+        }
+        #endregion
         /// <summary>
         /// Convert binary to object
         /// </summary>
