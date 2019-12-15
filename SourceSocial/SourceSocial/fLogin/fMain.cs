@@ -97,7 +97,7 @@ namespace fLogin
 
         private void LoadMainHeader()
         {
-            UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
+            UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent, BUS_Controls.GetPeople());
             uCMainHeader.OnOpenProfile += OnOpenProfile;
             uCMainHeader.OnOpenNotify += () =>
             {
@@ -121,11 +121,14 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                formMess = new MaterialForm() { Size = new Size(256+50, 364 + 30), StartPosition = FormStartPosition.CenterScreen };
+                formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen ,Sizable = false};
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
-                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+
+                uCMessengerDisplay.Location = new Point(0, 25);
+
                 formMess.Controls.Add(uCMessengerDisplay);
                 formMess.ShowDialog();
             };

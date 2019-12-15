@@ -88,6 +88,9 @@
     <Compile Include="ProfileDetails.Designer.cs">
       <DependentUpon>ProfileDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoundedLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UCDetailMessbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
