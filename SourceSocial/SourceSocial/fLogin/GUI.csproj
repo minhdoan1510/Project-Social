@@ -88,11 +88,26 @@
     <Compile Include="ProfileDetails.Designer.cs">
       <DependentUpon>ProfileDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoundedLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UCDetailMessbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UCDetailMessbox.Designer.cs">
       <DependentUpon>UCDetailMessbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCDisplayUserOnline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCDisplayUserOnline.Designer.cs">
+      <DependentUpon>UCDisplayUserOnline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCDisplayUserOnlineUnit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCDisplayUserOnlineUnit.Designer.cs">
+      <DependentUpon>UCDisplayUserOnlineUnit.cs</DependentUpon>
     </Compile>
     <Compile Include="UCMessengerDisplay.cs">
       <SubType>UserControl</SubType>
@@ -206,6 +221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCDetailMessbox.resx">
       <DependentUpon>UCDetailMessbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCDisplayUserOnline.resx">
+      <DependentUpon>UCDisplayUserOnline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCDisplayUserOnlineUnit.resx">
+      <DependentUpon>UCDisplayUserOnlineUnit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMessengerDisplay.resx">
       <DependentUpon>UCMessengerDisplay.cs</DependentUpon>

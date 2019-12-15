@@ -35,6 +35,9 @@ namespace BUS
         public event OnHaveNewNotify HaveNewNotify;
 
 
+        public delegate void OnGetUserOnline(int TOnlineUserPacket, List<KeyValuePair<string, string>> listOnline);
+        public event OnGetUserOnline GetUserOnline;
+
         #endregion
 
         public BUS_Controls()
@@ -50,45 +53,48 @@ namespace BUS
 
         #region Handle Network
 
-        private void Network_OnHavePacket(string obj)
-        {
-            PacketData packet = new PacketData(obj);
-            switch (packet.TPacket)
-            {
-                case 1:
-                    try
-                    {
-                        MessinMessbox messin = new MessinMessbox(); 
-                        DataTable data = dal.GetMessfromIDMess(packet.IDmess);
-                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
-                        messin.IDmess = data.Rows[0].ItemArray[0].ToString();
-                        messin.Content = data.Rows[0].ItemArray[2].ToString();
-                        messin.Time = (DateTime)data.Rows[0].ItemArray[3];
-                        messin.UidSend = data.Rows[0].ItemArray[4].ToString();
-                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5]);
-                        if(HaveNewMesseger!=null)
-                            HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
-                    }
-                    catch { }
-
-                    break;
-                case 2:
-                    try
-                    {
-                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
-                        if (HaveNewNotify != null)
-                            HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
-                    }
-                    catch { }
-
-                    break;
-
-                case 0:
-                    packet.UID = Profilecurrent.Uid;
-                    network.Send(EncodePacketData(packet));
-                    break;
-            }
-        }
+        private void Network_OnHavePacket(string obj)
+        {
+            PacketData packet = new PacketData(obj);
+            switch (packet.TPacket)
+            {
+                case 1: // Gói tin messenger
+                    try
+                    {
+                        MessinMessbox messin = new MessinMessbox();
+                        DataTable data = dal.GetMessfromIDMess(packet.IDmess);
+                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
+                        messin.IDmess = data.Rows[0].ItemArray[0].ToString();
+                        messin.Content = data.Rows[0].ItemArray[2].ToString();
+                        messin.Time = (DateTime)data.Rows[0].ItemArray[3];
+                        messin.UidSend = data.Rows[0].ItemArray[4].ToString();
+                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5]);
+                        if (HaveNewMesseger != null)
+                            HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
+                    }
+                    catch { }
+                    break;
+                case 2://Gói tin Notify
+                    try
+                    {                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
+                        if (HaveNewNotify != null)
+                            HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
+                    }
+                    catch { }
+                    break;
+
+                case 3://Gói tin Useronline
+                    try
+                    {
+                        GetUserOnline(packet.TOnlineUserPacket, packet.ListOnlineUser);
+                    }
+                    catch { }
+                    break;
+                case 0:                    packet.UID = Profilecurrent.Uid;
+                    network.Send(EncodePacketData(packet));
+                    break;
+            }
+        }
         public bool SendMess(string content, string idmessbox, string uidsend)
         {
             string idmess = new Random().Next(10000000, 99999999).ToString();
@@ -107,8 +113,13 @@ namespace BUS
             packet.TPacket = 2;
             packet.IDNotify = notify.IDNotify;
             network.Send(EncodePacketData(packet));
-        }
-
+        }
+
+        public void SendRequestUserOnline()
+        {
+            network.Send("3_Load");
+        }
+
         public string EncodePacketData(PacketData packet)
         {
             string temp = string.Empty;
@@ -544,7 +555,7 @@ namespace BUS
                 notify.ReceiveName = data.Rows[i].ItemArray[3].ToString();
 
                 notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
-                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                notify.Time = (DateTime)data.Rows[i].ItemArray[6];
+                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                //notify.Time = (DateTime)data.Rows[i].ItemArray[6];
                 notifies.Add(notify);
             }
             return notifies;

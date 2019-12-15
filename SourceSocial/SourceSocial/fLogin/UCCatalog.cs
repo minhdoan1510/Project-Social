@@ -22,9 +22,12 @@ namespace fLogin
 
         private void LoadDisplay_Catalog(List<KeyValuePair<string, string>> _people)
         {
-            UCSearchBar uCSearchBar = new UCSearchBar(_people);
-            uCSearchBar.OnSelectionUser += (i) => OnSelectionUser(i);
-            pnlSearch.Controls.Add(uCSearchBar);
+        //    UCSearchBar uCSearchBar = new UCSearchBar(_people);
+        //    uCSearchBar.OnSelectionUser += (i) => OnSelectionUser(i);
+        //    pnlSearch.Controls.Add(uCSearchBar);
+
+
+
         }
     }
 }
