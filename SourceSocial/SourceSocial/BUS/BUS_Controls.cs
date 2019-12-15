@@ -17,6 +17,7 @@ namespace BUS
         private List<Post> posts;
         private List<KeyValuePair<string, List<Comment>>> comments;
         private List<KeyValuePair<string, List<string>>> likes;
+ 
         private Profile profilecurrent;
         private DAL_Controls dal;
         private List<string> listFriend;
@@ -34,6 +35,9 @@ namespace BUS
         public event OnHaveNewNotify HaveNewNotify;
 
 
+        public delegate void OnGetUserOnline(int TOnlineUserPacket, List<KeyValuePair<string, string>> listOnline);
+        public event OnGetUserOnline GetUserOnline;
+
         #endregion
 
         public BUS_Controls()
@@ -49,45 +53,48 @@ namespace BUS
 
         #region Handle Network
 
-        private void Network_OnHavePacket(string obj)
-        {
-            PacketData packet = new PacketData(obj);
-            switch (packet.TPacket)
-            {
-                case 1:
-                    try
-                    {
-                        MessinMessbox messin = new MessinMessbox(); 
-                        DataTable data = dal.GetMessfromIDMess(packet.IDmess);
-                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
-                        messin.IDmess = data.Rows[0].ItemArray[0].ToString();
-                        messin.Content = data.Rows[0].ItemArray[2].ToString();
-                        messin.Time = (DateTime)data.Rows[0].ItemArray[4];
-                        messin.UidSend = data.Rows[0].ItemArray[5].ToString();
-                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[0]);
-                        if(HaveNewMesseger!=null)
-                            HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
-                    }
-                    catch { }
-
-                    break;
-                case 2:
-                    try
-                    {
-                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
-                        if (HaveNewNotify != null)
-                            HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
-                    }
-                    catch { }
-
-                    break;
-
-                case 0:
-                    packet.UID = Profilecurrent.Uid;
-                    network.Send(EncodePacketData(packet));
-                    break;
-            }
-        }
+        private void Network_OnHavePacket(string obj)
+        {
+            PacketData packet = new PacketData(obj);
+            switch (packet.TPacket)
+            {
+                case 1: // Gói tin messenger
+                    try
+                    {
+                        MessinMessbox messin = new MessinMessbox();
+                        DataTable data = dal.GetMessfromIDMess(packet.IDmess);
+                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
+                        messin.IDmess = data.Rows[0].ItemArray[0].ToString();
+                        messin.Content = data.Rows[0].ItemArray[2].ToString();
+                        messin.Time = (DateTime)data.Rows[0].ItemArray[3];
+                        messin.UidSend = data.Rows[0].ItemArray[4].ToString();
+                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5]);
+                        if (HaveNewMesseger != null)
+                            HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
+                    }
+                    catch { }
+                    break;
+                case 2://Gói tin Notify
+                    try
+                    {                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
+                        if (HaveNewNotify != null)
+                            HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
+                    }
+                    catch { }
+                    break;
+
+                case 3://Gói tin Useronline
+                    try
+                    {
+                        GetUserOnline(packet.TOnlineUserPacket, packet.ListOnlineUser);
+                    }
+                    catch { }
+                    break;
+                case 0:                    packet.UID = Profilecurrent.Uid;
+                    network.Send(EncodePacketData(packet));
+                    break;
+            }
+        }
         public bool SendMess(string content, string idmessbox, string uidsend)
         {
             string idmess = new Random().Next(10000000, 99999999).ToString();
@@ -106,8 +113,13 @@ namespace BUS
             packet.TPacket = 2;
             packet.IDNotify = notify.IDNotify;
             network.Send(EncodePacketData(packet));
-        }
-
+        }
+
+        public void SendRequestUserOnline()
+        {
+            network.Send("3_Load");
+        }
+
         public string EncodePacketData(PacketData packet)
         {
             string temp = string.Empty;
@@ -123,8 +135,8 @@ namespace BUS
                     temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
                     return temp;
                 case 2:
-                    temp = packet.TPacket + "_" + packet.IDNotify;
-                    break;
+                    temp = packet.TPacket + "_" + packet.IDNotify;                    return temp;
+                    
                 case 3:
                     break;
             }
@@ -226,12 +238,15 @@ namespace BUS
 
         public bool AddLike_Post(string iDPost,bool add)
         {
-            if (add)
+            if (add == true)
             {
                 if (dal.AddLike(iDPost, profilecurrent.Uid))
                 {
-                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);                    if(posts.SingleOrDefault(x=> x.Idpost == iDPost).Iduser == profilecurrent.Uid)                        AddNotify(iDPost, 1); //1 => like
+                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
+
+                    posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
                     
+
                     return true;
                 }
             }
@@ -239,7 +254,7 @@ namespace BUS
             {
                 if (dal.UnLike(iDPost, profilecurrent.Uid))
                 {
-                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Remove(profilecurrent.Uid);
+                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
                     posts.Single(x => x.Idpost == iDPost).Liked--;
                     return true;
                 }
@@ -333,8 +348,7 @@ namespace BUS
                     if (item.Key == idPost)
                     {
                         item.Value.Add(comment);
-                        if (posts.SingleOrDefault(x => x.Idpost == idPost).Iduser == profilecurrent.Uid)
-                            AddNotify(idPost, 2); //2 => comment
+                        AddNotify(idPost, 2); //2 => comment
                         return item.Value;
                     }
                 }
@@ -537,10 +551,11 @@ namespace BUS
                 Notify notify = new Notify();
                 notify.IDNotify = data.Rows[i].ItemArray[0].ToString();
                 notify.IDPost = data.Rows[i].ItemArray[1].ToString();
-                notify.Content = data.Rows[i].ItemArray[2].ToString();
-                notify.SendName = data.Rows[i].ItemArray[3].ToString();
+                notify.SendName = data.Rows[i].ItemArray[2].ToString();
+                notify.ReceiveName = data.Rows[i].ItemArray[3].ToString();
+
                 notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
-                notify.ReceiveUID = data.Rows[i].ItemArray[5].ToString();
+                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                //notify.Time = (DateTime)data.Rows[i].ItemArray[6];
                 notifies.Add(notify);
             }
             return notifies;
@@ -551,15 +566,18 @@ namespace BUS
             Notify notify = new Notify();
             try
             {
-                DataTable data = dal.GetOnlyOneNotify(IDNotify, Profilecurrent.Uid);
+                DataTable data = dal.GetOnlyOneNotify(IDNotify);
                 notify.IDNotify = data.Rows[0].ItemArray[0].ToString();
-                notify.IDPost = data.Rows[0].ItemArray[1].ToString();
-                notify.Content = data.Rows[0].ItemArray[2].ToString();
-                notify.SendName = data.Rows[0].ItemArray[3].ToString();
+                notify.IDPost = data.Rows[0].ItemArray[1].ToString();
+
+
+                notify.SendName = data.Rows[0].ItemArray[2].ToString();
+                notify.ReceiveName = data.Rows[0].ItemArray[3].ToString();
+
                 notify.ReceiveUID = data.Rows[0].ItemArray[4].ToString();
-                notify.ReceiveUID = data.Rows[0].ItemArray[5].ToString();
+                notify.TypeNotify = int.Parse(data.Rows[0].ItemArray[5].ToString());
             }
-            catch
+            catch(Exception)
             {
                 return null;
             }

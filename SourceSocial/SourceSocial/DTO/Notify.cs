@@ -16,7 +16,7 @@ namespace DTO
         private string receiveUID;
         private string sendUID;
         private int typeNotify;
-
+        private DateTime time;
         public string IDNotify { get => iDNotify; set => iDNotify = value; }
         public string IDPost { get => iDPost; set => iDPost = value; }
         public string Content { get => content; set => content = value; }
@@ -25,5 +25,6 @@ namespace DTO
         public string ReceiveUID { get => receiveUID; set => receiveUID = value; }
         public string SendUID { get => sendUID; set => sendUID = value; }
         public int TypeNotify { get => typeNotify; set => typeNotify = value; }
+        public DateTime Time { get => time; set => time = value; }
     }
 }

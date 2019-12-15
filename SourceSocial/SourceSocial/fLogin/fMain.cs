@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,8 +13,9 @@ namespace fLogin
         #region Propertion
         BUS_Controls BUS_Controls;
         UCProfile DisplayProfile;
-        Form formMess;        Form formNotify;
-
+        Form formMess;        NotificationList formNotify;
+        NotificationBox notification;
+        UCDisplayUserOnline uCDisplayUserOnline;
         #endregion
 
         public fMain(BUS_Controls _BUS_Controls)
@@ -23,24 +25,45 @@ namespace fLogin
 
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
+            LoadDatafMain();
+            LoadAnimation();
 
             BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
-            BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;
-
-            LoadDatafMain();
-            LoadAnimation();
-
-
-        }
+            BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;            BUS_Controls.GetUserOnline += BUS_Controls_GetUserOnline;
+        }
+
+        private void BUS_Controls_GetUserOnline(int TOnlineUserPacket, List<KeyValuePair<string, string>> listOnline)
+        {
+            if (TOnlineUserPacket == 0)
+            {
+                foreach (KeyValuePair<string, string> item in listOnline)
+                {
+                        Invoke(new Action(() =>
+                        {
+                            uCDisplayUserOnline.AddUserOnline(item.Value, item.Key);
+                        }));
+                }
+            }
+            else if (TOnlineUserPacket == 1)
+                Invoke(new Action(() =>
+                {
+                    uCDisplayUserOnline.AddUserOnline(listOnline[0].Value, listOnline[0].Key);
+                }));
+            else
+                Invoke(new Action(() =>
+                {
+                    uCDisplayUserOnline.DelUserOnline(listOnline[0].Key);
+                }));
+
+        }
+
         private void BUS_Controls_HaveNewNotify(Notify notify)
         {
-            Form notiForm = new Form() { Size = new Size(400, 400) };
-            Label label = new Label();
-            label.Text = notify.SendName + " đã " + ((notify.TypeNotify == 1) ? "like " : "comment ") + "bài viết của bạn";
-            label.Dock = DockStyle.Top;
-            notiForm.Controls.Add(label);
-        }
+            notification = new NotificationBox(notify,BUS_Controls.Profilecurrent.Uid);
+            notification.StartPosition = FormStartPosition.CenterParent;
+            notification.ShowDialog();   
 
+        }
 
         private void BUS_Controls_HaveNewMesseger(MessinMessbox messin)
         {
@@ -52,9 +75,7 @@ namespace fLogin
                 }
                 catch { }
             }
-        }
-
-
+        }
         #region Animation
         private void LoadAnimation()
         {
@@ -91,24 +112,35 @@ namespace fLogin
 
         private void LoadCatalog()
         {
-            UCCatalog uCCatalog = new UCCatalog(BUS_Controls.GetPeople());
-            uCCatalog.OnSelectionUser += (i) => OnOpenProfile(i);
-            this.pnlCatalog.Controls.Add(uCCatalog);
+            //UCCatalog uCCatalog = new UCCatalog(BUS_Controls.GetPeople());
+            //uCCatalog.OnSelectionUser += (i) => OnOpenProfile(i);
+            //this.pnlCatalog.Controls.Add(uCCatalog);
+
+            uCDisplayUserOnline = new UCDisplayUserOnline();
+            uCDisplayUserOnline.Dock = DockStyle.Bottom;
+            uCDisplayUserOnline.ClickUser += (id) => OnOpenProfile(id);
+            pnlCatalog.Controls.Add(uCDisplayUserOnline);
+
+            BUS_Controls.SendRequestUserOnline();
         }
 
         private void LoadMainHeader()
         {
-            UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent);
+            UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent, BUS_Controls.GetPeople());
             uCMainHeader.OnOpenProfile += OnOpenProfile;
+            uCMainHeader.OnOpenNotify += () =>
+            {
+                formNotify = new NotificationList(BUS_Controls.GetAllNotifyofUser(), BUS_Controls.Profilecurrent.Uid) { StartPosition = FormStartPosition.Manual, FormBorderStyle = FormBorderStyle.None };
+                formNotify.SetDesktopLocation(MousePosition.X, MousePosition.Y);           
+                formNotify.ShowDialog();
 
+            };
             uCMainHeader.OnOpenHome += () =>
             {
                 if (DisplayProfile != null)
                 {
                     this.Controls.Remove(DisplayProfile);
-                    DisplayProfile.Dispose();
-                    
-                  
+                    DisplayProfile.Dispose();
                     pnlHome.Visible = true;
                 }
             };
@@ -116,11 +148,14 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                formMess = new MaterialForm() { Size = new Size(256+50, 364 + 30), StartPosition = FormStartPosition.CenterScreen };
+                formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen ,Sizable = false};
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
-                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+
+                uCMessengerDisplay.Location = new Point(0, 25);
+
                 formMess.Controls.Add(uCMessengerDisplay);
                 formMess.ShowDialog();
             };
@@ -162,7 +197,7 @@ namespace fLogin
                     post.OnClickOpenProfile += OnOpenProfile;
                     post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
                     post.OnClickLikeList += (i)=> ShowUserList(BUS_Controls.LoadLikesOfPost(i));
-                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(item.Iduser))
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
                         post.PtbLike.Tag = true;
                     else post.PtbLike.Tag = false;
                     this.pnlNewFeed_Main.Controls.Add(post);

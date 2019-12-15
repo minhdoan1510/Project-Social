@@ -32,15 +32,15 @@ namespace fLogin
         public UCDetailMessbox(string name)
         {
             InitializeComponent();
-            Load(name);
+            Loading(name);
         }
 
-        private void Load(string name)
+        private void Loading(string name)
         {
             this.btnBack.Click += BtnBack_Click;
             this.btnSend.Click += BtnSend_Click;
-            //this.txbMess.KeyPress += TxbMess_KeyPress;
             this.txbMess.KeyDown += TxbMess_KeyDown;
+            pnlDisplayMess.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messbg.png");
             lbName.Text = name;
         }
 
@@ -82,6 +82,8 @@ namespace fLogin
                 UCmess = new UCMessofYou(messin.Avatar, messin.Content);
             UCmess.Dock = DockStyle.Top;
             this.pnlDisplayMess.Controls.Add(UCmess);
+            this.pnlDisplayMess.Controls.SetChildIndex(UCmess, 0);
+            pnlDisplayMess.ScrollControlIntoView(UCmess);
         }
     }
 }

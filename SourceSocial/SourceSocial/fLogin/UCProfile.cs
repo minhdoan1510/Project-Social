@@ -77,8 +77,8 @@ namespace fLogin
                     post.OnClickComment += (i) => Post_OnClickComment(i);
                     post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
                     post.OnClickLikeList += (i) => OnClickLikeList(i);
-                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(item.Iduser))
-                        post.PtbLike.Tag = true;
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
+                        post.PtbLike.Tag = true;
                     else post.PtbLike.Tag = false;
                     pnlNewFeed_Main.Controls.Add(post);
                 }
