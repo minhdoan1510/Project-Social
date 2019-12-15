@@ -242,6 +242,7 @@ namespace BUS
             {
                 if (dal.AddLike(iDPost, profilecurrent.Uid))
                 {
+                    likes.Where(x => x.Key == iDPost).SingleOrDefault().Value.Add(profilecurrent.Uid);                    if(posts.SingleOrDefault(x=> x.Idpost == iDPost).Iduser == profilecurrent.Uid)                        AddNotify(iDPost, 1); //1 => like
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
 
                     posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
