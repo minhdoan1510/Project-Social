@@ -35,6 +35,8 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
+            this.btnGame = new System.Windows.Forms.Button();
+            this.pnlCatalog.SuspendLayout();
             this.pnlMain_Newfeed_AddPost.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +65,7 @@
             // 
             // pnlCatalog
             // 
+            this.pnlCatalog.Controls.Add(this.btnGame);
             this.pnlCatalog.Location = new System.Drawing.Point(2, 1);
             this.pnlCatalog.Name = "pnlCatalog";
             this.pnlCatalog.Size = new System.Drawing.Size(208, 591);
@@ -97,6 +100,16 @@
             this.pnlHome.Size = new System.Drawing.Size(1068, 592);
             this.pnlHome.TabIndex = 7;
             // 
+            // btnGame
+            // 
+            this.btnGame.Location = new System.Drawing.Point(65, 503);
+            this.btnGame.Name = "btnGame";
+            this.btnGame.Size = new System.Drawing.Size(74, 65);
+            this.btnGame.TabIndex = 0;
+            this.btnGame.Text = "Game";
+            this.btnGame.UseVisualStyleBackColor = true;
+            this.btnGame.Click += new System.EventHandler(this.btnGame_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,6 +123,7 @@
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fMain";
+            this.pnlCatalog.ResumeLayout(false);
             this.pnlMain_Newfeed_AddPost.ResumeLayout(false);
             this.pnlMain_Newfeed_AddPost.PerformLayout();
             this.pnlHome.ResumeLayout(false);
@@ -125,5 +139,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
         private System.Windows.Forms.Panel pnlHome;
+        private System.Windows.Forms.Button btnGame;
     }
 }

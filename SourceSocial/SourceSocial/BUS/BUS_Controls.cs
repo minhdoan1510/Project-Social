@@ -7,6 +7,8 @@ using System.Data;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace BUS
 {
@@ -68,7 +70,7 @@ namespace BUS
                         messin.Content = data.Rows[0].ItemArray[2].ToString();
                         messin.Time = (DateTime)data.Rows[0].ItemArray[3];
                         messin.UidSend = data.Rows[0].ItemArray[4].ToString();
-                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5]);
+                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5].ToString());
                         if (HaveNewMesseger != null)
                             HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
                     }
@@ -89,6 +91,13 @@ namespace BUS
                         GetUserOnline(packet.TOnlineUserPacket, packet.ListOnlineUser);
                     }
                     catch { }
+                    break;
+                case 4:
+                    string[] temp = obj.Split('_');
+                    Form form = new Form();
+                    TextBox tb = new TextBox() { Text = temp[3] };
+                    form.Controls.Add(tb);
+                    form.Show();
                     break;
                 case 0:                    packet.UID = Profilecurrent.Uid;
                     network.Send(EncodePacketData(packet));
@@ -141,8 +150,10 @@ namespace BUS
                     break;
             }
             return string.Empty;
-        }
-
+        }
+
+          
+        
 
         #endregion
 
@@ -171,12 +182,12 @@ namespace BUS
                     
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
-                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
-                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
-                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
-                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
-                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
+                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[2];
+                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[3].ToString();
+                    Profilecurrent.Email = data.Rows[0].ItemArray[4].ToString();
+                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[5].ToString();
+                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[6].ToString();
                     network = new Network();
                     network.OnHavePacket += Network_OnHavePacket;
                     return true;
@@ -207,7 +218,7 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
@@ -224,7 +235,7 @@ namespace BUS
             for (int i=0;i<data.Rows.Count;i++)
             {
                 Mailboxlist temp = new Mailboxlist();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
                 temp.Iduser = data.Rows[i].ItemArray[3].ToString();
                 temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
@@ -271,7 +282,7 @@ namespace BUS
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 MessinMessbox temp = new MessinMessbox();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[6]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[6].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.IDmess = data.Rows[i].ItemArray[0].ToString();
                 temp.IDmessBox = data.Rows[i].ItemArray[1].ToString();
                 temp.UidSend = data.Rows[i].ItemArray[5].ToString();
@@ -290,7 +301,7 @@ namespace BUS
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
             post.Iduser = Profilecurrent.Uid;
             post.Name = Profilecurrent.Name;
-            post.Image = profilecurrent.Avatar;
+            post.Image = Profilecurrent.Avatar;
             post.Time = "Vừa xong";
             if (dal.AddPost(post))
             {
@@ -319,7 +330,7 @@ namespace BUS
                 Comment comment = new Comment();
                 comment.IdUser = data.Rows[i].ItemArray[0].ToString();
                 comment.Name = data.Rows[i].ItemArray[1].ToString();
-                comment.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                comment.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 comment.IdPost = data.Rows[i].ItemArray[3].ToString();
                 comment.IdComment = data.Rows[i].ItemArray[4].ToString();
                 comment.Content = data.Rows[i].ItemArray[5].ToString();
@@ -422,12 +433,12 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
-            profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
-            profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
-            profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
-            profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[2]).ToLocalTime();
+            profile.PhoneNum = dataTable.Rows[0].ItemArray[3].ToString();
+            profile.Email = dataTable.Rows[0].ItemArray[4].ToString();
+            profile.HomeTown = dataTable.Rows[0].ItemArray[5].ToString();
+            profile.MarriageSt =  dataTable.Rows[0].ItemArray[6].ToString();
      
             return profile;
         }
@@ -466,9 +477,11 @@ namespace BUS
         }
         public bool ChangeAvatar(Image image)
         {
-            if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = image }))
+            Image temp = ResizeImage(image);
+            if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = temp }))
             {
                 Profilecurrent.Avatar = image;
+           
                 foreach (Post item in posts)
                 {
                     if (item.Iduser == profilecurrent.Uid)
@@ -480,6 +493,46 @@ namespace BUS
             return false;
         }
 
+
+        const int MAX_SIZE_IMAGE = 300;
+        public Bitmap ResizeImage(Image image)
+        {
+            int width; int height;
+
+            if (image.Width > image.Height)
+            {
+                height = MAX_SIZE_IMAGE;
+                width = (int)(((float)image.Width / image.Height) * MAX_SIZE_IMAGE);
+            }
+            else
+            {
+                width = MAX_SIZE_IMAGE;
+                height = (int)(((float)image.Height / image.Width) * MAX_SIZE_IMAGE);
+            }
+
+
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
         #endregion
 
         #region Handle_Other
@@ -494,35 +547,27 @@ namespace BUS
             }
             return temp;
         }
-        public Image ConverttoImage(object byteArray)
+        public Image ConverttoImage(string base64String)
         {
-            try
+            if (base64String == string.Empty)
+                return null;
+            // Convert base 64 string to byte[]
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            // Convert byte[] to Image
+            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
             {
-                byte[] byteArrayIn = (byte[])byteArray;
-                Image returnImage;
-                MemoryStream ms = new MemoryStream(byteArrayIn, 0, byteArrayIn.Length);
-                ms.Write(byteArrayIn, 0, byteArrayIn.Length);
-                returnImage = Image.FromStream(ms, true);//Exception occurs here
-                return returnImage;
+                Image image = Image.FromStream(ms, true);
+                return image;
             }
-            catch { }
-            finally
-            {
-            }
-            return null;
-        }
-        //private Image ConvertBinaryToImage(byte[] data)
-        //{
-
-        //    using (MemoryStream ms = new MemoryStream(data))
-        //    {
-        //        return Image.FromStream(ms);
-        //    }
-        //}
+        }
+
+
+
         #endregion
-
+
+
         #region Handle_Notify
-        
+
         public bool AddNotify(string IdPost, int type)
         {            Notify notify = new Notify()
             {
@@ -569,7 +614,6 @@ namespace BUS
                 DataTable data = dal.GetOnlyOneNotify(IDNotify);
                 notify.IDNotify = data.Rows[0].ItemArray[0].ToString();
                 notify.IDPost = data.Rows[0].ItemArray[1].ToString();
-
 
                 notify.SendName = data.Rows[0].ItemArray[2].ToString();
                 notify.ReceiveName = data.Rows[0].ItemArray[3].ToString();

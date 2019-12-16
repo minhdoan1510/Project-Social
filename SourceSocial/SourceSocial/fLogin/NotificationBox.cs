@@ -18,16 +18,20 @@ namespace fLogin
         public NotificationBox(Notify notify,string UIDCurrentUser)
         {
             InitializeComponent();
+            if(notify.TypeNotify ==3 )
+            {
+                lbNotiText.Text = notify.SendName + " đã gửi cho bạn 1 tin nhắn. ";
+            }
+            else
             lbNotiText.Text = notify.SendName + " đã " + ((notify.TypeNotify == 1) ? "like " : "comment ") + "bài viết của " + ((notify.ReceiveUID==UIDCurrentUser)? "bạn.":notify.ReceiveName + " mà bạn đang theo dõi.");
     
         }
 
         private void Notification_Load(object sender, EventArgs e)
         {
-            Opacity = 0;      //first the opacity is 0
-
-            t1.Interval = 10;  //we'll increase the opacity every 10ms
-            t1.Tick += new EventHandler(fadeIn);  //this calls the function that changes opacity 
+            Opacity = 0;      
+            t1.Interval = 10;  
+            t1.Tick += new EventHandler(fadeIn);  
             t1.Start();
 
         }
@@ -37,9 +41,9 @@ namespace fLogin
         {
             if (Opacity >= 1)
             {
-                t1.Stop();   //this stops the timer if the form is completely displayed
+                t1.Stop();   
                 System.Threading.Thread.Sleep(500);
-                t1.Tick += new EventHandler(fadeOut);  //this calls the fade out function
+                t1.Tick += new EventHandler(fadeOut); 
                 t1.Start();
             }
             else
@@ -48,10 +52,10 @@ namespace fLogin
 
         void fadeOut(object sender, EventArgs e)
         {
-            if (Opacity <= 0)     //check if opacity is 0
+            if (Opacity <= 0)    
             {
-                t1.Stop();    //if it is, we stop the timer
-                Close();   //and we try to close the form
+                t1.Stop();    
+                Close();  
             }
             else
                 Opacity -= 0.05;
