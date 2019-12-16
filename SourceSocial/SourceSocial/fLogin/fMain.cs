@@ -360,6 +360,7 @@ namespace fLogin
             frmMain Game = new frmMain();
             Game.OnShareHighScore += (i) => Post_OnAddPost(string.Format(BUS_Controls.Profilecurrent.Name + " đã đạt {0} điểm khi chơi Eye Color Test! ", i));
             Game.Show();
+            
         }
     }
 }

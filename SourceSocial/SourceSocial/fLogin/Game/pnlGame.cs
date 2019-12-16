@@ -21,7 +21,7 @@ namespace fLogin
 
         int counter = 15;
         Label lbltimer;
-        Timer timer;
+        public Timer timer;
 
         public delegate void SetHighScore(int score);
         public event SetHighScore OnSetHighScore;

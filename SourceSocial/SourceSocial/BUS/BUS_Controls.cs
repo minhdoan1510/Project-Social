@@ -185,12 +185,12 @@ namespace BUS
                     
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
-                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[2];
-                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[3].ToString();
-                    Profilecurrent.Email = data.Rows[0].ItemArray[4].ToString();
-                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[5].ToString();
-                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[6].ToString();
+                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
+                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
+                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
+                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
+                    Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
                     network = new Network();
                     network.OnHavePacket += Network_OnHavePacket;
                     return true;
@@ -436,12 +436,12 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[2]).ToLocalTime();
-            profile.PhoneNum = dataTable.Rows[0].ItemArray[3].ToString();
-            profile.Email = dataTable.Rows[0].ItemArray[4].ToString();
-            profile.HomeTown = dataTable.Rows[0].ItemArray[5].ToString();
-            profile.MarriageSt =  dataTable.Rows[0].ItemArray[6].ToString();
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
+            profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
+            profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
+            profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
+            profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
      
             return profile;
         }
@@ -496,46 +496,6 @@ namespace BUS
             return false;
         }
 
-
-        const int MAX_SIZE_IMAGE = 300;
-        public Bitmap ResizeImage(Image image)
-        {
-            int width; int height;
-
-            if (image.Width > image.Height)
-            {
-                height = MAX_SIZE_IMAGE;
-                width = (int)(((float)image.Width / image.Height) * MAX_SIZE_IMAGE);
-            }
-            else
-            {
-                width = MAX_SIZE_IMAGE;
-                height = (int)(((float)image.Height / image.Width) * MAX_SIZE_IMAGE);
-            }
-
-
-            var destRect = new Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
-
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-
-            return destImage;
-        }
         #endregion
 
         #region Handle_Other
@@ -592,20 +552,26 @@ namespace BUS
             }
             return temp;
         }
-        public Image ConverttoImage(string base64String)
+        public Image ConverttoImage(object byteArray)
         {
-            if (base64String == string.Empty)
-                return null;
-            // Convert base 64 string to byte[]
-            byte[] imageBytes = Convert.FromBase64String(base64String);
-            // Convert byte[] to Image
-            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+            try
             {
-                Image image = Image.FromStream(ms, true);
-                return image;
+                byte[] byteArrayIn = (byte[])byteArray;
+                Image returnImage;
+                MemoryStream ms = new MemoryStream(byteArrayIn, 0, byteArrayIn.Length);
+                ms.Write(byteArrayIn, 0, byteArrayIn.Length);
+                returnImage = Image.FromStream(ms, true);//Exception occurs here
+                return returnImage;
             }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+            }
+            return null;
         }
-
 
 
         #endregion

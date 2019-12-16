@@ -91,11 +91,19 @@ namespace fLogin
             this.Controls.Add(game);
 
             this.FormClosed += FrmMain_FormClosed;
+            this.FormClosing += FrmMain_FormClosing;
             
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((MessageBox.Show("Bạn có muốn kết thúc trò chơi", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.No))
+                e.Cancel = true;
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            game.timer.Stop();
             OnShareHighScore(highScore.ToString());
 
         }
