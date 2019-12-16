@@ -1,28 +1,41 @@
 ﻿using BUS;
 using DTO;
-using System.Linq;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Threading;
 using System.Windows.Forms;
-using MaterialSkin.Controls;
+
 namespace fLogin
 {
     public partial class fMain : MaterialForm
     {
         #region Propertion
         BUS_Controls BUS_Controls;
+
         UCProfile DisplayProfile;
+        UCDisplayWeather uCDisplayWeather;
         Form formMess;        NotificationList formNotify;
         NotificationBox notification;
         UCDisplayUserOnline uCDisplayUserOnline;
+
+        WebClient web = new WebClient();
         #endregion
 
         public fMain(BUS_Controls _BUS_Controls)
         {
-            InitializeComponent();
-
-
+            InitializeComponent();
+
+            Thread Weather = new Thread(GetWeather);
+            Weather.IsBackground = true;
+            Weather.Start();
+
+
+
+
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
             LoadDatafMain();
@@ -32,16 +45,53 @@ namespace fLogin
             BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;            BUS_Controls.GetUserOnline += BUS_Controls_GetUserOnline;
         }
 
+        /// <summary>
+        /// khu vực thời tiết
+        /// </summary>
+        async void GetWeather()
+        {
+            GPSLocation.WeatherForecast.initClient();
+            GPSLocation.weather_data.RootObject val = await
+                GPSLocation.WeatherForecast.requestWeather();
+
+            if (uCDisplayWeather == null)
+            {
+                uCDisplayWeather = new UCDisplayWeather();
+                Invoke(new Action(() =>
+                    {
+                        pnlWeather.Controls.Add(uCDisplayWeather);
+                    }
+                ));
+            }
+            Invoke(new Action(() =>
+                {
+                    string temp = string.Format(Application.StartupPath + string.Format(@"\PictureWeather\{0}.png", val.weather[0].icon));
+                    if (!File.Exists(temp))
+                        web.DownloadFile(GPSLocation.WeatherForecast.iconUrl + val.weather[0].icon + ".png", temp);
+                    Image image = Bitmap.FromFile(Application.StartupPath + string.Format(@"\PictureWeather\{0}.png", val.weather[0].icon));
+                    uCDisplayWeather.ImageWeather = image;
+                    //File.Delete("temp.png");
+                    uCDisplayWeather.ViTri = val.sys.country + ", " + val.name;
+                    uCDisplayWeather.NhietDo = (val.main.temp-273.15).ToString() + " độ C";
+                    uCDisplayWeather.DoAm = val.main.humidity.ToString() + "%";
+                }
+                ));
+        }
+
+
+
+
+
         private void BUS_Controls_GetUserOnline(int TOnlineUserPacket, List<KeyValuePair<string, string>> listOnline)
         {
             if (TOnlineUserPacket == 0)
             {
                 foreach (KeyValuePair<string, string> item in listOnline)
                 {
-                        Invoke(new Action(() =>
-                        {
-                            uCDisplayUserOnline.AddUserOnline(item.Value, item.Key);
-                        }));
+                    Invoke(new Action(() =>
+                    {
+                        uCDisplayUserOnline.AddUserOnline(item.Value, item.Key);
+                    }));
                 }
             }
             else if (TOnlineUserPacket == 1)
@@ -59,9 +109,9 @@ namespace fLogin
 
         private void BUS_Controls_HaveNewNotify(Notify notify)
         {
-            notification = new NotificationBox(notify,BUS_Controls.Profilecurrent.Uid);
+            notification = new NotificationBox(notify, BUS_Controls.Profilecurrent.Uid);
             notification.StartPosition = FormStartPosition.CenterParent;
-            notification.ShowDialog();   
+            notification.ShowDialog();
 
         }
 
@@ -102,7 +152,7 @@ namespace fLogin
         {
             UCAddPost post = new UCAddPost();
             post.OnAddPost += Post_OnAddPost;
-            post.OnAddPost +=(i)=> post.LoadAnimation();
+            post.OnAddPost += (i) => post.LoadAnimation();
             pnlAddPost.Controls.Add(post);
             LoadNewFeed();
             LoadMainHeader();
@@ -131,7 +181,7 @@ namespace fLogin
             uCMainHeader.OnOpenNotify += () =>
             {
                 formNotify = new NotificationList(BUS_Controls.GetAllNotifyofUser(), BUS_Controls.Profilecurrent.Uid) { StartPosition = FormStartPosition.Manual, FormBorderStyle = FormBorderStyle.None };
-                formNotify.SetDesktopLocation(MousePosition.X, MousePosition.Y);           
+                formNotify.SetDesktopLocation(MousePosition.X, MousePosition.Y);
                 formNotify.ShowDialog();
 
             };
@@ -148,7 +198,7 @@ namespace fLogin
 
             uCMainHeader.OnOpenMessenger += () =>
             {
-                formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen ,Sizable = false};
+                formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
                 UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                 uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                 uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
@@ -196,7 +246,7 @@ namespace fLogin
                     post.OnClickComment += Post_OnClickComment;
                     post.OnClickOpenProfile += OnOpenProfile;
                     post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
-                    post.OnClickLikeList += (i)=> ShowUserList(BUS_Controls.LoadLikesOfPost(i));
+                    post.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
                     if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
                         post.PtbLike.Tag = true;
                     else post.PtbLike.Tag = false;
@@ -226,12 +276,12 @@ namespace fLogin
             Form l = new Form();
             l.AutoScroll = true;
             l.Size = new Size(350, 500);
-            foreach(var item in UserList)
+            foreach (var item in UserList)
             {
-                UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls,BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
+                UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls, BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
                 tempInfo.Dock = DockStyle.Top;
                 tempInfo.LbNumFriend.Visible = false;
-                tempInfo.OnDelFriend +=()=> BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
+                tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
                 l.Controls.Add(tempInfo);
             }
             l.Show();
@@ -250,13 +300,16 @@ namespace fLogin
         {
             return BUS_Controls.AddComment(idPost, content);
         }
-       
-    
-       
+
+
+
+
         #endregion
-
+
+
         #endregion
-
+
+
         #region UC_Profile
         private void OnOpenProfile(string UID)
         {
@@ -274,7 +327,7 @@ namespace fLogin
             DisplayProfile.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
             DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
             DisplayProfile.Visible = true;
-         
+
 
         }
 

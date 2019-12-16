@@ -344,3 +344,11 @@ C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe.config
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayWeather.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.xml

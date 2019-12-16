@@ -32,7 +32,7 @@
             this.pnlNewFeed_Main = new System.Windows.Forms.Panel();
             this.pnlAddPost = new System.Windows.Forms.Panel();
             this.pnlCatalog = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.pnlWeather = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost.SuspendLayout();
@@ -63,17 +63,21 @@
             // 
             // pnlCatalog
             // 
-            this.pnlCatalog.Location = new System.Drawing.Point(2, 1);
+            this.pnlCatalog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(64)))), ((int)(((byte)(34)))));
+            this.pnlCatalog.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCatalog.Location = new System.Drawing.Point(0, 0);
             this.pnlCatalog.Name = "pnlCatalog";
-            this.pnlCatalog.Size = new System.Drawing.Size(208, 591);
+            this.pnlCatalog.Size = new System.Drawing.Size(215, 592);
             this.pnlCatalog.TabIndex = 4;
             // 
-            // panel6
+            // pnlWeather
             // 
-            this.panel6.Location = new System.Drawing.Point(927, 1);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(138, 589);
-            this.panel6.TabIndex = 5;
+            this.pnlWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(64)))), ((int)(((byte)(34)))));
+            this.pnlWeather.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlWeather.Location = new System.Drawing.Point(924, 0);
+            this.pnlWeather.Name = "pnlWeather";
+            this.pnlWeather.Size = new System.Drawing.Size(149, 592);
+            this.pnlWeather.TabIndex = 5;
             // 
             // pnlMain_Newfeed_AddPost
             // 
@@ -90,11 +94,12 @@
             // pnlHome
             // 
             this.pnlHome.Controls.Add(this.pnlCatalog);
-            this.pnlHome.Controls.Add(this.panel6);
+            this.pnlHome.Controls.Add(this.pnlWeather);
             this.pnlHome.Controls.Add(this.pnlMain_Newfeed_AddPost);
-            this.pnlHome.Location = new System.Drawing.Point(1, 101);
+            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlHome.Location = new System.Drawing.Point(0, 100);
             this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(1068, 592);
+            this.pnlHome.Size = new System.Drawing.Size(1073, 592);
             this.pnlHome.TabIndex = 7;
             // 
             // fMain
@@ -102,9 +107,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
-            this.ClientSize = new System.Drawing.Size(1073, 701);
-            this.Controls.Add(this.pnlHome);
+            this.ClientSize = new System.Drawing.Size(1073, 692);
             this.Controls.Add(this.pnlMainHeader);
+            this.Controls.Add(this.pnlHome);
             this.MaximizeBox = false;
             this.Name = "fMain";
             this.Sizable = false;
@@ -122,7 +127,7 @@
         private System.Windows.Forms.Panel pnlNewFeed_Main;
         private System.Windows.Forms.Panel pnlAddPost;
         private System.Windows.Forms.Panel pnlCatalog;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel pnlWeather;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
         private System.Windows.Forms.Panel pnlHome;
     }

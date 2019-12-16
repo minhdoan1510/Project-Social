@@ -44,12 +44,18 @@
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -108,6 +114,12 @@
     </Compile>
     <Compile Include="UCDisplayUserOnlineUnit.Designer.cs">
       <DependentUpon>UCDisplayUserOnlineUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCDisplayWeather.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCDisplayWeather.Designer.cs">
+      <DependentUpon>UCDisplayWeather.cs</DependentUpon>
     </Compile>
     <Compile Include="UCMessengerDisplay.cs">
       <SubType>UserControl</SubType>
@@ -228,6 +240,9 @@
     <EmbeddedResource Include="UCDisplayUserOnlineUnit.resx">
       <DependentUpon>UCDisplayUserOnlineUnit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCDisplayWeather.resx">
+      <DependentUpon>UCDisplayWeather.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCMessengerDisplay.resx">
       <DependentUpon>UCMessengerDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,6 +322,10 @@
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{dfb4e9b7-4bed-4d94-b189-61a8058ade3a}</Project>
       <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gpsWeather\gpsWeather.csproj">
+      <Project>{8576cd60-ef64-424a-90d0-9829898fe391}</Project>
+      <Name>gpsWeather</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -60,7 +60,7 @@
             this.Controls.Add(this.ptbActive);
             this.Controls.Add(this.lbName);
             this.Name = "UCDisplayUserOnlineUnit";
-            this.Size = new System.Drawing.Size(208, 30);
+            this.Size = new System.Drawing.Size(215, 30);
             ((System.ComponentModel.ISupportInitialize)(this.ptbActive)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

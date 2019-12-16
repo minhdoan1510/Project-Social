@@ -39,7 +39,7 @@
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.Location = new System.Drawing.Point(0, 33);
             this.pnlDisplay.Name = "pnlDisplay";
-            this.pnlDisplay.Size = new System.Drawing.Size(208, 317);
+            this.pnlDisplay.Size = new System.Drawing.Size(215, 317);
             this.pnlDisplay.TabIndex = 0;
             // 
             // label1
@@ -51,7 +51,7 @@
             this.label1.ForeColor = System.Drawing.Color.DarkRed;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(208, 33);
+            this.label1.Size = new System.Drawing.Size(215, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "BẠN BÈ ĐANG ONLINE";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,7 +63,7 @@
             this.Controls.Add(this.pnlDisplay);
             this.Controls.Add(this.label1);
             this.Name = "UCDisplayUserOnline";
-            this.Size = new System.Drawing.Size(208, 350);
+            this.Size = new System.Drawing.Size(215, 350);
             this.ResumeLayout(false);
 
         }
