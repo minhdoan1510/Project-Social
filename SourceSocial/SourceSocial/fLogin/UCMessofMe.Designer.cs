@@ -59,6 +59,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.txbMess);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.Name = "UCMessofMe";
             this.Size = new System.Drawing.Size(256, 28);

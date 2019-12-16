@@ -121,10 +121,18 @@ namespace fLogin
             {
                 try
                 {
-                    item.AddMess(messin);
+                    item.AddMess(messin);                    
                 }
                 catch { }
-            }
+            }            if(formMess!=null)
+            {
+                Notify temp = new Notify()
+                {
+                    TypeNotify = 3,
+                    SendName = BUS_Controls.GetProfile(messin.UidSend).Name
+                };
+                BUS_Controls_HaveNewNotify(temp);
+            }            
         }
         #region Animation
         private void LoadAnimation()
@@ -343,10 +351,15 @@ namespace fLogin
                 return true;
             }
             return false;
-        }
-
-
-
+        }
+
         #endregion
+
+        private void btnGame_Click(object sender, EventArgs e)
+        {
+            frmMain Game = new frmMain();
+            Game.OnShareHighScore += (i) => Post_OnAddPost(string.Format(BUS_Controls.Profilecurrent.Name + " đã đạt {0} điểm khi chơi Eye Color Test! ", i));
+            Game.Show();
+        }
     }
 }

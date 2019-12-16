@@ -43,6 +43,7 @@
             // 
             // pnlDetailMess
             // 
+            this.pnlDetailMess.BackColor = System.Drawing.Color.Transparent;
             this.pnlDetailMess.Controls.Add(this.pnlDisplayMess);
             this.pnlDetailMess.Controls.Add(this.panel2);
             this.pnlDetailMess.Controls.Add(this.panel1);
@@ -54,13 +55,16 @@
             // pnlDisplayMess
             // 
             this.pnlDisplayMess.AutoScroll = true;
+            this.pnlDisplayMess.AutoScrollMinSize = new System.Drawing.Size(1, 0);
             this.pnlDisplayMess.AutoSize = true;
+            this.pnlDisplayMess.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDisplayMess.CausesValidation = false;
             this.pnlDisplayMess.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDisplayMess.Location = new System.Drawing.Point(0, 34);
-            this.pnlDisplayMess.MaximumSize = new System.Drawing.Size(256, 293);
-            this.pnlDisplayMess.MinimumSize = new System.Drawing.Size(256, 10);
+            this.pnlDisplayMess.MaximumSize = new System.Drawing.Size(256, 294);
+            this.pnlDisplayMess.MinimumSize = new System.Drawing.Size(256, 294);
             this.pnlDisplayMess.Name = "pnlDisplayMess";
-            this.pnlDisplayMess.Size = new System.Drawing.Size(256, 10);
+            this.pnlDisplayMess.Size = new System.Drawing.Size(256, 294);
             this.pnlDisplayMess.TabIndex = 5;
             // 
             // panel2
@@ -133,6 +137,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDetailMess);
+            this.DoubleBuffered = true;
             this.Name = "UCDetailMessbox";
             this.Size = new System.Drawing.Size(256, 365);
             this.pnlDetailMess.ResumeLayout(false);

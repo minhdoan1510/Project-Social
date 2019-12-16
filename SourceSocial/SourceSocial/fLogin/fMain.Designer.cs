@@ -129,6 +129,7 @@
         private System.Windows.Forms.Panel pnlCatalog;
         private System.Windows.Forms.Panel pnlWeather;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
-        private System.Windows.Forms.Panel pnlHome;
+        private System.Windows.Forms.Panel pnlHome;
+        private System.Windows.Forms.Button btnGame;
     }
 }

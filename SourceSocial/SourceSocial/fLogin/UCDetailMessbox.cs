@@ -40,7 +40,9 @@ namespace fLogin
             this.btnBack.Click += BtnBack_Click;
             this.btnSend.Click += BtnSend_Click;
             this.txbMess.KeyDown += TxbMess_KeyDown;
-            pnlDisplayMess.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messbg.png");
+            this.BackgroundImage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messbg.png");
+            this.BackgroundImageLayout = ImageLayout.Zoom;
+            this.DoubleBuffered = true;
             lbName.Text = name;
         }
 
@@ -80,10 +82,16 @@ namespace fLogin
                 UCmess = new UCMessofMe(messin.Content);
             else
                 UCmess = new UCMessofYou(messin.Avatar, messin.Content);
+            //  UCmess.Dock = DockStyle.Bottom;
+            //  this.pnlDisplayMess.Controls.Add(UCmess);
+
             UCmess.Dock = DockStyle.Top;
+            this.pnlDisplayMess.SuspendLayout();
             this.pnlDisplayMess.Controls.Add(UCmess);
             this.pnlDisplayMess.Controls.SetChildIndex(UCmess, 0);
+            this.pnlDisplayMess.ResumeLayout();
             pnlDisplayMess.ScrollControlIntoView(UCmess);
+           
         }
     }
 }

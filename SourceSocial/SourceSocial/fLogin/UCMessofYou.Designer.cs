@@ -82,6 +82,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.ptbAvatar);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.Name = "UCMessofYou";
             this.Size = new System.Drawing.Size(256, 28);
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();

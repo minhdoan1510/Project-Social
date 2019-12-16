@@ -483,58 +483,34 @@ namespace DAL
             return null;
         }
 
-        private byte[] ConvertImageToBinary(Image img)
+        public string ImageToBase64(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
+                // Convert Image to byte[]
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imageBytes = ms.ToArray();
 
+                // Convert byte[] to base 64 string
+                string base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
             }
         }
+        
         public bool ChangeAvatar(Profile profile)
         {
             _conn.Open();
             using (var command = _conn.CreateCommand())
             {
                 command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
-                command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
+                command.Parameters.AddWithValue("@avatar", ImageToBase64(profile.Avatar));
                 if (command.ExecuteNonQuery() > 0)
                     return true;
             }
-
+            _conn.Close();
             return false;
 
-            //using (var ms = new MemoryStream())
-            //{
-            //    profile.Avatar.Save(ms, profile.Avatar.RawFormat);
-            //    byte[] temp = ms.ToArray();
-            //    ms.Read(temp, 0, temp.Length);
-            //    try
-            //    {
-            //        _conn.Open();
-            //        string query = string.Format
-            //            (@"
-            //        UPDATE dbo.PROFILE 
-            //        SET AVATAR = '{0}' 
-            //        WHERE UIDuser = '{1}'
-            //        ", temp, profile.Uid);
-            //        SqlCommand sqlCommand = new SqlCommand(query, _conn);
-            //        if (sqlCommand.ExecuteNonQuery() > 0)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    catch
-            //    {
-
-            //    }
-            //    finally
-            //    {
-            //        _conn.Close();
-            //    }
-            //    return false;
-            //}
+     
         } // Đang bị lỗi
 
         public bool AddFriend(string UID1, string UID2)
