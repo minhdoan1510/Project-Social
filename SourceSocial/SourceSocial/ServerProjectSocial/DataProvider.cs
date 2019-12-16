@@ -20,8 +20,8 @@ namespace ServerProjectSocial
 
         private DataProvider() { }
 
-        private string connectionSTR = @"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True";
-        //private string connectionSTR = @"Data Source = 172.105.119.190,2511; Initial Catalog = DataSocial; User ID = sa; Password=D0 @n123; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //private string connectionSTR = @"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True";
+        private string connectionSTR = @"Data Source = 172.105.119.190,2511; Initial Catalog = DataSocial; User ID = guest123; Password=Guest@123; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

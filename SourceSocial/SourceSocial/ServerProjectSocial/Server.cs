@@ -222,7 +222,7 @@ namespace ServerProjectSocial
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("[" + DateTime.Now + "] "+e.Message);
                 Console.WriteLine( "["+ DateTime.Now +"] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
 
                 DetailClientSocket detail = clients.Where(x => x.Socket == client).SingleOrDefault();

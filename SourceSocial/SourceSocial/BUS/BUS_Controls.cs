@@ -7,12 +7,17 @@ using System.Data;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace BUS
 {
     public class BUS_Controls
     {
         #region Propertion
+
+        const int MAX_SIZE_IMAGE = 300;
+
         private Network network;
         private List<Post> posts;
         private List<KeyValuePair<string, List<Comment>>> comments;
@@ -66,9 +71,9 @@ namespace BUS
                         messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
                         messin.IDmess = data.Rows[0].ItemArray[0].ToString();
                         messin.Content = data.Rows[0].ItemArray[2].ToString();
-                        messin.Time = (DateTime)data.Rows[0].ItemArray[3];
-                        messin.UidSend = data.Rows[0].ItemArray[4].ToString();
-                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[5]);
+                        messin.Time = (DateTime)data.Rows[0].ItemArray[4];
+                        messin.UidSend = data.Rows[0].ItemArray[5].ToString();
+                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[6]);
                         if (HaveNewMesseger != null)
                             HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
                     }
@@ -467,6 +472,7 @@ namespace BUS
         }
         public bool ChangeAvatar(Image image)
         {
+            image = ResizeImage(image);
             if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = image }))
             {
                 Profilecurrent.Avatar = image;
@@ -484,6 +490,48 @@ namespace BUS
         #endregion
 
         #region Handle_Other
+
+
+
+        public static Bitmap ResizeImage(Image image)
+        {
+            int width; int height;
+
+            if (image.Width > image.Height)
+            {
+                height = MAX_SIZE_IMAGE;
+                width = (int)(((float)image.Width / image.Height) * MAX_SIZE_IMAGE);
+            }
+            else
+            {
+                width = MAX_SIZE_IMAGE;
+                height = (int)(((float)image.Height / image.Width) * MAX_SIZE_IMAGE);
+            }
+
+
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
         public List<KeyValuePair<string, string>> GetPeople()
         {
             DataTable dataTable = dal.GetPeople(profilecurrent.Uid);
