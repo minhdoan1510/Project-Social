@@ -58,6 +58,7 @@ namespace fLogin
         private void UCMessengerUnit_OpenMessBox(string IDmessbox)
         {
             UCDetailMessbox detailMessbox = uCDetailMessboxes.Where(x => x.Tag.Equals(IDmessbox)).SingleOrDefault();
+            Image AvatarMessbox = mailboxlists.Where(x => x.IDmessbox == IDmessbox).Single().Avatar;
             if (detailMessbox == null)
             {
                 List<MessinMessbox> detailMess = new List<MessinMessbox>();
@@ -67,7 +68,11 @@ namespace fLogin
                 detailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox.Equals(IDmessbox)).SingleOrDefault().Nameuser);
                 for (int i = detailMess.Count-1; i >=0; i--)
                 {
-                   detailMessbox.AddMessinMessbox(detailMess[i]);
+                    if(!detailMess[i].IsMe)
+                    {
+                        detailMess[i].Avatar = AvatarMessbox;
+                    }
+                    detailMessbox.AddMessinMessbox(detailMess[i]);
                 }
                 detailMessbox.Tag = IDmessbox;
                 uCDetailMessboxes.Add(detailMessbox);
@@ -78,25 +83,6 @@ namespace fLogin
             detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
             this.Controls.Add(detailMessbox);
             detailMessbox.BringToFront();
-
-            //UCDetailMessbox uCDetailMessbox = new UCDetailMessbox(mailboxlists.Where(x => x.IDmessbox == ).SingleOrDefault());
-
-
-            //pnlDisplayMess.Controls.Clear();
-            //pnlDisplayMess.Tag = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().IDmessbox;
-            //List<MessinMessbox> detailMess = new List<MessinMessbox>();
-            //if (GetMessinMessbox != null)
-            //    detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmess);
-
-            //lbName.Text = mailboxlists.Where(x => x.IDmessbox == IDmess).SingleOrDefault().Nameuser;
-            //foreach (MessinMessbox item in detailMess)
-            //{
-            //    AddMessinMessbox(item);
-            //}
-
-            //this.pnlDetailMess.Location = new Point(3, 3);
-
-
         }
 
         private bool DetailMessbox_SendMessCurrent(string Mess, string idMessbox)

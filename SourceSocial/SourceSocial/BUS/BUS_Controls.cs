@@ -68,12 +68,12 @@ namespace BUS
                     {
                         MessinMessbox messin = new MessinMessbox();
                         DataTable data = dal.GetMessfromIDMess(packet.IDmess);
-                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
                         messin.IDmess = data.Rows[0].ItemArray[0].ToString();
+                        messin.IDmessBox = data.Rows[0].ItemArray[1].ToString();
                         messin.Content = data.Rows[0].ItemArray[2].ToString();
-                        messin.Time = (DateTime)data.Rows[0].ItemArray[4];
-                        messin.UidSend = data.Rows[0].ItemArray[5].ToString();
-                        messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[6]);
+                        messin.Time = (DateTime)data.Rows[0].ItemArray[3];
+                        messin.UidSend = data.Rows[0].ItemArray[4].ToString();
+                        //messin.Avatar = ConverttoImage(data.Rows[0].ItemArray[6]);
                         if (HaveNewMesseger != null)
                             HaveNewMesseger(messin); // Gửi gói mess lên cho fMess hiển thị
                     }
@@ -276,28 +276,23 @@ namespace BUS
             return false;
         }
 
-        public object GetMessinMessbox(string id)
-        {
-            DataTable data = dal.GetMessinMessbox(id);
-
-            List<MessinMessbox> messinMessbox = new List<MessinMessbox>();
-
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                MessinMessbox temp = new MessinMessbox();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[6].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                temp.IDmess = data.Rows[i].ItemArray[0].ToString();
-                temp.IDmessBox = data.Rows[i].ItemArray[1].ToString();
-                temp.UidSend = data.Rows[i].ItemArray[5].ToString();
-                temp.Content = data.Rows[i].ItemArray[2].ToString();
-                temp.Time = (DateTime)data.Rows[i].ItemArray[4];
-                temp.IsMe = temp.UidSend == Profilecurrent.Uid;
-                messinMessbox.Add(temp);
-            }
-
-            return messinMessbox;
-
-        }
+        public object GetMessinMessbox(string id)
+        {
+            DataTable data = dal.GetMessinMessbox(id);
+            List<MessinMessbox> messinMessbox = new List<MessinMessbox>();
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                MessinMessbox temp = new MessinMessbox();
+                //temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[6].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.IDmess = data.Rows[i].ItemArray[0].ToString();
+                temp.IDmessBox = data.Rows[i].ItemArray[1].ToString();
+                temp.UidSend = data.Rows[i].ItemArray[4].ToString();
+                temp.Content = data.Rows[i].ItemArray[2].ToString();
+                temp.Time = (DateTime)data.Rows[i].ItemArray[3];
+                temp.IsMe = temp.UidSend == Profilecurrent.Uid;
+                messinMessbox.Add(temp);
+            }
+            return messinMessbox;        }
 
         public bool AddPost(Post post)
         {

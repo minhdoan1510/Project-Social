@@ -109,8 +109,6 @@ namespace DAL
             _conn.Close();
             return dataTable;
         }
-
-
         public DataTable GetMailboxlist(string id)
         {
             DataTable data = new DataTable();

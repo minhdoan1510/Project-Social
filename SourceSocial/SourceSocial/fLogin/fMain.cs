@@ -31,7 +31,6 @@ namespace fLogin
 
             Thread Weather = new Thread(GetWeather);
             Weather.IsBackground = true;
-            Weather.Start();
 
 
 
@@ -43,6 +42,8 @@ namespace fLogin
 
             BUS_Controls.HaveNewMesseger += BUS_Controls_HaveNewMesseger;
             BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;            BUS_Controls.GetUserOnline += BUS_Controls_GetUserOnline;
+
+            Weather.Start();
         }
 
         /// <summary>

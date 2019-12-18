@@ -1,62 +1,7 @@
-<<<<<<< HEAD
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-=======
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-D:\Code\tsclone\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
-C:\Users\Minh\Downloads\Compressed\Project-Social-minhtien_3\Project-Social-minhtien\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-<<<<<<< HEAD
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe.config
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csprojAssemblyReference.cache
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.csproj.CoreCompileInputs.cache
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.exe
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\obj\Debug\ServerProjectSocial.pdb
-C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\ServerProjectSocial\bin\Debug\ServerProjectSocial.pdb
-=======
->>>>>>> Minh
->>>>>>> Minh
