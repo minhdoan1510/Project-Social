@@ -28,6 +28,10 @@
 
 ![InfoProfile Screenshot](docs\Images\InfoProfile_SkySocial.PNG)
 
+- Chơi Game và chia sẻ kết quả nên newpost
+
+![Game Screenshot](docs\Images\Game_SkySocial.PNG)
+
 ## Getting started
 - Đối với việc cài đặt để sử dụng SkyProcial 
   - Yêu cầu:
