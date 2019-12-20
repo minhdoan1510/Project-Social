@@ -15,7 +15,7 @@ namespace fLogin
         #region Propertion
         string iduser;
         int likeCount;
-
+        DTO.Post Post;
         public delegate void ClickComment(string IDpost);
         public event ClickComment OnClickComment;
 
@@ -28,6 +28,9 @@ namespace fLogin
         public delegate void ClickOpenProfile(string UID);
         public event ClickOpenProfile OnClickOpenProfile;
 
+        public delegate void ClickLikeOutsideNewfeed(string IDpost);
+        public event ClickLikeOutsideNewfeed OnClickLikeOutsideNewfeed;
+
         public Label LbName_Post { get => lbName_Post; set => lbName_Post = value; }
         public Label LbTime_Post { get => lbTime_Post; set => lbTime_Post = value; }
         public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
@@ -35,25 +38,35 @@ namespace fLogin
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
         public int LikeCount { get => likeCount; set { likeCount = value; OnLikeCountChange(); }  }
         public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
-        public string Iduser { get => iduser; set => iduser = value; }
+        public string Iduser { get => iduser; set => iduser = value; }        public DTO.Post post
+        {
+            get => Post;
+            set
+            {
+                Post = value;
+                Iduser = Post.Iduser;
+                LbName_Post.Text = Post.Name;
+                LbTime_Post.Text = Post.Time;
+
+                LbContent_Post.Text = Post.Content;
+
+                PtbAvatar_Post.Image = Post.Image;
+                LikeCount = Post.Liked;
+
+            }
+        }
         #endregion
 
-        public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar, string _iduser)
+        public UCPostDisplay(DTO.Post _post)
         {
             InitializeComponent();
-            Iduser = _iduser;
-
-            LbName_Post.Text = _name;
+            post = _post;
             LbName_Post.Click += LbName_Post_Click;
 
-            LbTime_Post.Text = _time;
-
-            LbContent_Post.Text = _content;
-
-            PtbAvatar_Post.Image = avatar;
+           
             PtbAvatar_Post.SizeMode = PictureBoxSizeMode.Zoom;
 
-            LikeCount = _liked;
+           
 
             PtbLike.Image = Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png");
             PtbLike.SizeMode = PictureBoxSizeMode.Zoom;
@@ -72,7 +85,10 @@ namespace fLogin
             if (OnClickLike(this.Tag.ToString(), !(bool)PtbLike.Tag))
             {
                 LikeCount=(PtbLike.Tag.Equals(false))? likeCount+1:likeCount-1;
-                PtbLike.Tag = !(bool)PtbLike.Tag;
+                PtbLike.Tag = !(bool)PtbLike.Tag;
+
+                if (OnClickLikeOutsideNewfeed != null)
+                    OnClickLikeOutsideNewfeed(this.Tag.ToString());
             }
       
             

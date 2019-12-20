@@ -45,7 +45,11 @@ namespace fLogin
             InitializeComponent();
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-            profileDetails = new ProfileDetails(bUS_Controls,_profile);
+            lbName.Click += (i, e) =>
+            {
+                profileDetails = new ProfileDetails(bUS_Controls, _profile);
+                profileDetails.Show();
+            };
             LbName.Text = _profile.Name;
             IsFriend = isFriend;
             UpdateTypeProfile();
@@ -174,9 +178,6 @@ namespace fLogin
         }
         #endregion
 
-        private void lbName_Click(object sender, EventArgs e)
-        {
-            profileDetails.Show();
-        }
+        
     }
 }

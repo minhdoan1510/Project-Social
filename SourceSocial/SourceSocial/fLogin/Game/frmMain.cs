@@ -104,7 +104,8 @@ namespace fLogin
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             game.timer.Stop();
-            OnShareHighScore(highScore.ToString());
+            if(highScore!=0)
+                OnShareHighScore(highScore.ToString());
 
         }
 
