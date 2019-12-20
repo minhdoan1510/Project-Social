@@ -29,6 +29,10 @@ namespace fLogin
         public delegate void ViewFriend(string uid);
         public event ViewFriend OnViewFriend;
 
+        public delegate void Inbox(string IdMessbox,string Username, string IdUser);
+        public event Inbox OnInbox;
+
+
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
         public Label LbName { get => lbName; set => lbName = value; }
         public Label LbNumFriend { get => lbFriend_Count; set => lbFriend_Count = value; }
@@ -46,6 +50,12 @@ namespace fLogin
             IsFriend = isFriend;
             UpdateTypeProfile();
             lbFriend_Count.Click += (i,e)=>OnViewFriend(_profile.Uid);
+            btnMessenger.Click += (i, e) =>
+            {
+
+                OnInbox(bUS_Controls.GetIdMessbox(bUS_Controls.Profilecurrent.Uid,_profile.Uid),_profile.Name,_profile.Uid);
+
+            };
             CheckForIllegalCrossThreadCalls = false;
         }
         #region Handle_Event

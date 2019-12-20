@@ -246,11 +246,21 @@ namespace BUS
                 mailboxlists.Add(temp);
             }
 
-            return mailboxlists;
-
-        }
-
-        public bool AddLike_Post(string iDPost,bool add)
+            return mailboxlists;
+        }
+
+        public string GetIdMessbox(string iDuser1, string iDuser2)
+        {
+            return dal.GetIdMessbox(iDuser1, iDuser2) ?? dal.CreateMessBox(iDuser1, iDuser2);
+        }
+        public string CreateMessbox(string iDuser1, string iDuser2)
+        {
+           
+            return dal.CreateMessBox(iDuser1, iDuser2);
+        }
+
+
+        public bool AddLike_Post(string iDPost, bool add)
         {
             if (add == true)
             {
@@ -259,7 +269,7 @@ namespace BUS
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
 
                     posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
-                    
+
 
                     return true;
                 }
@@ -565,7 +575,7 @@ namespace BUS
             finally
             {
             }
-            return null;
+            
         }
 
 

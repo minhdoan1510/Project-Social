@@ -201,6 +201,61 @@ namespace DAL
             }
         }
 
+        public string GetIdMessbox(string iDuser1, string iDuser2)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC GetIdMessbox @IDuser1, @IDuser2";
+                SqlCommand sql = new SqlCommand(query, _conn); 
+                sql.Parameters.AddWithValue("@IDuser1", iDuser1);
+                sql.Parameters.AddWithValue("@IDuser2", iDuser2);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
+                sqlDataAdapter.Fill(data);
+
+                if (data.Rows.Count == 0)
+                    return null;
+                return data.Rows[0].ItemArray[0].ToString();
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public string CreateMessBox(string iDuser1, string iDuser2)
+        {
+            try
+            {
+                _conn.Open();
+                string query = @"EXEC AddMessbox @IDmessbox , @IDuser1, @IDuser2";
+                SqlCommand sql = new SqlCommand(query, _conn);
+                string idMessBox = new Random().Next(10000000, 99999999).ToString();
+                sql.Parameters.AddWithValue("@IDuser1", iDuser1);
+                sql.Parameters.AddWithValue("@IDuser2", iDuser2);
+                sql.Parameters.AddWithValue("@IDmessbox",idMessBox);
+            
+
+                if (sql.ExecuteNonQuery() > 0)
+                    return idMessBox;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return null;
+        }
+
         public bool AddPost(Post post)
         {
             try

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
@@ -205,23 +206,47 @@ namespace fLogin
             };
 
 
-            uCMainHeader.OnOpenMessenger += () =>
-            {
-                formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
-                UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
-                uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
-                uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
-                uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
-
-                uCMessengerDisplay.Location = new Point(0, 25);
-
-                formMess.Controls.Add(uCMessengerDisplay);
-                formMess.ShowDialog();
-            };
-
-
+            uCMainHeader.OnOpenMessenger += () => fMain_OpenMessenger();
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
+        private void fMain_OpenMessenger()
+        {
+            formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
+
+            UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
+
+            uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
+
+            uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
+
+            uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+
+            uCMessengerDisplay.Location = new Point(0, 25);
+
+            formMess.Controls.Add(uCMessengerDisplay);
+
+            formMess.ShowDialog();
+        }
+
+        private void UCProfileInfoBox_OpenSpecificMessbox(string IdMessBox, string Username, string IdUser)
+        {
+            formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
+
+            UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
+
+            uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
+
+            uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
+
+            uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
+
+            uCMessengerDisplay.Location = new Point(0, 25);
+
+            formMess.Controls.Add(uCMessengerDisplay);
+            uCMessengerDisplay.UCMessengerUnit_OpenMessBox(IdMessBox,Username,IdUser);
+            formMess.ShowDialog();
+        }
+
         private object UCMessengerDisplay_GetMessinMessbox(string id)
         {
             return BUS_Controls.GetMessinMessbox(id);
@@ -333,8 +358,9 @@ namespace fLogin
             DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
             DisplayProfile.OnViewFriend += (i) => ShowUserList(BUS_Controls.GetListFriend(i));
             DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
-            DisplayProfile.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
             DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
+            DisplayProfile.OnInbox += (IdMessBox, Username,IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox,Username,IdUser);
+
             DisplayProfile.Visible = true;
 
 
