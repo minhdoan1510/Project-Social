@@ -27,6 +27,9 @@ namespace fLogin
             tbxHometown.Text = profile.HomeTown;
             tbxPhonenum.Text = profile.PhoneNum;
             tbxMarriage.Text = profile.MarriageSt;
+            if (BUS_Controls.IsFriendWith(profile.Uid) != 2)
+                btnAlter.Visible = false;
+            else 
             btnAlter.Click += (sender, e) =>
             {
                 Profile _profile = new Profile() {

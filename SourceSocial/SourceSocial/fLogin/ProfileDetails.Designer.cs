@@ -42,7 +42,7 @@
             this.tbxMarriage = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnAlter = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
-            this.lblName = new MaterialSkin.Controls.MaterialLabel();
+            this.lblName = new RoundedLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,12 +63,12 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.BackColor = System.Drawing.Color.DimGray;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(336, 103);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(76, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(75, 18);
             this.materialLabel1.TabIndex = 2;
             this.materialLabel1.Text = "Ngày Sinh";
             // 
@@ -76,12 +76,12 @@
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel2.Location = new System.Drawing.Point(375, 151);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(37, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(38, 18);
             this.materialLabel2.TabIndex = 3;
             this.materialLabel2.Text = "SĐT";
             // 
@@ -89,12 +89,12 @@
             // 
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel3.Location = new System.Drawing.Point(365, 199);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(47, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(45, 18);
             this.materialLabel3.TabIndex = 4;
             this.materialLabel3.Text = "Email";
             // 
@@ -102,12 +102,12 @@
             // 
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel4.Location = new System.Drawing.Point(340, 247);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(72, 19);
+            this.materialLabel4.Size = new System.Drawing.Size(72, 18);
             this.materialLabel4.TabIndex = 5;
             this.materialLabel4.Text = "Quê quán";
             // 
@@ -115,12 +115,12 @@
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel5.Location = new System.Drawing.Point(274, 295);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(141, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(138, 18);
             this.materialLabel5.TabIndex = 6;
             this.materialLabel5.Text = "Tình trạng hôn nhân";
             // 
@@ -189,7 +189,6 @@
             // tbxMarriage
             // 
             this.tbxMarriage.Depth = 0;
-            this.tbxMarriage.Enabled = false;
             this.tbxMarriage.Hint = "";
             this.tbxMarriage.Location = new System.Drawing.Point(442, 295);
             this.tbxMarriage.MouseState = MaterialSkin.MouseState.HOVER;
@@ -229,15 +228,16 @@
             // 
             // lblName
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Depth = 0;
-            this.lblName.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblName.Location = new System.Drawing.Point(80, 281);
-            this.lblName.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblName._BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            this.lblName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblName.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblName.Location = new System.Drawing.Point(39, 283);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(0, 19);
+            this.lblName.Size = new System.Drawing.Size(185, 31);
             this.lblName.TabIndex = 14;
+            this.lblName.Text = "Name";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ProfileDetails
             // 
@@ -286,6 +286,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField tbxMarriage;
         private MaterialSkin.Controls.MaterialRaisedButton btnAlter;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
-        private MaterialSkin.Controls.MaterialLabel lblName;
+        private RoundedLabel lblName;
     }
 }

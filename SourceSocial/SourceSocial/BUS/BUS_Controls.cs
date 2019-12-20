@@ -211,6 +211,10 @@ namespace BUS
             return posts;
            
         }
+        public Post GetPost(string IDPost)
+        {
+            return posts.Single(x => x.Idpost == IDPost);
+        }
         private void LoadDataPost(string UID)
         {
             DataTable data = dal.LoadAllPosts();
@@ -616,7 +620,7 @@ namespace BUS
                 notify.ReceiveName = data.Rows[i].ItemArray[3].ToString();
 
                 notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
-                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                //notify.Time = (DateTime)data.Rows[i].ItemArray[6];
+                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                notify.Time = (DateTime)data.Rows[i].ItemArray[6];
                 notifies.Add(notify);
             }
             return notifies;

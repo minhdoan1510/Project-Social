@@ -126,7 +126,7 @@ namespace fLogin
                     item.AddMess(messin);                    
                 }
                 catch { }
-            }            if(formMess!=null)
+            }            if(formMess==null)
             {
                 Notify temp = new Notify()
                 {
@@ -190,8 +190,9 @@ namespace fLogin
             uCMainHeader.OnOpenProfile += OnOpenProfile;
             uCMainHeader.OnOpenNotify += () =>
             {
-                formNotify = new NotificationList(BUS_Controls.GetAllNotifyofUser(), BUS_Controls.Profilecurrent.Uid) { StartPosition = FormStartPosition.Manual, FormBorderStyle = FormBorderStyle.None };
+                formNotify = new NotificationList(BUS_Controls) { StartPosition = FormStartPosition.Manual, FormBorderStyle = FormBorderStyle.None };
                 formNotify.SetDesktopLocation(MousePosition.X, MousePosition.Y);
+                formNotify.OnClickNotify += (i) => DisplaySpecificPost(i);
                 formNotify.ShowDialog();
 
             };
@@ -199,8 +200,8 @@ namespace fLogin
             {
                 if (DisplayProfile != null)
                 {
-                    this.Controls.Remove(DisplayProfile);
-                    DisplayProfile.Dispose();
+                    this.Controls.Remove(DisplayProfile);                    DisplayProfile.Dispose();
+                    DisplayProfile = null;
                     pnlHome.Visible = true;
                 }
             };
@@ -209,6 +210,21 @@ namespace fLogin
             uCMainHeader.OnOpenMessenger += () => fMain_OpenMessenger();
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
+        private void DisplaySpecificPost(string IDPost)
+        {
+            Form form = new Form() { Size = new Size(707, 265), StartPosition = FormStartPosition.WindowsDefaultLocation /*,FormBorderStyle = FormBorderStyle.FixedToolWindow*/};
+            UCPostDisplay postDisplay = CreatePostDisplay(BUS_Controls.GetPost(IDPost));
+            postDisplay.OnClickLikeOutsideNewfeed += (i) => ClickLikeOutsideNewfeed(i);
+            //this.pnlNewFeed_Main.Controls.OfType<UCPostDisplay>().Single(x => x.Tag.ToString() == IDPost); 
+            postDisplay.Dock = DockStyle.Fill;
+            form.Controls.Add(postDisplay);
+            formNotify.FormClosed += (i,e) => form.Show();
+            formNotify.Close();
+           
+            
+
+        }
+
         private void fMain_OpenMessenger()
         {
             formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
@@ -273,22 +289,37 @@ namespace fLogin
             {
                 if (BUS_Controls.ListFriend.Contains(item.Iduser) || item.Iduser == BUS_Controls.Profilecurrent.Uid)
                 {
-                    UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
-
-                    post.Dock = DockStyle.Top;
-                    post.Tag = item.Idpost;
-                    post.OnClickComment += Post_OnClickComment;
-                    post.OnClickOpenProfile += OnOpenProfile;
-                    post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
-                    post.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
-                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
-                        post.PtbLike.Tag = true;
-                    else post.PtbLike.Tag = false;
+                    UCPostDisplay post = CreatePostDisplay(item);
+
                     this.pnlNewFeed_Main.Controls.Add(post);
                 }
             }
         }
 
+        private UCPostDisplay CreatePostDisplay(Post post)
+        {
+            UCPostDisplay postDisplay = new UCPostDisplay(post);
+
+            postDisplay.Dock = DockStyle.Top;
+
+            postDisplay.Tag = post.Idpost;
+
+            postDisplay.OnClickComment += Post_OnClickComment;
+
+            postDisplay.OnClickOpenProfile += OnOpenProfile;
+
+            postDisplay.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
+
+            postDisplay.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
+
+            if (BUS_Controls.LoadLikesOfPost(post.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
+
+                postDisplay.PtbLike.Tag = true;
+
+            else postDisplay.PtbLike.Tag = false;
+
+            return postDisplay;
+        }
 
 
         #region Handle_Event_MainDisplay
@@ -335,7 +366,12 @@ namespace fLogin
             return BUS_Controls.AddComment(idPost, content);
         }
 
-
+        public void ClickLikeOutsideNewfeed(string IDPost)
+        {
+            UCPostDisplay temp = this.pnlNewFeed_Main.Controls.OfType<UCPostDisplay>().Single(x => x.Tag.ToString() == IDPost);
+            temp.LikeCount = (temp.PtbLike.Tag.Equals(false)) ? temp.LikeCount + 1 : temp.LikeCount - 1;
+            temp.PtbLike.Tag = !(bool)temp.PtbLike.Tag;
+        }
 
 
         #endregion
@@ -347,6 +383,11 @@ namespace fLogin
         #region UC_Profile
         private void OnOpenProfile(string UID)
         {
+            if(DisplayProfile != null)
+            {
+                DisplayProfile.Dispose();
+                DisplayProfile = null;
+            }
             DisplayProfile = new UCProfile(BUS_Controls, BUS_Controls.GetProfile(UID), BUS_Controls.IsFriendWith(UID));
             pnlHome.Visible = false;
             DisplayProfile.Location = pnlHome.Location;
@@ -355,13 +396,20 @@ namespace fLogin
             DisplayProfile.OnChangeAvatar += DisplayProfile_OnChangeAvatar;
             DisplayProfile.OnAddFriend += (i) => BUS_Controls.AddFriend(i);
             DisplayProfile.OnDelFriend += (i) => BUS_Controls.DelFriend(i);
-            DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
-            DisplayProfile.OnViewFriend += (i) => ShowUserList(BUS_Controls.GetListFriend(i));
-            DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
-            DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
-            DisplayProfile.OnInbox += (IdMessBox, Username,IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox,Username,IdUser);
+            DisplayProfile.OnAddPost += (i) => Post_OnAddPost(i);
+
+            DisplayProfile.OnViewFriend += (i) => ShowUserList(BUS_Controls.GetListFriend(i));
+
+            DisplayProfile.Post_OnClickComment += (i) => Post_OnClickComment(i);
+
+            DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
+
+            DisplayProfile.OnInbox += (IdMessBox, Username, IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Username, IdUser);
+
+            DisplayProfile.OnClickLikeOutsideNewfeed += (i) => ClickLikeOutsideNewfeed(i);
 
             DisplayProfile.Visible = true;
+
 
 
         }
