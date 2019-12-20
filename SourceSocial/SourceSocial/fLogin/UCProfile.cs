@@ -36,8 +36,8 @@ namespace fLogin
         public delegate void ClickComment(string UID);
         public event ClickComment Post_OnClickComment;
 
-        public delegate bool ClickLike(string IDpost, bool add);
-        public event ClickLike OnClickLike;
+        public delegate void Inbox(string IdMessbox,string Username,string IdUser);
+        public event Inbox OnInbox;
 
         public delegate void ClickLikeList(string IdPost);
         public event ClickLikeList OnClickLikeList;
@@ -95,6 +95,7 @@ namespace fLogin
             uCProfile_InfoBox.OnDelFriend += () => OnDelFriend(this.Tag.ToString());
             uCProfile_InfoBox.OnViewFriend += (i) => OnViewFriend(i);
             uCProfile_InfoBox.LbNumFriend.Text = string.Format("{0} bạn", BUS_Controls.numOfFriend(profile.Uid));
+            uCProfile_InfoBox.OnInbox += (IdMessBox, Username,IdUser) => OnInbox(IdMessBox, Username, IdUser);
             
             //
             //add UCaddPost

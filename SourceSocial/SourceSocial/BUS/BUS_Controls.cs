@@ -303,103 +303,66 @@ namespace BUS
                 posts.Add(temp);
 
             }
-        }
-
-
-
-
-
-        public object GetMailboxlist()
-
-        {
-
-            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
-
-
-
-            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
-
-
-
-            for (int i=0;i<data.Rows.Count;i++)
-
-            {
-
-                Mailboxlist temp = new Mailboxlist();
-
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-
-                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
-
-                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
-
-                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
-
-                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
-
-                mailboxlists.Add(temp);
-
-            }
-
-
-
+        }
+
+
+        public object GetMailboxlist()
+        {
+            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
+
+            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
+
+            for (int i=0;i<data.Rows.Count;i++)
+            {
+                Mailboxlist temp = new Mailboxlist();
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
+                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
+                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
+                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
+                mailboxlists.Add(temp);
+            }
+
             return mailboxlists;
+        }
 
-
-
+        public string GetIdMessbox(string iDuser1, string iDuser2)
+        {
+            return dal.GetIdMessbox(iDuser1, iDuser2) ?? dal.CreateMessBox(iDuser1, iDuser2);
+        }
+        public string CreateMessbox(string iDuser1, string iDuser2)
+        {
+           
+            return dal.CreateMessBox(iDuser1, iDuser2);
         }
 
 
-
-        public bool AddLike_Post(string iDPost,bool add)
-
-        {
-
-            if (add == true)
-
-            {
-
-                if (dal.AddLike(iDPost, profilecurrent.Uid))
-
-                {
-
+        public bool AddLike_Post(string iDPost, bool add)
+        {
+            if (add == true)
+            {
+                if (dal.AddLike(iDPost, profilecurrent.Uid))
+                {
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
 
-                    posts.Single(x => x.Idpost == iDPost).Liked++;
-
-                    AddNotify(iDPost, 1); //1 => like
-                    
-
-                    return true;
-
-                }
-
-            }
-
-            else
-
-            {
-
-                if (dal.UnLike(iDPost, profilecurrent.Uid))
-
-                {
-
-                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
-
-                    posts.Single(x => x.Idpost == iDPost).Liked--;
-
-                    return true;
-
-                }
-
-            }
-
-            return false;
-
-        }
+                    posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
 
 
-
+                    return true;
+                }
+            }
+            else
+            {
+                if (dal.UnLike(iDPost, profilecurrent.Uid))
+                {
+                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
+                    posts.Single(x => x.Idpost == iDPost).Liked--;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public object GetMessinMessbox(string id)
         {
             DataTable data = dal.GetMessinMessbox(id);
@@ -703,7 +666,7 @@ namespace BUS
             finally
             {
             }
-            return null;
+            
         }
 
 

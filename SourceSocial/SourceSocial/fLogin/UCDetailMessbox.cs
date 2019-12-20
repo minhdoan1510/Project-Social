@@ -15,7 +15,7 @@ namespace fLogin
     public partial class UCDetailMessbox : UserControl
     {
 
-        public delegate bool OnSendMess(string Mess, string idMessbox);
+        public delegate bool OnSendMess(string Mess, string idMessbox, string IDUser);
         public event OnSendMess SendMessCurrent;
 
 
@@ -29,10 +29,11 @@ namespace fLogin
         public delegate MessinMessbox OnHaveMess();
         public event OnHaveMess HaveMess;
 
-        public UCDetailMessbox(string name)
+        public UCDetailMessbox(string name,string idUser)
         {
             InitializeComponent();
             Loading(name);
+            this.lbName.Tag = idUser;
         }
 
         private void Loading(string name)
@@ -61,7 +62,7 @@ namespace fLogin
         void SendMess()
         {
             if (txbMess.Text != string.Empty && SendMessCurrent != null)
-                if (SendMessCurrent(txbMess.Text, this.Tag.ToString()))
+                if (SendMessCurrent(txbMess.Text, this.Tag.ToString(),lbName.Tag.ToString()))
                 {
                     AddMessinMessbox(new MessinMessbox() { IsMe = true, Content = txbMess.Text });
                     txbMess.Clear();
