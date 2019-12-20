@@ -27,15 +27,21 @@ namespace BUS
         private DAL_Controls dal;
         private List<string> listFriend;
       
-        public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
-        public List<string> ListFriend { get => listFriend; set => listFriend = value; }
-
+        public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
+
+        public List<string> ListFriend { get => listFriend; set => listFriend = value; }
+
+
+
    
 
         public delegate void OnHaveNewMesseger(MessinMessbox messin);
-        public event OnHaveNewMesseger HaveNewMesseger;
-
-
+        public event OnHaveNewMesseger HaveNewMesseger;
+
+
+
+
+
         public delegate void OnHaveNewNotify(Notify notify);
         public event OnHaveNewNotify HaveNewNotify;
 
@@ -44,7 +50,8 @@ namespace BUS
         public event OnGetUserOnline GetUserOnline;
 
         #endregion
-
+
+
         public BUS_Controls()
         {
             posts = new List<Post>();
@@ -54,10 +61,14 @@ namespace BUS
             dal = new DAL_Controls();
             ListFriend = new List<string>();
             
-        }
-
-        #region Handle Network
-
+        }
+
+
+
+        #region Handle Network
+
+
+
         private void Network_OnHavePacket(string obj)
         {
             PacketData packet = new PacketData(obj);
@@ -81,7 +92,8 @@ namespace BUS
                     break;
                 case 2://Gói tin Notify
                     try
-                    {                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
+                    {
+                        Notify notify = GetOnlyOneNotify(packet.IDNotify);
                         if (HaveNewNotify != null)
                             HaveNewNotify(notify); // Gửi gói notify lên cho fMain hiển thị
                     }
@@ -102,29 +114,48 @@ namespace BUS
                     form.Controls.Add(tb);
                     form.Show();
                     break;
-                case 0:                    packet.UID = Profilecurrent.Uid;
+                case 0:
+                    packet.UID = Profilecurrent.Uid;
                     network.Send(EncodePacketData(packet));
                     break;
             }
         }
-        public bool SendMess(string content, string idmessbox, string uidsend)
-        {
-            string idmess = new Random().Next(10000000, 99999999).ToString();
-            if (dal.SendMess(content, idmess, idmessbox, Profilecurrent.Uid))
-            {
-                network.Send(EncodePacketData(new PacketData() { IDmess = idmess, UID = uidsend, TPacket = 1 }));
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public void SendNotify(Notify notify)
-        {
-            PacketData packet=new PacketData();
-            packet.TPacket = 2;
-            packet.IDNotify = notify.IDNotify;
-            network.Send(EncodePacketData(packet));
+        public bool SendMess(string content, string idmessbox, string uidsend)
+
+        {
+
+            string idmess = new Random().Next(10000000, 99999999).ToString();
+
+            if (dal.SendMess(content, idmess, idmessbox, Profilecurrent.Uid))
+
+            {
+
+                network.Send(EncodePacketData(new PacketData() { IDmess = idmess, UID = uidsend, TPacket = 1 }));
+
+                return true;
+
+            }
+
+            else
+
+                return false;
+
+        }
+
+
+
+        public void SendNotify(Notify notify)
+
+        {
+
+            PacketData packet=new PacketData();
+
+            packet.TPacket = 2;
+
+            packet.IDNotify = notify.IDNotify;
+
+            network.Send(EncodePacketData(packet));
+
         }
 
         public void SendRequestUserOnline()
@@ -132,34 +163,61 @@ namespace BUS
             network.Send("3_Load");
         }
 
-        public string EncodePacketData(PacketData packet)
-        {
-            string temp = string.Empty;
-            switch (packet.TPacket)
-            {
-                case 0:
-                    temp = packet.TPacket.ToString();
-                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
-                    return temp;
-                case 1:
-                    temp = packet.TPacket.ToString();
-                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
-                    temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
-                    return temp;
-                case 2:
-                    temp = packet.TPacket + "_" + packet.IDNotify;                    return temp;
-                    
-                case 3:
-                    break;
-            }
-            return string.Empty;
+        public string EncodePacketData(PacketData packet)
+
+        {
+
+            string temp = string.Empty;
+
+            switch (packet.TPacket)
+
+            {
+
+                case 0:
+
+                    temp = packet.TPacket.ToString();
+
+                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
+
+                    return temp;
+
+                case 1:
+
+                    temp = packet.TPacket.ToString();
+
+                    temp += (packet.UID != string.Empty) ? ("_" + packet.UID) : "";
+
+                    temp += (packet.IDmess != string.Empty) ? ("_" + packet.IDmess) : "";
+
+                    return temp;
+
+                case 2:
+
+                    temp = packet.TPacket + "_" + packet.IDNotify;
+                    return temp;
+                    
+
+                case 3:
+
+                    break;
+
+            }
+
+            return string.Empty;
+
         }
 
-          
-        
-
-        #endregion
-
+          
+
+        
+
+
+
+
+        #endregion
+
+
+
         #region Handle_Login
         public bool SignUp(Account account)
         {
@@ -185,20 +243,29 @@ namespace BUS
                     
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
-                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
-                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
-                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
-                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
+                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+
+                    Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
+
+                    Profilecurrent.PhoneNum = data.Rows[0].ItemArray[4].ToString();
+
+                    Profilecurrent.Email = data.Rows[0].ItemArray[5].ToString();
+
+                    Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
+
                     Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
-                    network = new Network();
-                    network.OnHavePacket += Network_OnHavePacket;
+                    network = new Network();
+
+                    network.OnHavePacket += Network_OnHavePacket;
+
                     return true;
                 }
             }
             return false;
-        }
-
+        }
+
+
+
         private bool CheckAccount_SignIn(Account account)
         {
             return true;
@@ -215,67 +282,124 @@ namespace BUS
         {
             DataTable data = dal.LoadAllPosts();
             for (int i = 0; i < data.Rows.Count; i++)
-            {
-                Post temp = new Post();
-                temp.Iduser = data.Rows[i].ItemArray[0].ToString();
-                temp.Idpost = data.Rows[i].ItemArray[1].ToString();
-                temp.Liked = (int)data.Rows[i].ItemArray[2];
-                temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                temp.Time = data.Rows[i].ItemArray[5].ToString();
-                temp.Name = data.Rows[i].ItemArray[6].ToString();
-                posts.Add(temp);
+            {
+
+                Post temp = new Post();
+
+                temp.Iduser = data.Rows[i].ItemArray[0].ToString();
+
+                temp.Idpost = data.Rows[i].ItemArray[1].ToString();
+
+                temp.Liked = (int)data.Rows[i].ItemArray[2];
+
+                temp.Content = data.Rows[i].ItemArray[3].ToString();
+
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+
+                temp.Time = data.Rows[i].ItemArray[5].ToString();
+
+                temp.Name = data.Rows[i].ItemArray[6].ToString();
+
+                posts.Add(temp);
+
             }
-        }
-
-
-        public object GetMailboxlist()
-        {
-            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
-
-            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
-
-            for (int i=0;i<data.Rows.Count;i++)
-            {
-                Mailboxlist temp = new Mailboxlist();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
-                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
-                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
-                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
-                mailboxlists.Add(temp);
-            }
-
-            return mailboxlists;
-
-        }
-
-        public bool AddLike_Post(string iDPost,bool add)
-        {
-            if (add == true)
-            {
-                if (dal.AddLike(iDPost, profilecurrent.Uid))
-                {
+        }
+
+
+
+
+
+        public object GetMailboxlist()
+
+        {
+
+            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
+
+
+
+            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
+
+
+
+            for (int i=0;i<data.Rows.Count;i++)
+
+            {
+
+                Mailboxlist temp = new Mailboxlist();
+
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+
+                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
+
+                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
+
+                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
+
+                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
+
+                mailboxlists.Add(temp);
+
+            }
+
+
+
+            return mailboxlists;
+
+
+
+        }
+
+
+
+        public bool AddLike_Post(string iDPost,bool add)
+
+        {
+
+            if (add == true)
+
+            {
+
+                if (dal.AddLike(iDPost, profilecurrent.Uid))
+
+                {
+
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
 
-                    posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
+                    posts.Single(x => x.Idpost == iDPost).Liked++;
+
+                    AddNotify(iDPost, 1); //1 => like
                     
 
-                    return true;
-                }
-            }
-            else
-            {
-                if (dal.UnLike(iDPost, profilecurrent.Uid))
-                {
-                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
-                    posts.Single(x => x.Idpost == iDPost).Liked--;
-                    return true;
-                }
-            }
-            return false;
-        }
-
+                    return true;
+
+                }
+
+            }
+
+            else
+
+            {
+
+                if (dal.UnLike(iDPost, profilecurrent.Uid))
+
+                {
+
+                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
+
+                    posts.Single(x => x.Idpost == iDPost).Liked--;
+
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+        }
+
+
+
         public object GetMessinMessbox(string id)
         {
             DataTable data = dal.GetMessinMessbox(id);
@@ -292,8 +416,11 @@ namespace BUS
                 temp.IsMe = temp.UidSend == Profilecurrent.Uid;
                 messinMessbox.Add(temp);
             }
-            return messinMessbox;        }
-
+            return messinMessbox;
+        }
+
+
+
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
@@ -410,11 +537,14 @@ namespace BUS
                 return ListFriend;
             return LoadDataListFriend(UID);
         }
-        public int numOfFriend(string UID)
-        {
+        public int numOfFriend(string UID)
+
+        {
+
             if (UID == Profilecurrent.Uid)
                 return ListFriend.Count;
-            return LoadDataListFriend(UID).Count;
+            return LoadDataListFriend(UID).Count;
+
         }
         public Profile GetProfile(string UID)
         {
@@ -431,7 +561,8 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+
             profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
             profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
             profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
@@ -450,9 +581,12 @@ namespace BUS
                 return 1;
             return 0;
         }
-        public bool AlterProfile(Profile profile)
-        {
-            return dal.AlterProfile(profile);
+        public bool AlterProfile(Profile profile)
+
+        {
+
+            return dal.AlterProfile(profile);
+
         }
 
         public bool AddFriend(string i)
@@ -480,10 +614,14 @@ namespace BUS
             {
                 Profilecurrent.Avatar = image;
            
-                foreach (Post item in posts)
-                {
-                    if (item.Iduser == profilecurrent.Uid)
-                        item.Image = profilecurrent.Avatar;
+                foreach (Post item in posts)
+
+                {
+
+                    if (item.Iduser == profilecurrent.Uid)
+
+                        item.Image = profilecurrent.Avatar;
+
                 }
                 return true;
                 
@@ -574,8 +712,10 @@ namespace BUS
 
         #region Handle_Notify
 
-        public bool AddNotify(string IdPost, int type)
-        {            Notify notify = new Notify()
+        public bool AddNotify(string IdPost, int type)
+
+        {
+            Notify notify = new Notify()
             {
                 IDNotify = new Random().Next(10000000, 99999999).ToString(),
                 IDPost = IdPost,
@@ -589,49 +729,83 @@ namespace BUS
             {
                 SendNotify(notify);
                 return true;
-            }            return false;
+            }
+            return false;
         }
 
-        public List<Notify> GetAllNotifyofUser()
-        {
-            DataTable data = dal.GetAllNotifyofUser(Profilecurrent.Uid);
-            List<Notify> notifies = new List<Notify>();
-
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                Notify notify = new Notify();
-                notify.IDNotify = data.Rows[i].ItemArray[0].ToString();
-                notify.IDPost = data.Rows[i].ItemArray[1].ToString();
-                notify.SendName = data.Rows[i].ItemArray[2].ToString();
+        public List<Notify> GetAllNotifyofUser()
+
+        {
+
+            DataTable data = dal.GetAllNotifyofUser(Profilecurrent.Uid);
+
+            List<Notify> notifies = new List<Notify>();
+
+
+
+            for (int i = 0; i < data.Rows.Count; i++)
+
+            {
+
+                Notify notify = new Notify();
+
+                notify.IDNotify = data.Rows[i].ItemArray[0].ToString();
+
+                notify.IDPost = data.Rows[i].ItemArray[1].ToString();
+
+                notify.SendName = data.Rows[i].ItemArray[2].ToString();
+
                 notify.ReceiveName = data.Rows[i].ItemArray[3].ToString();
 
-                notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
-                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());                //notify.Time = (DateTime)data.Rows[i].ItemArray[6];
-                notifies.Add(notify);
-            }
-            return notifies;
+                notify.ReceiveUID = data.Rows[i].ItemArray[4].ToString();
+
+                notify.TypeNotify = int.Parse(data.Rows[i].ItemArray[5].ToString());
+
+                //notify.Time = (DateTime)data.Rows[i].ItemArray[6];
+
+                notifies.Add(notify);
+
+            }
+
+            return notifies;
+
         }
 
-        public Notify GetOnlyOneNotify(string IDNotify)
-        {
-            Notify notify = new Notify();
-            try
-            {
-                DataTable data = dal.GetOnlyOneNotify(IDNotify);
-                notify.IDNotify = data.Rows[0].ItemArray[0].ToString();
+        public Notify GetOnlyOneNotify(string IDNotify)
+
+        {
+
+            Notify notify = new Notify();
+
+            try
+
+            {
+
+                DataTable data = dal.GetOnlyOneNotify(IDNotify);
+
+                notify.IDNotify = data.Rows[0].ItemArray[0].ToString();
+
                 notify.IDPost = data.Rows[0].ItemArray[1].ToString();
 
-                notify.SendName = data.Rows[0].ItemArray[2].ToString();
+                notify.SendName = data.Rows[0].ItemArray[2].ToString();
+
                 notify.ReceiveName = data.Rows[0].ItemArray[3].ToString();
 
-                notify.ReceiveUID = data.Rows[0].ItemArray[4].ToString();
+                notify.ReceiveUID = data.Rows[0].ItemArray[4].ToString();
+
                 notify.TypeNotify = int.Parse(data.Rows[0].ItemArray[5].ToString());
-            }
-            catch(Exception)
-            {
-                return null;
-            }
-            return notify;
+            }
+
+            catch(Exception)
+
+            {
+
+                return null;
+
+            }
+
+            return notify;
+
         }
 
         #endregion

@@ -128,6 +128,12 @@
     <Compile Include="UCDisplayWeather.Designer.cs">
       <DependentUpon>UCDisplayWeather.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCLoading.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCLoading.Designer.cs">
+      <DependentUpon>UCLoading.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCMessengerDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCDisplayWeather.resx">
       <DependentUpon>UCDisplayWeather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCLoading.resx">
+      <DependentUpon>UCLoading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMessengerDisplay.resx">
       <DependentUpon>UCMessengerDisplay.cs</DependentUpon>

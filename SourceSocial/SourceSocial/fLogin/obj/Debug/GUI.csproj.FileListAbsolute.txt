@@ -78,3 +78,4 @@ C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCLoading.resources

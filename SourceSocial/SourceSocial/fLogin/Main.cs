@@ -16,7 +16,14 @@ namespace fLogin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fLogin());
+            //Application.Run(new fLogin());
+            Form f = new Form();
+            UCLoading uCLoading = new UCLoading();
+            //uCLoading.Dock = DockStyle.Fill;
+            f.Controls.Add(uCLoading);
+            f.ShowDialog();
+        
+            //Application.Run(f);
         }
     }
 }
