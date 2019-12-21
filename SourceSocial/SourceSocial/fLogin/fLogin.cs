@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
@@ -45,25 +46,51 @@ namespace fLogin
             else
                 MessageBox.Show("Khong thanh cong");
         }
-        private void BtnSignIn_Click(object sender, EventArgs e)
+        async private void BtnSignIn_Click(object sender, EventArgs e)
         {
-            if (BUS_Controls.SigIn(new Account() { Username = txbUsername_SignIn.Text, Password = txbPassword_SignIn.Text }))
+            UCLoading ucLoadingLogin = new UCLoading();
+            this.Controls.Add(ucLoadingLogin);
+            ucLoadingLogin.BringToFront();
+
+            Func<bool> funcSigIn = new Func<bool>(() => BUS_Controls.SigIn(new Account() { Username = txbUsername_SignIn.Text, Password = txbPassword_SignIn.Text }));
+
+            Task<bool> taskSigIn = new Task<bool>(funcSigIn);
+            taskSigIn.Start();
+            await taskSigIn;
+            
+
+            
+            if (taskSigIn.Result)
             {
-                fMain fMain = new fMain(BUS_Controls);
+                LoadfMain();
+
+
+                //this.Close();
                 
-                fMain.ShowDialog();
-                this.Close();
 
             }
             else
             {
+                this.Controls.Remove(ucLoadingLogin);
                 MessageBox.Show("Sai!!!!");
             }
+
             //BUS_Controls.SigIn(new Account() { Username = "nkoxway49", Password = "123" });
             //fMain fMain = new fMain(BUS_Controls);
             //this.Visible = false;
             //fMain.ShowDialog();
         }
+
+        async private void LoadfMain()
+        {
+
+            Form fMain = new Form();
+            fMain = new fMain(BUS_Controls);
+            fMain.FormClosed += (jj, s) => this.Close();
+            this.Hide();
+            fMain.ShowDialog();
+        }
+
         #endregion
 
     }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlNotify = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnNotify = new System.Windows.Forms.Button();
             this.btnMess = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
@@ -46,25 +45,12 @@
             // pnlNotify
             // 
             this.pnlNotify.BackColor = System.Drawing.Color.Transparent;
-            this.pnlNotify.Controls.Add(this.button2);
             this.pnlNotify.Controls.Add(this.btnNotify);
             this.pnlNotify.Controls.Add(this.btnMess);
             this.pnlNotify.Location = new System.Drawing.Point(707, 12);
             this.pnlNotify.Name = "pnlNotify";
             this.pnlNotify.Size = new System.Drawing.Size(165, 50);
             this.pnlNotify.TabIndex = 6;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(7, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 50);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "frenf";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // btnNotify
             // 
@@ -165,7 +151,6 @@
         private System.Windows.Forms.Panel pnlNotify;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.PictureBox ptbLogo;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnNotify;
         private System.Windows.Forms.Button btnMess;
         private System.Windows.Forms.PictureBox ptbAvatar;

@@ -1,4 +1,6 @@
-﻿namespace fLogin
+﻿using System;
+
+namespace fLogin
 {
     partial class UCLoading
     {

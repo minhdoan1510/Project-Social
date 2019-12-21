@@ -21,3 +21,15 @@ C:\Users\Minh\Downloads\Compressed\gpsWeather\gpsWeather\gpsWeather\bin\Debug\Sy
 C:\Users\Minh\Downloads\Compressed\gpsWeather\gpsWeather\gpsWeather\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Minh\Downloads\Compressed\gpsWeather\gpsWeather\gpsWeather\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\Minh\Downloads\Compressed\gpsWeather\gpsWeather\gpsWeather\obj\Debug\gpsWeather.csproj.CopyComplete
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.exe.config
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csproj.CopyComplete
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.pdb

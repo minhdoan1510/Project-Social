@@ -1,14 +1,14 @@
 ﻿using DAL;
 using DTO;
-using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace BUS
 {
@@ -22,18 +22,18 @@ namespace BUS
         private List<Post> posts;
         private List<KeyValuePair<string, List<Comment>>> comments;
         private List<KeyValuePair<string, List<string>>> likes;
- 
+
         private Profile profilecurrent;
         private DAL_Controls dal;
         private List<string> listFriend;
-      
+
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
 
         public List<string> ListFriend { get => listFriend; set => listFriend = value; }
 
 
 
-   
+
 
         public delegate void OnHaveNewMesseger(MessinMessbox messin);
         public event OnHaveNewMesseger HaveNewMesseger;
@@ -50,8 +50,6 @@ namespace BUS
         public event OnGetUserOnline GetUserOnline;
 
         #endregion
-
-
         public BUS_Controls()
         {
             posts = new List<Post>();
@@ -60,14 +58,8 @@ namespace BUS
             Profilecurrent = new Profile();
             dal = new DAL_Controls();
             ListFriend = new List<string>();
-            
         }
-
-
-
         #region Handle Network
-
-
 
         private void Network_OnHavePacket(string obj)
         {
@@ -120,6 +112,7 @@ namespace BUS
                     break;
             }
         }
+
         public bool SendMess(string content, string idmessbox, string uidsend)
 
         {
@@ -142,13 +135,11 @@ namespace BUS
 
         }
 
-
-
         public void SendNotify(Notify notify)
 
         {
 
-            PacketData packet=new PacketData();
+            PacketData packet = new PacketData();
 
             packet.TPacket = 2;
 
@@ -195,7 +186,7 @@ namespace BUS
 
                     temp = packet.TPacket + "_" + packet.IDNotify;
                     return temp;
-                    
+
 
                 case 3:
 
@@ -207,16 +198,7 @@ namespace BUS
 
         }
 
-          
-
-        
-
-
-
-
         #endregion
-
-
 
         #region Handle_Login
         public bool SignUp(Account account)
@@ -227,10 +209,12 @@ namespace BUS
             }
             return false;
         }
+
         private bool CheckAccount_SignUp(Account account)
         {
             return true;
         }
+
         public bool SigIn(Account account)
         {
             if (CheckAccount_SignIn(account))
@@ -238,9 +222,8 @@ namespace BUS
                 DataTable data = dal.SignIn(account);
                 if (data.Rows.Count == 1)
                 {
-                    LoadDataPost(data.Rows[0].ItemArray[0].ToString());
                     ListFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
-                    
+
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
@@ -257,14 +240,11 @@ namespace BUS
                     network = new Network();
 
                     network.OnHavePacket += Network_OnHavePacket;
-
                     return true;
                 }
             }
             return false;
         }
-
-
 
         private bool CheckAccount_SignIn(Account account)
         {
@@ -276,57 +256,44 @@ namespace BUS
         public List<Post> GetPost()
         {
             return posts;
-           
         }
+
         public Post GetPost(string IDPost)
         {
             return posts.Single(x => x.Idpost == IDPost);
         }
-        private void LoadDataPost(string UID)
+
+        public void LoadDataPost(string UID)
         {
             DataTable data = dal.LoadAllPosts();
             for (int i = 0; i < data.Rows.Count; i++)
             {
-
                 Post temp = new Post();
-
                 temp.Iduser = data.Rows[i].ItemArray[0].ToString();
-
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
-
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
-
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-
                 temp.Image = ConverttoImage(data.Rows[i].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
-
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
-
                 posts.Add(temp);
-
             }
-        }
-
-
-        public object GetMailboxlist()
-        {
-            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
-
-            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
-
-            for (int i=0;i<data.Rows.Count;i++)
-            {
-                Mailboxlist temp = new Mailboxlist();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
-                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
-                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
-                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
-                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
-                mailboxlists.Add(temp);
-            }
-
+        } 
+
+        public object GetMailboxlist()
+        {
+            DataTable data = dal.GetMailboxlist(Profilecurrent.Uid);
+            List<Mailboxlist> mailboxlists = new List<Mailboxlist>();
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                Mailboxlist temp = new Mailboxlist();
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
+                temp.Iduser = data.Rows[i].ItemArray[3].ToString();
+                temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
+                temp.Nameuser = data.Rows[i].ItemArray[1].ToString();
+                mailboxlists.Add(temp);
+            }
             return mailboxlists;
         }
 
@@ -334,39 +301,33 @@ namespace BUS
         {
             return dal.GetIdMessbox(iDuser1, iDuser2) ?? dal.CreateMessBox(iDuser1, iDuser2);
         }
+
         public string CreateMessbox(string iDuser1, string iDuser2)
         {
-           
             return dal.CreateMessBox(iDuser1, iDuser2);
         }
-
-
-        public bool AddLike_Post(string iDPost, bool add)
-        {
-            if (add == true)
-            {
-                if (dal.AddLike(iDPost, profilecurrent.Uid))
-                {
+        
+        public bool AddLike_Post(string iDPost, bool add)
+        {
+            if (add == true)
+            {
+                if (dal.AddLike(iDPost, profilecurrent.Uid))
+                {
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
-
-                    posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1); //1 => like
-
-
-                    return true;
-                }
-            }
-            else
-            {
-                if (dal.UnLike(iDPost, profilecurrent.Uid))
-                {
-                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
-                    posts.Single(x => x.Idpost == iDPost).Liked--;
-                    return true;
-                }
-            }
-            return false;
+                    posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1);
+                }
+            }
+            else
+            {
+                if (dal.UnLike(iDPost, profilecurrent.Uid))
+                {
+                    likes.SingleOrDefault(x => x.Key == iDPost).Value.Remove(profilecurrent.Uid);
+                    posts.Single(x => x.Idpost == iDPost).Liked--;
+                    return true;
+                }
+            }
+            return false;
         }
-
         public object GetMessinMessbox(string id)
         {
             DataTable data = dal.GetMessinMessbox(id);
@@ -385,9 +346,7 @@ namespace BUS
             }
             return messinMessbox;
         }
-
-
-
+               
         public bool AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
@@ -402,6 +361,7 @@ namespace BUS
             }
             return false;
         }
+
         public List<Comment> LoadCMTof(string idPost)
         {
             foreach (var item in comments)
@@ -413,6 +373,7 @@ namespace BUS
             }
             return LoadAddCMTof(idPost);
         }
+
         public List<Comment> LoadAddCMTof(string IDPost)
         {
             List<Comment> commentofpost = new List<Comment>();
@@ -432,6 +393,7 @@ namespace BUS
             comments.Add(new KeyValuePair<string, List<Comment>>(IDPost, commentofpost));
             return commentofpost;
         }
+
         public List<Comment> AddComment(string idPost, string content)
         {
             Comment comment = new Comment()
@@ -455,7 +417,6 @@ namespace BUS
                         return item.Value;
                     }
                 }
-               
             }
             return null;
         }
@@ -471,6 +432,7 @@ namespace BUS
             }
             return LoadAddLikesOf(idPost);
         }
+
         public List<string> LoadAddLikesOf(string IDPost)
         {
             List<string> likesOfPost = new List<string>();
@@ -482,12 +444,13 @@ namespace BUS
             likes.Add(new KeyValuePair<string, List<string>>(IDPost, likesOfPost));
             return likesOfPost;
         }
+
         #endregion
 
         #region Handle_Profile
         private List<string> LoadDataListFriend(string UID)
         {
-            List<string> temp= new List<string>();
+            List<string> temp = new List<string>();
             DataTable data = dal.GetListFriend(UID);
             if (data == null)
                 return null;
@@ -520,6 +483,12 @@ namespace BUS
             return LoadDataProfile(UID);
         }
 
+        public string GetNameUser(string UID)
+        {
+            return dal.GetNameUser( UID);
+        }
+
+
         private Profile LoadDataProfile(string UID)
         {
             DataTable dataTable = dal.GetProfile(UID);
@@ -534,8 +503,8 @@ namespace BUS
             profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
             profile.Email = dataTable.Rows[0].ItemArray[5].ToString();
             profile.HomeTown = dataTable.Rows[0].ItemArray[6].ToString();
-            profile.MarriageSt =  dataTable.Rows[0].ItemArray[7].ToString();
-     
+            profile.MarriageSt = dataTable.Rows[0].ItemArray[7].ToString();
+
             return profile;
         }
 
@@ -580,7 +549,7 @@ namespace BUS
             if (dal.ChangeAvatar(new Profile() { Uid = Profilecurrent.Uid, Avatar = image }))
             {
                 Profilecurrent.Avatar = image;
-           
+
                 foreach (Post item in posts)
 
                 {
@@ -591,7 +560,7 @@ namespace BUS
 
                 }
                 return true;
-                
+
             }
             return false;
         }
@@ -645,7 +614,7 @@ namespace BUS
         {
             DataTable dataTable = dal.GetPeople(profilecurrent.Uid);
             List<KeyValuePair<string, string>> temp = new List<KeyValuePair<string, string>>();
-            for(int i=0;i<dataTable.Rows.Count;i++)
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 KeyValuePair<string, string> key = new KeyValuePair<string, string>(dataTable.Rows[i].ItemArray[0].ToString(), dataTable.Rows[i].ItemArray[1].ToString());
                 temp.Add(key);
@@ -670,7 +639,7 @@ namespace BUS
             finally
             {
             }
-            
+
         }
 
 
@@ -690,7 +659,7 @@ namespace BUS
                 SendUID = profilecurrent.Uid,
                 SendName = profilecurrent.Name,
                 ReceiveUID = posts.SingleOrDefault(x => x.Idpost == IdPost).Iduser,
-                ReceiveName = GetProfile(posts.SingleOrDefault(x => x.Idpost == IdPost).Iduser).Name
+                ReceiveName = GetNameUser(posts.SingleOrDefault(x => x.Idpost == IdPost).Iduser)
             };
             if (dal.SaveNotifyInDTB(notify))
             {
@@ -756,7 +725,7 @@ namespace BUS
                 notify.TypeNotify = int.Parse(data.Rows[0].ItemArray[5].ToString());
             }
 
-            catch(Exception)
+            catch (Exception)
 
             {
 
