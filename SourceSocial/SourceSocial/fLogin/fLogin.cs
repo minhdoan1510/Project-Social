@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,13 +41,41 @@ namespace fLogin
                 Password = txbPassword_SignUp.Text,
                 Username = txbUsername_SignUp.Text
             };
-            if (txbRePassword_SignUp.Text == txbPassword_SignUp.Text && BUS_Controls.SignUp(account))
+            try
             {
-                MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (txbRePassword_SignUp.Text == txbPassword_SignUp.Text && CheckAcc(account) && BUS_Controls.SignUp(account))
+                {
+                    MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("Đăng kí không thành công");
             }
-            else
-                MessageBox.Show("Khong thanh cong");
+            catch
+            {
+                MessageBox.Show("Kiểm tra lại kết nối mạng của bạn.");
+            }
         }
+
+        private bool CheckAcc(Account account)
+        {
+            if (string.IsNullOrWhiteSpace(account.Name)||account.Name== string.Empty)
+            {
+                MessageBox.Show("Name không hợp lệ");
+                return false;
+            }
+            if (!(account.Username.Length>5))
+            {
+                MessageBox.Show("Độ dài phải username phải lớn hơn 5");
+                return false;
+            }
+            if (!new Regex(@"/ ^(?=.*[a - z])(?=.*[A - Z])(?=.*[0 - 9])(?=.*[!@#\$%\^&\*]).{8,}$/").IsMatch(account.Password))
+            {
+                MessageBox.Show("Mật khẩu quá yếu");
+                return false;
+            }
+            return true;
+        }
+
         async private void BtnSignIn_Click(object sender, EventArgs e)
         {
             UCLoading ucLoadingLogin = new UCLoading();
@@ -73,7 +102,7 @@ namespace fLogin
             else
             {
                 this.Controls.Remove(ucLoadingLogin);
-                MessageBox.Show("Sai!!!!");
+                MessageBox.Show("Đăng nhập không thành công");
             }
 
             //BUS_Controls.SigIn(new Account() { Username = "nkoxway49", Password = "123" });

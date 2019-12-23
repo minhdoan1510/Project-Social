@@ -10,6 +10,8 @@ namespace ServerProjectSocial
 {
     public class DataProvider
     {
+        private string connectionSTR = @"Data Source=172.105.119.190,2511;Initial Catalog=DataSocial;Persist Security Info=True;User ID=sa;Password=D0@n123";
+
         private static DataProvider instance; // Ctrl + R + E
 
         public static DataProvider Instance
@@ -20,8 +22,7 @@ namespace ServerProjectSocial
 
         private DataProvider() { }
 
-        private string connectionSTR = @"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True";
-        // private string connectionSTR = @"Data Source = 172.105.119.190,2511; Initial Catalog = DataSocial; User ID = guest123; Password=Guest@123; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //private string connectionSTR = @"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

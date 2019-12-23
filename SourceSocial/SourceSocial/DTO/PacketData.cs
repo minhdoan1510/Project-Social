@@ -13,6 +13,7 @@ namespace DTO
         private string iDNotify;
         List<KeyValuePair<string, string>> listOnlineUser;
         private int tOnlineUserPacket; // 0-Load, 1-Add, 2-Del
+        private bool isLogined;
 
         public string IDmess { get => iDmess; set => iDmess = value; }
         public string UID { get => uID; set => uID = value; }
@@ -20,6 +21,7 @@ namespace DTO
         public string IDNotify { get => iDNotify; set => iDNotify = value; }
         public int TOnlineUserPacket { get => tOnlineUserPacket; set => tOnlineUserPacket = value; }
         public List<KeyValuePair<string, string>> ListOnlineUser { get => listOnlineUser; set => listOnlineUser = value; }
+        public bool IsLogined { get => isLogined; set => isLogined = value; }
 
         public PacketData() { }
 
@@ -69,6 +71,9 @@ namespace DTO
                     else
                         TOnlineUserPacket = 2;
 
+                    break;
+                case 5:
+                    IsLogined = temp[1] == "1";
                     break;
 
                 default:

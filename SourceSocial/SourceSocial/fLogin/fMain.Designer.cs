@@ -35,6 +35,7 @@
             this.pnlCatalog = new System.Windows.Forms.Panel();
             this.pnlWeather = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
+            this.btnReload = new System.Windows.Forms.Button();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost.SuspendLayout();
             this.pnlHome.SuspendLayout();
@@ -50,9 +51,9 @@
             // pnlNewFeed_Main
             // 
             this.pnlNewFeed_Main.AutoSize = true;
-            this.pnlNewFeed_Main.Location = new System.Drawing.Point(0, 189);
+            this.pnlNewFeed_Main.Location = new System.Drawing.Point(0, 200);
             this.pnlNewFeed_Main.Name = "pnlNewFeed_Main";
-            this.pnlNewFeed_Main.Size = new System.Drawing.Size(707, 400);
+            this.pnlNewFeed_Main.Size = new System.Drawing.Size(707, 389);
             this.pnlNewFeed_Main.TabIndex = 2;
             // 
             // pnlAddPost
@@ -84,6 +85,7 @@
             // 
             this.pnlMain_Newfeed_AddPost.AutoScroll = true;
             this.pnlMain_Newfeed_AddPost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
+            this.pnlMain_Newfeed_AddPost.Controls.Add(this.btnReload);
             this.pnlMain_Newfeed_AddPost.Controls.Add(this.pnlNewFeed_Main);
             this.pnlMain_Newfeed_AddPost.Controls.Add(this.pnlAddPost);
             this.pnlMain_Newfeed_AddPost.Location = new System.Drawing.Point(217, 0);
@@ -91,6 +93,21 @@
             this.pnlMain_Newfeed_AddPost.Name = "pnlMain_Newfeed_AddPost";
             this.pnlMain_Newfeed_AddPost.Size = new System.Drawing.Size(707, 590);
             this.pnlMain_Newfeed_AddPost.TabIndex = 6;
+            // 
+            // btnReload
+            // 
+            this.btnReload.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnReload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnReload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnReload.Location = new System.Drawing.Point(29, 171);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(75, 23);
+            this.btnReload.TabIndex = 4;
+            this.btnReload.Text = "Reload";
+            this.btnReload.UseVisualStyleBackColor = true;
             // 
             // pnlHome
             // 
@@ -131,5 +148,7 @@
         private System.Windows.Forms.Panel pnlCatalog;
         private System.Windows.Forms.Panel pnlWeather;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
-        private System.Windows.Forms.Panel pnlHome;    }
+        private System.Windows.Forms.Panel pnlHome;
+        private System.Windows.Forms.Button btnReload;
+    }
 }

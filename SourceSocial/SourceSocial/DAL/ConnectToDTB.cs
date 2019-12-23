@@ -9,8 +9,7 @@ namespace DAL
 {
     public class ConnectToDTB
     {
-        //protected SqlConnection _conn = new SqlConnection(@"Data Source=172.105.119.190,2511;Initial Catalog=DataSocial;User ID=guest123;Password=Guest@123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        protected SqlConnection _conn = new SqlConnection(@"Data Source=.\sqldev2017;Initial Catalog=DataSocial;Integrated Security=True");
-
+        protected string connectionSTR = @"Data Source=172.105.119.190,2511;Initial Catalog=DataSocial;Persist Security Info=True;User ID=sa;Password=D0@n123";
+        protected SqlConnection _conn = new SqlConnection(@"Data Source=172.105.119.190,2511;Initial Catalog=DataSocial;Persist Security Info=True;User ID=sa;Password=D0@n123");
     }
 }

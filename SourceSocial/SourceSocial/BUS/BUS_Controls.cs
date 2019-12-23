@@ -8,6 +8,8 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BUS
@@ -27,19 +29,14 @@ namespace BUS
         private DAL_Controls dal;
         private List<string> listFriend;
 
+
+        private int isLogin = 2; //0-NoLogin 1-Logined 2-Pendding
+
         public Profile Profilecurrent { get => profilecurrent; set => profilecurrent = value; }
 
         public List<string> ListFriend { get => listFriend; set => listFriend = value; }
-
-
-
-
-
         public delegate void OnHaveNewMesseger(MessinMessbox messin);
         public event OnHaveNewMesseger HaveNewMesseger;
-
-
-
 
 
         public delegate void OnHaveNewNotify(Notify notify);
@@ -50,6 +47,7 @@ namespace BUS
         public event OnGetUserOnline GetUserOnline;
 
         #endregion
+
         public BUS_Controls()
         {
             posts = new List<Post>();
@@ -59,6 +57,7 @@ namespace BUS
             dal = new DAL_Controls();
             ListFriend = new List<string>();
         }
+
         #region Handle Network
 
         private void Network_OnHavePacket(string obj)
@@ -106,6 +105,17 @@ namespace BUS
                     form.Controls.Add(tb);
                     form.Show();
                     break;
+
+                case 5:
+                    if (packet.IsLogined)
+                        isLogin = 1;
+                    else
+                        isLogin = 0;
+
+
+                    break;
+
+
                 case 0:
                     packet.UID = Profilecurrent.Uid;
                     network.Send(EncodePacketData(packet));
@@ -153,6 +163,9 @@ namespace BUS
         {
             network.Send("3_Load");
         }
+
+
+
 
         public string EncodePacketData(PacketData packet)
 
@@ -222,9 +235,33 @@ namespace BUS
                 DataTable data = dal.SignIn(account);
                 if (data.Rows.Count == 1)
                 {
+                    Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
+                    try
+                    {
+                        network = new Network();
+                        network.OnHavePacket += Network_OnHavePacket;
+                        while (isLogin == 2)
+                        { }
+                            
+                        if (isLogin == 1)
+                        {
+                            MessageBox.Show("Tài khoản đã được đăng nhập trên thiết bị khác");
+                            network.CloseConnect();
+                            return false;
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Lỗi kết nối. Kiểm tra lại mạng của bạn");
+                        return false;
+                    }
+                    finally
+                    {
+                        isLogin = 2;
+                    }
+
                     ListFriend = LoadDataListFriend(data.Rows[0].ItemArray[0].ToString());
 
-                    Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
                     Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
 
@@ -237,9 +274,7 @@ namespace BUS
                     Profilecurrent.HomeTown = data.Rows[0].ItemArray[6].ToString();
 
                     Profilecurrent.MarriageSt = data.Rows[0].ItemArray[7].ToString();
-                    network = new Network();
-
-                    network.OnHavePacket += Network_OnHavePacket;
+                    
                     return true;
                 }
             }
@@ -266,6 +301,7 @@ namespace BUS
         public void LoadDataPost(string UID)
         {
             DataTable data = dal.LoadAllPosts();
+            //DataTable data = dal.LoadPosts(UID);
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 Post temp = new Post();
@@ -348,7 +384,7 @@ namespace BUS
             return messinMessbox;
         }
                
-        public bool AddPost(Post post)
+        public Post AddPost(Post post)
         {
             post.Idpost = new Random().Next(10000000, 99999999).ToString();
             post.Iduser = Profilecurrent.Uid;
@@ -358,9 +394,9 @@ namespace BUS
             if (dal.AddPost(post))
             {
                 posts.Add(post);
-                return true;
+                return post;
             }
-            return false;
+            return null;
         }
 
         public List<Comment> LoadCMTof(string idPost)
@@ -642,7 +678,6 @@ namespace BUS
 
 
         #endregion
-
 
         #region Handle_Notify
 

@@ -115,6 +115,18 @@ namespace fLogin
                 highScore = score;
         }
 
-      
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.SuspendLayout();
+            // 
+            // frmMain
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmMain";
+            this.ResumeLayout(false);
+
+        }
     }
 }

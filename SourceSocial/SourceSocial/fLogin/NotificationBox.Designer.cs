@@ -42,7 +42,7 @@
             this.lbNotiText.Text = "label1";
             this.lbNotiText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Notification
+            // NotificationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -50,9 +50,10 @@
             this.Controls.Add(this.lbNotiText);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Notification";
+            this.Name = "NotificationBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Notification";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Notification_Load);
             this.ResumeLayout(false);
 

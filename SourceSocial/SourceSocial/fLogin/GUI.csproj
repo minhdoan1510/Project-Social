@@ -112,6 +112,12 @@
     <Compile Include="RoundedLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UCAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCAbout.Designer.cs">
+      <DependentUpon>UCAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCDetailMessbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,6 +246,9 @@
     <Compile Include="UCSearchBar.Designer.cs">
       <DependentUpon>UCSearchBar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Game\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NotificationBox.resx">
       <DependentUpon>NotificationBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileDetails.resx">
       <DependentUpon>ProfileDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAbout.resx">
+      <DependentUpon>UCAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCDetailMessbox.resx">
       <DependentUpon>UCDetailMessbox.cs</DependentUpon>

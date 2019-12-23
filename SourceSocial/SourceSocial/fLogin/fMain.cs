@@ -79,6 +79,11 @@ namespace fLogin
                 }
                 ));
         }
+        /// <summary>
+        /// OnlineUser
+        /// </summary>
+        /// <param name="TOnlineUserPacket"></param>
+        /// <param name="listOnline"></param>
         private void BUS_Controls_GetUserOnline(int TOnlineUserPacket, List<KeyValuePair<string, string>> listOnline)
         {
             if (TOnlineUserPacket == 0)
@@ -103,7 +108,10 @@ namespace fLogin
                 }));
 
         }
-
+        /// <summary>
+        /// Notify
+        /// </summary>
+        /// <param name="notify"></param>
         private void BUS_Controls_HaveNewNotify(Notify notify)
         {
             notification = new NotificationBox(notify, BUS_Controls.Profilecurrent.Uid);
@@ -111,7 +119,10 @@ namespace fLogin
             notification.ShowDialog();
 
         }
-
+        /// <summary>
+        /// Messsenger
+        /// </summary>
+        /// <param name="messin"></param>
         private void BUS_Controls_HaveNewMesseger(MessinMessbox messin)
         {
             foreach (UCMessengerDisplay item in formMess.Controls)
@@ -135,6 +146,7 @@ namespace fLogin
 
 
         }
+
         #region Animation
         private void LoadAnimation()
         {
@@ -145,8 +157,9 @@ namespace fLogin
 
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Red800, MaterialSkin.Primary.Red700, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
-           
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Red800, MaterialSkin.Primary.Red700, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+
+
             //
             //Text holder in my post
 
@@ -181,14 +194,31 @@ namespace fLogin
 
             await Task.Factory.StartNew((() => LoadNewFeed()));
             this.pnlNewFeed_Main.Controls.Remove(ucPostloading);
+
+            this.btnReload.Click += BtnReload_Click;
         }
 
+        private async void BtnReload_Click(object sender, EventArgs e)
+        {
+            UCLoading uCLoading = new UCLoading();
+            pnlNewFeed_Main.Controls.Add(uCLoading);
+            pnlNewFeed_Main.Controls.Clear();
+            uCLoading.BringToFront();
+
+            await Task.Factory.StartNew((() => LoadNewFeed()));
+
+
+        }
 
         private void LoadCatalog()
         {
             //UCCatalog uCCatalog = new UCCatalog(BUS_Controls.GetPeople());
             //uCCatalog.OnSelectionUser += (i) => OnOpenProfile(i);
             //this.pnlCatalog.Controls.Add(uCCatalog);
+
+            UCAbout uCAbout = new UCAbout();
+            uCAbout.Dock = DockStyle.Top;
+            pnlCatalog.Controls.Add(uCAbout);
 
             uCDisplayUserOnline = new UCDisplayUserOnline();
             uCDisplayUserOnline.Dock = DockStyle.Bottom;
@@ -211,7 +241,7 @@ namespace fLogin
 
             };
             uCMainHeader.OnOpenHome += () => OpenHome();
-           
+
             uCMainHeader.OnOpenGame += btnGame_Click;
 
             uCMainHeader.OnOpenMessenger += () => fMain_OpenMessenger();
@@ -255,23 +285,24 @@ namespace fLogin
             formMess.Controls.Add(uCLoadingMEssbox);
 
 
-            await Task.Factory.StartNew(new Action(() =>
+            await Task.Run(new Action(() =>
                {
                    UCMessengerDisplay uCMessengerDisplay = new UCMessengerDisplay(BUS_Controls.GetMailboxlist());
                    uCMessengerDisplay.GetMailboxlist += UCMessengerDisplay_GetMailboxlist;
                    uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
                    uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
                    uCMessengerDisplay.Location = new Point(0, 25);
-                  Invoke(new Action(() =>
-                   {
-                       formMess.Controls.Add(uCMessengerDisplay);
-                       formMess.Controls.Remove(uCLoadingMEssbox);
-                       formMess.ShowDialog();
-                   }));
+                   Invoke(new Action(() =>
+                    {
+                        formMess.Controls.Add(uCMessengerDisplay);
+                        formMess.Controls.Remove(uCLoadingMEssbox);
+                        if (formMess.Visible != true)
+                            formMess.ShowDialog();
+                    }));
                }));
 
 
-            
+
             //}));
 
         }
@@ -300,56 +331,46 @@ namespace fLogin
             return BUS_Controls.GetMessinMessbox(id);
         }
 
-        private object UCMessengerDisplay_GetMailboxlist()
-        {
-            return BUS_Controls.GetMailboxlist();
-        }
-        private void LoadpnlAddPost()
+        private object UCMessengerDisplay_GetMailboxlist()
         {
-
-        }
-
+            return BUS_Controls.GetMailboxlist();
+        }
         private void LoadNewFeed()
         {
             BUS_Controls.LoadDataPost(BUS_Controls.Profilecurrent.Uid);
-
-
             Invoke(new Action(() => pnlNewFeed_Main.Controls.Clear()));
             List<Post> posts = BUS_Controls.GetPost();
             foreach (var item in posts)
             {
                 if (BUS_Controls.ListFriend.Contains(item.Iduser) || item.Iduser == BUS_Controls.Profilecurrent.Uid)
-                {
+                {
                     UCPostDisplay post = CreatePostDisplay(item);
-
                     Invoke(new Action(() => { this.pnlNewFeed_Main.Controls.Add(post); }));
-
                 }
             }
+            try
+            {
+                foreach (Control item in pnlNewFeed_Main.Controls.OfType<UCLoading>())
+                {
+                    pnlNewFeed_Main.Controls.Remove(item);
+                }
+            }
+            catch { }
         }
 
         private UCPostDisplay CreatePostDisplay(Post post)
         {
             UCPostDisplay postDisplay = new UCPostDisplay(post);
-
             postDisplay.Dock = DockStyle.Top;
-
             postDisplay.Tag = post.Idpost;
-
             postDisplay.OnClickComment += Post_OnClickComment;
-
             postDisplay.OnClickOpenProfile += OnOpenProfile;
-
             postDisplay.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
-
             postDisplay.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
-
             if (BUS_Controls.LoadLikesOfPost(post.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
-
                 postDisplay.Liked = true;
-
-            else postDisplay.Liked = false;
-
+            else
+                postDisplay.Liked = false;
             return postDisplay;
         }
 
@@ -358,10 +379,13 @@ namespace fLogin
 
         private void Post_OnAddPost(string str)
         {
-            if (BUS_Controls.AddPost(new Post() { Content = str }))
+            Post temp = BUS_Controls.AddPost(new Post() { Content = str });
+            if (temp!=null)
             {
                 MessageBox.Show("Đã Đăng!!!");
-                LoadNewFeed();
+
+                UCPostDisplay post = CreatePostDisplay(temp);
+                this.pnlNewFeed_Main.Controls.Add(post);
             }
             else
                 MessageBox.Show("Không thành công!!!");
@@ -378,7 +402,9 @@ namespace fLogin
                 UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls, BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
                 tempInfo.Dock = DockStyle.Top;
                 tempInfo.LbNumFriend.Visible = false;
-                tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);          
+                tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
+
+
                 l.Controls.Add(tempInfo);
             }
             l.Show();

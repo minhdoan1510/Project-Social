@@ -59,15 +59,8 @@ namespace fLogin
             //   this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pnlProfile.Text = _profile.Name;
             imageProfile = _profile.Avatar;
-            
-            
+
             pnlProfile.Click += PnlProfile_Click;
-
-
-
-
-
-
 
             PtbLogo.Click += (s, e) => OnOpenHome();
             btnMess.Click += (s, e) => OnOpenMessenger();

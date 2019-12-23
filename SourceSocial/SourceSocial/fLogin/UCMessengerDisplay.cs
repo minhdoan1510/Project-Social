@@ -14,6 +14,11 @@ namespace fLogin
 {
     public partial class UCMessengerDisplay : UserControl
     {
+        List<UCDetailMessbox> uCDetailMessboxes;
+
+        List<Mailboxlist> mailboxlists;
+
+
         public delegate object OnGetMailboxlist();
         public event OnGetMailboxlist GetMailboxlist;
 
@@ -34,11 +39,6 @@ namespace fLogin
             LoadListMess();
 
         }
-
-        List<UCDetailMessbox> uCDetailMessboxes;
-             
-
-        List<Mailboxlist> mailboxlists;
 
         private void LoadListMess()
         {

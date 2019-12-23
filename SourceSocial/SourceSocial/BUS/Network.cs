@@ -24,15 +24,15 @@ namespace BUS
         {
             Connect();
         }
-        private void CloseConnect()
+        public void CloseConnect()
         {
             client.Close();
         }
 
         void Connect()
         {
-            //IP = new IPEndPoint(IPAddress.Parse("172.105.119.190"), 9865);
-            IP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9865);
+            IP = new IPEndPoint(IPAddress.Parse("172.105.119.190"), 9865);
+            //IP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9865);
 
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             try
@@ -41,8 +41,7 @@ namespace BUS
             }
             catch
             {
-                MessageBox.Show("Lỗi đường truyền");
-                return;
+                throw new Exception("Kiểm tra lại kết nối mạng của bạn rồi thử lại!!!");
             }
 
             Thread threadReceive = new Thread(Receive);
@@ -97,6 +96,11 @@ namespace BUS
             BinaryFormatter binary = new BinaryFormatter();
             binary.Serialize(stream, obj);
             return stream.ToArray();
+        }
+
+        internal void IsLogined(string v)
+        {
+            Send("4_" + v);
         }
     }
 }

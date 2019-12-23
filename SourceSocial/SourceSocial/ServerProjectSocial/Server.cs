@@ -123,9 +123,12 @@ namespace ServerProjectSocial
                     while (true)
                     {
                         server.Listen(100);
+
                         Socket client = server.Accept();
+
                         Console.WriteLine( "["+ DateTime.Now +"] Have 1 device request access");
-                        clients.Add(new DetailClientSocket(client,string.Empty));
+
+                        clients.Add(new DetailClientSocket(client, string.Empty));
                         Send(SetBinary("0"),client);
 
                         //Send(SetBinary("Minh"), client);
@@ -195,29 +198,6 @@ namespace ServerProjectSocial
                     string packet_str = (string)GetfromBinary(temp);
                     PacketData packet = new PacketData(packet_str);
                     Handle_ReceivePacket(packet, temp, client);
-
-                    //switch (packet.TPacket)
-                    //{
-                    //    case 1:
-                    //        Console.WriteLine( "["+ DateTime.Now +"] Received message package.Sending to the client");
-                    //        try
-                    //        {
-                    //            if (Send(temp, clients.Where(x => x.UID == packet.UID).SingleOrDefault().Socket))
-                    //                Console.WriteLine( "["+ DateTime.Now +"] Send success");
-                    //        }
-                    //        catch { Console.WriteLine( "["+ DateTime.Now +"] Client not working. The packet has been saved in the database"); }
-                    //        break;
-
-                    //    case 2:
-
-                    //        break;
-
-                    //    case 0:
-                    //        clients.Where(x => x.Socket == ((Socket)obj)).SingleOrDefault().UID = packet.UID;
-                    //        Console.WriteLine( "["+ DateTime.Now +"] Received UID {0} from the client",packet.UID);
-                    //        break;
-                    //}
-               
                 }
             }
             catch(Exception e)
@@ -257,6 +237,17 @@ namespace ServerProjectSocial
 
                 case 0://Xử lý yêu cầu UID từ client kết nối tới server
                     DetailClientSocket item1 = clients.Where(x => x.Socket == client).SingleOrDefault();
+                    DetailClientSocket item2 = null;
+                    item2 = clients.Where(x => x.UID == packet.UID).SingleOrDefault();
+                    if (item2 != null)
+                    {
+                        Send(SetBinary("5_1"), item1.Socket);
+                        //clients.Remove(item1);
+                        Console.WriteLine("[" + DateTime.Now + "] UID {0} have other access device. Socket removed from server", packet.UID);
+                        break;
+                    }
+                    else
+                        Send(SetBinary("5_0"), item1.Socket);
                     item1.UID = packet.UID;
 
                     SendAddUserOnline(item1);

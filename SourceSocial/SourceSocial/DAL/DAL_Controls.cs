@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -49,7 +50,6 @@ namespace DAL
             return false;
         }
 
-
         public DataTable SignIn(Account account)
         {
            
@@ -69,9 +69,33 @@ namespace DAL
 
 
         }
+
         #endregion
 
         #region Handle_fMain
+        public DataTable LoadPosts(string uid)
+                {
+                    try
+                    {
+                        return DataProvider.Instance.ExecuteQuery(string.Format(@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
+                            FROM dbo.POST AS Post, dbo.PROFILE AS Profile
+                            WHERE  Post.IDUSER = '{0}' AND Post.IDUSER=Profile.UIDuser
+                            UNION ALL
+                            SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
+                            FROM dbo.POST AS Post
+                            INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}' AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
+                            INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
+                            ORDER BY Post.TIME",uid));
+                    }
+                    catch {
+                        return null;
+                    }
+                    finally
+                    {
+                        _conn.Close();
+                    }
+
+                }
 
         public DataTable LoadAllPosts()
         {
@@ -81,6 +105,8 @@ namespace DAL
                     FROM dbo.POST AS Post, dbo.PROFILE AS Profile 
                     WHERE Post.IDUSER=Profile.UIDuser
                     ORDER BY Post.TIME ASC");
+
+
             }
             catch {
                 return null;
@@ -89,13 +115,16 @@ namespace DAL
             {
                 _conn.Close();
             }
-            return null;
 
         }
+
         public DataTable GetMailboxlist(string id)
         {
             try
             {
+                //return Task.Factory.StartNew(
+                //    new Func<DataTable>(() => DataProvider.Instance.ExecuteQuery(@"EXEC GetMailboxlist @IDuser", new object[] { id }))
+                //    ).Result;
 
                 return DataProvider.Instance.ExecuteQuery(@"EXEC GetMailboxlist @IDuser", new object[] { id });
             }
@@ -234,6 +263,7 @@ namespace DAL
                 _conn.Close();
             }
         }
+
         public bool UnLike(string IdPost, string IdUser)
         {
             try
@@ -250,6 +280,7 @@ namespace DAL
                 _conn.Close();
             }
         }
+
         public DataTable LoadCMTof(string UIDpost)
         {
             try
@@ -270,7 +301,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddComment @IDcomment ,	@IDPOST ,	@CONTENT , 	@IDuser", 
+                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddComment @IDcomment , @IDPOST , @CONTENT , @IDuser", 
                                                         new object[] { comment.IdComment, comment.IdPost, comment.Content, comment.IdUser }) > 0;
             }
             catch
@@ -298,6 +329,7 @@ namespace DAL
                 _conn.Close();
             }
         }
+
         public DataTable GetPeople(string UID)
         {
             try
@@ -334,7 +366,6 @@ namespace DAL
         #endregion
 
         #region Handle_Profile
-
         public DataTable GetListFriend(string UID)
         {
             try
@@ -457,7 +488,6 @@ namespace DAL
         #endregion
 
         #region Handle_Notify
-
         public bool SaveNotifyInDTB(Notify notify)
         {
             try
@@ -522,6 +552,7 @@ namespace DAL
                 return base64String;
             }
         }
+
         private byte[] ConvertImageToBinary(Image img)
         {
             using (MemoryStream ms = new MemoryStream())
