@@ -63,7 +63,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
-            this.splitContainer1.Size = new System.Drawing.Size(405, 318);
+            this.splitContainer1.Size = new System.Drawing.Size(446, 318);
             this.splitContainer1.SplitterDistance = 36;
             this.splitContainer1.SplitterIncrement = 6;
             this.splitContainer1.SplitterWidth = 5;
@@ -73,7 +73,7 @@
             // 
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Location = new System.Drawing.Point(370, 7);
+            this.btnExit.Location = new System.Drawing.Point(409, 7);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(22, 22);
             this.btnExit.TabIndex = 1;
@@ -85,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(405, 318);
+            this.ClientSize = new System.Drawing.Size(446, 318);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NotificationList";

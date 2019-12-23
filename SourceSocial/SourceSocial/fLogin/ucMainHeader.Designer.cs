@@ -28,69 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMainHeader));
             this.pnlNotify = new System.Windows.Forms.Panel();
-            this.btnNotify = new System.Windows.Forms.Button();
-            this.btnMess = new System.Windows.Forms.Button();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.tbxSearch = new System.Windows.Forms.TextBox();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
-            this.ptbAvatar = new System.Windows.Forms.PictureBox();
-            this.pnlProfile = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.pnlProfile = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.btnNotify = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnMess = new Bunifu.Framework.UI.BunifuImageButton();
+            this.tbxSearch = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.btnGame = new Bunifu.Framework.UI.BunifuImageButton();
             this.pnlNotify.SuspendLayout();
-            this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotify)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMess)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnGame)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlNotify
             // 
             this.pnlNotify.BackColor = System.Drawing.Color.Transparent;
-            this.pnlNotify.Controls.Add(this.btnNotify);
+            this.pnlNotify.Controls.Add(this.btnGame);
             this.pnlNotify.Controls.Add(this.btnMess);
+            this.pnlNotify.Controls.Add(this.btnNotify);
             this.pnlNotify.Location = new System.Drawing.Point(707, 12);
             this.pnlNotify.Name = "pnlNotify";
             this.pnlNotify.Size = new System.Drawing.Size(165, 50);
             this.pnlNotify.TabIndex = 6;
-            // 
-            // btnNotify
-            // 
-            this.btnNotify.BackColor = System.Drawing.Color.Transparent;
-            this.btnNotify.FlatAppearance.BorderSize = 0;
-            this.btnNotify.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(226)))), ((int)(((byte)(84)))));
-            this.btnNotify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotify.Location = new System.Drawing.Point(57, 0);
-            this.btnNotify.Name = "btnNotify";
-            this.btnNotify.Size = new System.Drawing.Size(50, 50);
-            this.btnNotify.TabIndex = 1;
-            this.btnNotify.UseVisualStyleBackColor = false;
-            // 
-            // btnMess
-            // 
-            this.btnMess.BackColor = System.Drawing.Color.Transparent;
-            this.btnMess.FlatAppearance.BorderSize = 0;
-            this.btnMess.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(226)))), ((int)(((byte)(84)))));
-            this.btnMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMess.Location = new System.Drawing.Point(112, 0);
-            this.btnMess.Name = "btnMess";
-            this.btnMess.Size = new System.Drawing.Size(50, 50);
-            this.btnMess.TabIndex = 0;
-            this.btnMess.UseVisualStyleBackColor = false;
-            // 
-            // pnlSearch
-            // 
-            this.pnlSearch.Controls.Add(this.tbxSearch);
-            this.pnlSearch.Location = new System.Drawing.Point(264, 21);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(422, 35);
-            this.pnlSearch.TabIndex = 5;
-            // 
-            // tbxSearch
-            // 
-            this.tbxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSearch.Location = new System.Drawing.Point(3, 3);
-            this.tbxSearch.Name = "tbxSearch";
-            this.tbxSearch.Size = new System.Drawing.Size(416, 29);
-            this.tbxSearch.TabIndex = 0;
             // 
             // ptbLogo
             // 
@@ -101,60 +63,120 @@
             this.ptbLogo.TabIndex = 4;
             this.ptbLogo.TabStop = false;
             // 
-            // ptbAvatar
-            // 
-            this.ptbAvatar.Enabled = false;
-            this.ptbAvatar.Location = new System.Drawing.Point(902, 16);
-            this.ptbAvatar.Name = "ptbAvatar";
-            this.ptbAvatar.Size = new System.Drawing.Size(44, 44);
-            this.ptbAvatar.TabIndex = 1;
-            this.ptbAvatar.TabStop = false;
-            // 
             // pnlProfile
             // 
-            this.pnlProfile.BackColor = System.Drawing.Color.Yellow;
-            this.pnlProfile.Depth = 0;
-            this.pnlProfile.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.pnlProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pnlProfile.Location = new System.Drawing.Point(887, 12);
-            this.pnlProfile.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pnlProfile.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlProfile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlProfile.BorderRadius = 0;
+            this.pnlProfile.ButtonText = "bunifuFlatButton1";
+            this.pnlProfile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlProfile.DisabledColor = System.Drawing.Color.Gray;
+            this.pnlProfile.Iconcolor = System.Drawing.Color.Transparent;
+            this.pnlProfile.Iconimage = ((System.Drawing.Image)(resources.GetObject("pnlProfile.Iconimage")));
+            this.pnlProfile.Iconimage_right = null;
+            this.pnlProfile.Iconimage_right_Selected = null;
+            this.pnlProfile.Iconimage_Selected = null;
+            this.pnlProfile.IconMarginLeft = 0;
+            this.pnlProfile.IconMarginRight = 0;
+            this.pnlProfile.IconRightVisible = true;
+            this.pnlProfile.IconRightZoom = 0D;
+            this.pnlProfile.IconVisible = true;
+            this.pnlProfile.IconZoom = 80D;
+            this.pnlProfile.IsTab = false;
+            this.pnlProfile.Location = new System.Drawing.Point(884, 12);
             this.pnlProfile.Name = "pnlProfile";
-            this.pnlProfile.Primary = true;
-            this.pnlProfile.Size = new System.Drawing.Size(179, 51);
-            this.pnlProfile.TabIndex = 7;
-            this.pnlProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.pnlProfile.UseVisualStyleBackColor = false;
-            this.pnlProfile.Click += new System.EventHandler(this.PnlProfile_Click);
+            this.pnlProfile.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlProfile.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.pnlProfile.OnHoverTextColor = System.Drawing.Color.White;
+            this.pnlProfile.selected = false;
+            this.pnlProfile.Size = new System.Drawing.Size(181, 50);
+            this.pnlProfile.TabIndex = 8;
+            this.pnlProfile.Text = "bunifuFlatButton1";
+            this.pnlProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.pnlProfile.Textcolor = System.Drawing.Color.White;
+            this.pnlProfile.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // btnNotify
+            // 
+            this.btnNotify.BackColor = System.Drawing.Color.White;
+            this.btnNotify.ErrorImage = null;
+            this.btnNotify.ImageActive = null;
+            this.btnNotify.InitialImage = null;
+            this.btnNotify.Location = new System.Drawing.Point(58, 0);
+            this.btnNotify.Name = "btnNotify";
+            this.btnNotify.Size = new System.Drawing.Size(50, 50);
+            this.btnNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNotify.TabIndex = 9;
+            this.btnNotify.TabStop = false;
+            this.btnNotify.Zoom = 10;
+            // 
+            // btnMess
+            // 
+            this.btnMess.BackColor = System.Drawing.Color.White;
+            this.btnMess.ErrorImage = null;
+            this.btnMess.ImageActive = null;
+            this.btnMess.InitialImage = null;
+            this.btnMess.Location = new System.Drawing.Point(115, 0);
+            this.btnMess.Name = "btnMess";
+            this.btnMess.Size = new System.Drawing.Size(50, 50);
+            this.btnMess.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMess.TabIndex = 10;
+            this.btnMess.TabStop = false;
+            this.btnMess.Zoom = 10;
+            this.btnMess.Click += new System.EventHandler(this.BtnMess_Click);
+            // 
+            // tbxSearch
+            // 
+            this.tbxSearch.BorderColor = System.Drawing.Color.Red;
+            this.tbxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSearch.Location = new System.Drawing.Point(278, 23);
+            this.tbxSearch.Name = "tbxSearch";
+            this.tbxSearch.Size = new System.Drawing.Size(389, 31);
+            this.tbxSearch.TabIndex = 9;
+            // 
+            // btnGame
+            // 
+            this.btnGame.BackColor = System.Drawing.Color.White;
+            this.btnGame.ErrorImage = null;
+            this.btnGame.ImageActive = null;
+            this.btnGame.InitialImage = null;
+            this.btnGame.Location = new System.Drawing.Point(1, 0);
+            this.btnGame.Name = "btnGame";
+            this.btnGame.Size = new System.Drawing.Size(50, 50);
+            this.btnGame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnGame.TabIndex = 11;
+            this.btnGame.TabStop = false;
+            this.btnGame.Zoom = 10;
             // 
             // UCMainHeader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            this.Controls.Add(this.ptbAvatar);
-            this.Controls.Add(this.pnlNotify);
-            this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.ptbLogo);
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.tbxSearch);
             this.Controls.Add(this.pnlProfile);
+            this.Controls.Add(this.pnlNotify);
+            this.Controls.Add(this.ptbLogo);
             this.Name = "UCMainHeader";
             this.Size = new System.Drawing.Size(1080, 75);
             this.pnlNotify.ResumeLayout(false);
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotify)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMess)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnGame)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Panel pnlNotify;
-        private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.PictureBox ptbLogo;
-        private System.Windows.Forms.Button btnNotify;
-        private System.Windows.Forms.Button btnMess;
-        private System.Windows.Forms.PictureBox ptbAvatar;
-        private MaterialSkin.Controls.MaterialRaisedButton pnlProfile;
-        private System.Windows.Forms.TextBox tbxSearch;
+        private Bunifu.Framework.UI.BunifuFlatButton pnlProfile;
+        private Bunifu.Framework.UI.BunifuImageButton btnNotify;
+        private Bunifu.Framework.UI.BunifuImageButton btnMess;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbxSearch;
+        private Bunifu.Framework.UI.BunifuImageButton btnGame;
     }
 }

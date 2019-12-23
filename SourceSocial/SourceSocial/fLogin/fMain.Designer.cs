@@ -28,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.pnlMainHeader = new System.Windows.Forms.Panel();
             this.pnlNewFeed_Main = new System.Windows.Forms.Panel();
             this.pnlAddPost = new System.Windows.Forms.Panel();
             this.pnlCatalog = new System.Windows.Forms.Panel();
-            this.btnGame = new System.Windows.Forms.Button();
             this.pnlWeather = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
-            this.pnlCatalog.SuspendLayout();
             this.pnlMain_Newfeed_AddPost.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMainHeader
             // 
-            this.pnlMainHeader.Location = new System.Drawing.Point(0, 25);
+            this.pnlMainHeader.Location = new System.Drawing.Point(0, 24);
             this.pnlMainHeader.Name = "pnlMainHeader";
             this.pnlMainHeader.Size = new System.Drawing.Size(1076, 75);
             this.pnlMainHeader.TabIndex = 1;
@@ -65,31 +64,16 @@
             // 
             // pnlCatalog
             // 
-            this.pnlCatalog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(64)))), ((int)(((byte)(34)))));
-            this.pnlCatalog.Controls.Add(this.btnGame);
+            this.pnlCatalog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
             this.pnlCatalog.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCatalog.Location = new System.Drawing.Point(0, 0);
             this.pnlCatalog.Name = "pnlCatalog";
-            this.pnlCatalog.Size = new System.Drawing.Size(215, 592);
+            this.pnlCatalog.Size = new System.Drawing.Size(217, 592);
             this.pnlCatalog.TabIndex = 4;
-            // 
-            // btnGame
-            // 
-            this.btnGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnGame.FlatAppearance.BorderSize = 0;
-            this.btnGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGame.Location = new System.Drawing.Point(12, 15);
-            this.btnGame.Name = "btnGame";
-            this.btnGame.Size = new System.Drawing.Size(189, 179);
-            this.btnGame.TabIndex = 0;
-            this.btnGame.Text = "Game";
-            this.btnGame.UseVisualStyleBackColor = false;
-            this.btnGame.Click += new System.EventHandler(this.btnGame_Click);
             // 
             // pnlWeather
             // 
-            this.pnlWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(64)))), ((int)(((byte)(34)))));
+            this.pnlWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
             this.pnlWeather.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlWeather.Location = new System.Drawing.Point(924, 0);
             this.pnlWeather.Name = "pnlWeather";
@@ -127,12 +111,12 @@
             this.ClientSize = new System.Drawing.Size(1073, 692);
             this.Controls.Add(this.pnlMainHeader);
             this.Controls.Add(this.pnlHome);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "fMain";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fMain";
-            this.pnlCatalog.ResumeLayout(false);
             this.pnlMain_Newfeed_AddPost.ResumeLayout(false);
             this.pnlMain_Newfeed_AddPost.PerformLayout();
             this.pnlHome.ResumeLayout(false);
@@ -147,7 +131,5 @@
         private System.Windows.Forms.Panel pnlCatalog;
         private System.Windows.Forms.Panel pnlWeather;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
-        private System.Windows.Forms.Panel pnlHome;
-        private System.Windows.Forms.Button btnGame;
-    }
+        private System.Windows.Forms.Panel pnlHome;    }
 }

@@ -23,7 +23,7 @@ namespace fLogin
         Form formMess;        NotificationList formNotify;
         NotificationBox notification;
         UCDisplayUserOnline uCDisplayUserOnline;
-
+        UCMainHeader uCMainHeader;
         WebClient web = new WebClient();
 
         #endregion
@@ -43,7 +43,7 @@ namespace fLogin
             BUS_Controls.HaveNewNotify += BUS_Controls_HaveNewNotify;            BUS_Controls.GetUserOnline += BUS_Controls_GetUserOnline;
 
 
-            //new Thread(() => GetWeather()).Start();
+            new Thread(() => GetWeather()).Start();
 
         }
 
@@ -145,8 +145,8 @@ namespace fLogin
 
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.BLACK);
-
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Red800, MaterialSkin.Primary.Red700, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+           
             //
             //Text holder in my post
 
@@ -160,6 +160,7 @@ namespace fLogin
             UCAddPost post = new UCAddPost();
             post.OnAddPost += Post_OnAddPost;
             post.OnAddPost += (i) => post.LoadAnimation();
+            post.Dock = DockStyle.Fill;
             pnlAddPost.Controls.Add(post);
 
             UCLoading ucPostloading = new UCLoading();
@@ -199,7 +200,7 @@ namespace fLogin
 
         private void LoadMainHeader()
         {
-            UCMainHeader uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent, BUS_Controls.GetPeople());
+            uCMainHeader = new UCMainHeader(BUS_Controls.Profilecurrent, BUS_Controls.GetPeople());
             uCMainHeader.OnOpenProfile += OnOpenProfile;
             uCMainHeader.OnOpenNotify += () =>
             {
@@ -209,20 +210,27 @@ namespace fLogin
                 formNotify.ShowDialog();
 
             };
-            uCMainHeader.OnOpenHome += () =>
-            {
-                if (DisplayProfile != null)
-                {
-                    this.Controls.Remove(DisplayProfile);                    DisplayProfile.Dispose();
-                    DisplayProfile = null;
-                    pnlHome.Visible = true;
-                }
-            };
-
+            uCMainHeader.OnOpenHome += () => OpenHome();
+           
+            uCMainHeader.OnOpenGame += btnGame_Click;
 
             uCMainHeader.OnOpenMessenger += () => fMain_OpenMessenger();
             this.pnlMainHeader.Controls.Add(uCMainHeader);
         }
+        private void OpenHome()
+        {
+            if (DisplayProfile != null)
+            {
+
+                this.Controls.Remove(DisplayProfile);
+                DisplayProfile.Dispose();
+                DisplayProfile = null;
+                pnlHome.Visible = true;
+
+            }
+        }
+
+
         private void DisplaySpecificPost(string IDPost)
         {
             Form form = new Form() { Size = new Size(707, 265), StartPosition = FormStartPosition.WindowsDefaultLocation /*,FormBorderStyle = FormBorderStyle.FixedToolWindow*/};
@@ -254,15 +262,16 @@ namespace fLogin
                    uCMessengerDisplay.GetMessinMessbox += UCMessengerDisplay_GetMessinMessbox;
                    uCMessengerDisplay.SendMessCurrent += (i, j, uidsend) => BUS_Controls.SendMess(i, j, uidsend);
                    uCMessengerDisplay.Location = new Point(0, 25);
-                   Invoke(new Action(() =>
+                  Invoke(new Action(() =>
                    {
                        formMess.Controls.Add(uCMessengerDisplay);
                        formMess.Controls.Remove(uCLoadingMEssbox);
+                       formMess.ShowDialog();
                    }));
                }));
 
 
-            formMess.ShowDialog();
+            
             //}));
 
         }
@@ -337,9 +346,9 @@ namespace fLogin
 
             if (BUS_Controls.LoadLikesOfPost(post.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
 
-                postDisplay.PtbLike.Tag = true;
+                postDisplay.Liked = true;
 
-            else postDisplay.PtbLike.Tag = false;
+            else postDisplay.Liked = false;
 
             return postDisplay;
         }
@@ -369,7 +378,7 @@ namespace fLogin
                 UCProfile_InfoBox tempInfo = new UCProfile_InfoBox(BUS_Controls, BUS_Controls.GetProfile(item), BUS_Controls.IsFriendWith(item));
                 tempInfo.Dock = DockStyle.Top;
                 tempInfo.LbNumFriend.Visible = false;
-                tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
+                tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);          
                 l.Controls.Add(tempInfo);
             }
             l.Show();
@@ -446,6 +455,8 @@ namespace fLogin
                     if (item.Iduser.Equals(BUS_Controls.Profilecurrent.Uid))
                         item.PtbAvatar_Post.Image = i;
                 }
+                uCMainHeader.imageProfile = i;
+                OpenHome();
                 return true;
             }
             return false;
@@ -453,7 +464,7 @@ namespace fLogin
 
         #endregion
 
-        private void btnGame_Click(object sender, EventArgs e)
+        private void btnGame_Click()
         {
             frmMain Game = new frmMain();
             Game.OnShareHighScore += (i) => Post_OnAddPost(string.Format(BUS_Controls.Profilecurrent.Name + " đã đạt {0} điểm khi chơi Eye Color Test! ", i));

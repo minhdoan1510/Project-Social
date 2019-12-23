@@ -52,47 +52,27 @@ namespace DAL
 
         public DataTable SignIn(Account account)
         {
-            _conn.Open();
+           
+            try
+            {
+
+                return DataProvider.Instance.ExecuteQuery(@"EXEC SignIn @IDuser , @PassWord", new object[] { account.Username, account.Password });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
 
 
-            //Logined
-            string query = string.Format
-                (@"
-                SELECT Profile.*
-                FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
-                WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
-                ", account.Username, account.Password);
-            //", "nkoxway49", "123");       
-            SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-            DataTable dataTable = new DataTable();
-            sqlData.Fill(dataTable);
-            _conn.Close();
-            return dataTable;
         }
         #endregion
 
         #region Handle_fMain
-        public DataTable LoadPost_fMain(string UID)
-        {
-            _conn.Open();
-            string query = string.Format
-                (@"
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
-                FROM dbo.POST AS Post, dbo.PROFILE AS Profile
-                WHERE  Post.IDUSER = '{0}' AND Post.IDUSER=Profile.UIDuser
-                UNION ALL
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
-                FROM dbo.POST AS Post
-                INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
-                INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
-                ORDER BY Post.TIME
-                ", UID);
-            DataTable dataTable = new DataTable();
-            SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
-            sql.Fill(dataTable);
-            _conn.Close();
-            return dataTable;
-        }
+
         public DataTable LoadAllPosts()
         {
             try
@@ -100,10 +80,11 @@ namespace DAL
                 return DataProvider.Instance.ExecuteQuery(@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR 
                     FROM dbo.POST AS Post, dbo.PROFILE AS Profile 
                     WHERE Post.IDUSER=Profile.UIDuser
-                    ORDER BY Post.TIME ASC
-                    ");
+                    ORDER BY Post.TIME ASC");
             }
-            catch { }
+            catch {
+                return null;
+            }
             finally
             {
                 _conn.Close();
@@ -257,11 +238,8 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteNonQuery(@"
-                                                              DELETE FROM dbo.posts_like_list
-                                                              WHERE IdPost = @IdPost 
-                                                              AND IdUser = @IdUser 
-                                                              ", new object[] { IdPost, IdUser }) > 0;
+                return DataProvider.Instance.ExecuteNonQuery(@"DELETE FROM dbo.posts_like_list WHERE IdPost = @IdPost AND IdUser = @IdUser"
+                                                              , new object[] { IdPost, IdUser }) > 0;
             }
             catch
             {
@@ -292,23 +270,8 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteNonQuery(@"
-                                                            INSERT dbo.COMMENT
-                                                            (
-                                                                IDcomment,
-                                                                IDPOST,
-                                                                CONTENT,
-                                                                TIME,
-                                                                IDuser
-                                                            )
-                                                            VALUES
-                                                            (    @IDcomment ,        -- IDcomment - varchar(30)
-                                                                 @IDPOST ,        -- IDPOST - varchar(30)
-                                                                 @CONTENT ,        -- CONTENT - text
-                                                                 GETDATE() , -- TIME - datetime
-                                                                 @IDuser          -- IDuser - varchar(30)
-                                                            )
-                                                            ", new object[] { comment.IdComment, comment.IdPost, comment.Content, comment.IdUser }) > 0;
+                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddComment @IDcomment ,	@IDPOST ,	@CONTENT , 	@IDuser", 
+                                                        new object[] { comment.IdComment, comment.IdPost, comment.Content, comment.IdUser }) > 0;
             }
             catch
             {
@@ -324,10 +287,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteQuery(@"
-                    SELECT IdUser FROM dbo.posts_like_list
-                    WHERE IdPost = @iDPost 
-                    ", new object[] { iDPost });
+                return DataProvider.Instance.ExecuteQuery(@"SELECT IdUser FROM dbo.posts_like_list WHERE IdPost = @iDPost", new object[] { iDPost });
             }
             catch
             {
@@ -342,11 +302,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteQuery(@"
-                    SELECT *
-                    FROM dbo.PROFILE
-                    WHERE UIDuser != @UID 
-                    ", new object[] { UID });
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.PROFILE WHERE UIDuser != @UID ", new object[] { UID });
             }
             catch
             {
@@ -383,11 +339,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteQuery(@"
-                                                            SELECT *
-                                                            FROM dbo.FRIEND
-                                                            WHERE @UID IN (UID1,UID2)
-                                                            ", new object[] { UID });
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.FRIEND WHERE @UID IN (UID1,UID2)", new object[] { UID });
             }
             catch
             {
@@ -437,7 +389,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteNonQuery(string.Format(@"DELETE FROM dbo.FRIEND WHERE   (UID1 = '{0}'AND UID2 = '{1}') OR (UID1 = '{1}'AND UID2 = '{0}')", UID1, UID2)) > 0;
+                return DataProvider.Instance.ExecuteNonQuery(string.Format(@"DELETE FROM dbo.FRIEND WHERE (UID1 = '{0}'AND UID2 = '{1}') OR (UID1 = '{1}'AND UID2 = '{0}')", UID1, UID2)) > 0;
             }
             catch
             {
@@ -454,11 +406,7 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteQuery(@"
-                                                        SELECT *
-                                                        FROM dbo.PROFILE
-                                                        WHERE UIDuser = @UID
-                                                        ", new object[] { UID });
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.PROFILE WHERE UIDuser = @UID", new object[] { UID });
             }
             catch
             {
@@ -492,11 +440,8 @@ namespace DAL
         {
             try
             {
-                return DataProvider.Instance.ExecuteQuery(@"
-                                                    SELECT dbo.PROFILE.NAME
-                                                    FROM dbo.PROFILE
-                                                    WHERE dbo.PROFILE.UIDuser = @IDuser
-                                                    ",new object[] { uID }).Rows[0].ItemArray[0].ToString();
+                return DataProvider.Instance.ExecuteQuery(@"SELECT dbo.PROFILE.NAME FROM dbo.PROFILE WHERE dbo.PROFILE.UIDuser = @IDuser",
+                                                                new object[] { uID }).Rows[0].ItemArray[0].ToString();
             }
             catch
             {

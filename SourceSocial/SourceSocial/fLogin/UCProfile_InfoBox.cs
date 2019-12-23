@@ -36,8 +36,8 @@ namespace fLogin
         public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
         public Label LbName { get => lbName; set => lbName = value; }
         public Label LbNumFriend { get => lbFriend_Count; set => lbFriend_Count = value; }
-        public Button BtnAddFriend { get => btnAddFriend; set => btnAddFriend = value; }
-        public Button BtnMessenger { get => btnMessenger; set => btnMessenger = value; }
+        public Bunifu.Framework.UI.BunifuFlatButton BtnAddFriend { get => btnAddFriend; set => btnAddFriend = value; }
+        public Bunifu.Framework.UI.BunifuFlatButton BtnMessenger { get => btnMessenger; set => btnMessenger = value; }
         public ProfileDetails profileDetails;
         #endregion
         public UCProfile_InfoBox(BUS.BUS_Controls bUS_Controls,Profile _profile,int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
@@ -45,9 +45,11 @@ namespace fLogin
             InitializeComponent();
             PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
             PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
+            btnMessenger.Iconimage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messWhite.png");
             lbName.Click += (i, e) =>
             {
                 profileDetails = new ProfileDetails(bUS_Controls, _profile);
+                profileDetails.OnChangeAvatar += (image) => OnChangeAvatar(image);
                 profileDetails.Show();
             };
             LbName.Text = _profile.Name;
@@ -89,51 +91,7 @@ namespace fLogin
                 MessageBox.Show("Kết bạn Thất bại");
         }
 
-        private void PtbAvatar_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
 
-            
-            if (openFile.ShowDialog() == DialogResult.OK)
-            {
-                Image bitmap = Bitmap.FromFile(openFile.FileName);
-
-                //Form loadding = new Form() { FormBorderStyle = FormBorderStyle.None, Size = new Size(100, 300), StartPosition = FormStartPosition.CenterScreen };
-                //TextBox textBox = new TextBox() { Text = "Loadding....", Dock = DockStyle.Fill, TextAlign = HorizontalAlignment.Center };
-                //loadding.Controls.Add(textBox);
-
-                //Thread thread = new Thread(() =>
-                //{
-                //    CheckForIllegalCrossThreadCalls = false;
-                //    if (OnChangeAvatar(bitmap))
-                //    {
-                //        loadding.Dispose();
-                //        PtbAvatar.Image = bitmap;
-                //        MessageBox.Show("Đổi avatar thành công");
-                //    }
-                //    else
-                //    {
-                //        loadding.Dispose();
-                //        MessageBox.Show("Đổi avatar không thành công");
-                //    }
-                //    CheckForIllegalCrossThreadCalls = true;
-
-                //});
-                //thread.Start();
-                //loadding.ShowDialog();
-
-                if (OnChangeAvatar(bitmap))
-                {
-                    PtbAvatar.Image = bitmap;
-                    MessageBox.Show("Đổi avatar thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Đổi avatar không thành công");
-                }
-
-            }
-        }
         #endregion
 
         #region Handle_Other
@@ -143,12 +101,16 @@ namespace fLogin
             {
                 BtnAddFriend.Visible = false;
                 BtnMessenger.Visible = false;
-                PtbAvatar.Click += PtbAvatar_Click;
+              
             }
             else if (IsFriend == 1)
             {
                 BtnAddFriend.Text = "Huỷ kết bạn";
+                BtnAddFriend.BackColor = Color.Red;
+                BtnAddFriend.colbackground = Color.Red;
+                BtnAddFriend.colhover = Color.FromArgb(211, 47, 47);
                 BtnAddFriend.Visible = true;
+                BtnAddFriend.Update();
                 BtnMessenger.Visible = true;
                 try
                 {
@@ -163,7 +125,10 @@ namespace fLogin
             else
             {
                 BtnAddFriend.Text = "Kết bạn";
+                BtnAddFriend.colbackground = btnMessenger.colbackground;
+                BtnAddFriend.colhover = btnMessenger.colhover;
                 BtnAddFriend.Visible = true;
+                BtnAddFriend.Update();
                 BtnMessenger.Visible = false;
                 try
                 {

@@ -226,7 +226,7 @@ namespace BUS
 
                     Profilecurrent.Uid = data.Rows[0].ItemArray[0].ToString();
                     Profilecurrent.Name = data.Rows[0].ItemArray[1].ToString();
-                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                    Profilecurrent.Avatar = ConverttoImage(data.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
 
                     Profilecurrent.DateOfBirth = (DateTime)data.Rows[0].ItemArray[3];
 
@@ -273,7 +273,7 @@ namespace BUS
                 temp.Idpost = data.Rows[i].ItemArray[1].ToString();
                 temp.Liked = (int)data.Rows[i].ItemArray[2];
                 temp.Content = data.Rows[i].ItemArray[3].ToString();
-                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.Image = ConverttoImage(data.Rows[i].ItemArray[7]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.Time = data.Rows[i].ItemArray[5].ToString();
                 temp.Name = data.Rows[i].ItemArray[6].ToString();
                 posts.Add(temp);
@@ -287,7 +287,7 @@ namespace BUS
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 Mailboxlist temp = new Mailboxlist();
-                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                temp.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 temp.IDmessbox = data.Rows[i].ItemArray[0].ToString();
                 temp.Iduser = data.Rows[i].ItemArray[3].ToString();
                 temp.Lastcontent = data.Rows[i].ItemArray[4].ToString();
@@ -315,6 +315,7 @@ namespace BUS
                 {
                     likes.SingleOrDefault(x => x.Key == iDPost).Value.Add(profilecurrent.Uid);
                     posts.Single(x => x.Idpost == iDPost).Liked++;                    AddNotify(iDPost, 1);
+                    return true;
                 }
             }
             else
@@ -383,7 +384,7 @@ namespace BUS
                 Comment comment = new Comment();
                 comment.IdUser = data.Rows[i].ItemArray[0].ToString();
                 comment.Name = data.Rows[i].ItemArray[1].ToString();
-                comment.Avatar = ConverttoImage(data.Rows[i].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+                comment.Avatar = ConverttoImage(data.Rows[i].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
                 comment.IdPost = data.Rows[i].ItemArray[3].ToString();
                 comment.IdComment = data.Rows[i].ItemArray[4].ToString();
                 comment.Content = data.Rows[i].ItemArray[5].ToString();
@@ -497,7 +498,7 @@ namespace BUS
             Profile profile = new Profile();
             profile.Uid = UID;
             profile.Name = dataTable.Rows[0].ItemArray[1].ToString();
-            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2].ToString()) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
+            profile.Avatar = ConverttoImage(dataTable.Rows[0].ItemArray[2]) ?? Bitmap.FromFile(System.Windows.Forms.Application.StartupPath + @"\Picture\NoAvatar.png");
 
             profile.DateOfBirth = ((DateTime)dataTable.Rows[0].ItemArray[3]).ToLocalTime();
             profile.PhoneNum = dataTable.Rows[0].ItemArray[4].ToString();
@@ -632,14 +633,11 @@ namespace BUS
                 returnImage = Image.FromStream(ms, true);//Exception occurs here
                 return returnImage;
             }
-            catch
-            {
-                return null;
-            }
+            catch { }
             finally
             {
             }
-
+            return null;
         }
 
 

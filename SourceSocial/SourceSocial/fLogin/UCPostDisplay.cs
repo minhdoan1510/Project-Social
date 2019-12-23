@@ -38,7 +38,11 @@ namespace fLogin
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
         public int LikeCount { get => likeCount; set { likeCount = value; OnLikeCountChange(); }  }
         public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
-        public string Iduser { get => iduser; set => iduser = value; }        public DTO.Post post
+        public string Iduser { get => iduser; set => iduser = value; }        public bool Liked { get => (bool)PtbLike.Tag; set { PtbLike.Tag = value; OnLike(); } }
+
+       
+
+        public DTO.Post post
         {
             get => Post;
             set
@@ -68,12 +72,12 @@ namespace fLogin
 
            
 
-            PtbLike.Image = Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png");
+           
             PtbLike.SizeMode = PictureBoxSizeMode.Zoom;
             PtbLike.Click += PtbLike_Click;
             lbLiked_Post.Click += (sender,e)=> OnClickLikeList(this.Tag.ToString());
             btnComment_Post.Click += BtnComment_Post_Click;
-
+            this.bunifuElipse1.ApplyElipse(30);
 
             LoadAnimation();
         }
@@ -82,21 +86,29 @@ namespace fLogin
         #region Handle_Event
         private void PtbLike_Click(object sender, EventArgs e)
         {
-            if (OnClickLike(this.Tag.ToString(), !(bool)PtbLike.Tag))
+            if (OnClickLike(this.Tag.ToString(), !(bool)Liked))
             {
-                LikeCount=(PtbLike.Tag.Equals(false))? likeCount+1:likeCount-1;
-                PtbLike.Tag = !(bool)PtbLike.Tag;
-
+                LikeCount=(Liked.Equals(false))? LikeCount+1:LikeCount-1;
+            
+                Liked = !(bool)Liked;
+                
                 if (OnClickLikeOutsideNewfeed != null)
                     OnClickLikeOutsideNewfeed(this.Tag.ToString());
             }
-      
+            
             
         }
 
         private void OnLikeCountChange()
         {
             this.lbLiked_Post.Text = string.Format("{0} lượt thích", likeCount);
+        }
+
+        private void OnLike()
+        {
+            
+            PtbLike.Image = (Liked == false)? Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png"): Bitmap.FromFile(Application.StartupPath + @"\picture\Liked.png");
+            
         }
         private void LbName_Post_Click(object sender, EventArgs e)
         {

@@ -24,9 +24,10 @@ namespace fLogin
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
             skinManager.AddFormToManage(this);
-            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
-            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green900, MaterialSkin.Primary.BlueGrey900, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
-
+            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Red800, MaterialSkin.Primary.Red600, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
+            ptbAvatar.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\avatarLoginfrm.png");
+            ptbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         #region Handle_Event
@@ -86,7 +87,7 @@ namespace fLogin
 
             Form fMain = new Form();
             fMain = new fMain(BUS_Controls);
-            fMain.FormClosed += (jj, s) => this.Close();
+            fMain.FormClosed += (j, s) => this.Close();
             this.Hide();
             fMain.ShowDialog();
         }

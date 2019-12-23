@@ -20,15 +20,15 @@ namespace GPSLocation
             Client = new HttpClient();
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add
-                (new MediaTypeWithQualityHeaderValue("application/json"));  
+                (new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public static DateTime toLocal(int input) // input the unix code
-		{
-			DateTime UnixEpoach = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-			DateTime localTime = UnixEpoach.AddSeconds(input).ToLocalTime();
-			return localTime;
-		}
+        {
+            DateTime UnixEpoach = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            DateTime localTime = UnixEpoach.AddSeconds(input).ToLocalTime();
+            return localTime;
+        }
 
         public static async Task<string> requestIP()
         {
@@ -58,8 +58,8 @@ namespace GPSLocation
         public static async Task<location_data> requestLocation()
         {
             string ip_address = await requestIP();
-            string url = $"https://api.ipfind.com/?ip={ ip_address }" +
-                "&auth=2648e2ed-b6cc-4bf7-88d4-5d2265837b80";
+            string url = $"https://api.ipdata.co/{ip_address}" +
+                $"?api-key=5eda9e6bd49b361f4bf8f23a85d3b57692ba0c963f8132c9460c4bf9";
 
             using (HttpResponseMessage respond = await Client.GetAsync(url))
             {

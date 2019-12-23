@@ -33,3 +33,15 @@ C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWea
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csproj.CopyComplete
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.exe
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.exe.config
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.exe
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\gpsWeather.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\Newtonsoft.Json.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\System.Net.Http.Formatting.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\Newtonsoft.Json.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\bin\Debug\System.Net.Http.Formatting.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csproj.CoreCompileInputs.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.csproj.CopyComplete
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.exe
+D:\Code\tsclone\SourceSocial\SourceSocial\gpsWeather\obj\Debug\gpsWeather.pdb

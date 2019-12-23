@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ptbAvatar_Post = new System.Windows.Forms.PictureBox();
             this.lbName_Post = new System.Windows.Forms.Label();
             this.lbTime_Post = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.btnComment_Post = new System.Windows.Forms.Button();
             this.lbLiked_Post = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar_Post)).BeginInit();
             this.pnlInfor.SuspendLayout();
             this.pnlInter.SuspendLayout();
@@ -124,7 +126,7 @@
             // ptbLike
             // 
             this.ptbLike.BackColor = System.Drawing.Color.Transparent;
-            this.ptbLike.Location = new System.Drawing.Point(15, 15);
+            this.ptbLike.Location = new System.Drawing.Point(16, 13);
             this.ptbLike.Name = "ptbLike";
             this.ptbLike.Size = new System.Drawing.Size(25, 25);
             this.ptbLike.TabIndex = 0;
@@ -137,7 +139,7 @@
             this.btnComment_Post.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnComment_Post.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComment_Post.ForeColor = System.Drawing.Color.White;
-            this.btnComment_Post.Location = new System.Drawing.Point(554, 8);
+            this.btnComment_Post.Location = new System.Drawing.Point(572, 8);
             this.btnComment_Post.Name = "btnComment_Post";
             this.btnComment_Post.Size = new System.Drawing.Size(115, 33);
             this.btnComment_Post.TabIndex = 2;
@@ -166,6 +168,11 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(697, 224);
             this.panel1.TabIndex = 6;
+            // 
+            // bunifuElipse1
+            // 
+            this.bunifuElipse1.ElipseRadius = 30;
+            this.bunifuElipse1.TargetControl = this.panel1;
             // 
             // UCPostDisplay
             // 
@@ -202,5 +209,6 @@
         private System.Windows.Forms.PictureBox ptbLike;
         private System.Windows.Forms.Label lbContent_Post;
         private System.Windows.Forms.Panel panel1;
+        public Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
     }
 }

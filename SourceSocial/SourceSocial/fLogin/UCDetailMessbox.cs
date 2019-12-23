@@ -45,6 +45,12 @@ namespace fLogin
             this.BackgroundImageLayout = ImageLayout.Zoom;
             this.DoubleBuffered = true;
             lbName.Text = name;
+            pnlDisplayMess.AutoScroll = false;
+            pnlDisplayMess.HorizontalScroll.Maximum = 0;
+            pnlDisplayMess.HorizontalScroll.Visible = false;
+            pnlDisplayMess.VerticalScroll.Maximum = 0;
+            pnlDisplayMess.VerticalScroll.Visible = false;
+            pnlDisplayMess.AutoScroll = true;
         }
 
         private void TxbMess_KeyDown(object sender, KeyEventArgs e)

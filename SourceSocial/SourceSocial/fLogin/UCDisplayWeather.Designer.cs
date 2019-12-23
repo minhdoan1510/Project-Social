@@ -56,7 +56,9 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.DarkGray;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(34)))), ((int)(((byte)(19)))));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(0, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(149, 27);
@@ -66,7 +68,9 @@
             // 
             // lbViTri
             // 
-            this.lbViTri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lbViTri.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbViTri.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbViTri.ForeColor = System.Drawing.Color.White;
             this.lbViTri.Location = new System.Drawing.Point(0, 122);
             this.lbViTri.Name = "lbViTri";
             this.lbViTri.Size = new System.Drawing.Size(149, 27);
@@ -76,7 +80,9 @@
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.Color.DarkGray;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(34)))), ((int)(((byte)(19)))));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(0, 290);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(149, 27);
@@ -86,7 +92,9 @@
             // 
             // label5
             // 
-            this.label5.BackColor = System.Drawing.Color.DarkGray;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(34)))), ((int)(((byte)(19)))));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(0, 191);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 27);
@@ -105,7 +113,9 @@
             // 
             // lbNhietDo
             // 
-            this.lbNhietDo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lbNhietDo.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbNhietDo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNhietDo.ForeColor = System.Drawing.Color.White;
             this.lbNhietDo.Location = new System.Drawing.Point(0, 218);
             this.lbNhietDo.Name = "lbNhietDo";
             this.lbNhietDo.Size = new System.Drawing.Size(149, 27);
@@ -115,7 +125,9 @@
             // 
             // lbDoAm
             // 
-            this.lbDoAm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lbDoAm.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbDoAm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDoAm.ForeColor = System.Drawing.Color.White;
             this.lbDoAm.Location = new System.Drawing.Point(0, 317);
             this.lbDoAm.Name = "lbDoAm";
             this.lbDoAm.Size = new System.Drawing.Size(149, 27);
@@ -135,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(64)))), ((int)(((byte)(34)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
             this.Controls.Add(this.ptbWeather);
             this.Controls.Add(this.lbDoAm);
             this.Controls.Add(this.lbNhietDo);

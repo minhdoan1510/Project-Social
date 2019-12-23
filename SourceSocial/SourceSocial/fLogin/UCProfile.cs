@@ -83,8 +83,8 @@ namespace fLogin
                     post.OnClickLikeList += (i) => OnClickLikeList(i);
                     post.OnClickLikeOutsideNewfeed += (i) => OnClickLikeOutsideNewfeed(i);
                     if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
-                        post.PtbLike.Tag = true;
-                    else post.PtbLike.Tag = false;
+                        post.Liked = true;
+                    else post.Liked = false;
                     pnlNewFeed_Main.Controls.Add(post);
                 }
             }
