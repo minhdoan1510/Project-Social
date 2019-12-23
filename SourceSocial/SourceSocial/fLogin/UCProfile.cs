@@ -21,6 +21,9 @@ namespace fLogin
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
+        public delegate bool ChangeProfile(Profile profile);
+        public event ChangeProfile OnChangeProfile;
+
         public delegate bool AddFriend(string uid);
         public event AddFriend OnAddFriend;
 
@@ -101,7 +104,7 @@ namespace fLogin
             uCProfile_InfoBox.OnViewFriend += (i) => OnViewFriend(i);
             uCProfile_InfoBox.LbNumFriend.Text = string.Format("{0} bạn", BUS_Controls.numOfFriend(profile.Uid));
             uCProfile_InfoBox.OnInbox += (IdMessBox, Username,IdUser) => OnInbox(IdMessBox, Username, IdUser);
-            
+            uCProfile_InfoBox.OnChangeProfile += (i) => OnChangeProfile(i);
             //
             //add UCaddPost
             if (isFriend == 2)

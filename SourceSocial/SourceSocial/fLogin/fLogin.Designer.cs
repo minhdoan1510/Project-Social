@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLogin));
             this.materialTabSelector2 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
@@ -49,6 +50,7 @@
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
@@ -235,6 +237,7 @@
             this.txbPassword_SignUp.SelectionStart = 0;
             this.txbPassword_SignUp.Size = new System.Drawing.Size(188, 23);
             this.txbPassword_SignUp.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.txbPassword_SignUp, "Mật khẩu phải có từ 8 kí tự trở lên và có chứa ít nhất 1 chữ số");
             this.txbPassword_SignUp.UseSystemPasswordChar = false;
             // 
             // txbUsername_SignUp
@@ -379,6 +382,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialRaisedButton btnSignUp;
         private System.Windows.Forms.PictureBox ptbAvatar;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

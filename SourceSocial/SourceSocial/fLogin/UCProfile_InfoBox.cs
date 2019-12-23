@@ -20,6 +20,9 @@ namespace fLogin
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
+        public delegate bool ChangeProfile(Profile profile);
+        public event ChangeProfile OnChangeProfile;
+
         public delegate bool AddFriend();
         public event AddFriend OnAddFriend;
 
@@ -48,8 +51,9 @@ namespace fLogin
             btnMessenger.Iconimage = Bitmap.FromFile(Application.StartupPath + @"\Picture\messWhite.png");
             lbName.Click += (i, e) =>
             {
-                profileDetails = new ProfileDetails(bUS_Controls, _profile);
+                profileDetails = new ProfileDetails(_profile,isFriend);
                 profileDetails.OnChangeAvatar += (image) => OnChangeAvatar(image);
+                profileDetails.OnChangeProfile += (profile)=> OnChangeProfile(profile);
                 profileDetails.Show();
             };
             LbName.Text = _profile.Name;

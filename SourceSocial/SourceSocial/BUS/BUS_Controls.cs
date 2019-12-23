@@ -300,6 +300,7 @@ namespace BUS
 
         public void LoadDataPost(string UID)
         {
+            if (posts != null) posts.Clear();
             DataTable data = dal.LoadAllPosts();
             //DataTable data = dal.LoadPosts(UID);
             for (int i = 0; i < data.Rows.Count; i++)
@@ -557,8 +558,12 @@ namespace BUS
         public bool AlterProfile(Profile profile)
 
         {
-
-            return dal.AlterProfile(profile);
+            if (dal.AlterProfile(profile))
+            {
+                Profilecurrent = profile;
+                return true;
+            }
+            return false;
 
         }
 

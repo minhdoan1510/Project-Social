@@ -18,10 +18,13 @@ namespace fLogin
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
-        BUS_Controls BUS_Controls;
-        public ProfileDetails(BUS_Controls _Controls,Profile profile)
+        public delegate bool ChangeProfile(Profile profile);
+        public event ChangeProfile OnChangeProfile;
+
+
+        public ProfileDetails(Profile profile, int IsFriend)
         {
-            BUS_Controls = _Controls;
+          
             InitializeComponent();
             lblName.Text = profile.Name;
             ptbAvatar.Image = profile.Avatar;
@@ -31,7 +34,7 @@ namespace fLogin
             tbxHometown.Text = profile.HomeTown != string.Empty ? profile.HomeTown: "Chưa cập nhật" ;
             tbxPhonenum.Text = profile.PhoneNum != string.Empty ? profile.PhoneNum :"Chưa cập nhật"; 
             tbxMarriage.Text = profile.MarriageSt != string.Empty ? profile.MarriageSt:"Chưa cập nhật"; 
-            if (BUS_Controls.IsFriendWith(profile.Uid) != 2)
+            if (IsFriend != 2)
             {
                 btnAlter.Visible = false;
                 btnChangeAvatar.Visible = false;
@@ -52,7 +55,7 @@ namespace fLogin
                         PhoneNum = tbxPhonenum.Text,
                         MarriageSt = tbxMarriage.Text
                     };
-                    if (BUS_Controls.AlterProfile(_profile))
+                    if (OnChangeProfile(_profile))
                         MessageBox.Show("Thay đổi thông tin thành công!");
                     else
                         MessageBox.Show("Thay đổi thông tin thất bại!");

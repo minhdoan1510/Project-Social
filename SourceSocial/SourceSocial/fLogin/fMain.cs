@@ -20,7 +20,7 @@ namespace fLogin
 
         UCProfile DisplayProfile;
         UCDisplayWeather uCDisplayWeather;
-        Form formMess;        NotificationList formNotify;
+        Form formMess;               NotificationList formNotify;
         NotificationBox notification;
         UCDisplayUserOnline uCDisplayUserOnline;
         UCMainHeader uCMainHeader;
@@ -31,7 +31,7 @@ namespace fLogin
         public fMain(BUS_Controls _BUS_Controls)
         {
             InitializeComponent();
-
+          
 
             BUS_Controls = _BUS_Controls;
             this.BackColor = Color.FromArgb(249, 249, 249);
@@ -125,6 +125,15 @@ namespace fLogin
         /// <param name="messin"></param>
         private void BUS_Controls_HaveNewMesseger(MessinMessbox messin)
         {
+            if (formMess == null)
+            {
+                Notify temp = new Notify()
+                {
+                    TypeNotify = 3,
+                    SendName = BUS_Controls.GetProfile(messin.UidSend).Name
+                };
+                BUS_Controls_HaveNewNotify(temp);
+            }
             foreach (UCMessengerDisplay item in formMess.Controls)
             {
                 try
@@ -134,15 +143,7 @@ namespace fLogin
 
                 }
                 catch { }
-            }            if (formMess == null)
-            {
-                Notify temp = new Notify()
-                {
-                    TypeNotify = 3,
-                    SendName = BUS_Controls.GetProfile(messin.UidSend).Name
-                };
-                BUS_Controls_HaveNewNotify(temp);
-            }
+            }            
 
 
         }
@@ -280,7 +281,7 @@ namespace fLogin
         {
             //Invoke(new Action(() =>
             //{
-            formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
+            formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false , MaximizeBox = false};
             UCLoading uCLoadingMEssbox = new UCLoading();
             formMess.Controls.Add(uCLoadingMEssbox);
 
@@ -295,6 +296,7 @@ namespace fLogin
                    Invoke(new Action(() =>
                     {
                         formMess.Controls.Add(uCMessengerDisplay);
+                        formMess.FormClosed += (i, e) => { formMess = null; };
                         formMess.Controls.Remove(uCLoadingMEssbox);
                         if (formMess.Visible != true)
                             formMess.ShowDialog();
@@ -394,7 +396,7 @@ namespace fLogin
         public void ShowUserList(List<string> UserList)
         {
             if (UserList.Count == 0) return;
-            Form l = new Form();
+            Form l = new Form() { Text = "Danh sách", MaximizeBox = false , FormBorderStyle = FormBorderStyle.FixedDialog };
             l.AutoScroll = true;
             l.Size = new Size(350, 500);
             foreach (var item in UserList)
@@ -407,7 +409,7 @@ namespace fLogin
 
                 l.Controls.Add(tempInfo);
             }
-            l.Show();
+            l.ShowDialog();
 
         }
         public void Post_OnClickComment(string IDPost)
@@ -466,6 +468,8 @@ namespace fLogin
 
             DisplayProfile.OnClickLikeOutsideNewfeed += (i) => ClickLikeOutsideNewfeed(i);
 
+            DisplayProfile.OnChangeProfile += (i) => ProfileDetails_OnChangeProfile(i);
+
             DisplayProfile.Visible = true;
 
 
@@ -486,6 +490,16 @@ namespace fLogin
                 return true;
             }
             return false;
+        }
+
+        private bool ProfileDetails_OnChangeProfile(Profile profile)
+        {
+            if (BUS_Controls.AlterProfile(profile))
+            {
+                OpenHome();
+                return true;
+            }
+            return false;
         }
 
         #endregion

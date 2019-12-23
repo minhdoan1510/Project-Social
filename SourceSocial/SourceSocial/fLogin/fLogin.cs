@@ -60,7 +60,7 @@ namespace fLogin
         {
             if (string.IsNullOrWhiteSpace(account.Name)||account.Name== string.Empty)
             {
-                MessageBox.Show("Name không hợp lệ");
+                MessageBox.Show("Tên hiển thị không hợp lệ");
                 return false;
             }
             if (!(account.Username.Length>5))
@@ -68,7 +68,7 @@ namespace fLogin
                 MessageBox.Show("Độ dài phải username phải lớn hơn 5");
                 return false;
             }
-            if (!new Regex(@"/ ^(?=.*[a - z])(?=.*[A - Z])(?=.*[0 - 9])(?=.*[!@#\$%\^&\*]).{8,}$/").IsMatch(account.Password))
+            if (!new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$").IsMatch(account.Password))
             {
                 MessageBox.Show("Mật khẩu quá yếu");
                 return false;

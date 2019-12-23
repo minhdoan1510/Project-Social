@@ -162,3 +162,5 @@ D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\Bunifu_UI_v1.52.dll
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAbout.resources
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAbout.resources
