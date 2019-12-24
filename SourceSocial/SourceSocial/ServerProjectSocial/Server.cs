@@ -37,59 +37,72 @@ namespace ServerProjectSocial
             Connect();
         }
 
-        void SendAddUserOnline(DetailClientSocket newusser)
-        {
+        void SendAddUserOnline(DetailClientSocket newusser)
+        {
             string name = DataProvider.Instance.ExecuteQuery(@"SELECT dbo.PROFILE.NAME
                                                                 FROM dbo.PROFILE
                                                                 WHERE dbo.PROFILE.UIDuser = @UIDuser", new object[] { newusser.UID }).Rows[0].ItemArray[0].ToString();
-            string result = string.Format("3_Add_{0}|{1}", newusser.UID, name);
-            foreach (DetailClientSocket item in clients)
-            {
-                if (newusser.UID != item.UID)
-                {
-                    Send(SetBinary(result), item.Socket);
-                }
-            }
-        }
-
-
-        void SendDelUserOnline(DetailClientSocket newusser)
-        {
-            try
-            {
-                string result = string.Format("3_Del_{0}|{1}", newusser.UID, "del");
-                foreach (DetailClientSocket item in clients)
-                {
-                    Send(SetBinary(result), item.Socket);
-                }
-            }
-            catch
-            {
-                SendDelUserOnline(newusser);
-            }
-        }
-
-        string EndcodeDataUserOnline(string uid)
-        {
-            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { uid });
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { newusser.UID });
             List<KeyValuePair<string, string>> uidbb = new List<KeyValuePair<string, string>>();
 
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 uidbb.Add(new KeyValuePair<string, string>(data.Rows[i].ItemArray[0].ToString(), data.Rows[i].ItemArray[1].ToString()));
             }
-            string result = "3_Load";
-            foreach (KeyValuePair<string, string> item in uidbb)
+
+            string result = string.Format("3_Add_{0}|{1}", newusser.UID, name);
+            foreach (DetailClientSocket item in clients)
             {
-                try
+                if (newusser.UID != item.UID)
                 {
-                    List<DetailClientSocket> temp = clients.Where(x => x.UID == item.Key).ToList();
-                    if (temp.Count == 1)
-                        result += ("_" + item.Key + "|" + item.Value);
+                    try
+                    {
+                        if (uidbb.Where(x => x.Key == item.UID).ToList().Count ==1)
+                            Send(SetBinary(result), item.Socket);
+                    }
+                    catch { }
                 }
-                catch { }
             }
-            return result;
+        }
+
+
+        void SendDelUserOnline(DetailClientSocket newusser)
+        {
+            try
+            {
+                string result = string.Format("3_Del_{0}|{1}", newusser.UID, "del");
+                foreach (DetailClientSocket item in clients)
+                {
+                    Send(SetBinary(result), item.Socket);
+                }
+            }
+            catch
+            {
+                SendDelUserOnline(newusser);
+            }
+        }
+
+        string EndcodeDataUserOnline(string uid)
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { uid });
+            List<KeyValuePair<string, string>> uidbb = new List<KeyValuePair<string, string>>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                uidbb.Add(new KeyValuePair<string, string>(data.Rows[i].ItemArray[0].ToString(), data.Rows[i].ItemArray[1].ToString()));
+            }
+            string result = "3_Load";
+            foreach (KeyValuePair<string, string> item in uidbb)
+            {
+                try
+                {
+                    List<DetailClientSocket> temp = clients.Where(x => x.UID == item.Key).ToList();
+                    if (temp.Count == 1)
+                        result += ("_" + item.Key + "|" + item.Value);
+                }
+                catch { }
+            }
+            return result;
         }
 
 
@@ -127,7 +140,7 @@ namespace ServerProjectSocial
                         Socket client = server.Accept();
 
                         Console.WriteLine("[" + DateTime.Now + "] Have 1 device request access");
-
+
                         clients.Add(new DetailClientSocket(client, string.Empty));
                         Send(SetBinary("0"), client);
 
@@ -192,7 +205,7 @@ namespace ServerProjectSocial
             {
                 while (true)
                 {
-                    byte[] temp1 = new byte[1024];
+                    byte[] temp1 = new byte[1024*5000];
                     int cout = client.Receive(temp1);
 
                     byte[] temp = new byte[cout];
@@ -210,12 +223,12 @@ namespace ServerProjectSocial
             catch (Exception e)
             {
                 Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
-                Console.WriteLine("[" + DateTime.Now + "] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
-
-                DetailClientSocket detail = clients.Where(x => x.Socket == client).SingleOrDefault();
-                clients.Remove(detail);
-                SendDelUserOnline(detail);
-
+                Console.WriteLine("[" + DateTime.Now + "] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
+
+                DetailClientSocket detail = clients.Where(x => x.Socket == client).SingleOrDefault();
+                clients.Remove(detail);
+                SendDelUserOnline(detail);
+
                 Console.WriteLine("[" + DateTime.Now + "] The number of current connections is {0}", clients.Count);
                 client.Close();
             }
@@ -237,25 +250,25 @@ namespace ServerProjectSocial
                 case 2://Xử lý khi user gửi thông báo
                     Handle_NotifyPacket(packet.IDNotify, client);
                     break;
-                case 3:
-                    DetailClientSocket item = clients.Where(x => x.Socket == client).SingleOrDefault();
+                case 3:
+                    DetailClientSocket item = clients.Where(x => x.Socket == client).SingleOrDefault();
                     Send(SetBinary(EndcodeDataUserOnline(item.UID)), item.Socket);
                     break;
 
                 case 0://Xử lý yêu cầu UID từ client kết nối tới server
-                    DetailClientSocket item1 = clients.Where(x => x.Socket == client).SingleOrDefault();
-                    DetailClientSocket item2 = null;
-                    item2 = clients.Where(x => x.UID == packet.UID).SingleOrDefault();
-                    if (item2 != null)
-                    {
-                        Send(SetBinary("5_1"), item1.Socket);
-                        //clients.Remove(item1);
-                        Console.WriteLine("[" + DateTime.Now + "] UID {0} have other access device. Socket removed from server", packet.UID);
-                        break;
-                    }
-                    else
-                        Send(SetBinary("5_0"), item1.Socket);
-                    item1.UID = packet.UID;
+                    DetailClientSocket item1 = clients.Where(x => x.Socket == client).SingleOrDefault();
+                    DetailClientSocket item2 = null;
+                    item2 = clients.Where(x => x.UID == packet.UID).SingleOrDefault();
+                    if (item2 != null)
+                    {
+                        Send(SetBinary("5_1"), item1.Socket);
+                        //clients.Remove(item1);
+                        Console.WriteLine("[" + DateTime.Now + "] UID {0} have other access device. Socket removed from server", packet.UID);
+                        break;
+                    }
+                    else
+                        Send(SetBinary("5_0"), item1.Socket);
+                    item1.UID = packet.UID;
 
                     SendAddUserOnline(item1);
 
@@ -280,10 +293,10 @@ namespace ServerProjectSocial
                     Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
                 }
             }
-        }
+        }
         #endregion
-
-
+        
+        
         ///// <summary>
         ///// Convert binary to object
         ///// </summary>
