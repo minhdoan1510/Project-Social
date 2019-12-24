@@ -92,7 +92,7 @@ namespace fLogin
                 MessageBox.Show("Kết Bạn Thành Công");
             }
             else
-                MessageBox.Show("Kết bạn Thất bại");
+                MessageBox.Show("Đã là bạn bè");
         }
 
 

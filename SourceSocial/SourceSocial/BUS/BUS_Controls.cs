@@ -301,6 +301,8 @@ namespace BUS
         public void Reload()
         {
             if (posts != null) posts.Clear();
+            ListFriend.Clear();
+            ListFriend = LoadDataListFriend(Profilecurrent.Uid);
             comments.Clear();
             likes.Clear();
             LoadDataPost();

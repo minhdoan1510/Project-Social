@@ -206,7 +206,9 @@ namespace fLogin
             pnlNewFeed_Main.Controls.Clear();
             uCLoading.BringToFront();
 
-            await Task.Factory.StartNew((() => LoadNewFeed()));
+            await Task.Factory.StartNew((() => { LoadNewFeed();   }));
+            uCMainHeader.Dispose();
+            LoadMainHeader();
 
 
         }
