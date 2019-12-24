@@ -111,10 +111,11 @@ namespace fLogin
             {
                 BtnAddFriend.Text = "Huỷ kết bạn";
                 BtnAddFriend.BackColor = Color.Red;
+                BtnAddFriend.Activecolor = Color.Red;
                 BtnAddFriend.colbackground = Color.Red;
                 BtnAddFriend.colhover = Color.FromArgb(211, 47, 47);
                 BtnAddFriend.Visible = true;
-                BtnAddFriend.Update();
+                BtnAddFriend.Iconimage = Bitmap.FromFile(Application.StartupPath + @"\Picture\cross.png");
                 BtnMessenger.Visible = true;
                 try
                 {
@@ -131,8 +132,9 @@ namespace fLogin
                 BtnAddFriend.Text = "Kết bạn";
                 BtnAddFriend.colbackground = btnMessenger.colbackground;
                 BtnAddFriend.colhover = btnMessenger.colhover;
+                BtnAddFriend.Activecolor = btnMessenger.Activecolor;
                 BtnAddFriend.Visible = true;
-                BtnAddFriend.Update();
+                BtnAddFriend.Iconimage = Bitmap.FromFile(Application.StartupPath + @"\Picture\tick.png");
                 BtnMessenger.Visible = false;
                 try
                 {

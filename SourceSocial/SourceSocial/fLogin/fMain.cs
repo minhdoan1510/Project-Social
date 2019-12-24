@@ -339,7 +339,7 @@ namespace fLogin
         }
         private void LoadNewFeed()
         {
-            BUS_Controls.LoadDataPost(BUS_Controls.Profilecurrent.Uid);
+            BUS_Controls.Reload();
             Invoke(new Action(() => pnlNewFeed_Main.Controls.Clear()));
             List<Post> posts = BUS_Controls.GetPost();
             foreach (var item in posts)
@@ -360,7 +360,7 @@ namespace fLogin
             catch { }
         }
 
-        private UCPostDisplay CreatePostDisplay(Post post)
+        public UCPostDisplay CreatePostDisplay(Post post)
         {
             UCPostDisplay postDisplay = new UCPostDisplay(post);
             postDisplay.Dock = DockStyle.Top;
@@ -388,6 +388,7 @@ namespace fLogin
 
                 UCPostDisplay post = CreatePostDisplay(temp);
                 this.pnlNewFeed_Main.Controls.Add(post);
+                OpenHome();
             }
             else
                 MessageBox.Show("Không thành công!!!");
@@ -405,6 +406,10 @@ namespace fLogin
                 tempInfo.Dock = DockStyle.Top;
                 tempInfo.LbNumFriend.Visible = false;
                 tempInfo.OnDelFriend += () => BUS_Controls.DelFriend(BUS_Controls.GetProfile(item).Uid);
+
+                tempInfo.OnAddFriend += () => BUS_Controls.AddFriend(BUS_Controls.GetProfile(item).Uid);
+
+                tempInfo.OnInbox += (IdMessBox, Username, IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Username, IdUser);
 
 
                 l.Controls.Add(tempInfo);
@@ -429,8 +434,8 @@ namespace fLogin
         public void ClickLikeOutsideNewfeed(string IDPost)
         {
             UCPostDisplay temp = this.pnlNewFeed_Main.Controls.OfType<UCPostDisplay>().Single(x => x.Tag.ToString() == IDPost);
-            temp.LikeCount = (temp.PtbLike.Tag.Equals(false)) ? temp.LikeCount + 1 : temp.LikeCount - 1;
-            temp.PtbLike.Tag = !(bool)temp.PtbLike.Tag;
+            temp.LikeCount = (temp.Liked.Equals(false)) ? temp.LikeCount + 1 : temp.LikeCount - 1;
+            temp.Liked = !(bool)temp.Liked;
         }
 
 

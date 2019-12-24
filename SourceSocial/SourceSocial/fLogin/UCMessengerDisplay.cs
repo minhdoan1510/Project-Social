@@ -59,7 +59,7 @@ namespace fLogin
             Mailboxlist tempMailbox = mailboxlists.Where(x => x.IDmessbox == IDmessbox).SingleOrDefault();
             if(tempMailbox!=null)
             {
-                Image AvatarMessbox = tempMailbox.Avatar;
+               
                 if (detailMessbox == null)
                 {
                     List<MessinMessbox> detailMess = new List<MessinMessbox>();
@@ -67,14 +67,9 @@ namespace fLogin
                         detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
 
                     detailMessbox = new UCDetailMessbox(Username,IdUser);
-                    for (int i = detailMess.Count - 1; i >= 0; i--)
-                    {
-                        if (!detailMess[i].IsMe)
-                        {
-                            detailMess[i].Avatar = AvatarMessbox;
-                        }
-                        detailMessbox.AddMessinMessbox(detailMess[i]);
-                    }
+                    detailMessbox.Avatar = tempMailbox.Avatar;
+                    foreach(var item in detailMess)
+                        detailMessbox.AddMessinMessbox(item);
                     detailMessbox.Tag = IDmessbox;
                     uCDetailMessboxes.Add(detailMessbox);
                 }

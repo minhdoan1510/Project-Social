@@ -21,7 +21,7 @@ namespace ServerProjectSocial
 
         public Server()
         {
-            Console.WriteLine( "["+ DateTime.Now +"] Creating the server");
+            Console.WriteLine("[" + DateTime.Now + "] Creating the server");
             clients = new List<DetailClientSocket>();
             IP = new IPEndPoint(IPAddress.Any, 9865);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
@@ -71,12 +71,12 @@ namespace ServerProjectSocial
 
         string EndcodeDataUserOnline(string uid)
         {
-            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser",new object[]{ uid });
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { uid });
             List<KeyValuePair<string, string>> uidbb = new List<KeyValuePair<string, string>>();
 
             for (int i = 0; i < data.Rows.Count; i++)
             {
-                uidbb.Add(new KeyValuePair<string, string>( data.Rows[i].ItemArray[0].ToString(),data.Rows[i].ItemArray[1].ToString()));
+                uidbb.Add(new KeyValuePair<string, string>(data.Rows[i].ItemArray[0].ToString(), data.Rows[i].ItemArray[1].ToString()));
             }
             string result = "3_Load";
             foreach (KeyValuePair<string, string> item in uidbb)
@@ -104,15 +104,15 @@ namespace ServerProjectSocial
         {
             try
             {
-                Console.WriteLine( "["+ DateTime.Now +"] Connecting....");
+                Console.WriteLine("[" + DateTime.Now + "] Connecting....");
                 server.Bind(IP);
-                Console.WriteLine( "["+ DateTime.Now +"] The server is ready to accept the connection!!!");
+                Console.WriteLine("[" + DateTime.Now + "] The server is ready to accept the connection!!!");
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine( "["+ DateTime.Now +"] Error!!!!! Trying again....");
+                Console.WriteLine("[" + DateTime.Now + "] Error!!!!! Trying again....");
                 Connect();
             }
 
@@ -126,25 +126,25 @@ namespace ServerProjectSocial
 
                         Socket client = server.Accept();
 
-                        Console.WriteLine( "["+ DateTime.Now +"] Have 1 device request access");
+                        Console.WriteLine("[" + DateTime.Now + "] Have 1 device request access");
 
                         clients.Add(new DetailClientSocket(client, string.Empty));
-                        Send(SetBinary("0"),client);
+                        Send(SetBinary("0"), client);
 
                         //Send(SetBinary("Minh"), client);
 
                         Thread threadReceive = new Thread(Receive);
                         threadReceive.IsBackground = true;
                         threadReceive.Start(client);
-                        Console.WriteLine( "["+ DateTime.Now +"] Device access allowed");
-                        Console.WriteLine( "["+ DateTime.Now +"] The number of current connections is {0}",clients.Count);
+                        Console.WriteLine("[" + DateTime.Now + "] Device access allowed");
+                        Console.WriteLine("[" + DateTime.Now + "] The number of current connections is {0}", clients.Count);
                     }
                 }
                 catch (Exception e)
                 {
                     server.Close();
-                    Console.WriteLine("[" + DateTime.Now + "]" +e.Message);
-                    Console.WriteLine( "["+ DateTime.Now +"] Connection lost, recovering");
+                    Console.WriteLine("[" + DateTime.Now + "]" + e.Message);
+                    Console.WriteLine("[" + DateTime.Now + "] Connection lost, recovering");
                     IP = new IPEndPoint(IPAddress.Any, 1510);
                     server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                     Connect();
@@ -179,7 +179,7 @@ namespace ServerProjectSocial
                 socket.Send(temp);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
                 return false;
@@ -192,24 +192,31 @@ namespace ServerProjectSocial
             {
                 while (true)
                 {
-                    byte[] temp = new byte[1024 * 5000];
-                    client.Receive(temp);
-                    
+                    byte[] temp1 = new byte[1024];
+                    int cout = client.Receive(temp1);
+
+                    byte[] temp = new byte[cout];
+
+                    for (int i = 0; i < cout; i++)
+                    {
+                        temp[i] = temp1[i];
+                    }
+
                     string packet_str = (string)GetfromBinary(temp);
                     PacketData packet = new PacketData(packet_str);
                     Handle_ReceivePacket(packet, temp, client);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("[" + DateTime.Now + "] "+e.Message);
-                Console.WriteLine( "["+ DateTime.Now +"] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
+                Console.WriteLine("[" + DateTime.Now + "] " + e.Message);
+                Console.WriteLine("[" + DateTime.Now + "] The client whose {0} ID is disconnected", clients.Where(x => x.Socket == client).SingleOrDefault().UID);
 
                 DetailClientSocket detail = clients.Where(x => x.Socket == client).SingleOrDefault();
                 clients.Remove(detail);
                 SendDelUserOnline(detail);
 
-                Console.WriteLine( "["+ DateTime.Now +"] The number of current connections is {0}", clients.Count);
+                Console.WriteLine("[" + DateTime.Now + "] The number of current connections is {0}", clients.Count);
                 client.Close();
             }
         }
@@ -264,7 +271,7 @@ namespace ServerProjectSocial
                 try
                 {
                     DetailClientSocket socketDetail = clients.Where(x => x.UID == data.Rows[i].ItemArray[0].ToString()).Single();
-                    if (socketDetail != null&&socketDetail.Socket != client)
+                    if (socketDetail != null && socketDetail.Socket != client)
                         if (Send(SetBinary("2_" + iDNotify), socketDetail.Socket))
                             Console.WriteLine("[" + DateTime.Now + "] Send notify ID " + iDNotify + " to UID " + socketDetail.UID);
                 }
@@ -275,29 +282,58 @@ namespace ServerProjectSocial
             }
         }
         #endregion
-        /// <summary>
-        /// Convert binary to object
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        object GetfromBinary(byte[] obj)
-        {
-            MemoryStream stream = new MemoryStream(obj);
-            BinaryFormatter binary = new BinaryFormatter();
-            return binary.Deserialize(stream);
-        }
-        /// <summary>
-        /// Convert object to binary
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        byte[] SetBinary(object obj)
-        {
-            MemoryStream stream = new MemoryStream();
-            BinaryFormatter binary = new BinaryFormatter();
-            binary.Serialize(stream, obj);
 
-            return stream.ToArray();
+
+        ///// <summary>
+        ///// Convert binary to object
+        ///// </summary>
+        ///// <param name="obj"></param>
+        ///// <returns></returns>
+        //object GetfromBinary(byte[] obj)
+        //{
+        //    MemoryStream stream = new MemoryStream(obj);
+        //    BinaryFormatter binary = new BinaryFormatter();
+        //    return binary.Deserialize(stream);
+        //}
+        ///// <summary>
+        ///// Convert object to binary
+        ///// </summary>
+        ///// <param name="obj"></param>
+        ///// <returns></returns>
+        //byte[] SetBinary(object obj)
+        //{
+        //    MemoryStream stream = new MemoryStream();
+        //    BinaryFormatter binary = new BinaryFormatter();
+        //    binary.Serialize(stream, obj);
+
+        //    return stream.ToArray();
+        //}
+
+
+
+        public static byte[] SetBinary(object obj)
+        {
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                formatter.Serialize(stream, obj);
+
+                byte[] bytes = stream.ToArray();
+                stream.Flush();
+
+                return bytes;
+            }
+        }
+
+        //deserialize
+        public static object GetfromBinary(byte[] binaryObj)
+        {
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream(binaryObj))
+            {
+                stream.Position = 0;
+                object desObj = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter().Deserialize(stream);
+                return desObj;
+            }
         }
     }
 }

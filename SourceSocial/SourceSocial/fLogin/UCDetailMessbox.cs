@@ -14,6 +14,9 @@ namespace fLogin
 {
     public partial class UCDetailMessbox : UserControl
     {
+        private Image avatar;
+
+        public Image Avatar { get => avatar; set => avatar = value; }
 
         public delegate bool OnSendMess(string Mess, string idMessbox, string IDUser);
         public event OnSendMess SendMessCurrent;
@@ -88,7 +91,7 @@ namespace fLogin
             if (messin.IsMe)
                 UCmess = new UCMessofMe(messin.Content);
             else
-                UCmess = new UCMessofYou(messin.Avatar, messin.Content);
+                UCmess = new UCMessofYou(Avatar, messin.Content);
             //  UCmess.Dock = DockStyle.Bottom;
             //  this.pnlDisplayMess.Controls.Add(UCmess);
 

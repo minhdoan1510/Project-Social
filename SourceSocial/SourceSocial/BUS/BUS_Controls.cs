@@ -298,9 +298,16 @@ namespace BUS
             return posts.Single(x => x.Idpost == IDPost);
         }
 
-        public void LoadDataPost(string UID)
+        public void Reload()
         {
             if (posts != null) posts.Clear();
+            comments.Clear();
+            likes.Clear();
+            LoadDataPost();
+        }
+
+        public void LoadDataPost()
+        {
             DataTable data = dal.LoadAllPosts();
             //DataTable data = dal.LoadPosts(UID);
             for (int i = 0; i < data.Rows.Count; i++)

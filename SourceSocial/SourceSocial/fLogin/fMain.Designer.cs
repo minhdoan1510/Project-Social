@@ -35,8 +35,8 @@
             this.pnlCatalog = new System.Windows.Forms.Panel();
             this.pnlWeather = new System.Windows.Forms.Panel();
             this.pnlMain_Newfeed_AddPost = new System.Windows.Forms.Panel();
-            this.btnReload = new System.Windows.Forms.Button();
             this.pnlHome = new System.Windows.Forms.Panel();
+            this.btnReload = new Bunifu.Framework.UI.BunifuFlatButton();
             this.pnlMain_Newfeed_AddPost.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.SuspendLayout();
@@ -94,21 +94,6 @@
             this.pnlMain_Newfeed_AddPost.Size = new System.Drawing.Size(707, 590);
             this.pnlMain_Newfeed_AddPost.TabIndex = 6;
             // 
-            // btnReload
-            // 
-            this.btnReload.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnReload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnReload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReload.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnReload.Location = new System.Drawing.Point(29, 171);
-            this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(75, 23);
-            this.btnReload.TabIndex = 4;
-            this.btnReload.Text = "Reload";
-            this.btnReload.UseVisualStyleBackColor = true;
-            // 
             // pnlHome
             // 
             this.pnlHome.Controls.Add(this.pnlCatalog);
@@ -119,6 +104,41 @@
             this.pnlHome.Name = "pnlHome";
             this.pnlHome.Size = new System.Drawing.Size(1073, 592);
             this.pnlHome.TabIndex = 7;
+            // 
+            // btnReload
+            // 
+            this.btnReload.Activecolor = System.Drawing.Color.Blue;
+            this.btnReload.BackColor = System.Drawing.Color.Blue;
+            this.btnReload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReload.BorderRadius = 0;
+            this.btnReload.ButtonText = "Reload";
+            this.btnReload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReload.DisabledColor = System.Drawing.Color.Gray;
+            this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnReload.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnReload.Iconimage")));
+            this.btnReload.Iconimage_right = null;
+            this.btnReload.Iconimage_right_Selected = null;
+            this.btnReload.Iconimage_Selected = null;
+            this.btnReload.IconMarginLeft = 0;
+            this.btnReload.IconMarginRight = 0;
+            this.btnReload.IconRightVisible = true;
+            this.btnReload.IconRightZoom = 0D;
+            this.btnReload.IconVisible = true;
+            this.btnReload.IconZoom = 40D;
+            this.btnReload.IsTab = false;
+            this.btnReload.Location = new System.Drawing.Point(286, 171);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Normalcolor = System.Drawing.Color.Blue;
+            this.btnReload.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnReload.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnReload.selected = false;
+            this.btnReload.Size = new System.Drawing.Size(142, 23);
+            this.btnReload.TabIndex = 5;
+            this.btnReload.Text = "Reload";
+            this.btnReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReload.Textcolor = System.Drawing.Color.White;
+            this.btnReload.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // fMain
             // 
@@ -149,6 +169,6 @@
         private System.Windows.Forms.Panel pnlWeather;
         private System.Windows.Forms.Panel pnlMain_Newfeed_AddPost;
         private System.Windows.Forms.Panel pnlHome;
-        private System.Windows.Forms.Button btnReload;
+        private Bunifu.Framework.UI.BunifuFlatButton btnReload;
     }
 }

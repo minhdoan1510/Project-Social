@@ -36,7 +36,7 @@ namespace fLogin
 
         public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
         public Image imageProfile { get => pnlProfile.Iconimage; set {
-                pnlProfile.Iconimage = CropCircleImage(value, new PointF(value.Height / 2, value.Height / 2), value.Height / 2, pnlProfile.BackColor);
+                pnlProfile.Iconimage = CropCircleImage(value, pnlProfile.BackColor);
             } }
 
         #endregion
@@ -116,14 +116,18 @@ namespace fLogin
 
         }
 
-        public Image CropCircleImage(Image srcImage, PointF center, float radius, Color backGround)
+        public Image CropCircleImage(Image srcImage,  Color backGround)
         {
-            Image dstImage = new Bitmap(srcImage.Height, srcImage.Height, srcImage.PixelFormat);
+            
+            int R = (srcImage.Height < srcImage.Width) ? srcImage.Height : srcImage.Width;
+            
+            PointF center = new PointF(R/2, R / 2);
+            Image dstImage = new Bitmap(R, R, srcImage.PixelFormat);
 
             using (Graphics g = Graphics.FromImage(dstImage))
             {
-                RectangleF r = new RectangleF(center.X - radius, center.Y - radius,
-                                                         radius * 2, radius * 2);
+                RectangleF r = new RectangleF(center.X - R/2, center.Y - R/2,
+                                                         R, R);
 
                 // fills background color
                 using (Brush br = new SolidBrush(backGround))
