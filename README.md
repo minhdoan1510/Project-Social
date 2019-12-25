@@ -1,7 +1,8 @@
 # Project SoucialHub
 Ứng dụng mạng xã hội SocialHub được nhóm xây dựng bằng ngôn ngữ C# cho đồ án môn lập trình trực quan. SoucialHub được tích hợp rất nhiều tính năng giúp kết nối giữa mọi người.
-
+- Giao diện đăng nhập
 ![SoucialHub Screenshot](/docs/Images/SoucialHub1.PNG)
+- Giao diện chính
 ![SoucialHub Screenshot 2](/docs/Images/SoucialHub2.PNG)
 ## Features
 - Tạo tài khoản, đăng nhập vào mạng xã hội bằng tài khoản của từng cá nhân
@@ -24,7 +25,7 @@
   
 
   - Hiển thị các người bạn đang online
-  ![Online Screenshot](docs/Images/Online_SoucialHub.PNG)
+    ![Online Screenshot](docs/Images/Online_SoucialHub.PNG)
 
   - Thông báo thông tin trực tiếp tới người dùng nếu đang online
 
@@ -44,7 +45,7 @@
     - Đang sử dụng [.NET Framework 4.6](https://dotnet.microsoft.com/download/dotnet-framework) hoặc cao hơn.
     - Có kết nối mạng khi sử dụng
   - Cài đặt
-    - Tải về file [SoucialHub.msi](/Installer/SoucialHub.msi) trong thư mục [Installer](/Installer) hoặc ấn vào [link Google Drive](https://drive.google.com/drive/folders/1aBm2hEbWqQ2Dc8OSVsmZkvzZEWAcvyfP)
+    - Tải về file [SoucialHub.msi] trong thư mục [Installer](/Installer) hoặc ấn vào [link Google Drive](https://drive.google.com/drive/folders/1aBm2hEbWqQ2Dc8OSVsmZkvzZEWAcvyfP)
     - Mở file cài đặt mới tải về bằng quyền administrator
     - Làm theo hướng dẫn trong quá trình cài đặt. Nếu có lỗi hoặc cần hỗ trợ vui lòng gửi lại màn hình về [email](18521092@gm.uit.edu.vn) hoặc tìm kiếm user Admin  trong SoucialHub để được hỗ trợ.
   * Lưu ý: Phía trên chúng tôi sử dụng server demo nên việc truyền gửi thông tin có thể không thực sự được nhanh và ổn định.
