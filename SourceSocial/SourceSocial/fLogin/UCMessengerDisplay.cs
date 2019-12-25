@@ -89,9 +89,6 @@ namespace fLogin
             detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
             this.Controls.Add(detailMessbox);
             detailMessbox.BringToFront();
-            UCMessengerUnit uCMessengerUnit = new UCMessengerUnit(profile.Avatar, profile.Uid, "") { Dock = DockStyle.Top, Tag = IDmessbox };
-            uCMessengerUnit.OpenMessBox += (IdMess, Username) => UCMessengerUnit_OpenMessBox(IdMess, profile.Name, profile.Uid);
-            this.pnlListMess.Controls.Add(uCMessengerUnit);
         }
 
         public void UCMessengerUnit_OpenMessBox(string IDmessbox, string Username, string IdUser)
