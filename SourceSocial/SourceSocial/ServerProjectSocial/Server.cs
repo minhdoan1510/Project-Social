@@ -41,28 +41,28 @@ namespace ServerProjectSocial
         {
             string name = DataProvider.Instance.ExecuteQuery(@"SELECT dbo.PROFILE.NAME
                                                                 FROM dbo.PROFILE
-                                                                WHERE dbo.PROFILE.UIDuser = @UIDuser", new object[] { newusser.UID }).Rows[0].ItemArray[0].ToString();
-            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { newusser.UID });
-            List<KeyValuePair<string, string>> uidbb = new List<KeyValuePair<string, string>>();
-
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                uidbb.Add(new KeyValuePair<string, string>(data.Rows[i].ItemArray[0].ToString(), data.Rows[i].ItemArray[1].ToString()));
-            }
-
-            string result = string.Format("3_Add_{0}|{1}", newusser.UID, name);
-            foreach (DetailClientSocket item in clients)
-            {
-                if (newusser.UID != item.UID)
-                {
-                    try
-                    {
-                        if (uidbb.Where(x => x.Key == item.UID).ToList().Count ==1)
-                            Send(SetBinary(result), item.Socket);
-                    }
-                    catch { }
-                }
-            }
+                                                                WHERE dbo.PROFILE.UIDuser = @UIDuser", new object[] { newusser.UID }).Rows[0].ItemArray[0].ToString();
+            DataTable data = DataProvider.Instance.ExecuteQuery(@"EXEC GetUIDListFriend @UIDuser", new object[] { newusser.UID });
+            List<KeyValuePair<string, string>> uidbb = new List<KeyValuePair<string, string>>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                uidbb.Add(new KeyValuePair<string, string>(data.Rows[i].ItemArray[0].ToString(), data.Rows[i].ItemArray[1].ToString()));
+            }
+
+            string result = string.Format("3_Add_{0}|{1}", newusser.UID, name);
+            foreach (DetailClientSocket item in clients)
+            {
+                if (newusser.UID != item.UID)
+                {
+                    try
+                    {
+                        if (uidbb.Where(x => x.Key == item.UID).ToList().Count == 1)
+                            Send(SetBinary(result), item.Socket);
+                    }
+                    catch { }
+                }
+            }
         }
 
 
@@ -205,7 +205,7 @@ namespace ServerProjectSocial
             {
                 while (true)
                 {
-                    byte[] temp1 = new byte[1024*5000];
+                    byte[] temp1 = new byte[1024 * 5000];
                     int cout = client.Receive(temp1);
 
                     byte[] temp = new byte[cout];

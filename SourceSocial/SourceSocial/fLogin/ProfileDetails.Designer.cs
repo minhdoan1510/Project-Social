@@ -32,17 +32,17 @@
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.tbxBDay = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tbxPhonenum = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tbxEmail = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tbxHometown = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.tbxMarriage = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnAlter = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.lblName = new System.Windows.Forms.Label();
             this.btnChangeAvatar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.birthDayPicker = new System.Windows.Forms.DateTimePicker();
+            this.cbMarriageSt = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,22 +99,6 @@
             this.materialLabel5.TabIndex = 6;
             this.materialLabel5.Text = "Tình trạng hôn nhân";
             // 
-            // tbxBDay
-            // 
-            this.tbxBDay.Depth = 0;
-            this.tbxBDay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(212)))));
-            this.tbxBDay.Hint = "";
-            this.tbxBDay.Location = new System.Drawing.Point(442, 102);
-            this.tbxBDay.MouseState = MaterialSkin.MouseState.HOVER;
-            this.tbxBDay.Name = "tbxBDay";
-            this.tbxBDay.PasswordChar = '\0';
-            this.tbxBDay.SelectedText = "";
-            this.tbxBDay.SelectionLength = 0;
-            this.tbxBDay.SelectionStart = 0;
-            this.tbxBDay.Size = new System.Drawing.Size(262, 23);
-            this.tbxBDay.TabIndex = 7;
-            this.tbxBDay.UseSystemPasswordChar = false;
-            // 
             // tbxPhonenum
             // 
             this.tbxPhonenum.Depth = 0;
@@ -160,23 +144,6 @@
             this.tbxHometown.Size = new System.Drawing.Size(262, 23);
             this.tbxHometown.TabIndex = 10;
             this.tbxHometown.UseSystemPasswordChar = false;
-            // 
-            // tbxMarriage
-            // 
-            this.tbxMarriage.Depth = 0;
-            this.tbxMarriage.Hint = "";
-            this.tbxMarriage.Location = new System.Drawing.Point(442, 298);
-            this.tbxMarriage.MouseState = MaterialSkin.MouseState.HOVER;
-            this.tbxMarriage.Name = "tbxMarriage";
-            this.tbxMarriage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tbxMarriage.PasswordChar = '\0';
-            this.tbxMarriage.SelectedText = "";
-            this.tbxMarriage.SelectionLength = 0;
-            this.tbxMarriage.SelectionStart = 0;
-            this.tbxMarriage.Size = new System.Drawing.Size(262, 23);
-            this.tbxMarriage.TabIndex = 11;
-            this.tbxMarriage.Text = "Độc thân";
-            this.tbxMarriage.UseSystemPasswordChar = false;
             // 
             // btnAlter
             // 
@@ -253,22 +220,44 @@
             this.btnChangeAvatar.UseVisualStyleBackColor = true;
             this.btnChangeAvatar.Click += new System.EventHandler(this.ChangeAvatar_Click);
             // 
+            // birthDayPicker
+            // 
+            this.birthDayPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.birthDayPicker.Location = new System.Drawing.Point(442, 107);
+            this.birthDayPicker.Name = "birthDayPicker";
+            this.birthDayPicker.Size = new System.Drawing.Size(262, 20);
+            this.birthDayPicker.TabIndex = 19;
+            // 
+            // cbMarriageSt
+            // 
+            this.cbMarriageSt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarriageSt.FormattingEnabled = true;
+            this.cbMarriageSt.Items.AddRange(new object[] {
+            "Độc thân",
+            "Đang hẹn hò",
+            "Đang trong một mối quan hệ phức tạp",
+            "Đã kết hôn"});
+            this.cbMarriageSt.Location = new System.Drawing.Point(442, 296);
+            this.cbMarriageSt.Name = "cbMarriageSt";
+            this.cbMarriageSt.Size = new System.Drawing.Size(262, 21);
+            this.cbMarriageSt.TabIndex = 20;
+            // 
             // ProfileDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 403);
+            this.Controls.Add(this.cbMarriageSt);
+            this.Controls.Add(this.birthDayPicker);
             this.Controls.Add(this.btnChangeAvatar);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.btnAlter);
-            this.Controls.Add(this.tbxMarriage);
             this.Controls.Add(this.tbxHometown);
             this.Controls.Add(this.tbxEmail);
             this.Controls.Add(this.tbxPhonenum);
-            this.Controls.Add(this.tbxBDay);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.materialLabel4);
             this.Controls.Add(this.materialLabel3);
@@ -291,16 +280,16 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
-        private MaterialSkin.Controls.MaterialSingleLineTextField tbxBDay;
         private MaterialSkin.Controls.MaterialSingleLineTextField tbxPhonenum;
         private MaterialSkin.Controls.MaterialSingleLineTextField tbxEmail;
         private MaterialSkin.Controls.MaterialSingleLineTextField tbxHometown;
-        private MaterialSkin.Controls.MaterialSingleLineTextField tbxMarriage;
         private MaterialSkin.Controls.MaterialRaisedButton btnAlter;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.Label lblName;
         private MaterialSkin.Controls.MaterialRaisedButton btnChangeAvatar;
+        private System.Windows.Forms.ComboBox cbMarriageSt;
+        private System.Windows.Forms.DateTimePicker birthDayPicker;
     }
 }

@@ -206,7 +206,9 @@ namespace fLogin
             pnlNewFeed_Main.Controls.Clear();
             uCLoading.BringToFront();
 
-            await Task.Factory.StartNew((() => LoadNewFeed()));
+            await Task.Factory.StartNew((() => { LoadNewFeed();   }));
+            uCMainHeader.Dispose();
+            LoadMainHeader();
 
 
         }
@@ -309,7 +311,7 @@ namespace fLogin
 
         }
 
-        private void UCProfileInfoBox_OpenSpecificMessbox(string IdMessBox, string Username, string IdUser)
+        private void UCProfileInfoBox_OpenSpecificMessbox(string IdMessBox, Profile profile)
         {
             formMess = new MaterialForm() { Size = new Size(256, 364 + 28), StartPosition = FormStartPosition.CenterScreen, Sizable = false };
 
@@ -324,7 +326,7 @@ namespace fLogin
             uCMessengerDisplay.Location = new Point(0, 25);
 
             formMess.Controls.Add(uCMessengerDisplay);
-            uCMessengerDisplay.UCMessengerUnit_OpenMessBox(IdMessBox, Username, IdUser);
+            uCMessengerDisplay.UCMessengerUnit_OpenMessBox(IdMessBox, profile);
             formMess.ShowDialog();
         }
 
@@ -409,7 +411,7 @@ namespace fLogin
 
                 tempInfo.OnAddFriend += () => BUS_Controls.AddFriend(BUS_Controls.GetProfile(item).Uid);
 
-                tempInfo.OnInbox += (IdMessBox, Username, IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Username, IdUser);
+                tempInfo.OnInbox += (IdMessBox, Profile) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Profile);
 
 
                 l.Controls.Add(tempInfo);
@@ -469,7 +471,7 @@ namespace fLogin
 
             DisplayProfile.OnClickLikeList += (i) => ShowUserList(BUS_Controls.LoadLikesOfPost(i));
 
-            DisplayProfile.OnInbox += (IdMessBox, Username, IdUser) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Username, IdUser);
+            DisplayProfile.OnInbox += (IdMessBox, Profile) => UCProfileInfoBox_OpenSpecificMessbox(IdMessBox, Profile);
 
             DisplayProfile.OnClickLikeOutsideNewfeed += (i) => ClickLikeOutsideNewfeed(i);
 

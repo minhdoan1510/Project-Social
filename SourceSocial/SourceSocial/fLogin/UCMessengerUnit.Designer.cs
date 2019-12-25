@@ -38,6 +38,7 @@
             // 
             // ptbAvatar
             // 
+            this.ptbAvatar.Enabled = false;
             this.ptbAvatar.Location = new System.Drawing.Point(6, 8);
             this.ptbAvatar.Name = "ptbAvatar";
             this.ptbAvatar.Size = new System.Drawing.Size(30, 30);
@@ -47,6 +48,7 @@
             // lbName
             // 
             this.lbName.AutoSize = true;
+            this.lbName.Enabled = false;
             this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbName.Location = new System.Drawing.Point(42, 6);
             this.lbName.Name = "lbName";
@@ -57,6 +59,7 @@
             // lbMessDisplay
             // 
             this.lbMessDisplay.AutoSize = true;
+            this.lbMessDisplay.Enabled = false;
             this.lbMessDisplay.ForeColor = System.Drawing.Color.DimGray;
             this.lbMessDisplay.Location = new System.Drawing.Point(42, 26);
             this.lbMessDisplay.Name = "lbMessDisplay";

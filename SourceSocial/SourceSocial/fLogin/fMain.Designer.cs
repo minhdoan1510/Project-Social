@@ -153,7 +153,7 @@
             this.Name = "fMain";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "fMain";
+            this.Text = "SocialHub";
             this.pnlMain_Newfeed_AddPost.ResumeLayout(false);
             this.pnlMain_Newfeed_AddPost.PerformLayout();
             this.pnlHome.ResumeLayout(false);

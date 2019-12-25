@@ -42,18 +42,20 @@ namespace fLogin
 
         private void LoadListMess()
         {
-
+      
             foreach (Mailboxlist item in mailboxlists)
             {
                 UCMessengerUnit uCMessengerUnit = new UCMessengerUnit(item.Avatar, item.Nameuser, item.Lastcontent) { Dock = DockStyle.Top, Tag = item.IDmessbox };
-                uCMessengerUnit.OpenMessBox += (IdMess,Username) => UCMessengerUnit_OpenMessBox(IdMess,Username,item.Iduser);
-                //uCMessengerUnit.Click += UCMessengerUnit_Click;
+                uCMessengerUnit.OpenMessBox += (IdMess, Username) => UCMessengerUnit_OpenMessBox(IdMess, item.Nameuser, item.Iduser);
+
 
                 this.pnlListMess.Controls.Add(uCMessengerUnit);
             }
         }
 
-        public void UCMessengerUnit_OpenMessBox(string IDmessbox, string Username, string IdUser)
+
+
+        public void UCMessengerUnit_OpenMessBox(string IDmessbox, Profile profile)
         {
             UCDetailMessbox detailMessbox = uCDetailMessboxes.Where(x => x.Tag.Equals(IDmessbox)).SingleOrDefault();
             Mailboxlist tempMailbox = mailboxlists.Where(x => x.IDmessbox == IDmessbox).SingleOrDefault();
@@ -66,7 +68,7 @@ namespace fLogin
                     if (GetMessinMessbox != null)
                         detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
 
-                    detailMessbox = new UCDetailMessbox(Username,IdUser);
+                    detailMessbox = new UCDetailMessbox(profile.Name,profile.Uid);
                     detailMessbox.Avatar = tempMailbox.Avatar;
                     foreach(var item in detailMess)
                         detailMessbox.AddMessinMessbox(item);
@@ -76,7 +78,43 @@ namespace fLogin
             }
             else
             {
-                detailMessbox = new UCDetailMessbox(Username,IdUser);
+                detailMessbox = new UCDetailMessbox(profile.Name, profile.Uid);
+                detailMessbox.Avatar = profile.Avatar;
+                detailMessbox.Tag = IDmessbox;
+                uCDetailMessboxes.Add(detailMessbox);
+            }
+            detailMessbox.Back += () =>  this.Controls.Remove(detailMessbox); 
+            detailMessbox.Dock = DockStyle.Fill;
+            detailMessbox.Location = new Point(3, 3);
+            detailMessbox.SendMessCurrent += DetailMessbox_SendMessCurrent;
+            this.Controls.Add(detailMessbox);
+            detailMessbox.BringToFront();
+        }
+
+        public void UCMessengerUnit_OpenMessBox(string IDmessbox, string Username, string IdUser)
+        {
+            UCDetailMessbox detailMessbox = uCDetailMessboxes.Where(x => x.Tag.Equals(IDmessbox)).SingleOrDefault();
+            Mailboxlist tempMailbox = mailboxlists.Where(x => x.IDmessbox == IDmessbox).SingleOrDefault();
+            if (tempMailbox != null)
+            {
+
+                if (detailMessbox == null)
+                {
+                    List<MessinMessbox> detailMess = new List<MessinMessbox>();
+                    if (GetMessinMessbox != null)
+                        detailMess = (List<MessinMessbox>)GetMessinMessbox(IDmessbox);
+
+                    detailMessbox = new UCDetailMessbox(Username, IdUser);
+                    detailMessbox.Avatar = tempMailbox.Avatar;
+                    foreach (var item in detailMess)
+                        detailMessbox.AddMessinMessbox(item);
+                    detailMessbox.Tag = IDmessbox;
+                    uCDetailMessboxes.Add(detailMessbox);
+                }
+            }
+            else
+            {
+                detailMessbox = new UCDetailMessbox(Username, IdUser);
                 detailMessbox.Tag = IDmessbox;
                 uCDetailMessboxes.Add(detailMessbox);
             }

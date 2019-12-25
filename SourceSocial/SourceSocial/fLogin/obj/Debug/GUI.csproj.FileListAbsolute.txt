@@ -146,14 +146,12 @@ D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.reso
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCatalog.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCSearchBar.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete

@@ -15,6 +15,7 @@ namespace fLogin
 {
     public partial class ProfileDetails : MaterialForm
     {
+        private Profile profile;
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
@@ -29,11 +30,11 @@ namespace fLogin
             lblName.Text = profile.Name;
             ptbAvatar.Image = profile.Avatar;
             ptbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-            tbxBDay.Text = profile.DateOfBirth.ToShortDateString();
+            birthDayPicker.Value = profile.DateOfBirth;
             tbxEmail.Text = profile.Email != string.Empty? profile.Email:"Chưa cập nhật";
             tbxHometown.Text = profile.HomeTown != string.Empty ? profile.HomeTown: "Chưa cập nhật" ;
             tbxPhonenum.Text = profile.PhoneNum != string.Empty ? profile.PhoneNum :"Chưa cập nhật"; 
-            tbxMarriage.Text = profile.MarriageSt != string.Empty ? profile.MarriageSt:"Chưa cập nhật"; 
+            cbMarriageSt.SelectedItem = profile.MarriageSt != string.Empty ? profile.MarriageSt:"Chưa cập nhật"; 
             if (IsFriend != 2)
             {
                 btnAlter.Visible = false;
@@ -49,11 +50,11 @@ namespace fLogin
                         Avatar = profile.Avatar,
                         Name = profile.Name,
                         Uid = profile.Uid,
-                        DateOfBirth = DateTime.Parse(tbxBDay.Text),
+                        DateOfBirth = birthDayPicker.Value,
                         Email = tbxEmail.Text,
                         HomeTown = tbxHometown.Text,
                         PhoneNum = tbxPhonenum.Text,
-                        MarriageSt = tbxMarriage.Text
+                        MarriageSt = cbMarriageSt.SelectedItem.ToString()
                     };
                     if (OnChangeProfile(_profile))
                         MessageBox.Show("Thay đổi thông tin thành công!");
