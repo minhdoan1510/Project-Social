@@ -21,6 +21,9 @@ namespace fLogin
         public delegate bool ChangeAvatar(Image image);
         public event ChangeAvatar OnChangeAvatar;
 
+        public delegate bool ChangeProfile(Profile profile);
+        public event ChangeProfile OnChangeProfile;
+
         public delegate bool AddFriend(string uid);
         public event AddFriend OnAddFriend;
 
@@ -36,6 +39,15 @@ namespace fLogin
         public delegate void ClickComment(string UID);
         public event ClickComment Post_OnClickComment;
 
+        public delegate void Inbox(string IdMessbox, Profile profile);
+        public event Inbox OnInbox;
+
+        public delegate void ClickLikeList(string IdPost);
+        public event ClickLikeList OnClickLikeList;
+
+        public delegate void ClickLikeOutsideNewfeed(string IDpost);
+        public event ClickLikeOutsideNewfeed OnClickLikeOutsideNewfeed;
+
 
 
         public UCProfile(BUS_Controls _BUS_Controls, Profile profile, int isFriend)// 0 - NotFriend | 1 - Friend | 2 - CurrentUser
@@ -44,10 +56,10 @@ namespace fLogin
             InitializeComponent();
             LoadWallNewFeed(profile.Uid);
             LoadDisplay(profile, isFriend);
-         
-            
-            OnAddPost += (i)=> LoadWallNewFeed(profile.Uid);
-            OnAddPost += (i)=> LoadDisplay(profile, isFriend);
+
+
+            OnAddPost += (i) => LoadWallNewFeed(profile.Uid);
+            OnAddPost += (i) => LoadDisplay(profile, isFriend);
         }
 
         private void LoadWallNewFeed(string UID)
@@ -65,12 +77,19 @@ namespace fLogin
             {
                 if (item.Iduser == UID)
                 {
-                    UCPostDisplay post = new UCPostDisplay(item.Name, item.Time, item.Content, item.Liked, item.Image, item.Iduser);
+                    UCPostDisplay post = new UCPostDisplay(item);
                     post.Dock = DockStyle.Top;
                     post.Tag = item.Idpost;
 
                     post.OnClickComment += (i) => Post_OnClickComment(i);
+                    post.OnClickLike += (iDPost, add) => BUS_Controls.AddLike_Post(iDPost, add);
+                    post.OnClickLikeList += (i) => OnClickLikeList(i);
+                    post.OnClickLikeOutsideNewfeed += (i) => OnClickLikeOutsideNewfeed(i);
+                    if (BUS_Controls.LoadLikesOfPost(item.Idpost).Contains(BUS_Controls.Profilecurrent.Uid))
 
+                        post.Liked = true;
+
+                    else post.Liked = false;
                     pnlNewFeed_Main.Controls.Add(post);
                 }
             }
@@ -79,19 +98,20 @@ namespace fLogin
         private void LoadDisplay(Profile profile, int isFriend)
         {
             //add ProfileControl
-            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(BUS_Controls,profile,isFriend);
+            UCProfile_InfoBox uCProfile_InfoBox = new UCProfile_InfoBox(BUS_Controls, profile, isFriend);
             pnlProfile_Infor.Controls.Add(uCProfile_InfoBox);
             uCProfile_InfoBox.OnChangeAvatar += (i) => OnChangeAvatar(i);
             uCProfile_InfoBox.OnAddFriend += () => OnAddFriend(this.Tag.ToString());
             uCProfile_InfoBox.OnDelFriend += () => OnDelFriend(this.Tag.ToString());
             uCProfile_InfoBox.OnViewFriend += (i) => OnViewFriend(i);
             uCProfile_InfoBox.LbNumFriend.Text = string.Format("{0} bạn", BUS_Controls.numOfFriend(profile.Uid));
-            
+            uCProfile_InfoBox.OnInbox += (IdMessBox, Profile) => OnInbox(IdMessBox, Profile);
+            uCProfile_InfoBox.OnChangeProfile += (i) => OnChangeProfile(i);
             //
             //add UCaddPost
             if (isFriend == 2)
             {
-                
+
                 UCAddPost uCAddPost = new UCAddPost();
                 uCAddPost.OnAddPost += (content) => OnAddPost(content);
                 uCAddPost.Dock = DockStyle.Top;

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
+using System.Drawing.Drawing2D;
 
 namespace fLogin
 {
@@ -15,7 +16,7 @@ namespace fLogin
     {
         #region Propertion
         Profile profile;
-        
+        List<KeyValuePair<string, string>> peopleList;
 
         public delegate void OpenProfile(string UID);
         public event OpenProfile OnOpenProfile;
@@ -26,45 +27,58 @@ namespace fLogin
         public delegate void OpenMessenger();
         public event OpenMessenger OnOpenMessenger;
 
-        
+        public delegate void OpenNotify();
+        public event OpenNotify OnOpenNotify;
+
+        public delegate void OpenGame();
+        public event OpenGame OnOpenGame;
+
+
         public PictureBox PtbLogo { get => ptbLogo; set => ptbLogo = value; }
-        public PictureBox PtbAvatar { get => ptbAvatar; set => ptbAvatar = value; }
+        public Image imageProfile { get => pnlProfile.Iconimage; set {
+                pnlProfile.Iconimage = CropCircleImage(value, pnlProfile.BackColor);
+            } }
 
         #endregion
 
 
-        public UCMainHeader(Profile _profile)
+        public UCMainHeader(Profile _profile, List<KeyValuePair<string, string>> _people)
         {
             InitializeComponent();
             profile = _profile;
+            peopleList = _people;
             LoadMainHeader(_profile);
-            LoadAnimation();
+          
         }
 
         #region Load_UCMainHeader
         private void LoadMainHeader(Profile _profile)
         {
-            this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
-            this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            InitSearchTbx();
+            //   this.PtbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"/Picture/LogoMain.png");
+            //   this.PtbLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pnlProfile.Text = _profile.Name;
-            PtbAvatar.Image = (_profile.Avatar != null) ? _profile.Avatar : Bitmap.FromFile(Application.StartupPath + @"\Picture\NoAvatar.png");
-            PtbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
-           
-            pnlProfile.Controls.Add(ptbAvatar);
-           
-            ptbAvatar.BackColor = Color.Transparent;
-            ptbAvatar.Dock = DockStyle.Left;
+            imageProfile = _profile.Avatar;
+
+            pnlProfile.Click += PnlProfile_Click;
 
             PtbLogo.Click += (s, e) => OnOpenHome();
-
-            //btnMess.Click += (s, e) => OnOpenMessenger();
-
-            //pnlclick = new Panel() { Size = pnlProfile.Size };
-            //pnlProfile.Controls.Add(pnlclick);
-            //pnlclick.BringToFront();
-            ////pnlclick.Visible = false;
-            //pnlclick.Click += PnlProfile_Click;
+            btnMess.Click += (s, e) => OnOpenMessenger();
+            btnNotify.Click += (s, e) => OnOpenNotify();
+            btnGame.Click += (s, e) => OnOpenGame();
+            tbxSearch.KeyDown += UCMainHeader_KeyDown;
+       
+            ptbLogo.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\LogoMain.png");
+            ptbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            btnMess.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\mess2.png");
+            btnMess.SizeMode = PictureBoxSizeMode.Zoom;
+            btnNotify.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\noti2.png");
+            btnNotify.SizeMode = PictureBoxSizeMode.Zoom;
+            btnGame.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\game.png");
+            btnGame.SizeMode = PictureBoxSizeMode.Zoom;
+      
         }
+    
         #endregion
 
         #region Handle_Event
@@ -75,24 +89,60 @@ namespace fLogin
                 OnOpenProfile(profile.Uid);
             }
         }
+        private void UCMainHeader_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (peopleList.Where(x => tbxSearch.Text == x.Value).SingleOrDefault().Key != null)
+                    OnOpenProfile(peopleList.Where(x => tbxSearch.Text == x.Value).SingleOrDefault().Key);
+            }
+        }
         #endregion
 
         #region Animation
 
-        private void LoadAnimation()
+       
+
+        private void InitSearchTbx()
         {
-            //Animation enter PnlProfile
-            pnlProfile.MouseEnter += (s, e) =>
+            tbxSearch.AutoCompleteMode = AutoCompleteMode.Suggest;
+            tbxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+            foreach (var item in peopleList)
             {
-                pnlProfile.BackColor = Color.FromArgb(51, 51, 51);
-            };
-            pnlProfile.MouseLeave += (s, e) =>
-            {
-                pnlProfile.BackColor = Color.Transparent;
-            };
+                collection.Add(item.Value);
+            }
+            tbxSearch.AutoCompleteCustomSource = collection;
+
         }
 
+        public Image CropCircleImage(Image srcImage,  Color backGround)
+        {
+            
+            int R = (srcImage.Height < srcImage.Width) ? srcImage.Height : srcImage.Width;
+            
+            PointF center = new PointF(R/2, R / 2);
+            Image dstImage = new Bitmap(R, R, srcImage.PixelFormat);
 
+            using (Graphics g = Graphics.FromImage(dstImage))
+            {
+                RectangleF r = new RectangleF(center.X - R/2, center.Y - R/2,
+                                                         R, R);
+
+                // fills background color
+                using (Brush br = new SolidBrush(backGround))
+                {
+                    g.FillRectangle(br, 0, 0, dstImage.Width, dstImage.Height);
+                }
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                GraphicsPath path = new GraphicsPath();
+                path.AddEllipse(r);
+                g.SetClip(path);
+                g.DrawImage(srcImage, 0, 0);
+
+                return dstImage;
+            }
+        }
         #endregion
 
         private void BtnMess_Click(object sender, EventArgs e)

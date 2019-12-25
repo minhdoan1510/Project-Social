@@ -1,107 +1,104 @@
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe.config
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\LollipoUi.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Data.v19.1.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Printing.v19.1.Core.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Sparkline.v19.1.Core.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Utils.v19.1.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.XtraEditors.v19.1.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.xml
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerDisplay.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddComment.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCatalog.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerUnit.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCSearchBar.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
-C:\Users\Minh\Desktop\Project social\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerDisplay.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddComment.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCatalog.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerUnit.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCSearchBar.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
-D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe.config
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\LollipoUi.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\MaterialSkin.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe.config
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Data.v19.1.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Printing.v19.1.Core.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Sparkline.v19.1.Core.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Utils.v19.1.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.XtraEditors.v19.1.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.xml
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Data.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Printing.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Printing.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Printing.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Printing.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Sparkline.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Sparkline.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Sparkline.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Sparkline.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Utils.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Utils.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Utils.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Utils.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.XtraEditors.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.XtraEditors.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.XtraEditors.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.XtraEditors.v19.1.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Pdf.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Pdf.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Pdf.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Pdf.v19.1.Core.resources.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationBox.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationItem.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationList.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayUserOnline.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayUserOnlineUnit.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayWeather.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCLoading.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerDisplay.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerUnit.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddComment.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe.config
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.pdb
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\MaterialSkin.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.pdb
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\gpsWeather.exe.config
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Data.v19.1.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Printing.v19.1.Core.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Sparkline.v19.1.Core.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Utils.v19.1.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.XtraEditors.v19.1.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\Newtonsoft.Json.xml
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\System.Net.Http.Formatting.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.pdb
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.xml
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
@@ -128,71 +125,39 @@ D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Pdf.v19
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Pdf.v19.1.Core.resources.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Pdf.v19.1.Core.resources.dll
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Pdf.v19.1.Core.resources.dll
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationBox.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationItem.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.NotificationList.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayUserOnline.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayUserOnlineUnit.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDisplayWeather.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCLoading.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerDisplay.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerUnit.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddComment.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe.config
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\fLogin.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\LollipoUi.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\MaterialSkin.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\BUS.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DTO.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Data.v19.1.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Printing.v19.1.Core.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Sparkline.v19.1.Core.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Utils.v19.1.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.XtraEditors.v19.1.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DAL.pdb
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\DevExpress.Pdf.v19.1.Core.xml
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Data.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Printing.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Sparkline.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Utils.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.XtraEditors.v19.1.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\de\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\es\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ja\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\bin\Debug\ru\DevExpress.Pdf.v19.1.Core.resources.dll
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csprojAssemblyReference.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.ProfileDetails.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCDetailMessbox.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerDisplay.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessengerUnit.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofMe.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMessofYou.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddComment.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAddPost.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fDisplayPost_Comment.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fLogin.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.fMain.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCatalog.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCPostDisplay.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.Properties.Resources.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCCommentDisplay.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCMainHeader.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCProfile_InfoBox.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCSearchBar.resources
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.GenerateResource.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CoreCompileInputs.cache
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\GUI.csproj.CopyComplete
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
-C:\Users\Minh\Downloads\Compressed\SourceSocial\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.exe
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.pdb
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAbout.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
+D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAbout.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCBug.resources

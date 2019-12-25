@@ -43,51 +43,64 @@
             // 
             // pnlDetailMess
             // 
+            this.pnlDetailMess.BackColor = System.Drawing.Color.Transparent;
             this.pnlDetailMess.Controls.Add(this.pnlDisplayMess);
             this.pnlDetailMess.Controls.Add(this.panel2);
             this.pnlDetailMess.Controls.Add(this.panel1);
             this.pnlDetailMess.Location = new System.Drawing.Point(0, 0);
             this.pnlDetailMess.Name = "pnlDetailMess";
-            this.pnlDetailMess.Size = new System.Drawing.Size(256, 364);
+            this.pnlDetailMess.Size = new System.Drawing.Size(256, 365);
             this.pnlDetailMess.TabIndex = 2;
             // 
             // pnlDisplayMess
             // 
-            this.pnlDisplayMess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDisplayMess.AutoScroll = true;
+            this.pnlDisplayMess.AutoScrollMinSize = new System.Drawing.Size(1, 0);
+            this.pnlDisplayMess.AutoSize = true;
+            this.pnlDisplayMess.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDisplayMess.CausesValidation = false;
+            this.pnlDisplayMess.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDisplayMess.Location = new System.Drawing.Point(0, 34);
+            this.pnlDisplayMess.MaximumSize = new System.Drawing.Size(256, 294);
+            this.pnlDisplayMess.MinimumSize = new System.Drawing.Size(256, 294);
             this.pnlDisplayMess.Name = "pnlDisplayMess";
             this.pnlDisplayMess.Size = new System.Drawing.Size(256, 294);
             this.pnlDisplayMess.TabIndex = 5;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(58)))), ((int)(((byte)(54)))));
             this.panel2.Controls.Add(this.btnSend);
             this.panel2.Controls.Add(this.txbMess);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 328);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 36);
+            this.panel2.Size = new System.Drawing.Size(256, 37);
             this.panel2.TabIndex = 0;
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(209, 6);
+            this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(193)))), ((int)(((byte)(61)))));
+            this.btnSend.FlatAppearance.BorderSize = 0;
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Location = new System.Drawing.Point(209, 8);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(44, 23);
             this.btnSend.TabIndex = 3;
             this.btnSend.Text = "Send";
-            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.UseVisualStyleBackColor = false;
             // 
             // txbMess
             // 
-            this.txbMess.Location = new System.Drawing.Point(3, 8);
+            this.txbMess.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbMess.Location = new System.Drawing.Point(5, 7);
             this.txbMess.Name = "txbMess";
-            this.txbMess.Size = new System.Drawing.Size(200, 20);
+            this.txbMess.Size = new System.Drawing.Size(200, 24);
             this.txbMess.TabIndex = 2;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Silver;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(124)))), ((int)(((byte)(75)))));
             this.panel1.Controls.Add(this.lbName);
             this.panel1.Controls.Add(this.btnBack);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -99,10 +112,10 @@
             // lbName
             // 
             this.lbName.AutoSize = true;
-            this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbName.Location = new System.Drawing.Point(34, 6);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(51, 20);
+            this.lbName.Size = new System.Drawing.Size(49, 19);
             this.lbName.TabIndex = 1;
             this.lbName.Text = "Name";
             // 
@@ -124,9 +137,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDetailMess);
+            this.DoubleBuffered = true;
             this.Name = "UCDetailMessbox";
-            this.Size = new System.Drawing.Size(256, 364);
+            this.Size = new System.Drawing.Size(256, 365);
             this.pnlDetailMess.ResumeLayout(false);
+            this.pnlDetailMess.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

@@ -14,49 +14,70 @@ namespace fLogin
     {
         #region Propertion
         string iduser;
-
+        int likeCount;
+        DTO.Post Post;
         public delegate void ClickComment(string IDpost);
         public event ClickComment OnClickComment;
 
-        public delegate void ClickLike(string IDpost, string IDuser);
+        public delegate bool ClickLike(string IDpost,bool add);
         public event ClickLike OnClickLike;
+
+        public delegate void ClickLikeList(string IdPost);
+        public event ClickLikeList OnClickLikeList;
 
         public delegate void ClickOpenProfile(string UID);
         public event ClickOpenProfile OnClickOpenProfile;
 
+        public delegate void ClickLikeOutsideNewfeed(string IDpost);
+        public event ClickLikeOutsideNewfeed OnClickLikeOutsideNewfeed;
 
         public Label LbName_Post { get => lbName_Post; set => lbName_Post = value; }
         public Label LbTime_Post { get => lbTime_Post; set => lbTime_Post = value; }
         public Label LbContent_Post { get => lbContent_Post; set => lbContent_Post = value; }
         public Label LbLiked_Post { get => lbLiked_Post; set => lbLiked_Post = value; }
         public PictureBox PtbAvatar_Post { get => ptbAvatar_Post; set => ptbAvatar_Post = value; }
-        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
-        public string Iduser { get => iduser; set => iduser = value; }
+        public int LikeCount { get => likeCount; set { likeCount = value; OnLikeCountChange(); }  }
+        public PictureBox PtbLike { get => ptbLike; set => ptbLike = value; }
+        public string Iduser { get => iduser; set => iduser = value; }        public bool Liked { get => (bool)PtbLike.Tag; set { PtbLike.Tag = value; OnLike(); } }
+
+       
+
+        public DTO.Post post
+        {
+            get => Post;
+            set
+            {
+                Post = value;
+                Iduser = Post.Iduser;
+                LbName_Post.Text = Post.Name;
+                LbTime_Post.Text = Post.Time;
+
+                LbContent_Post.Text = Post.Content;
+
+                PtbAvatar_Post.Image = Post.Image;
+                LikeCount = Post.Liked;
+
+            }
+        }
         #endregion
 
-        public UCPostDisplay(string _name, string _time, string _content, int _liked, Image avatar, string _iduser)
+        public UCPostDisplay(DTO.Post _post)
         {
             InitializeComponent();
-            Iduser = _iduser;
-
-            LbName_Post.Text = _name;
+            post = _post;
             LbName_Post.Click += LbName_Post_Click;
 
-            LbTime_Post.Text = _time;
-
-            LbContent_Post.Text = _content;
-
-            PtbAvatar_Post.Image = avatar;
+           
             PtbAvatar_Post.SizeMode = PictureBoxSizeMode.Zoom;
 
-            LbLiked_Post.Text = _liked.ToString() + " lượt thích";
+           
 
-            PtbLike.Image = Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png");
+           
             PtbLike.SizeMode = PictureBoxSizeMode.Zoom;
             PtbLike.Click += PtbLike_Click;
-
+            lbLiked_Post.Click += (sender,e)=> OnClickLikeList(this.Tag.ToString());
             btnComment_Post.Click += BtnComment_Post_Click;
-
+            this.bunifuElipse1.ApplyElipse(30);
 
             LoadAnimation();
         }
@@ -65,9 +86,30 @@ namespace fLogin
         #region Handle_Event
         private void PtbLike_Click(object sender, EventArgs e)
         {
-
+            if (OnClickLike(this.Tag.ToString(), !(bool)Liked))
+            {
+                LikeCount=(Liked.Equals(false))? LikeCount+1:LikeCount-1;
+            
+                Liked = !(bool)Liked;
+                
+                if (OnClickLikeOutsideNewfeed != null)
+                    OnClickLikeOutsideNewfeed(this.Tag.ToString());
+            }
+            
+            
         }
 
+        private void OnLikeCountChange()
+        {
+            this.lbLiked_Post.Text = string.Format("{0} lượt thích", likeCount);
+        }
+
+        private void OnLike()
+        {
+            
+            PtbLike.Image = (Liked == false)? Bitmap.FromFile(Application.StartupPath + @"\picture\Like.png"): Bitmap.FromFile(Application.StartupPath + @"\picture\Liked.png");
+            
+        }
         private void LbName_Post_Click(object sender, EventArgs e)
         {
             if (OnClickOpenProfile != null)

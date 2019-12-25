@@ -12,7 +12,7 @@ namespace fLogin
 {
     public partial class UCMessengerUnit : UserControl
     {
-        public delegate void OnOpenMessBox(string IDmess);
+        public delegate void OnOpenMessBox(string IDmess, string Username);
         public event OnOpenMessBox OpenMessBox;
 
 
@@ -34,7 +34,7 @@ namespace fLogin
         private void Panel1_Click(object sender, EventArgs e)
         {
             if (OpenMessBox != null)
-                OpenMessBox(this.Tag.ToString() );
+                OpenMessBox(this.Tag.ToString() , lbName.Text);
         }
     }
 }
