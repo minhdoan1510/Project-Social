@@ -38,6 +38,7 @@
 
 ![Game Screenshot](docs/Images/Game_SoucialHub.PNG)
 
+- [Link Demo](https://www.youtube.com/watch?v=Wc1fPVCY4sI&feature=youtu.be)
 ## Getting started
 - Đối với việc cài đặt để sử dụng SkyProcial 
   - Yêu cầu:
