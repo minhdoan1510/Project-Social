@@ -32,7 +32,7 @@ namespace fLogin
         public delegate void ViewFriend(string uid);
         public event ViewFriend OnViewFriend;
 
-        public delegate void Inbox(string IdMessbox,string Username, string IdUser);
+        public delegate void Inbox(string IdMessbox, Profile profile);
         public event Inbox OnInbox;
 
 
@@ -63,7 +63,7 @@ namespace fLogin
             btnMessenger.Click += (i, e) =>
             {
 
-                OnInbox(bUS_Controls.GetIdMessbox(bUS_Controls.Profilecurrent.Uid,_profile.Uid),_profile.Name,_profile.Uid);
+                OnInbox(bUS_Controls.GetIdMessbox(bUS_Controls.Profilecurrent.Uid,_profile.Uid),_profile);
 
             };
             CheckForIllegalCrossThreadCalls = false;
