@@ -1,8 +1,8 @@
 # Project SoucialHub
 Ứng dụng mạng xã hội SocialHub được nhóm xây dựng bằng ngôn ngữ C# cho đồ án môn lập trình trực quan. SoucialHub được tích hợp rất nhiều tính năng giúp kết nối giữa mọi người.
 
-![SoucialHub Screenshot](\docs\Images\SoucialHub1.PNG)
-![SoucialHub Screenshot 2](\docs\Images\SoucialHub2.PNG)
+![SoucialHub Screenshot](master/docs/Images/SoucialHub1.PNG)
+![SoucialHub Screenshot 2](/docs/Images/SoucialHub2.PNG)
 ## Features
 - Tạo tài khoản, đăng nhập vào mạng xã hội bằng tài khoản của từng cá nhân
 - Tìm kiếm realtime người dùng, kết bạn xem thông tin của người dùng khác
