@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -116,7 +117,11 @@ namespace fLogin
 
             Form fMain = new Form();
             fMain = new fMain(BUS_Controls);
-            fMain.FormClosed += (j, s) => this.Close();
+            fMain.FormClosed += (j, s) =>
+            {
+                Process.Start(Application.StartupPath + @"\fLogin.exe");
+                this.Close();
+            };
             this.Hide();
             fMain.ShowDialog();
         }
