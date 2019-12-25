@@ -29,10 +29,7 @@ namespace DTO
         #endregion
         public Post()
         {
-            Idpost = Iduser = content = "";
-            Liked = 0;
             
-            Time = "";
         }
     }
 }

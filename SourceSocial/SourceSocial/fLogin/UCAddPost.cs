@@ -22,9 +22,10 @@ namespace fLogin
         }
 
         #region Handle_Event
+
         private void BtnAddPost_Main_Click(object sender, EventArgs e)
         {
-            if (new Regex(@"\S").Match(RtbContent_Main.Text).Success)
+            if (new Regex(@"\S").Match(RtbContent_Main.Text).Success && !RtbContent_Main.Text.Contains("Bạn đang nghĩ gì???"))
                 if (OnAddPost != null)
                     OnAddPost(RtbContent_Main.Text);
         }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BUS_controls", "BUS_controls", "{FF6B1312-BDBC-4820-AC45-593FEFB703F6}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{30020E06-451E-44E7-9C86-D4E6B0E92965}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProjectSocial", "ServerProjectSocial\ServerProjectSocial.csproj", "{A4A1BACB-FED6-4EB4-9AEA-66F4F5D0D369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gpsWeather", "gpsWeather\gpsWeather.csproj", "{8576CD60-EF64-424A-90D0-9829898FE391}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{A4A1BACB-FED6-4EB4-9AEA-66F4F5D0D369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4A1BACB-FED6-4EB4-9AEA-66F4F5D0D369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4A1BACB-FED6-4EB4-9AEA-66F4F5D0D369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8576CD60-EF64-424A-90D0-9829898FE391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8576CD60-EF64-424A-90D0-9829898FE391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8576CD60-EF64-424A-90D0-9829898FE391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8576CD60-EF64-424A-90D0-9829898FE391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,8 +65,9 @@ Global
 		{9B85CD39-6A0D-4E78-BF1B-C9CDFB48610E} = {FF6B1312-BDBC-4820-AC45-593FEFB703F6}
 		{DFB4E9B7-4BED-4D94-B189-61A8058ADE3A} = {C4763E25-7E55-47BB-8501-A726D33FC463}
 		{A4A1BACB-FED6-4EB4-9AEA-66F4F5D0D369} = {30020E06-451E-44E7-9C86-D4E6B0E92965}
+		{8576CD60-EF64-424A-90D0-9829898FE391} = {FF6B1312-BDBC-4820-AC45-593FEFB703F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {06A13582-8FCB-48AA-86B0-51C4D0EFC799}
+		SolutionGuid = {BF49B7EC-7C4B-4C69-92F2-1B9948EAFFF5}
 	EndGlobalSection
 EndGlobal

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Data;
-using DTO;
 using System.Data.SqlClient;
-using System.IO;
-using System.Drawing.Imaging;
 using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -50,86 +50,116 @@ namespace DAL
             return false;
         }
 
-
         public DataTable SignIn(Account account)
         {
-            _conn.Open();
+           
+            try
+            {
+
+                return DataProvider.Instance.ExecuteQuery(@"EXEC SignIn @IDuser , @PassWord", new object[] { account.Username, account.Password });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
 
 
-            //Logined
-            string query = string.Format
-                (@"
-                SELECT Profile.*
-                FROM dbo.ACCOUNT AS acc, dbo.PROFILE AS Profile 
-                WHERE acc.ID = '{0}' AND acc.PASS = '{1}' AND Profile.UIDuser = acc.UID
-                ", account.Username, account.Password);
-            //", "nkoxway49", "123");       
-            SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-            DataTable dataTable = new DataTable();
-            sqlData.Fill(dataTable);
-            _conn.Close();
-            return dataTable;
         }
+
         #endregion
 
         #region Handle_fMain
-        public DataTable LoadPost_fMain(string UID)
-        {
-            _conn.Open();
-            string query = string.Format
-                (@"
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
-                FROM dbo.POST AS Post, dbo.PROFILE AS Profile
-                WHERE  Post.IDUSER = '{0}' AND Post.IDUSER=Profile.UIDuser
-                UNION ALL
-                SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
-                FROM dbo.POST AS Post
-                INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}'AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
-                INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
-                ORDER BY Post.TIME
-                ", UID);
-            DataTable dataTable = new DataTable();
-            SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
-            sql.Fill(dataTable);
-            _conn.Close();
-            return dataTable;
-        }
+        public DataTable LoadPosts(string uid)
+                {
+                    try
+                    {
+                        return DataProvider.Instance.ExecuteQuery(string.Format(@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
+                            FROM dbo.POST AS Post, dbo.PROFILE AS Profile
+                            WHERE  Post.IDUSER = '{0}' AND Post.IDUSER=Profile.UIDuser
+                            UNION ALL
+                            SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR
+                            FROM dbo.POST AS Post
+                            INNER JOIN dbo.FRIEND AS Friend  ON (Friend.UID1 = '{0}' AND Friend.UID2 = Post.IDUSER)OR(Friend.UID2 = '{0}'AND Friend.UID1 = Post.IDUSER)
+                            INNER JOIN dbo.PROFILE AS Profile on Post.IDUSER=Profile.UIDuser
+                            ORDER BY Post.TIME",uid));
+                    }
+                    catch {
+                        return null;
+                    }
+                    finally
+                    {
+                        _conn.Close();
+                    }
+
+                }
+
         public DataTable LoadAllPosts()
         {
-            _conn.Open();
-            string query = string.Format
-                (@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR 
+            try
+            {
+                return DataProvider.Instance.ExecuteQuery(@"SELECT Post.IDUSER,Post.IDPOST,Post.LIKED,Post.CONTENT,Post.IMAGE,Post.TIME, Profile.NAME, Profile.AVATAR 
                     FROM dbo.POST AS Post, dbo.PROFILE AS Profile 
                     WHERE Post.IDUSER=Profile.UIDuser
-                    ORDER BY Post.TIME ASC
-                    ");
-            DataTable dataTable = new DataTable();
-            SqlDataAdapter sql = new SqlDataAdapter(query, _conn);
-            sql.Fill(dataTable);
-            _conn.Close();
-            return dataTable;
-        }
+                    ORDER BY Post.TIME ASC");
 
+
+            }
+            catch {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+
+        }
 
         public DataTable GetMailboxlist(string id)
         {
-            DataTable data = new DataTable();
             try
             {
-                _conn.Open();
-                string query = @"EXEC GetMailboxlist @IDuser";
-                SqlCommand sql = new SqlCommand(query, _conn);
+                //return Task.Factory.StartNew(
+                //    new Func<DataTable>(() => DataProvider.Instance.ExecuteQuery(@"EXEC GetMailboxlist @IDuser", new object[] { id }))
+                //    ).Result;
 
-                string[] temp = query.Split(' ');
-                foreach (string item in temp)
-                {
-                    if (item.Contains("@"))
-                        sql.Parameters.AddWithValue(item, id);
-                }
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetMailboxlist @IDuser", new object[] { id });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
 
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
-                sqlDataAdapter.Fill(data);
-                return data;
+        }
+
+        public bool SendMess(string content, string idmess, string idmessbox, string uid)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddMess @IDmessbox , @IDmess , @UIDsend , @Content", new object[] { idmessbox, idmess, uid, content }) > 0;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public DataTable GetMessinMessbox(string idMess)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetMessinMessbox @IDmess", new object[] { idMess });
             }
             catch
             {
@@ -141,57 +171,28 @@ namespace DAL
             }
         }
 
-        public bool SendMess(string content, string idmess, string idmessbox, string uid)
+        public string GetIdMessbox(string iDuser1, string iDuser2)
         {
-            DataTable data = new DataTable();
             try
             {
-                _conn.Open();
-                string query = @"EXEC AddMess @IDmessbox , @IDmess , @UIDsend , @Content";
-                SqlCommand sql = new SqlCommand(query, _conn);
-
-                string[] parameter = new string[] { idmessbox, idmess, uid, content };
-                string[] temp = query.Split(' ');
-                int i = 0;
-                foreach (string item in temp)
-                {
-                    if (item.Contains("@"))
-                        sql.Parameters.AddWithValue(item, parameter[i++]);
-                }
-
-                if (sql.ExecuteNonQuery() > 0)
-                    return true;
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetIdMessbox @IDuser1 , @IDuser2", new object[] { iDuser1, iDuser2 }).Rows[0].ItemArray[0].ToString();
             }
             catch
             {
-                return false;
+                return null;
             }
             finally
             {
                 _conn.Close();
             }
-            return false;
         }
 
-        public DataTable GetMessinMessbox(string idMess)
+        public string CreateMessBox(string iDuser1, string iDuser2)
         {
-            DataTable data = new DataTable();
             try
             {
-                _conn.Open();
-                string query = @"EXEC GetMessinMessbox @IDmess";
-                SqlCommand sql = new SqlCommand(query, _conn);
-
-                string[] temp = query.Split(' ');
-                foreach (string item in temp)
-                {
-                    if (item.Contains("@"))
-                        sql.Parameters.AddWithValue(item, idMess);
-                }
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
-                sqlDataAdapter.Fill(data);
-                return data;
+                string idMessBox = new Random().Next(10000000, 99999999).ToString();
+                return ((DataProvider.Instance.ExecuteNonQuery(@"EXEC AddMessbox @IDmessbox , @IDuser1 , @IDuser2", new object[] { idMessBox, iDuser1, iDuser2 }) > 0) ? idMessBox : null);
             }
             catch
             {
@@ -207,31 +208,68 @@ namespace DAL
         {
             try
             {
-                _conn.Open();
-                string query = string.Format
-                  (@"
-                  INSERT dbo.POST
-                  (
-                      IDPOST,
-                      IDUSER,
-                      LIKED,
-                      CONTENT,
-                      IMAGE,
-                      TIME
-                  )
-                  VALUES
-                  (   '{0}',       -- IDPOST - varchar(30)
-                      '{1}',       -- IDUSER - varchar(30)
-                      0,        -- LIKED - int
-                      N'{2}',       -- CONTENT - Ntext
-                      NULL,     -- IMAGE - image
-                      GETDATE() -- TIME - datetime
-                  )
-                  ", post.Idpost, post.Iduser, post.Content);
-                SqlCommand sql = new SqlCommand(query, _conn);
-                if (sql.ExecuteNonQuery() > 0)
-                    return true;
+                return DataProvider.Instance.ExecuteNonQuery(@"
+                                                              INSERT dbo.POST
+                                                              (
+                                                                  IDPOST,
+                                                                  IDUSER,
+                                                                  LIKED,
+                                                                  CONTENT,
+                                                                  IMAGE,
+                                                                  TIME
+                                                              )
+                                                              VALUES
+                                                              (    @idPost ,       -- IDPOST - varchar(30)
+                                                                   @idUser ,       -- IDUSER - varchar(30)
+                                                                  0,        -- LIKED - int
+                                                                   @Content ,       -- CONTENT - Ntext
+                                                                  NULL,     -- IMAGE - image
+                                                                  GETDATE() -- TIME - datetime
+                                                              )
+                                                              ", new object[] { post.Idpost, post.Iduser, post.Content }) > 0;
+            }
+            catch
+            {
                 return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public bool AddLike(string IdPost, string IdUser)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteNonQuery(@"
+                                                              INSERT INTO dbo.posts_like_list
+                                                              (
+                                                                  IDPOST,
+                                                                  IDUSER
+                                                              )
+                                                              VALUES
+                                                              (   @IDPOST ,       -- IDPOST - varchar(30)
+                                                                  @IDUSER      -- IDUSER - varchar(30)
+                                                              )
+                                                              ", new object[] { IdPost, IdUser }) > 0;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public bool UnLike(string IdPost, string IdUser)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteNonQuery(@"DELETE FROM dbo.posts_like_list WHERE IdPost = @IdPost AND IdUser = @IdUser"
+                                                              , new object[] { IdPost, IdUser }) > 0;
             }
             catch
             {
@@ -247,118 +285,73 @@ namespace DAL
         {
             try
             {
-                string query = string.Format
-                    (@"
-                    SELECT Profile.UIDuser, Profile.NAME,Profile.AVATAR, Post.IDPOST, CMT.IDcomment, CMT.CONTENT,CMT.TIME
-                    FROM dbo.COMMENT AS CMT
-                    INNER JOIN dbo.PROFILE AS Profile ON Profile.UIDuser = CMT.IDuser
-                    INNER JOIN dbo.POST AS Post ON Post.IDPOST = CMT.IDPOST
-                    WHERE CMT.IDPOST='{0}'
-                    ORDER BY Post.TIME
-                    ", UIDpost);
-                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-                DataTable data = new DataTable();
-                sqlData.Fill(data);
-                return data;
+                return DataProvider.Instance.ExecuteQuery(@"EXEC LoadCMTof @UIDpost", new object[] { UIDpost });
             }
             catch
             {
-
+                return null;
             }
             finally
             {
                 _conn.Close();
             }
-            return null;
         }
 
         public bool AddComment(Comment comment)
         {
             try
             {
-                _conn.Open();
-                string query = string.Format
-                    (@"
-                    INSERT dbo.COMMENT
-                    (
-                        IDcomment,
-                        IDPOST,
-                        CONTENT,
-                        TIME,
-                        IDuser
-                    )
-                    VALUES
-                    (   '{0}',        -- IDcomment - varchar(30)
-                        '{1}',        -- IDPOST - varchar(30)
-                        '{2}',        -- CONTENT - text
-                        GETDATE(), -- TIME - datetime
-                        '{3}'         -- IDuser - varchar(30)
-                    )
-                    ", comment.IdComment, comment.IdPost, comment.Content, comment.IdUser);
-                SqlCommand sqlCommand = new SqlCommand(query, _conn);
-                if (sqlCommand.ExecuteNonQuery() > 0)
-                {
-                    return true;
-                }
+                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddComment @IDcomment , @IDPOST , @CONTENT , @IDuser", 
+                                                        new object[] { comment.IdComment, comment.IdPost, comment.Content, comment.IdUser }) > 0;
             }
             catch
             {
-
+                return false;
             }
             finally
             {
                 _conn.Close();
             }
-            return false;
+        }
+
+        public DataTable LoadLikesof(string iDPost)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteQuery(@"SELECT IdUser FROM dbo.posts_like_list WHERE IdPost = @iDPost", new object[] { iDPost });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
         }
 
         public DataTable GetPeople(string UID)
         {
             try
             {
-                _conn.Open();
-                string query = string.Format
-                    (@"
-                    SELECT *
-                    FROM dbo.PROFILE
-                    WHERE UIDuser != '{0}'
-                    ", UID);
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, _conn);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                return dataTable;
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.PROFILE WHERE UIDuser != @UID ", new object[] { UID });
             }
             catch
             {
-
+                return null;
             }
             finally
             {
                 _conn.Close();
             }
-            return null;
         }
-
 
         public DataTable GetMessfromIDMess(string idmess)
         {
             DataTable data = new DataTable();
             try
             {
-                _conn.Open();
-                string query = @"EXEC GetMessfromIDMess @IDmess";
-                SqlCommand sql = new SqlCommand(query, _conn);
-
-                string[] temp = query.Split(' ');
-                foreach (string item in temp)
-                {
-                    if (item.Contains("@"))
-                        sql.Parameters.AddWithValue(item, idmess);
-                }
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql);
-                sqlDataAdapter.Fill(data);
-                return data;
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetMessfromIDMess @IDmess", new object[] { idmess });
             }
             catch
             {
@@ -373,97 +366,43 @@ namespace DAL
         #endregion
 
         #region Handle_Profile
-
         public DataTable GetListFriend(string UID)
         {
             try
             {
-                _conn.Open();
-                string query = string.Format
-                    (@"
-                    SELECT *
-                    FROM dbo.FRIEND
-                    WHERE UID1='{0}'OR UID2='{0}'
-                    ", UID);
-                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-                DataTable data = new DataTable();
-                sqlData.Fill(data);
-                return data;
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.FRIEND WHERE @UID IN (UID1,UID2)", new object[] { UID });
             }
             catch
             {
-
+                return null;
             }
             finally
             {
                 _conn.Close();
             }
-            return null;
-        }
-
-        private byte[] ConvertImageToBinary(Image img)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
-
-            }
         }
         public bool ChangeAvatar(Profile profile)
         {
-            _conn.Open();
-            using (var command = _conn.CreateCommand())
+            try
             {
-                command.CommandText = string.Format("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = '{0}'", profile.Uid);
-                command.Parameters.AddWithValue("@avatar", ConvertImageToBinary(profile.Avatar));
-                if (command.ExecuteNonQuery() > 0)
-                    return true;
+
+                return DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.PROFILE SET AVATAR = @avatar WHERE UIDuser = @uid", new object[] { ConvertImageToBinary(profile.Avatar), profile.Uid }) > 0;
             }
-
-            return false;
-
-            //using (var ms = new MemoryStream())
-            //{
-            //    profile.Avatar.Save(ms, profile.Avatar.RawFormat);
-            //    byte[] temp = ms.ToArray();
-            //    ms.Read(temp, 0, temp.Length);
-            //    try
-            //    {
-            //        _conn.Open();
-            //        string query = string.Format
-            //            (@"
-            //        UPDATE dbo.PROFILE 
-            //        SET AVATAR = '{0}' 
-            //        WHERE UIDuser = '{1}'
-            //        ", temp, profile.Uid);
-            //        SqlCommand sqlCommand = new SqlCommand(query, _conn);
-            //        if (sqlCommand.ExecuteNonQuery() > 0)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    catch
-            //    {
-
-            //    }
-            //    finally
-            //    {
-            //        _conn.Close();
-            //    }
-            //    return false;
-            //}
-        } // Đang bị lỗi
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
 
         public bool AddFriend(string UID1, string UID2)
         {
             try
             {
-                _conn.Open();
-                string query = string.Format(@"INSERT dbo.FRIEND(UID1, UID2) VALUES('{0}', '{1}')", UID1, UID2);
-                SqlCommand sqlCommand = new SqlCommand(query, _conn);
-                if (sqlCommand.ExecuteNonQuery() > 0)
-                    return true;
+                return DataProvider.Instance.ExecuteNonQuery(@"INSERT dbo.FRIEND(UID1, UID2) VALUES( @uid1 , @uid2 )", new object[] { UID1, UID2 }) > 0;
             }
             catch
             {
@@ -481,82 +420,149 @@ namespace DAL
         {
             try
             {
-                _conn.Open();
-                string query = string.Format(@"DELETE FROM dbo.FRIEND WHERE (UID1 = '{0}'AND UID2 = '{1}')OR (UID1 = '{1}'AND UID2 = '{0}')", UID1, UID2);
-                SqlCommand sqlCommand = new SqlCommand(query, _conn);
-                if (sqlCommand.ExecuteNonQuery() > 0)
-                    return true;
+                return DataProvider.Instance.ExecuteNonQuery(string.Format(@"DELETE FROM dbo.FRIEND WHERE (UID1 = '{0}'AND UID2 = '{1}') OR (UID1 = '{1}'AND UID2 = '{0}')", UID1, UID2)) > 0;
             }
             catch
             {
-
+                return false;
             }
             finally
             {
                 _conn.Close();
             }
 
-            return false;
         }
 
         public DataTable GetProfile(string UID)
         {
             try
             {
-                _conn.Open();
-                string query = string.Format
-                    (@"
-                        SELECT *
-                        FROM dbo.PROFILE
-                        WHERE UIDuser = '{0}'
-                    ", UID);
-                SqlDataAdapter sqlData = new SqlDataAdapter(query, _conn);
-                DataTable dataTable = new DataTable();
-                sqlData.Fill(dataTable);
-                return dataTable;
+                return DataProvider.Instance.ExecuteQuery(@"SELECT * FROM dbo.PROFILE WHERE UIDuser = @UID", new object[] { UID });
             }
-            catch (SqlException)
+            catch
             {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
 
+        public bool AlterProfile(Profile profile)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteNonQuery(@"UPDATE PROFILE SET NGSINH = @NS ,SODT = @Tel ,EMAIL= @email ,QUEQUAN= @Home ,HONNHAN= @MarriageSt WHERE UIDuser = @uid",
+               new object[] { profile.DateOfBirth.ToLocalTime(), profile.PhoneNum, profile.Email, profile.HomeTown, profile.MarriageSt, profile.Uid }) > 0;
+            }
+            catch
+            {
+                return false;
             }
             finally
             {
                 _conn.Close();
             }
 
-            return null;
         }
 
-        public bool AlterProfile(Profile profile)
+        public string GetNameUser(string uID)
         {
-
-            _conn.Open();
-            using (var command = _conn.CreateCommand())
+            try
             {
-                try
-                {
-                    command.CommandText = string.Format(
-                    "UPDATE PROFILE SET NGSINH = '{0}',SODT = '{1}',EMAIL='{2}',QUEQUAN=N'{3}',HONNHAN='{4}' WHERE UIDuser = '{5}'",
-                    profile.DateOfBirth.ToLocalTime(), profile.PhoneNum, profile.Email, profile.HomeTown, profile.MarriageSt, profile.Uid);
-                    if (command.ExecuteNonQuery() > 0)
-                        return true;
-                }
-                catch (SqlException)
-                {
-                }
-                finally
-                {
-                    _conn.Close();
-                }
+                return DataProvider.Instance.ExecuteQuery(@"SELECT dbo.PROFILE.NAME FROM dbo.PROFILE WHERE dbo.PROFILE.UIDuser = @IDuser",
+                                                                new object[] { uID }).Rows[0].ItemArray[0].ToString();
             }
-
-            return false;
-
+            catch
+            {
+                return "";
+            }
+            finally
+            {
+                _conn.Close();
+            }
 
         }
 
         #endregion
 
+        #region Handle_Notify
+        public bool SaveNotifyInDTB(Notify notify)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteNonQuery(@"EXEC AddNotify  @IDNotify , @IDPost , @Content , @IDuser , @TypeNotify", new object[] { notify.IDNotify, notify.IDPost, notify.IDPost, notify.SendUID, notify.TypeNotify }) > 0;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public DataTable GetAllNotifyofUser(string UID)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetAllNotifyofUser @IDuser", new object[] { UID });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public DataTable GetOnlyOneNotify(string IDNotify)
+        {
+            try
+            {
+                return DataProvider.Instance.ExecuteQuery(@"EXEC GetOnlyOneNotify @IDNotify", new object[] { IDNotify });
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        #endregion
+
+        #region Handle_Other
+        public string ImageToBase64(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Convert Image to byte[]
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imageBytes = ms.ToArray();
+
+                // Convert byte[] to base 64 string
+                string base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+        }
+
+        private byte[] ConvertImageToBinary(Image img)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+
+            }
+        }
+        #endregion
     }
 }
 
