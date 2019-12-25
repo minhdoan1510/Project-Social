@@ -9,9 +9,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using BUS;
 using DTO;
+using System.Net;
 
 namespace fLogin
 {
@@ -19,6 +21,7 @@ namespace fLogin
     {
         #region propertion
         BUS_Controls BUS_Controls = new BUS_Controls();
+        WebClient web = new WebClient();
         #endregion
 
         public fLogin()
@@ -30,10 +33,43 @@ namespace fLogin
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Red800, MaterialSkin.Primary.Red600, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.Orange700, MaterialSkin.TextShade.WHITE);
             ptbAvatar.Image = Bitmap.FromFile(Application.StartupPath + @"\Picture\avatarLoginfrm.png");
             ptbAvatar.SizeMode = PictureBoxSizeMode.Zoom;
+
+            CheckForUpdate();
         }
 
+        async private void CheckForUpdate()
+        {
+            UCLoading ucLoadingLogin = new UCLoading();
+            this.Controls.Add(ucLoadingLogin);
+            ucLoadingLogin.BringToFront();
+            lbTitle.Text = "Đang kiểm tra phiên bản sử dụng";
+            lbTitle.BringToFront();
+
+            //Kiểm tra phiên bản đang sử dụng
+            Action actionCheckVersion = new Action(() =>
+            {
+                var versionInfo = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\fLogin.exe");
+                string version = versionInfo.ProductVersion;
+                string lastversion = web.DownloadString(@"https://raw.githubusercontent.com/minhdoan1510/Project-Social/master/Lastversion").Split('\n').First();
+                if (!lastversion.Contains(version))
+                {
+                    if (MessageBox.Show("Phiên bản v" + version + " hiện tại của bạn đã cũ. Bạn có muốn tải về phiên bản v" + lastversion + " mới nhất của phần mềm", "Thông cáo cập nhật", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                        Process.Start(string.Format(@"https:\\drive.google.com/drive/folders/1aBm2hEbWqQ2Dc8OSVsmZkvzZEWAcvyfP?usp=sharing"));
+                    Invoke(new Action(() => this.Close()));
+                }
+            }
+            );
+
+            Task taskCheckVersion = new Task(actionCheckVersion);
+            taskCheckVersion.Start();
+            await taskCheckVersion;
+            this.Controls.Remove(ucLoadingLogin);
+            lbTitle.Text = "SocialHub";
+        }
+
+
         #region Handle_Event
-     
+
         private void BtnSignUp_SignUp_Click(object sender, EventArgs e)
         {
             Account account = new Account()

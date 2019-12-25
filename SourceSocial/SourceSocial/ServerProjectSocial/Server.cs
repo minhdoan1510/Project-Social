@@ -23,7 +23,7 @@ namespace ServerProjectSocial
         {
             Console.WriteLine("[" + DateTime.Now + "] Creating the server");
             clients = new List<DetailClientSocket>();
-            IP = new IPEndPoint(IPAddress.Any, 9865);
+            IP = new IPEndPoint(IPAddress.Any, 3652);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
         }
         ~Server()
@@ -296,33 +296,6 @@ namespace ServerProjectSocial
         }
         #endregion
         
-        
-        ///// <summary>
-        ///// Convert binary to object
-        ///// </summary>
-        ///// <param name="obj"></param>
-        ///// <returns></returns>
-        //object GetfromBinary(byte[] obj)
-        //{
-        //    MemoryStream stream = new MemoryStream(obj);
-        //    BinaryFormatter binary = new BinaryFormatter();
-        //    return binary.Deserialize(stream);
-        //}
-        ///// <summary>
-        ///// Convert object to binary
-        ///// </summary>
-        ///// <param name="obj"></param>
-        ///// <returns></returns>
-        //byte[] SetBinary(object obj)
-        //{
-        //    MemoryStream stream = new MemoryStream();
-        //    BinaryFormatter binary = new BinaryFormatter();
-        //    binary.Serialize(stream, obj);
-
-        //    return stream.ToArray();
-        //}
-
-
 
         public static byte[] SetBinary(object obj)
         {

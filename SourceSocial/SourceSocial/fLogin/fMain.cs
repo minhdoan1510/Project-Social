@@ -59,6 +59,7 @@ namespace fLogin
             if (uCDisplayWeather == null)
             {
                 uCDisplayWeather = new UCDisplayWeather();
+                uCDisplayWeather.Messbug += (s) => { BUS_Controls.Messbug(s); };
                 Invoke(new Action(() =>
                     {
                         pnlWeather.Controls.Add(uCDisplayWeather);

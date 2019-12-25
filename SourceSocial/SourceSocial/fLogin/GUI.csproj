@@ -118,6 +118,12 @@
     <Compile Include="UCAbout.Designer.cs">
       <DependentUpon>UCAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCBug.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCBug.Designer.cs">
+      <DependentUpon>UCBug.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCDetailMessbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCAbout.resx">
       <DependentUpon>UCAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCBug.resx">
+      <DependentUpon>UCBug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCDetailMessbox.resx">
       <DependentUpon>UCDetailMessbox.cs</DependentUpon>

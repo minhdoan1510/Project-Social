@@ -51,6 +51,7 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lbTitle = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
@@ -337,6 +338,18 @@
             this.materialLabel1.TabIndex = 10;
             this.materialLabel1.Text = "Name";
             // 
+            // lbTitle
+            // 
+            this.lbTitle.AutoSize = true;
+            this.lbTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lbTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitle.ForeColor = System.Drawing.Color.White;
+            this.lbTitle.Location = new System.Drawing.Point(3, 4);
+            this.lbTitle.Name = "lbTitle";
+            this.lbTitle.Size = new System.Drawing.Size(73, 16);
+            this.lbTitle.TabIndex = 10;
+            this.lbTitle.Text = "SocialHub";
+            // 
             // fLogin
             // 
             this.AcceptButton = this.btnSignIn;
@@ -344,6 +357,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(365, 435);
+            this.Controls.Add(this.lbTitle);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.materialTabSelector2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -358,6 +372,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -383,6 +398,7 @@
         private MaterialSkin.Controls.MaterialRaisedButton btnSignUp;
         private System.Windows.Forms.PictureBox ptbAvatar;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbTitle;
     }
 }
 

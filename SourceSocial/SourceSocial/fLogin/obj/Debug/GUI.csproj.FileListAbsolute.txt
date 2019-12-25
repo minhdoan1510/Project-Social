@@ -160,3 +160,4 @@ C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin
 C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.frmMain.resources
 D:\Code\tsclone\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCAbout.resources
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\fLogin\obj\Debug\fLogin.UCBug.resources

@@ -58,6 +58,8 @@ namespace BUS
             ListFriend = new List<string>();
         }
 
+        
+
         #region Handle Network
 
         private void Network_OnHavePacket(string obj)
@@ -490,6 +492,11 @@ namespace BUS
             }
             likes.Add(new KeyValuePair<string, List<string>>(IDPost, likesOfPost));
             return likesOfPost;
+        }
+
+        public void Messbug(string s)
+        {
+            dal.AddBugTable(Profilecurrent.Uid, s);
         }
 
         #endregion

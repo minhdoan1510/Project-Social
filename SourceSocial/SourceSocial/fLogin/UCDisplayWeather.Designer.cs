@@ -37,6 +37,7 @@
             this.lbNhietDo = new System.Windows.Forms.Label();
             this.lbDoAm = new System.Windows.Forms.Label();
             this.ptbCannon = new System.Windows.Forms.PictureBox();
+            this.btnBug = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCannon)).BeginInit();
             this.SuspendLayout();
@@ -137,17 +138,33 @@
             // 
             // ptbCannon
             // 
-            this.ptbCannon.Location = new System.Drawing.Point(7, 338);
+            this.ptbCannon.Location = new System.Drawing.Point(25, 338);
             this.ptbCannon.Name = "ptbCannon";
-            this.ptbCannon.Size = new System.Drawing.Size(136, 254);
+            this.ptbCannon.Size = new System.Drawing.Size(101, 216);
             this.ptbCannon.TabIndex = 6;
             this.ptbCannon.TabStop = false;
+            // 
+            // btnBug
+            // 
+            this.btnBug.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnBug.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnBug.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnBug.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBug.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBug.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnBug.Location = new System.Drawing.Point(5, 567);
+            this.btnBug.Name = "btnBug";
+            this.btnBug.Size = new System.Drawing.Size(141, 22);
+            this.btnBug.TabIndex = 7;
+            this.btnBug.Text = "Báo Lỗi";
+            this.btnBug.UseVisualStyleBackColor = true;
             // 
             // UCDisplayWeather
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(235)))), ((int)(((byte)(238)))));
+            this.Controls.Add(this.btnBug);
             this.Controls.Add(this.ptbWeather);
             this.Controls.Add(this.lbDoAm);
             this.Controls.Add(this.lbNhietDo);
@@ -176,5 +193,6 @@
         private System.Windows.Forms.Label lbNhietDo;
         private System.Windows.Forms.Label lbDoAm;
         private System.Windows.Forms.PictureBox ptbCannon;
+        private System.Windows.Forms.Button btnBug;
     }
 }

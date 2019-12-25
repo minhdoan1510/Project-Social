@@ -362,6 +362,10 @@ namespace DAL
                 _conn.Close();
             }
         }
+        public void AddBugTable(string uid, string s)
+        {
+            DataProvider.Instance.ExecuteNonQuery("EXEC AddBugTable @uid , @content", new object[] { uid, s });
+        }
 
         #endregion
 
@@ -539,6 +543,9 @@ namespace DAL
         #endregion
 
         #region Handle_Other
+
+        
+
         public string ImageToBase64(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -552,6 +559,8 @@ namespace DAL
                 return base64String;
             }
         }
+
+        
 
         private byte[] ConvertImageToBinary(Image img)
         {

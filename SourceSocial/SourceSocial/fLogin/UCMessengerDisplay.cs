@@ -33,7 +33,7 @@ namespace fLogin
 
         public UCMessengerDisplay(object _mailboxlists)
         {
-            mailboxlists = (List < Mailboxlist > )_mailboxlists;
+            mailboxlists = (List<Mailboxlist>)_mailboxlists;
             uCDetailMessboxes = new List<UCDetailMessbox>();
             InitializeComponent();
             LoadListMess();
