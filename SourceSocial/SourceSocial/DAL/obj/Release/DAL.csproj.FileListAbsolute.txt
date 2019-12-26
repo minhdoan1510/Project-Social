@@ -1,0 +1,9 @@
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\bin\Release\DAL.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\bin\Release\DAL.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\bin\Release\DTO.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\bin\Release\DTO.pdb
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\obj\Release\DAL.csprojAssemblyReference.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\obj\Release\DAL.dll
+C:\Users\Minh\Desktop\New folder\Project-Social\SourceSocial\SourceSocial\DAL\obj\Release\DAL.pdb

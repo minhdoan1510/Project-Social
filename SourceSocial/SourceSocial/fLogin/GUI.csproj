@@ -350,9 +350,9 @@
       <Project>{dfb4e9b7-4bed-4d94-b189-61a8058ade3a}</Project>
       <Name>DTO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gpsWeather\gpsWeather.csproj">
-      <Project>{8576cd60-ef64-424a-90d0-9829898fe391}</Project>
-      <Name>gpsWeather</Name>
+    <ProjectReference Include="..\Weather\Weather.csproj">
+      <Project>{9ed4b88d-3c19-4455-b912-a7237b48e894}</Project>
+      <Name>Weather</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
