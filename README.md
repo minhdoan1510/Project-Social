@@ -1,9 +1,13 @@
 # Project SoucialHub
 Ứng dụng mạng xã hội SocialHub được nhóm xây dựng bằng ngôn ngữ C# cho đồ án môn lập trình trực quan. SoucialHub được tích hợp rất nhiều tính năng giúp kết nối giữa mọi người.
 - Giao diện đăng nhập
+
 ![SoucialHub Screenshot](/docs/Images/SoucialHub1.PNG)
+
 - Giao diện chính
+
 ![SoucialHub Screenshot 2](/docs/Images/SoucialHub2.PNG)
+
 ## Features
 - Tạo tài khoản, đăng nhập vào mạng xã hội bằng tài khoản của từng cá nhân
 - Tìm kiếm realtime người dùng, kết bạn xem thông tin của người dùng khác
@@ -19,12 +23,10 @@
   
   - Like, comment bài viết
   
-
-  
   ![Comment Screenshot](docs/Images/Comment_SoucialHub.PNG)
-  
 
   - Hiển thị các người bạn đang online
+  
     ![Online Screenshot](docs/Images/Online_SoucialHub.PNG)
 
   - Thông báo thông tin trực tiếp tới người dùng nếu đang online
@@ -39,6 +41,7 @@
 ![Game Screenshot](docs/Images/Game_SoucialHub.PNG)
 
 - [Link Demo](https://www.youtube.com/watch?v=Wc1fPVCY4sI&feature=youtu.be)
+
 ## Getting started
 - Đối với việc cài đặt để sử dụng SkyProcial 
   - Yêu cầu:
