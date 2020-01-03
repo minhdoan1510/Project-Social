@@ -6,7 +6,7 @@
 - Xử lý và gửi tín hiệu cho server
 - Nhận và xử lý tín hiệu từ server
 
-#Server
+# Server
 
 - Xử lý và gửi tín hiệu cho Client
 - Nhận và xử lý tín hiệu từ Client
@@ -27,3 +27,7 @@ Xử lý đăng nhập trên client
 ![SendMess](docs/Images/SendMess.PNG)
 
 Xử Lý Gửi tin nhắn giữa các client
+
+# Database
+
+![Diagrams](docs/Images/Diagrams.png)
