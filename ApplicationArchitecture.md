@@ -2,15 +2,17 @@
 
 # Client
 
-- Sử dụng ADO.Net
+- Sử dụng ADO.Net để giao tiếp với database
 - Xử lý và gửi tín hiệu cho server
 - Nhận và xử lý tín hiệu từ server
+- Phân task cho từng phân vùng chạy
 
 # Server
 
 - Xử lý và gửi tín hiệu cho Client
 - Nhận và xử lý tín hiệu từ Client
 - Xử lý các hành vi: SendMess, UserOnline, SendNotify, HandleLogin
+- Phân chia thread chạy và xử lý nhiều user cùng truy cập trong một lúc
 
 ![Server](docs/Images/Server.PNG)
 
@@ -18,7 +20,7 @@
 
 ![handleMess](docs/Images/handleMess.PNG)
 
-#Handle Client-Server
+# Handle Client-Server
 
 ![Login](docs/Images/Login.png)
 
