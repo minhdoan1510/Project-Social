@@ -43,7 +43,7 @@
 - [Link Demo](https://www.youtube.com/watch?v=Wc1fPVCY4sI&feature=youtu.be)
 
 ## Getting started
-- Đối với việc cài đặt để sử dụng SkyProcial 
+- Đối với việc cài đặt để sử dụng SoucialHub 
   - Yêu cầu:
     - Máy tính đang sử dụng hệ điều hành windowns.
     - Đang sử dụng [.NET Framework 4.6](https://dotnet.microsoft.com/download/dotnet-framework) hoặc cao hơn.
@@ -54,6 +54,7 @@
     - Làm theo hướng dẫn trong quá trình cài đặt. Nếu có lỗi hoặc cần hỗ trợ vui lòng gửi lại màn hình về [email](18521092@gm.uit.edu.vn) hoặc tìm kiếm user Admin  trong SoucialHub để được hỗ trợ.
   * Lưu ý: Phía trên chúng tôi sử dụng server demo nên việc truyền gửi thông tin có thể không thực sự được nhanh và ổn định.
 - Đối với việc lấy code:
+  - Để hiểu rõ hơn về sơ đồ cũng như hoạt động của SocialHub. Vui lòng đọc kĩ file [ApplicationArchitecture.md](/ApplicationArchitecture.md)
   - Chạy lệnh phía dưới trong máy tính của bạn đã cài git
   
    ```
